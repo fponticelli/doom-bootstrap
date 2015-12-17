@@ -1,13 +1,14 @@
 package doom.bs;
 
 import Doom.*;
+import doom.Node;
 
 class Label extends Component<{}, LabelState> {
-  public static function create(text : String, ?type : LabelType)
-    return new Label({}, { text : text, type : type });
+  public static function create(children : Nodes, ?type : LabelType)
+    return new Label({}, { type : type }, children);
 
-  public static function pill(text : String, ?type : LabelType)
-    return new Label({}, { text : text, type : type, isPill : true });
+  public static function pill(children : Nodes, ?type : LabelType)
+    return new Label({}, { type : type, isPill : true }, children);
 
   override function render()
     return SPAN([
@@ -21,11 +22,10 @@ class Label extends Component<{}, LabelState> {
         "label-danger"  => Type.enumEq(Danger, state.type),
         "label-pill"    => state.isPill == true
       ]
-    ], state.text);
+    ], children);
 }
 
 typedef LabelState = {
-  text : String,
   ?type : LabelType,
   ?isPill : Bool
 }
