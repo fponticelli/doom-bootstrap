@@ -101,32 +101,99 @@ All.prototype = $extend(doom_Component.prototype,{
 			}
 			$r = _g2;
 			return $r;
-		}(this)),[Doom.H1(null,null,doom_NodeImpl.Text("Doom Bootstrap Demo"))],null)],null),Doom.DIV((function($this) {
+		}(this)),[Doom.H1((function($this) {
 			var $r;
 			var _g3 = new haxe_ds_StringMap();
 			{
-				var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
+				var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("display-1");
 				if(__map_reserved["class"] != null) _g3.setReserved("class",value3); else _g3.h["class"] = value3;
 			}
 			$r = _g3;
 			return $r;
-		}(this)),[Doom.DIV((function($this) {
+		}(this)),null,doom_NodeImpl.Text("Doom Bootstrap"))],null)],null),Doom.DIV((function($this) {
 			var $r;
 			var _g4 = new haxe_ds_StringMap();
 			{
-				var value4 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+				var value4 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
 				if(__map_reserved["class"] != null) _g4.setReserved("class",value4); else _g4.h["class"] = value4;
 			}
 			$r = _g4;
 			return $r;
-		}(this)),[this.labels()],null),Doom.DIV((function($this) {
+		}(this)),[Doom.DIV((function($this) {
 			var $r;
 			var _g5 = new haxe_ds_StringMap();
 			{
-				var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+				var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-12");
 				if(__map_reserved["class"] != null) _g5.setReserved("class",value5); else _g5.h["class"] = value5;
 			}
 			$r = _g5;
+			return $r;
+		}(this)),[new doom_bs_Jumbotron([Doom.H1((function($this) {
+			var $r;
+			var _g6 = new haxe_ds_StringMap();
+			{
+				var value6 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("display-3");
+				if(__map_reserved["class"] != null) _g6.setReserved("class",value6); else _g6.h["class"] = value6;
+			}
+			$r = _g6;
+			return $r;
+		}(this)),null,doom_NodeImpl.Text("Jumbotron header")),Doom.P((function($this) {
+			var $r;
+			var _g7 = new haxe_ds_StringMap();
+			{
+				var value7 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("lead");
+				if(__map_reserved["class"] != null) _g7.setReserved("class",value7); else _g7.h["class"] = value7;
+			}
+			$r = _g7;
+			return $r;
+		}(this)),null,doom_NodeImpl.Text("This is some lead text in the Jumbotron!")),Doom.HR((function($this) {
+			var $r;
+			var _g8 = new haxe_ds_StringMap();
+			{
+				var value8 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("m-y-2");
+				if(__map_reserved["class"] != null) _g8.setReserved("class",value8); else _g8.h["class"] = value8;
+			}
+			$r = _g8;
+			return $r;
+		}(this))),Doom.P(null,null,doom_NodeImpl.Text("This is some normal text in the Jumbotron")),Doom.BUTTON((function($this) {
+			var $r;
+			var _g9 = new haxe_ds_StringMap();
+			{
+				var value9 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("button");
+				if(__map_reserved.type != null) _g9.setReserved("type",value9); else _g9.h["type"] = value9;
+			}
+			{
+				var value10 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("btn btn-primary btn-lg");
+				if(__map_reserved["class"] != null) _g9.setReserved("class",value10); else _g9.h["class"] = value10;
+			}
+			$r = _g9;
+			return $r;
+		}(this)),null,doom_NodeImpl.Text("Learn more"))]).render()],null)],null),Doom.DIV((function($this) {
+			var $r;
+			var _g10 = new haxe_ds_StringMap();
+			{
+				var value11 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
+				if(__map_reserved["class"] != null) _g10.setReserved("class",value11); else _g10.h["class"] = value11;
+			}
+			$r = _g10;
+			return $r;
+		}(this)),[Doom.DIV((function($this) {
+			var $r;
+			var _g11 = new haxe_ds_StringMap();
+			{
+				var value12 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+				if(__map_reserved["class"] != null) _g11.setReserved("class",value12); else _g11.h["class"] = value12;
+			}
+			$r = _g11;
+			return $r;
+		}(this)),[this.labels()],null),Doom.DIV((function($this) {
+			var $r;
+			var _g12 = new haxe_ds_StringMap();
+			{
+				var value13 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+				if(__map_reserved["class"] != null) _g12.setReserved("class",value13); else _g12.h["class"] = value13;
+			}
+			$r = _g12;
 			return $r;
 		}(this)),[this.pillLabels()],null)],null)],null);
 	}
@@ -2018,6 +2085,28 @@ doom_XmlNode.attributesToString = function(attributes) {
 	}
 	return buf;
 };
+var doom_bs_Jumbotron = function(children) {
+	doom_Component.call(this,{ },{ });
+	this.children = children;
+};
+doom_bs_Jumbotron.__name__ = ["doom","bs","Jumbotron"];
+doom_bs_Jumbotron.__super__ = doom_Component;
+doom_bs_Jumbotron.prototype = $extend(doom_Component.prototype,{
+	children: null
+	,render: function() {
+		return Doom.DIV((function($this) {
+			var $r;
+			var _g = new haxe_ds_StringMap();
+			{
+				var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("jumbotron");
+				if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
+			}
+			$r = _g;
+			return $r;
+		}(this)),this.children,null);
+	}
+	,__class__: doom_bs_Jumbotron
+});
 var doom_bs_Label = function(api,state) {
 	doom_Component.call(this,api,state);
 };

@@ -8,7 +8,21 @@ class All extends Component<{}, {}> {
     return DIV(["class" => "container"], [
       DIV(["class" => "row"], [
         DIV(["class" => "col-md-12"], [
-          H1("Doom Bootstrap Demo"),
+          H1(["class" => "display-1"], "Doom Bootstrap"),
+        ]),
+      ]),
+      DIV(["class" => "row"], [
+        DIV(["class" => "col-md-12"], [
+          new Jumbotron([
+            H1(["class" => "display-3"], "Jumbotron header"),
+            P(["class" => "lead"], "This is some lead text in the Jumbotron!"),
+            HR(["class" => "m-y-2"]),
+            P("This is some normal text in the Jumbotron"),
+            BUTTON([
+              "type" => "button",
+              "class" => "btn btn-primary btn-lg"
+            ], "Learn more"),
+          ]).render()
         ]),
       ]),
       DIV(["class" => "row"], [
