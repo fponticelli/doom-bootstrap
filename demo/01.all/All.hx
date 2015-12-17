@@ -25,24 +25,24 @@ class All extends Component<{}, {}> {
   public function labels() : Node {
     return DIV([
       H2("Labels"),
-      new Label({}, { text: "Default label", type: Default }).render(),
-      new Label({}, { text: "Primary label", type: Primary }).render(),
-      new Label({}, { text: "Success label", type: Success }).render(),
-      new Label({}, { text: "Info label", type: Info }).render(),
-      new Label({}, { text: "Warning label", type: Warning }).render(),
-      new Label({}, { text: "Danger label", type: Danger }).render(),
+      Label.create("Default label", Default).render(),
+      Label.create("Primary label", Primary).render(),
+      Label.create("Success label", Success).render(),
+      Label.create("Info label", Info).render(),
+      Label.create("Warning label", Warning).render(),
+      Label.create("Danger label", Danger).render(),
     ]);
   }
 
   public function pillLabels() : Node {
     return DIV([
       H2("Pill labels"),
-      new Label({}, { text: "Default label", type: Default, isPill: true }).render(),
-      new Label({}, { text: "Primary label", type: Primary, isPill: true }).render(),
-      new Label({}, { text: "Success label", type: Success, isPill: true }).render(),
-      new Label({}, { text: "Info label", type: Info, isPill: true }).render(),
-      new Label({}, { text: "Warning label", type: Warning, isPill: true }).render(),
-      new Label({}, { text: "Danger label", type: Danger, isPill: true }).render(),
+      Label.pill("Default label", Default).render(),
+      Label.pill("Primary label", Primary).render(),
+      Label.pill("Success label", Success).render(),
+      Label.pill("Info label", Info).render(),
+      Label.pill("Warning label", Warning).render(),
+      Label.pill("Danger label", Danger).render(),
     ]);
   }
 }
