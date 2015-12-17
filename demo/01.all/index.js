@@ -17,10 +17,11 @@ doom_IComponent.prototype = {
 	,mount: null
 	,__class__: doom_IComponent
 };
-var doom_Component = function(api,state) {
+var doom_Component = function(api,state,children) {
 	this.api = api;
 	this.state = state;
 	this.node = this.render();
+	this.children = children;
 };
 doom_Component.__name__ = ["doom","Component"];
 doom_Component.__interfaces__ = [doom_IComponent];
@@ -29,8 +30,9 @@ doom_Component.prototype = {
 	,node: null
 	,api: null
 	,state: null
+	,children: null
 	,init: function() {
-		if(null != this.element) haxe_Log.trace("double init",{ fileName : "Component.hx", lineNumber : 21, className : "doom.Component", methodName : "init", customParams : [this.toString()]});
+		if(null != this.element) haxe_Log.trace("double init",{ fileName : "Component.hx", lineNumber : 24, className : "doom.Component", methodName : "init", customParams : [this.toString()]});
 		this.element = doom_HtmlNode.toHtml(this.node);
 	}
 	,updateNode: function(oldNode) {
@@ -41,14 +43,14 @@ doom_Component.prototype = {
 		case 3:
 			break;
 		default:
-			throw new thx_Error("Component " + this.toString() + " must return only element nodes",null,{ fileName : "Component.hx", lineNumber : 30, className : "doom.Component", methodName : "updateNode"});
+			throw new thx_Error("Component " + this.toString() + " must return only element nodes",null,{ fileName : "Component.hx", lineNumber : 33, className : "doom.Component", methodName : "updateNode"});
 		}
 		var patches = doom__$Node_Node_$Impl_$.diff(oldNode,newNode);
 		doom_HtmlNode.applyPatches(patches,this.element);
 		this.node = newNode;
 	}
 	,render: function() {
-		throw new thx_error_AbstractMethod({ fileName : "Component.hx", lineNumber : 39, className : "doom.Component", methodName : "render"});
+		throw new thx_error_AbstractMethod({ fileName : "Component.hx", lineNumber : 42, className : "doom.Component", methodName : "render"});
 	}
 	,mount: function() {
 	}
@@ -67,8 +69,8 @@ doom_Component.prototype = {
 	}
 	,__class__: doom_Component
 };
-var All = function(api,state) {
-	doom_Component.call(this,api,state);
+var All = function(api,state,children) {
+	doom_Component.call(this,api,state,children);
 };
 All.__name__ = ["All"];
 All.__super__ = doom_Component;
@@ -195,13 +197,70 @@ All.prototype = $extend(doom_Component.prototype,{
 			}
 			$r = _g12;
 			return $r;
-		}(this)),[this.pillLabels()],null)],null)],null);
+		}(this)),[this.pillLabels()],null)],null),Doom.DIV((function($this) {
+			var $r;
+			var _g13 = new haxe_ds_StringMap();
+			{
+				var value14 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
+				if(__map_reserved["class"] != null) _g13.setReserved("class",value14); else _g13.h["class"] = value14;
+			}
+			$r = _g13;
+			return $r;
+		}(this)),[Doom.DIV((function($this) {
+			var $r;
+			var _g14 = new haxe_ds_StringMap();
+			{
+				var value15 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+				if(__map_reserved["class"] != null) _g14.setReserved("class",value15); else _g14.h["class"] = value15;
+			}
+			$r = _g14;
+			return $r;
+		}(this)),[this.buttons()],null),Doom.DIV((function($this) {
+			var $r;
+			var _g15 = new haxe_ds_StringMap();
+			{
+				var value16 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+				if(__map_reserved["class"] != null) _g15.setReserved("class",value16); else _g15.h["class"] = value16;
+			}
+			$r = _g15;
+			return $r;
+		}(this)),[this.outlineButtons()],null)],null)],null);
+	}
+	,section: function(name,content) {
+		return Doom.DIV((function($this) {
+			var $r;
+			var _g = new haxe_ds_StringMap();
+			{
+				var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("card");
+				if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
+			}
+			$r = _g;
+			return $r;
+		}(this)),[Doom.DIV((function($this) {
+			var $r;
+			var _g1 = new haxe_ds_StringMap();
+			{
+				var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("card-block");
+				if(__map_reserved["class"] != null) _g1.setReserved("class",value1); else _g1.h["class"] = value1;
+			}
+			$r = _g1;
+			return $r;
+		}(this)),[Doom.H2(null,null,doom_NodeImpl.Text(name))].concat(content),null)],null);
 	}
 	,labels: function() {
-		return Doom.DIV(null,[Doom.H2(null,null,doom_NodeImpl.Text("Labels")),new doom_bs_Label({ },{ text : "Default label", type : doom_bs_LabelType.Default}).render(),new doom_bs_Label({ },{ text : "Primary label", type : doom_bs_LabelType.Primary}).render(),new doom_bs_Label({ },{ text : "Success label", type : doom_bs_LabelType.Success}).render(),new doom_bs_Label({ },{ text : "Info label", type : doom_bs_LabelType.Info}).render(),new doom_bs_Label({ },{ text : "Warning label", type : doom_bs_LabelType.Warning}).render(),new doom_bs_Label({ },{ text : "Danger label", type : doom_bs_LabelType.Danger}).render()],null);
+		return this.section("Labels",[new doom_bs_Label({ },{ text : "Default label", type : doom_bs_LabelType.Default}).render(),new doom_bs_Label({ },{ text : "Primary label", type : doom_bs_LabelType.Primary}).render(),new doom_bs_Label({ },{ text : "Success label", type : doom_bs_LabelType.Success}).render(),new doom_bs_Label({ },{ text : "Info label", type : doom_bs_LabelType.Info}).render(),new doom_bs_Label({ },{ text : "Warning label", type : doom_bs_LabelType.Warning}).render(),new doom_bs_Label({ },{ text : "Danger label", type : doom_bs_LabelType.Danger}).render()]);
 	}
 	,pillLabels: function() {
-		return Doom.DIV(null,[Doom.H2(null,null,doom_NodeImpl.Text("Pill labels")),new doom_bs_Label({ },{ text : "Default label", type : doom_bs_LabelType.Default, isPill : true}).render(),new doom_bs_Label({ },{ text : "Primary label", type : doom_bs_LabelType.Primary, isPill : true}).render(),new doom_bs_Label({ },{ text : "Success label", type : doom_bs_LabelType.Success, isPill : true}).render(),new doom_bs_Label({ },{ text : "Info label", type : doom_bs_LabelType.Info, isPill : true}).render(),new doom_bs_Label({ },{ text : "Warning label", type : doom_bs_LabelType.Warning, isPill : true}).render(),new doom_bs_Label({ },{ text : "Danger label", type : doom_bs_LabelType.Danger, isPill : true}).render()],null);
+		return this.section("Pill labels",[new doom_bs_Label({ },{ text : "Default label", type : doom_bs_LabelType.Default, isPill : true}).render(),new doom_bs_Label({ },{ text : "Primary label", type : doom_bs_LabelType.Primary, isPill : true}).render(),new doom_bs_Label({ },{ text : "Success label", type : doom_bs_LabelType.Success, isPill : true}).render(),new doom_bs_Label({ },{ text : "Info label", type : doom_bs_LabelType.Info, isPill : true}).render(),new doom_bs_Label({ },{ text : "Warning label", type : doom_bs_LabelType.Warning, isPill : true}).render(),new doom_bs_Label({ },{ text : "Danger label", type : doom_bs_LabelType.Danger, isPill : true}).render()]);
+	}
+	,buttons: function() {
+		return this.section("Buttons",[doom_bs_Button.create(doom_bs_ButtonStyle.Primary,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Primary button")]).render(),doom_bs_Button.create(doom_bs_ButtonStyle.Secondary,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Secondary button")]).render(),doom_bs_Button.create(doom_bs_ButtonStyle.Info,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Info button")]).render(),doom_bs_Button.create(doom_bs_ButtonStyle.Success,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Success button")]).render(),doom_bs_Button.create(doom_bs_ButtonStyle.Warning,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Warning button")]).render(),doom_bs_Button.create(doom_bs_ButtonStyle.Danger,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Danger button")]).render()]);
+	}
+	,outlineButtons: function() {
+		return this.section("Outline buttons",[doom_bs_Button.create(doom_bs_ButtonStyle.PrimaryOutline,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Primary outline button")]).render(),doom_bs_Button.create(doom_bs_ButtonStyle.SecondaryOutline,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Secondary outline button")]).render(),doom_bs_Button.create(doom_bs_ButtonStyle.InfoOutline,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Info outline button")]).render(),doom_bs_Button.create(doom_bs_ButtonStyle.SuccessOutline,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Success outline button")]).render(),doom_bs_Button.create(doom_bs_ButtonStyle.WarningOutline,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Warning outline button")]).render(),doom_bs_Button.create(doom_bs_ButtonStyle.DangerOutline,null,$bind(this,this.onClick),[doom_NodeImpl.Text("Danger outline button")]).render()]);
+	}
+	,onClick: function() {
+		haxe_Log.trace("click",{ fileName : "All.hx", lineNumber : 103, className : "All", methodName : "onClick"});
 	}
 	,__class__: All
 });
@@ -1734,6 +1793,14 @@ doom__$Node_Node_$Impl_$.diff = function(this1,that) {
 doom__$Node_Node_$Impl_$.toString = function(this1) {
 	return doom_XmlNode.toString(this1);
 };
+var doom__$Node_Nodes_$Impl_$ = {};
+doom__$Node_Nodes_$Impl_$.__name__ = ["doom","_Node","Nodes_Impl_"];
+doom__$Node_Nodes_$Impl_$.fromNode = function(node) {
+	return [node];
+};
+doom__$Node_Nodes_$Impl_$.fromNodeImpl = function(node) {
+	return [node];
+};
 var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
 doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
@@ -2085,15 +2152,158 @@ doom_XmlNode.attributesToString = function(attributes) {
 	}
 	return buf;
 };
+var doom_bs_Button = function(api,state,children) {
+	doom_Component.call(this,api,state,children);
+};
+doom_bs_Button.__name__ = ["doom","bs","Button"];
+doom_bs_Button.create = function(style,size,onClick,children) {
+	if(size == null) size = doom_bs_ButtonSize.Default;
+	return new doom_bs_Button({ onClick : onClick},{ active : false, disabled : false, size : size, style : style},children);
+};
+doom_bs_Button.__super__ = doom_Component;
+doom_bs_Button.prototype = $extend(doom_Component.prototype,{
+	classes: null
+	,render: function() {
+		return Doom.BUTTON((function($this) {
+			var $r;
+			var _g = new haxe_ds_StringMap();
+			{
+				var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("button");
+				if(__map_reserved.type != null) _g.setReserved("type",value); else _g.h["type"] = value;
+			}
+			{
+				var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString($this.getClass());
+				if(__map_reserved["class"] != null) _g.setReserved("class",value1); else _g.h["class"] = value1;
+			}
+			{
+				var value2 = doom__$AttributeValue_AttributeValue_$Impl_$.fromBool($this.state.disabled);
+				if(__map_reserved.disabled != null) _g.setReserved("disabled",value2); else _g.h["disabled"] = value2;
+			}
+			{
+				var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromHandler(($_=$this.api,$bind($_,$_.onClick)));
+				if(__map_reserved.click != null) _g.setReserved("click",value3); else _g.h["click"] = value3;
+			}
+			$r = _g;
+			return $r;
+		}(this)),this.children,null);
+	}
+	,getClass: function() {
+		var classes = [];
+		classes.push("btn");
+		var styleClass;
+		var _g = this.state.style;
+		switch(_g[1]) {
+		case 0:
+			styleClass = "btn-primary";
+			break;
+		case 1:
+			styleClass = "btn-secondary";
+			break;
+		case 2:
+			styleClass = "btn-info";
+			break;
+		case 3:
+			styleClass = "btn-success";
+			break;
+		case 4:
+			styleClass = "btn-warning";
+			break;
+		case 5:
+			styleClass = "btn-danger";
+			break;
+		case 6:
+			styleClass = "btn-primary-outline";
+			break;
+		case 7:
+			styleClass = "btn-secondary-outline";
+			break;
+		case 8:
+			styleClass = "btn-info-outline";
+			break;
+		case 9:
+			styleClass = "btn-success-outline";
+			break;
+		case 10:
+			styleClass = "btn-warning-outline";
+			break;
+		case 11:
+			styleClass = "btn-danger-outline";
+			break;
+		}
+		classes.push(styleClass);
+		var sizeClass;
+		var _g1 = this.state.size;
+		switch(_g1[1]) {
+		case 0:
+			sizeClass = "";
+			break;
+		case 1:
+			sizeClass = "btn-lg";
+			break;
+		case 2:
+			sizeClass = "btn-sm";
+			break;
+		}
+		classes.push(sizeClass);
+		if(this.state.active) classes.push("active");
+		return classes.join(" ");
+	}
+	,__class__: doom_bs_Button
+});
+var doom_bs_ButtonSize = { __ename__ : ["doom","bs","ButtonSize"], __constructs__ : ["Default","Large","Small"] };
+doom_bs_ButtonSize.Default = ["Default",0];
+doom_bs_ButtonSize.Default.toString = $estr;
+doom_bs_ButtonSize.Default.__enum__ = doom_bs_ButtonSize;
+doom_bs_ButtonSize.Large = ["Large",1];
+doom_bs_ButtonSize.Large.toString = $estr;
+doom_bs_ButtonSize.Large.__enum__ = doom_bs_ButtonSize;
+doom_bs_ButtonSize.Small = ["Small",2];
+doom_bs_ButtonSize.Small.toString = $estr;
+doom_bs_ButtonSize.Small.__enum__ = doom_bs_ButtonSize;
+var doom_bs_ButtonStyle = { __ename__ : ["doom","bs","ButtonStyle"], __constructs__ : ["Primary","Secondary","Info","Success","Warning","Danger","PrimaryOutline","SecondaryOutline","InfoOutline","SuccessOutline","WarningOutline","DangerOutline"] };
+doom_bs_ButtonStyle.Primary = ["Primary",0];
+doom_bs_ButtonStyle.Primary.toString = $estr;
+doom_bs_ButtonStyle.Primary.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.Secondary = ["Secondary",1];
+doom_bs_ButtonStyle.Secondary.toString = $estr;
+doom_bs_ButtonStyle.Secondary.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.Info = ["Info",2];
+doom_bs_ButtonStyle.Info.toString = $estr;
+doom_bs_ButtonStyle.Info.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.Success = ["Success",3];
+doom_bs_ButtonStyle.Success.toString = $estr;
+doom_bs_ButtonStyle.Success.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.Warning = ["Warning",4];
+doom_bs_ButtonStyle.Warning.toString = $estr;
+doom_bs_ButtonStyle.Warning.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.Danger = ["Danger",5];
+doom_bs_ButtonStyle.Danger.toString = $estr;
+doom_bs_ButtonStyle.Danger.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.PrimaryOutline = ["PrimaryOutline",6];
+doom_bs_ButtonStyle.PrimaryOutline.toString = $estr;
+doom_bs_ButtonStyle.PrimaryOutline.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.SecondaryOutline = ["SecondaryOutline",7];
+doom_bs_ButtonStyle.SecondaryOutline.toString = $estr;
+doom_bs_ButtonStyle.SecondaryOutline.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.InfoOutline = ["InfoOutline",8];
+doom_bs_ButtonStyle.InfoOutline.toString = $estr;
+doom_bs_ButtonStyle.InfoOutline.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.SuccessOutline = ["SuccessOutline",9];
+doom_bs_ButtonStyle.SuccessOutline.toString = $estr;
+doom_bs_ButtonStyle.SuccessOutline.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.WarningOutline = ["WarningOutline",10];
+doom_bs_ButtonStyle.WarningOutline.toString = $estr;
+doom_bs_ButtonStyle.WarningOutline.__enum__ = doom_bs_ButtonStyle;
+doom_bs_ButtonStyle.DangerOutline = ["DangerOutline",11];
+doom_bs_ButtonStyle.DangerOutline.toString = $estr;
+doom_bs_ButtonStyle.DangerOutline.__enum__ = doom_bs_ButtonStyle;
 var doom_bs_Jumbotron = function(children) {
-	doom_Component.call(this,{ },{ });
-	this.children = children;
+	doom_Component.call(this,{ },{ },children);
 };
 doom_bs_Jumbotron.__name__ = ["doom","bs","Jumbotron"];
 doom_bs_Jumbotron.__super__ = doom_Component;
 doom_bs_Jumbotron.prototype = $extend(doom_Component.prototype,{
-	children: null
-	,render: function() {
+	render: function() {
 		return Doom.DIV((function($this) {
 			var $r;
 			var _g = new haxe_ds_StringMap();
@@ -2107,8 +2317,8 @@ doom_bs_Jumbotron.prototype = $extend(doom_Component.prototype,{
 	}
 	,__class__: doom_bs_Jumbotron
 });
-var doom_bs_Label = function(api,state) {
-	doom_Component.call(this,api,state);
+var doom_bs_Label = function(api,state,children) {
+	doom_Component.call(this,api,state,children);
 };
 doom_bs_Label.__name__ = ["doom","bs","Label"];
 doom_bs_Label.create = function(text,type) {

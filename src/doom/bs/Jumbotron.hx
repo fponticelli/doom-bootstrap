@@ -6,11 +6,8 @@ using thx.Arrays;
 using thx.Functions;
 
 class Jumbotron extends Component<{}, {}> {
-  var children(default, null) : Array<Node>;
-
   public function new(children : Array<Node>) {
-    super({}, {});
-    this.children = children;
+    super({}, {}, children);
   }
 
   override function render() : Node {

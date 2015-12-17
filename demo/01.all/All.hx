@@ -1,7 +1,10 @@
+import js.html.*;
 import Doom.*;
 import doom.*;
 import doom.bs.*;
 import doom.bs.Label.LabelType;
+import doom.bs.Button.ButtonSize;
+import doom.bs.Button.ButtonStyle;
 
 class All extends Component<{}, {}> {
   override function render() {
@@ -27,18 +30,33 @@ class All extends Component<{}, {}> {
       ]),
       DIV(["class" => "row"], [
         DIV(["class" => "col-md-6"], [
-          labels()
+          labels(),
         ]),
         DIV(["class" => "col-md-6"], [
-          pillLabels()
-        ])
-      ])
+          pillLabels(),
+        ]),
+      ]),
+      DIV(["class" => "row"], [
+        DIV(["class" => "col-md-6"], [
+          buttons(),
+        ]),
+        DIV(["class" => "col-md-6"], [
+          outlineButtons(),
+        ]),
+      ]),
+    ]);
+  }
+
+  public function section(name : String, content : Array<Node>) {
+    return DIV(["class" => "card"], [
+      DIV(["class" => "card-block"], [
+        H2(name)
+      ].concat(content))
     ]);
   }
 
   public function labels() : Node {
-    return DIV([
-      H2("Labels"),
+    return section("Labels", [
       new Label({}, { text: "Default label", type: Default }).render(),
       new Label({}, { text: "Primary label", type: Primary }).render(),
       new Label({}, { text: "Success label", type: Success }).render(),
@@ -49,8 +67,7 @@ class All extends Component<{}, {}> {
   }
 
   public function pillLabels() : Node {
-    return DIV([
-      H2("Pill labels"),
+    return section("Pill labels", [
       new Label({}, { text: "Default label", type: Default, isPill: true }).render(),
       new Label({}, { text: "Primary label", type: Primary, isPill: true }).render(),
       new Label({}, { text: "Success label", type: Success, isPill: true }).render(),
@@ -58,5 +75,31 @@ class All extends Component<{}, {}> {
       new Label({}, { text: "Warning label", type: Warning, isPill: true }).render(),
       new Label({}, { text: "Danger label", type: Danger, isPill: true }).render(),
     ]);
+  }
+
+  public function buttons() : Node {
+    return section("Buttons", [
+      Button.create(Primary, onClick, ["Primary button"]).render(),
+      Button.create(Secondary, onClick, ["Secondary button"]).render(),
+      Button.create(Info, onClick, ["Info button"]).render(),
+      Button.create(Success, onClick, ["Success button"]).render(),
+      Button.create(Warning, onClick, ["Warning button"]).render(),
+      Button.create(Danger, onClick, ["Danger button"]).render(),
+    ]);
+  }
+
+  public function outlineButtons() : Node {
+    return section("Outline buttons", [
+      Button.create(PrimaryOutline, onClick, ["Primary outline button"]).render(),
+      Button.create(SecondaryOutline, onClick, ["Secondary outline button"]).render(),
+      Button.create(InfoOutline, onClick, ["Info outline button"]).render(),
+      Button.create(SuccessOutline, onClick, ["Success outline button"]).render(),
+      Button.create(WarningOutline, onClick, ["Warning outline button"]).render(),
+      Button.create(DangerOutline, onClick, ["Danger outline button"]).render(),
+    ]);
+  }
+
+  function onClick() {
+    trace('click');
   }
 }
