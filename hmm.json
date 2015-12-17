@@ -1,0 +1,30 @@
+{
+  "dependencies": [
+    {
+      "name": "JQueryExtern",
+      "type": "haxelib",
+      "version": "2.0.4"
+    },
+    {
+      "name": "doom",
+      "type": "git",
+      "dir": "src",
+      "ref": "master",
+      "url": "git@github.com:fponticelli/doom"
+    },
+    {
+      "name": "dots",
+      "type": "git",
+      "dir": "src",
+      "ref": "master",
+      "url": "git@github.com:fponticelli/dots"
+    },
+    {
+      "name": "thx.core",
+      "type": "git",
+      "dir": "src",
+      "ref": "master",
+      "url": "git@github.com:fponticelli/thx.core"
+    }
+  ]
+}
