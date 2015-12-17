@@ -133,10 +133,10 @@ All.prototype = $extend(doom_Component.prototype,{
 		}(this)),[this.pillLabels()],null)],null)],null);
 	}
 	,labels: function() {
-		return Doom.DIV(null,[Doom.H2(null,null,doom_NodeImpl.Text("Labels")),doom_bs_Label.create("Default label",doom_bs_LabelType.Default).render(),doom_bs_Label.create("Primary label",doom_bs_LabelType.Primary).render(),doom_bs_Label.create("Success label",doom_bs_LabelType.Success).render(),doom_bs_Label.create("Info label",doom_bs_LabelType.Info).render(),doom_bs_Label.create("Warning label",doom_bs_LabelType.Warning).render(),doom_bs_Label.create("Danger label",doom_bs_LabelType.Danger).render()],null);
+		return Doom.DIV(null,[Doom.H2(null,null,doom_NodeImpl.Text("Labels")),doom_bs_Label.create([doom_NodeImpl.Text("Default label")],doom_bs_LabelType.Default).render(),doom_bs_Label.create([doom_NodeImpl.Text("Primary label")],doom_bs_LabelType.Primary).render(),doom_bs_Label.create([doom_NodeImpl.Text("Success label")],doom_bs_LabelType.Success).render(),doom_bs_Label.create([doom_NodeImpl.Text("Info label")],doom_bs_LabelType.Info).render(),doom_bs_Label.create([doom_NodeImpl.Text("Warning label")],doom_bs_LabelType.Warning).render(),doom_bs_Label.create([doom_NodeImpl.Text("Danger label")],doom_bs_LabelType.Danger).render()],null);
 	}
 	,pillLabels: function() {
-		return Doom.DIV(null,[Doom.H2(null,null,doom_NodeImpl.Text("Pill labels")),doom_bs_Label.pill("Default label",doom_bs_LabelType.Default).render(),doom_bs_Label.pill("Primary label",doom_bs_LabelType.Primary).render(),doom_bs_Label.pill("Success label",doom_bs_LabelType.Success).render(),doom_bs_Label.pill("Info label",doom_bs_LabelType.Info).render(),doom_bs_Label.pill("Warning label",doom_bs_LabelType.Warning).render(),doom_bs_Label.pill("Danger label",doom_bs_LabelType.Danger).render()],null);
+		return Doom.DIV(null,[Doom.H2(null,null,doom_NodeImpl.Text("Pill labels")),doom_bs_Label.pill([doom_NodeImpl.Text("Default label")],doom_bs_LabelType.Default).render(),doom_bs_Label.pill([doom_NodeImpl.Text("Primary label")],doom_bs_LabelType.Primary).render(),doom_bs_Label.pill([doom_NodeImpl.Text("Success label")],doom_bs_LabelType.Success).render(),doom_bs_Label.pill([doom_NodeImpl.Text("Info label")],doom_bs_LabelType.Info).render(),doom_bs_Label.pill([doom_NodeImpl.Text("Warning label")],doom_bs_LabelType.Warning).render(),doom_bs_Label.pill([doom_NodeImpl.Text("Danger label")],doom_bs_LabelType.Danger).render()],null);
 	}
 	,__class__: All
 });
@@ -1677,6 +1677,12 @@ doom__$Node_Nodes_$Impl_$.fromNode = function(node) {
 doom__$Node_Nodes_$Impl_$.fromNodeImpl = function(node) {
 	return [node];
 };
+doom__$Node_Nodes_$Impl_$.text = function(content) {
+	return [doom_NodeImpl.Text(content)];
+};
+doom__$Node_Nodes_$Impl_$.comp = function(comp) {
+	return [doom_NodeImpl.ComponentNode(comp)];
+};
 var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
 doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
@@ -2032,11 +2038,11 @@ var doom_bs_Label = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
 doom_bs_Label.__name__ = ["doom","bs","Label"];
-doom_bs_Label.create = function(text,type) {
-	return new doom_bs_Label({ },{ text : text, type : type});
+doom_bs_Label.create = function(children,type) {
+	return new doom_bs_Label({ },{ type : type},children);
 };
-doom_bs_Label.pill = function(text,type) {
-	return new doom_bs_Label({ },{ text : text, type : type, isPill : true});
+doom_bs_Label.pill = function(children,type) {
+	return new doom_bs_Label({ },{ type : type, isPill : true},children);
 };
 doom_bs_Label.__super__ = doom_Component;
 doom_bs_Label.prototype = $extend(doom_Component.prototype,{
@@ -2081,7 +2087,7 @@ doom_bs_Label.prototype = $extend(doom_Component.prototype,{
 			}
 			$r = _g1;
 			return $r;
-		}(this)),null,doom_NodeImpl.Text(this.state.text));
+		}(this)),this.children,null);
 	}
 	,__class__: doom_bs_Label
 });
