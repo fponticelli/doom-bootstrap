@@ -1,0 +1,11 @@
+-cp src
+-lib doom
+-lib dots
+-lib jQueryExtern
+-lib thx.core
+
+--each
+
+-cp demo/01.all
+-main Index
+-js demo/01.all/index.js
