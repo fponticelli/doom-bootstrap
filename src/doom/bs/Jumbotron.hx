@@ -11,6 +11,6 @@ class Jumbotron extends Component<{}, {}> {
   }
 
   override function render() : Node {
-    return DIV(["class" => "jumbotron"], children);
+    return div(["class" => "jumbotron"], children);
   }
 }

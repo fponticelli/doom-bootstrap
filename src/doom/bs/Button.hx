@@ -18,7 +18,7 @@ class Button extends Component<ButtonApi, ButtonState> {
   }
 
   override function render() : Node {
-    return BUTTON([
+    return button([
       "type" => "button",
       "class" => getClass(),
       "disabled" => state.disabled,

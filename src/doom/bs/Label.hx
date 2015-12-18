@@ -4,14 +4,14 @@ import Doom.*;
 import doom.Node;
 
 class Label extends Component<{}, LabelState> {
-  public static function create(children : Nodes, ?type : LabelType)
+  public static function create(?type : LabelType, children : Nodes)
     return new Label({}, { type : type }, children);
 
-  public static function pill(children : Nodes, ?type : LabelType)
+  public static function pill(?type : LabelType, children : Nodes)
     return new Label({}, { type : type, isPill : true }, children);
 
   override function render()
-    return SPAN([
+    return span([
       "class" => [
         "label" => true,
         "label-default" => null == state.type || Type.enumEq(Default, state.type),
