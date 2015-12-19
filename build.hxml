@@ -4,6 +4,12 @@
 -lib jQueryExtern
 -lib thx.core
 
+BS
+doom.bs.Button
+doom.bs.Jumbotron
+doom.bs.Label
+doom.bs.Navbar
+
 --each
 
 -cp demo/01.all

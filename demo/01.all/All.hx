@@ -8,39 +8,39 @@ import doom.bs.Button.ButtonStyle;
 
 class All extends Component<{}, {}> {
   override function render() {
-    return DIV(["class" => "container"], [
-      DIV(["class" => "row"], [
-        DIV(["class" => "col-md-12"], [
-          H1(["class" => "display-1"], "Doom Bootstrap"),
+    return div(["class" => "container"], [
+      div(["class" => "row"], [
+        div(["class" => "col-md-12"], [
+          h1(["class" => "display-1"], "Doom Bootstrap"),
         ]),
       ]),
-      DIV(["class" => "row"], [
-        DIV(["class" => "col-md-12"], [
+      div(["class" => "row"], [
+        div(["class" => "col-md-12"], [
           new Jumbotron([
-            H1(["class" => "display-3"], "Jumbotron header"),
-            P(["class" => "lead"], "This is some lead text in the Jumbotron!"),
-            HR(["class" => "m-y-2"]),
-            P("This is some normal text in the Jumbotron"),
-            BUTTON([
+            h1(["class" => "display-3"], "Jumbotron header"),
+            p(["class" => "lead"], "This is some lead text in the Jumbotron!"),
+            hr(["class" => "m-y-2"]),
+            p("This is some normal text in the Jumbotron"),
+            button([
               "type" => "button",
               "class" => "btn btn-primary btn-lg"
             ], "Learn more"),
           ]).render()
         ]),
       ]),
-      DIV(["class" => "row"], [
-        DIV(["class" => "col-md-6"], [
+      div(["class" => "row"], [
+        div(["class" => "col-md-6"], [
           labels(),
         ]),
-        DIV(["class" => "col-md-6"], [
+        div(["class" => "col-md-6"], [
           pillLabels(),
         ]),
       ]),
-      DIV(["class" => "row"], [
-        DIV(["class" => "col-md-6"], [
+      div(["class" => "row"], [
+        div(["class" => "col-md-6"], [
           buttons(),
         ]),
-        DIV(["class" => "col-md-6"], [
+        div(["class" => "col-md-6"], [
           outlineButtons(),
         ]),
       ]),
@@ -48,32 +48,32 @@ class All extends Component<{}, {}> {
   }
 
   public function section(name : String, content : Array<Node>) {
-    return DIV(["class" => "card"], [
-      DIV(["class" => "card-block"], [
-        H2(name)
+    return div(["class" => "card"], [
+      div(["class" => "card-block"], [
+        h2(name)
       ].concat(content))
     ]);
   }
 
   public function labels() : Node {
     return section("Labels", [
-      Label.create("Default label", Default).render(),
-      Label.create("Primary label", Primary).render(),
-      Label.create("Success label", Success).render(),
-      Label.create("Info label", Info).render(),
-      Label.create("Warning label", Warning).render(),
-      Label.create("Danger label", Danger).render(),
+      Label.create(Default, "Default label").render(),
+      Label.create(Primary, "Primary label").render(),
+      Label.create(Success, "Success label").render(),
+      Label.create(Info, "Info label").render(),
+      Label.create(Warning, "Warning label").render(),
+      Label.create(Danger, "Danger label").render(),
     ]);
   }
 
   public function pillLabels() : Node {
     return section("Pill labels", [
-      Label.pill("Default label", Default).render(),
-      Label.pill("Primary label", Primary).render(),
-      Label.pill("Success label", Success).render(),
-      Label.pill("Info label", Info).render(),
-      Label.pill("Warning label", Warning).render(),
-      Label.pill("Danger label", Danger).render(),
+      Label.pill(Default, "Default label").render(),
+      Label.pill(Primary, "Primary label").render(),
+      Label.pill(Success, "Success label").render(),
+      Label.pill(Info, "Info label").render(),
+      Label.pill(Warning, "Warning label").render(),
+      Label.pill(Danger, "Danger label").render(),
     ]);
   }
 
