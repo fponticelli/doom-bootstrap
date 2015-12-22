@@ -1,13 +1,13 @@
 package doom.bs;
 
 import Doom.*;
-import doom.*;
+import doom.Node;
 import js.html.MouseEvent;
 
 class Button extends Component<ButtonApi, ButtonState> {
   var classes(default, null) : Array<String>;
 
-  public static function create(style : ButtonStyle, ?size : ButtonSize, onClick: Void -> Void, children : Array<Node>) : Button {
+  public static function create(style : ButtonStyle, ?size : ButtonSize, onClick: Void -> Void, children : Nodes) : Node {
     if (size == null) size = Default;
     return new Button({ onClick: onClick }, {
       active: false,
