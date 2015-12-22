@@ -4,10 +4,10 @@ import Doom.*;
 import doom.Node;
 
 class Label extends Component<{}, LabelState> {
-  public static function create(?type : LabelType, children : Nodes)
+  public static function create(?type : LabelType, children : Nodes) : Node
     return new Label({}, { type : type }, children);
 
-  public static function pill(?type : LabelType, children : Nodes)
+  public static function pill(?type : LabelType, children : Nodes) : Node
     return new Label({}, { type : type, isPill : true }, children);
 
   override function render()
