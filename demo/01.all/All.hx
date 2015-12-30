@@ -44,6 +44,14 @@ class All extends Component<{}, {}> {
           outlineButtons(),
         ]),
       ]),
+      div(["class" => "row"], [
+        div(["class" => "col-md-6"], [
+          groupButtons(),
+        ]),
+        // div(["class" => "col-md-6"], [
+        //   outlineButtons(),
+        // ]),
+      ])
     ]);
   }
 
@@ -96,6 +104,16 @@ class All extends Component<{}, {}> {
       Button.create(Success, { outline : true }, onClick, "Success outline button"),
       Button.create(Warning, { outline : true }, onClick, "Warning outline button"),
       Button.create(Danger, { outline : true }, onClick, "Danger outline button"),
+    ]);
+  }
+
+  public function groupButtons() : Node {
+    return section("Buttons Group", [
+      ButtonGroup.create([
+        Button.create(Primary, function(){}, "left"),
+        Button.create(Primary, function(){}, "middle"),
+        Button.create(Primary, function(){}, "right")
+      ])
     ]);
   }
 

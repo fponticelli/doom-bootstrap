@@ -219,7 +219,25 @@ All.prototype = $extend(doom_Component.prototype,{
 			}
 			$r = _g15;
 			return $r;
-		}(this)),[this.outlineButtons()],null)],null)],null);
+		}(this)),[this.outlineButtons()],null)],null),Doom.div((function($this) {
+			var $r;
+			var _g16 = new haxe_ds_StringMap();
+			{
+				var value17 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
+				if(__map_reserved["class"] != null) _g16.setReserved("class",value17); else _g16.h["class"] = value17;
+			}
+			$r = _g16;
+			return $r;
+		}(this)),[Doom.div((function($this) {
+			var $r;
+			var _g17 = new haxe_ds_StringMap();
+			{
+				var value18 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+				if(__map_reserved["class"] != null) _g17.setReserved("class",value18); else _g17.h["class"] = value18;
+			}
+			$r = _g17;
+			return $r;
+		}(this)),[this.groupButtons()],null)],null)],null);
 	}
 	,section: function(name,content) {
 		return Doom.div((function($this) {
@@ -254,8 +272,14 @@ All.prototype = $extend(doom_Component.prototype,{
 	,outlineButtons: function() {
 		return this.section("Outline buttons",[doom_bs_Button.create(doom_bs_ButtonStyle.Primary,{ outline : true},$bind(this,this.onClick),[doom_NodeImpl.Text("Primary outline button")]),doom_bs_Button.create(doom_bs_ButtonStyle.Secondary,{ outline : true},$bind(this,this.onClick),[doom_NodeImpl.Text("Secondary outline button")]),doom_bs_Button.create(doom_bs_ButtonStyle.Info,{ outline : true},$bind(this,this.onClick),[doom_NodeImpl.Text("Info outline button")]),doom_bs_Button.create(doom_bs_ButtonStyle.Success,{ outline : true},$bind(this,this.onClick),[doom_NodeImpl.Text("Success outline button")]),doom_bs_Button.create(doom_bs_ButtonStyle.Warning,{ outline : true},$bind(this,this.onClick),[doom_NodeImpl.Text("Warning outline button")]),doom_bs_Button.create(doom_bs_ButtonStyle.Danger,{ outline : true},$bind(this,this.onClick),[doom_NodeImpl.Text("Danger outline button")])]);
 	}
+	,groupButtons: function() {
+		return this.section("Buttons Group",[doom_bs_ButtonGroup.create(null,[doom_bs_Button.create(doom_bs_ButtonStyle.Primary,null,function() {
+		},[doom_NodeImpl.Text("left")]),doom_bs_Button.create(doom_bs_ButtonStyle.Primary,null,function() {
+		},[doom_NodeImpl.Text("middle")]),doom_bs_Button.create(doom_bs_ButtonStyle.Primary,null,function() {
+		},[doom_NodeImpl.Text("right")])])]);
+	}
 	,onClick: function() {
-		haxe_Log.trace("click",{ fileName : "All.hx", lineNumber : 103, className : "All", methodName : "onClick"});
+		haxe_Log.trace("click",{ fileName : "All.hx", lineNumber : 121, className : "All", methodName : "onClick"});
 	}
 	,__class__: All
 });
@@ -1482,10 +1506,14 @@ doom_HtmlNode.createElement = function(name,attributes,children) {
 		var key = $it0.next();
 		var value;
 		value = __map_reserved[key] != null?attributes.getReserved(key):attributes.h[key];
-		switch(value[1]) {
+		if(value == null) {
+		} else switch(value[1]) {
 		case 1:
 			var s = value[2];
-			if(s != null && s.length > 0) el.setAttribute(key,s); else {
+			if(null == s || s == "") {
+			} else {
+				var s1 = value[2];
+				el.setAttribute(key,s1);
 			}
 			break;
 		case 0:
@@ -1558,7 +1586,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 				node.appendChild(window.document.createTextNode(text));
 				break;
 			default:
-				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 135, className : "doom.HtmlNode", methodName : "applyPatch"});
+				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
 			}
 			break;
 		case 1:
@@ -1568,7 +1596,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 				node.appendChild(dots_Html.parse(text1));
 				break;
 			default:
-				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 135, className : "doom.HtmlNode", methodName : "applyPatch"});
+				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
 			}
 			break;
 		case 2:
@@ -1581,7 +1609,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 				node.appendChild(el);
 				break;
 			default:
-				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 135, className : "doom.HtmlNode", methodName : "applyPatch"});
+				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
 			}
 			break;
 		case 3:
@@ -1592,7 +1620,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 				node.appendChild(comp2.element);
 				break;
 			default:
-				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 135, className : "doom.HtmlNode", methodName : "applyPatch"});
+				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
 			}
 			break;
 		case 7:
@@ -1605,7 +1633,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 				node.removeAttribute(name1);
 				break;
 			default:
-				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 135, className : "doom.HtmlNode", methodName : "applyPatch"});
+				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
 			}
 			break;
 		case 9:
@@ -1613,10 +1641,13 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			case 1:
 				var name2 = patch[2];
 				var value = patch[3];
-				switch(value[1]) {
+				if(value == null) node.removeAttribute(name2); else switch(value[1]) {
 				case 1:
 					var s = value[2];
-					if(s != null && s.length > 0) node.setAttribute(name2,s); else node.removeAttribute(name2);
+					if(s == null || s == "") node.removeAttribute(name2); else {
+						var s1 = value[2];
+						node.setAttribute(name2,s1);
+					}
 					break;
 				case 0:
 					var b = value[2];
@@ -1629,7 +1660,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 				}
 				break;
 			default:
-				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 135, className : "doom.HtmlNode", methodName : "applyPatch"});
+				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
 			}
 			break;
 		case 10:
@@ -1668,7 +1699,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 				if(node.parentNode.nodeName == "TEXTAREA") node.parentNode.value = newcontent1; else node.nodeValue = newcontent1;
 				break;
 			default:
-				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 135, className : "doom.HtmlNode", methodName : "applyPatch"});
+				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
 			}
 			break;
 		case 15:
@@ -1680,7 +1711,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 				if(null != n) doom_HtmlNode.applyPatches(patches,n);
 				break;
 			default:
-				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 135, className : "doom.HtmlNode", methodName : "applyPatch"});
+				throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
 			}
 			break;
 		}
@@ -2550,6 +2581,39 @@ doom_bs_ButtonStyle.Warning.__enum__ = doom_bs_ButtonStyle;
 doom_bs_ButtonStyle.Danger = ["Danger",5];
 doom_bs_ButtonStyle.Danger.toString = $estr;
 doom_bs_ButtonStyle.Danger.__enum__ = doom_bs_ButtonStyle;
+var doom_bs_ButtonGroup = function(api,state,children) {
+	doom_Component.call(this,api,state,children);
+};
+doom_bs_ButtonGroup.__name__ = ["doom","bs","ButtonGroup"];
+doom_bs_ButtonGroup.create = function(options,children) {
+	if(options == null) options = { };
+	{
+		var comp = new doom_bs_ButtonGroup({ },{ toggle : options.toggle},children);
+		return doom_NodeImpl.ComponentNode(comp);
+	}
+};
+doom_bs_ButtonGroup.__super__ = doom_Component;
+doom_bs_ButtonGroup.prototype = $extend(doom_Component.prototype,{
+	classes: null
+	,render: function() {
+		return Doom.div((function($this) {
+			var $r;
+			var _g = new haxe_ds_StringMap();
+			{
+				var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("btn-group");
+				if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
+			}
+			{
+				var value1;
+				if($this.state.toggle == true) value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("buttons"); else value1 = null;
+				if(__map_reserved["data-toggle"] != null) _g.setReserved("data-toggle",value1); else _g.h["data-toggle"] = value1;
+			}
+			$r = _g;
+			return $r;
+		}(this)),this.children,null);
+	}
+	,__class__: doom_bs_ButtonGroup
+});
 var doom_bs_Jumbotron = function(children) {
 	doom_Component.call(this,{ },{ },children);
 };
