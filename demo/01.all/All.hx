@@ -90,12 +90,12 @@ class All extends Component<{}, {}> {
 
   public function outlineButtons() : Node {
     return section("Outline buttons", [
-      Button.create(PrimaryOutline, onClick, "Primary outline button"),
-      Button.create(SecondaryOutline, onClick, "Secondary outline button"),
-      Button.create(InfoOutline, onClick, "Info outline button"),
-      Button.create(SuccessOutline, onClick, "Success outline button"),
-      Button.create(WarningOutline, onClick, "Warning outline button"),
-      Button.create(DangerOutline, onClick, "Danger outline button"),
+      Button.create(Primary, { outline : true }, onClick, "Primary outline button"),
+      Button.create(Secondary, { outline : true }, onClick, "Secondary outline button"),
+      Button.create(Info, { outline : true }, onClick, "Info outline button"),
+      Button.create(Success, { outline : true }, onClick, "Success outline button"),
+      Button.create(Warning, { outline : true }, onClick, "Warning outline button"),
+      Button.create(Danger, { outline : true }, onClick, "Danger outline button"),
     ]);
   }
 

@@ -7,12 +7,23 @@ import js.html.MouseEvent;
 class Button extends Component<ButtonApi, ButtonState> {
   var classes(default, null) : Array<String>;
 
-  public static function create(style : ButtonStyle, ?size : ButtonSize, onClick: Void -> Void, children : Nodes) : Node {
-    if (size == null) size = Default;
+  public static function create(style : ButtonStyle, ?options : {
+    ?size : ButtonSize,
+    ?active : Bool,
+    ?disabled : Bool,
+    ?outline : Bool
+  }, onClick: Void -> Void, children : Nodes) : Node {
+    if (options == null) options = {
+      size : null,
+      outline : null,
+      active : null,
+      disabled : null
+    };
     return new Button({ onClick: onClick }, {
-      active: false,
-      disabled: false,
-      size: size,
+      active: options.active,
+      disabled: options.disabled,
+      outline: options.outline,
+      size: options.size,
       style: style
     }, children);
   }
@@ -27,36 +38,29 @@ class Button extends Component<ButtonApi, ButtonState> {
   }
 
   function getClass() : String {
-    var classes : Array<String> = [];
+    var classes = ["btn"],
+        styleClass = switch state.style {
+          case Primary: "btn-primary";
+          case Secondary: "btn-secondary";
+          case Info: "btn-info";
+          case Success: "btn-success";
+          case Warning: "btn-warning";
+          case Danger: "btn-danger";
+        };
 
-    classes.push("btn");
-
-    var styleClass = switch state.style {
-      case Primary: "btn-primary";
-      case Secondary: "btn-secondary";
-      case Info: "btn-info";
-      case Success: "btn-success";
-      case Warning: "btn-warning";
-      case Danger: "btn-danger";
-      case PrimaryOutline: "btn-primary-outline";
-      case SecondaryOutline: "btn-secondary-outline";
-      case InfoOutline: "btn-info-outline";
-      case SuccessOutline: "btn-success-outline";
-      case WarningOutline: "btn-warning-outline";
-      case DangerOutline: "btn-danger-outline";
-    };
+    if(state.outline == true)
+      styleClass += "-outline";
     classes.push(styleClass);
 
     var sizeClass = switch state.size {
-      case Default: "";
+      case null, Default: "";
       case Large: "btn-lg";
       case Small: "btn-sm";
     };
     classes.push(sizeClass);
 
-    if (state.active) {
+    if (state.active == true)
       classes.push("active");
-    }
 
     return classes.join(" ");
   }
@@ -75,12 +79,6 @@ enum ButtonStyle {
   Success;
   Warning;
   Danger;
-  PrimaryOutline;
-  SecondaryOutline;
-  InfoOutline;
-  SuccessOutline;
-  WarningOutline;
-  DangerOutline;
 }
 
 typedef ButtonApi = {
@@ -88,8 +86,9 @@ typedef ButtonApi = {
 };
 
 typedef ButtonState = {
-  active: Bool,
-  disabled: Bool,
-  size: ButtonSize,
-  style: ButtonStyle,
+  ?active: Bool,
+  ?disabled: Bool,
+  ?outline : Bool,
+  ?size: ButtonSize,
+  ?style: ButtonStyle,
 };
