@@ -264,9 +264,9 @@ var doom_bs_Button = function(api,state,children) {
 };
 doom_bs_Button.__name__ = ["doom","bs","Button"];
 doom_bs_Button.create = function(style,options,onClick,children) {
-	if(options == null) options = { size : null, outline : null, active : null, disabled : null};
+	if(options == null) options = { };
 	{
-		var comp = new doom_bs_Button({ onClick : onClick},{ active : options.active, disabled : options.disabled, outline : options.outline, size : options.size, style : style},children);
+		var comp = new doom_bs_Button({ onClick : onClick},{ active : options.active, disabled : options.disabled, outline : options.outline, block : options.block, size : options.size, style : style},children);
 		return doom_NodeImpl.ComponentNode(comp);
 	}
 };
@@ -338,6 +338,7 @@ doom_bs_Button.prototype = $extend(doom_Component.prototype,{
 		}
 		classes.push(sizeClass);
 		if(this.state.active == true) classes.push("active");
+		if(this.state.block == true) classes.push("btn-block");
 		return classes.join(" ");
 	}
 	,__class__: doom_bs_Button

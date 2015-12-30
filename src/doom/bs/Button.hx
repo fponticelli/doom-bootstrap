@@ -9,20 +9,17 @@ class Button extends Component<ButtonApi, ButtonState> {
 
   public static function create(style : ButtonStyle, ?options : {
     ?size : ButtonSize,
+    ?block : Bool,
     ?active : Bool,
     ?disabled : Bool,
     ?outline : Bool
   }, onClick: Void -> Void, children : Nodes) : Node {
-    if (options == null) options = {
-      size : null,
-      outline : null,
-      active : null,
-      disabled : null
-    };
+    if (options == null) options = {};
     return new Button({ onClick: onClick }, {
       active: options.active,
       disabled: options.disabled,
       outline: options.outline,
+      block: options.block,
       size: options.size,
       style: style
     }, children);
@@ -62,6 +59,9 @@ class Button extends Component<ButtonApi, ButtonState> {
     if (state.active == true)
       classes.push("active");
 
+    if (state.block == true)
+      classes.push("btn-block");
+
     return classes.join(" ");
   }
 }
@@ -86,6 +86,7 @@ typedef ButtonApi = {
 };
 
 typedef ButtonState = {
+  ?block : Bool,
   ?active: Bool,
   ?disabled: Bool,
   ?outline : Bool,
