@@ -12,6 +12,7 @@ class BS {
       className => null != className
     ]], children);
 
+  public static var container(default, null) =  doom.bs.Container.create;
   public static var label(default, null) =  doom.bs.Label.create;
   public static var pill(default, null) =  doom.bs.Label.pill;
   public static var button(default, null) =  doom.bs.Button.create;
