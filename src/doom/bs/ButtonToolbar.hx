@@ -16,7 +16,8 @@ class ButtonToolbar extends Component<{}, ButtonToolbarState> {
       "role" => "toolbar",
       "aria-label" => state.label
     ], children);
-  }}
+  }
+}
 
 typedef ButtonToolbarState = {
   ?label : String

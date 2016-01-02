@@ -17,5 +17,6 @@ class BS {
   public static var pill(default, null) =  doom.bs.Label.pill;
   public static var button(default, null) =  doom.bs.Button.create;
   public static var buttonGroup(default, null) =  doom.bs.ButtonGroup.create;
+  public static var buttonGroupVertical(default, null) =  doom.bs.ButtonGroupVertical.create;
   public static var buttonToolbar(default, null) =  doom.bs.ButtonToolbar.create;
 }
