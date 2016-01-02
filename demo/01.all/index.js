@@ -245,6 +245,7 @@ doom_bs_Button.prototype = $extend(doom_Component.prototype,{
 		classes.push(sizeClass);
 		if(this.state.active == true) classes.push("active");
 		if(this.state.block == true) classes.push("btn-block");
+		if(this.state.dropdownToggle == true) classes.push("dropdown-toggle");
 		return classes.join(" ");
 	}
 	,__class__: doom_bs_Button
@@ -354,6 +355,26 @@ doom_bs_Container.prototype = $extend(doom_Component.prototype,{
 		return doom__$Node_Node_$Impl_$.el("div",_g1,this.children,null);
 	}
 	,__class__: doom_bs_Container
+});
+var doom_bs_DropdownMenu = function(api,state,children) {
+	doom_Component.call(this,api,state,children);
+};
+doom_bs_DropdownMenu.__name__ = ["doom","bs","DropdownMenu"];
+doom_bs_DropdownMenu.create = function(options,children) {
+	if(options == null) options = { };
+	return doom_NodeImpl.ComponentNode(new doom_bs_DropdownMenu({ },options,children));
+};
+doom_bs_DropdownMenu.__super__ = doom_Component;
+doom_bs_DropdownMenu.prototype = $extend(doom_Component.prototype,{
+	render: function() {
+		var _g = new haxe_ds_StringMap();
+		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("dropdown-menu");
+		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
+		var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromBool(this.state.dropup == true);
+		if(__map_reserved.dropup != null) _g.setReserved("dropup",value1); else _g.h["dropup"] = value1;
+		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
+	}
+	,__class__: doom_bs_DropdownMenu
 });
 var doom_bs_Label = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
@@ -8095,6 +8116,7 @@ BS.button = doom_bs_Button.create;
 BS.buttonGroup = doom_bs_ButtonGroup.create;
 BS.buttonGroupVertical = doom_bs_ButtonGroupVertical.create;
 BS.buttonToolbar = doom_bs_ButtonToolbar.create;
+BS.dropdownMenu = doom_bs_DropdownMenu.create;
 DateTools.DAYS_OF_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];
 Doom.namespaces = (function($this) {
 	var $r;

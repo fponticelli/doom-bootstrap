@@ -62,6 +62,9 @@ class Button extends Component<ButtonApi, ButtonState> {
     if (state.block == true)
       classes.push("btn-block");
 
+    if (state.dropdownToggle == true)
+      classes.push("dropdown-toggle");
+
     return classes.join(" ");
   }
 }
@@ -84,6 +87,7 @@ typedef ButtonState = {
   ?active: Bool,
   ?disabled: Bool,
   ?outline : Bool,
+  ?dropdownToggle : Bool,
   ?size: Size,
   ?style: ButtonStyle,
 };
