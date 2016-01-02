@@ -3,7 +3,7 @@ import Doom.*;
 import doom.*;
 import doom.bs.*;
 import doom.bs.Label.LabelType;
-import doom.bs.Button.ButtonSize;
+import doom.bs.Size;
 import doom.bs.Button.ButtonStyle;
 
 class All extends Component<{}, {}> {

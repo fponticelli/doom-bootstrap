@@ -2323,16 +2323,6 @@ doom_XmlNode.attributesToString = function(attributes) {
 	}
 	return buf;
 };
-var doom_bs_ButtonSize = { __ename__ : ["doom","bs","ButtonSize"], __constructs__ : ["Default","Large","Small"] };
-doom_bs_ButtonSize.Default = ["Default",0];
-doom_bs_ButtonSize.Default.toString = $estr;
-doom_bs_ButtonSize.Default.__enum__ = doom_bs_ButtonSize;
-doom_bs_ButtonSize.Large = ["Large",1];
-doom_bs_ButtonSize.Large.toString = $estr;
-doom_bs_ButtonSize.Large.__enum__ = doom_bs_ButtonSize;
-doom_bs_ButtonSize.Small = ["Small",2];
-doom_bs_ButtonSize.Small.toString = $estr;
-doom_bs_ButtonSize.Small.__enum__ = doom_bs_ButtonSize;
 var doom_bs_ButtonStyle = { __ename__ : ["doom","bs","ButtonStyle"], __constructs__ : ["Primary","Secondary","Info","Success","Warning","Danger"] };
 doom_bs_ButtonStyle.Primary = ["Primary",0];
 doom_bs_ButtonStyle.Primary.toString = $estr;
@@ -2428,6 +2418,16 @@ doom_bs_NavbarBackground.Inverse.__enum__ = doom_bs_NavbarBackground;
 doom_bs_NavbarBackground.Primary = ["Primary",2];
 doom_bs_NavbarBackground.Primary.toString = $estr;
 doom_bs_NavbarBackground.Primary.__enum__ = doom_bs_NavbarBackground;
+var doom_bs_Size = { __ename__ : ["doom","bs","Size"], __constructs__ : ["Default","Large","Small"] };
+doom_bs_Size.Default = ["Default",0];
+doom_bs_Size.Default.toString = $estr;
+doom_bs_Size.Default.__enum__ = doom_bs_Size;
+doom_bs_Size.Large = ["Large",1];
+doom_bs_Size.Large.toString = $estr;
+doom_bs_Size.Large.__enum__ = doom_bs_Size;
+doom_bs_Size.Small = ["Small",2];
+doom_bs_Size.Small.toString = $estr;
+doom_bs_Size.Small.__enum__ = doom_bs_Size;
 var dots_Dom = function() { };
 dots_Dom.__name__ = ["dots","Dom"];
 dots_Dom.addCss = function(css,container) {

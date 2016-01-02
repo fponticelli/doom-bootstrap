@@ -8,7 +8,7 @@ class Button extends Component<ButtonApi, ButtonState> {
   var classes(default, null) : Array<String>;
 
   public static function create(style : ButtonStyle, ?options : {
-    ?size : ButtonSize,
+    ?size : Size,
     ?block : Bool,
     ?active : Bool,
     ?disabled : Bool,
@@ -66,12 +66,6 @@ class Button extends Component<ButtonApi, ButtonState> {
   }
 }
 
-enum ButtonSize {
-  Default;
-  Large;
-  Small;
-}
-
 enum ButtonStyle {
   Primary;
   Secondary;
@@ -90,6 +84,6 @@ typedef ButtonState = {
   ?active: Bool,
   ?disabled: Bool,
   ?outline : Bool,
-  ?size: ButtonSize,
+  ?size: Size,
   ?style: ButtonStyle,
 };
