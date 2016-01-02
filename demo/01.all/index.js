@@ -2312,7 +2312,7 @@ var doom_bs_ButtonGroup = function(api,state,children) {
 doom_bs_ButtonGroup.__name__ = ["doom","bs","ButtonGroup"];
 doom_bs_ButtonGroup.create = function(options,children) {
 	if(options == null) options = { };
-	return doom_NodeImpl.ComponentNode(new doom_bs_ButtonGroup({ },{ toggle : options.toggle},children));
+	return doom_NodeImpl.ComponentNode(new doom_bs_ButtonGroup({ },options,children));
 };
 doom_bs_ButtonGroup.__super__ = doom_Component;
 doom_bs_ButtonGroup.prototype = $extend(doom_Component.prototype,{
@@ -2323,6 +2323,10 @@ doom_bs_ButtonGroup.prototype = $extend(doom_Component.prototype,{
 		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
 		var value1 = this.state.toggle == true?doom__$AttributeValue_AttributeValue_$Impl_$.fromString("buttons"):null;
 		if(__map_reserved["data-toggle"] != null) _g.setReserved("data-toggle",value1); else _g.h["data-toggle"] = value1;
+		var value2 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("group");
+		if(__map_reserved.role != null) _g.setReserved("role",value2); else _g.h["role"] = value2;
+		var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString(this.state.label);
+		if(__map_reserved["aria-label"] != null) _g.setReserved("aria-label",value3); else _g.h["aria-label"] = value3;
 		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
 	}
 	,__class__: doom_bs_ButtonGroup
