@@ -1,10 +1,12 @@
 import js.html.*;
+import BS.*;
 import Doom.*;
 import doom.*;
 import doom.bs.*;
 import doom.bs.Label.LabelType;
 import doom.bs.Size;
 import doom.bs.Button.ButtonStyle;
+
 
 class All extends Component<{}, {}> {
   override function render() {
@@ -48,9 +50,10 @@ class All extends Component<{}, {}> {
         div(["class" => "col-md-6"], [
           groupButtons(),
         ]),
-        // div(["class" => "col-md-6"], [
-        //   outlineButtons(),
-        // ]),
+        div(["class" => "col-md-6"], [
+          alertSuccess("a permanent alert"),
+          alertDanger({ dismissable : true }, "a dismissable alert")
+        ]),
       ])
     ]);
   }

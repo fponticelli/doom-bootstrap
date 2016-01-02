@@ -145,7 +145,11 @@ All.prototype = $extend(doom_Component.prototype,{
 		var _g17 = new haxe_ds_StringMap();
 		var value18 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
 		if(__map_reserved["class"] != null) _g17.setReserved("class",value18); else _g17.h["class"] = value18;
-		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,tmp5,tmp7,tmp9,doom__$Node_Node_$Impl_$.el("div",attributes7,[doom__$Node_Node_$Impl_$.el("div",_g17,[this.groupButtons()],null)],null)],null);
+		var tmp10 = doom__$Node_Node_$Impl_$.el("div",_g17,[this.groupButtons()],null);
+		var _g18 = new haxe_ds_StringMap();
+		var value19 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g18.setReserved("class",value19); else _g18.h["class"] = value19;
+		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,tmp5,tmp7,tmp9,doom__$Node_Node_$Impl_$.el("div",attributes7,[tmp10,doom__$Node_Node_$Impl_$.el("div",_g18,[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])],null)],null)],null);
 	}
 	,section: function(name,content) {
 		var _g = new haxe_ds_StringMap();
@@ -176,7 +180,7 @@ All.prototype = $extend(doom_Component.prototype,{
 		},[doom_NodeImpl.Text("right")])])]);
 	}
 	,onClick: function() {
-		haxe_Log.trace("click",{ fileName : "All.hx", lineNumber : 121, className : "All", methodName : "onClick"});
+		haxe_Log.trace("click",{ fileName : "All.hx", lineNumber : 124, className : "All", methodName : "onClick"});
 	}
 	,__class__: All
 });
@@ -186,37 +190,55 @@ var doom_bs_Alert = function(api,state,children) {
 doom_bs_Alert.__name__ = ["doom","bs","Alert"];
 doom_bs_Alert.create = function(type,options,children) {
 	var state = thx_Objects.combine({ type : type},options);
-	return doom_NodeImpl.ComponentNode(new doom_bs_Alert({ },{ type : type},children));
+	return doom_NodeImpl.ComponentNode(new doom_bs_Alert({ },state,children));
 };
 doom_bs_Alert.success = function(options,children) {
-	return doom_bs_Alert.create(doom_bs_AlertType.Success,null,children);
+	return doom_bs_Alert.create(doom_bs_AlertType.Success,options,children);
 };
 doom_bs_Alert.info = function(options,children) {
-	return doom_bs_Alert.create(doom_bs_AlertType.Info,null,children);
+	return doom_bs_Alert.create(doom_bs_AlertType.Info,options,children);
 };
 doom_bs_Alert.warning = function(options,children) {
-	return doom_bs_Alert.create(doom_bs_AlertType.Warning,null,children);
+	return doom_bs_Alert.create(doom_bs_AlertType.Warning,options,children);
 };
 doom_bs_Alert.danger = function(options,children) {
-	return doom_bs_Alert.create(doom_bs_AlertType.Danger,null,children);
+	return doom_bs_Alert.create(doom_bs_AlertType.Danger,options,children);
 };
 doom_bs_Alert.__super__ = doom_Component;
 doom_bs_Alert.prototype = $extend(doom_Component.prototype,{
 	render: function() {
+		var children = [];
+		if(this.state.dismissable) {
+			var _g = new haxe_ds_StringMap();
+			var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("button");
+			if(__map_reserved.type != null) _g.setReserved("type",value); else _g.h["type"] = value;
+			var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("close");
+			if(__map_reserved["class"] != null) _g.setReserved("class",value1); else _g.h["class"] = value1;
+			var value2 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("alert");
+			if(__map_reserved["data-dismiss"] != null) _g.setReserved("data-dismiss",value2); else _g.h["data-dismiss"] = value2;
+			var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("Close");
+			if(__map_reserved["aria-label"] != null) _g.setReserved("aria-label",value3); else _g.h["aria-label"] = value3;
+			var attributes = _g;
+			var _g11 = new haxe_ds_StringMap();
+			var value4 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("true");
+			if(__map_reserved["aria-hidden"] != null) _g11.setReserved("aria-hidden",value4); else _g11.h["aria-hidden"] = value4;
+			children.push(doom__$Node_Node_$Impl_$.el("button",attributes,[doom__$Node_Node_$Impl_$.el("span",_g11,null,doom_NodeImpl.Text("×"))],null));
+		}
+		children = children.concat(this.children);
 		var _g1 = new haxe_ds_StringMap();
-		var _g = new haxe_ds_StringMap();
-		if(__map_reserved.alert != null) _g.setReserved("alert",true); else _g.h["alert"] = true;
-		var value1 = Type.enumEq(doom_bs_AlertType.Success,this.state.type);
-		if(__map_reserved["alert-success"] != null) _g.setReserved("alert-success",value1); else _g.h["alert-success"] = value1;
-		var value2 = Type.enumEq(doom_bs_AlertType.Info,this.state.type);
-		if(__map_reserved["alert-info"] != null) _g.setReserved("alert-info",value2); else _g.h["alert-info"] = value2;
-		var value3 = Type.enumEq(doom_bs_AlertType.Warning,this.state.type);
-		if(__map_reserved["alert-warning"] != null) _g.setReserved("alert-warning",value3); else _g.h["alert-warning"] = value3;
-		var value4 = Type.enumEq(doom_bs_AlertType.Danger,this.state.type);
-		if(__map_reserved["alert-danger"] != null) _g.setReserved("alert-danger",value4); else _g.h["alert-danger"] = value4;
-		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g);
-		if(__map_reserved["class"] != null) _g1.setReserved("class",value); else _g1.h["class"] = value;
-		return doom__$Node_Node_$Impl_$.el("div",_g1,this.children,null);
+		var _g2 = new haxe_ds_StringMap();
+		if(__map_reserved.alert != null) _g2.setReserved("alert",true); else _g2.h["alert"] = true;
+		var value6 = Type.enumEq(doom_bs_AlertType.Success,this.state.type);
+		if(__map_reserved["alert-success"] != null) _g2.setReserved("alert-success",value6); else _g2.h["alert-success"] = value6;
+		var value7 = Type.enumEq(doom_bs_AlertType.Info,this.state.type);
+		if(__map_reserved["alert-info"] != null) _g2.setReserved("alert-info",value7); else _g2.h["alert-info"] = value7;
+		var value8 = Type.enumEq(doom_bs_AlertType.Warning,this.state.type);
+		if(__map_reserved["alert-warning"] != null) _g2.setReserved("alert-warning",value8); else _g2.h["alert-warning"] = value8;
+		var value9 = Type.enumEq(doom_bs_AlertType.Danger,this.state.type);
+		if(__map_reserved["alert-danger"] != null) _g2.setReserved("alert-danger",value9); else _g2.h["alert-danger"] = value9;
+		var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g2);
+		if(__map_reserved["class"] != null) _g1.setReserved("class",value5); else _g1.h["class"] = value5;
+		return doom__$Node_Node_$Impl_$.el("div",_g1,children,null);
 	}
 	,mount: function() {
 		if(this.state.dismissable == true) $(this.element).alert();
