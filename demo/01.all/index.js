@@ -41,8 +41,6 @@ doom_Component.prototype = {
 	,render: function() {
 		throw new thx_error_AbstractMethod({ fileName : "Component.hx", lineNumber : 43, className : "doom.Component", methodName : "render"});
 	}
-	,migrate: function(old) {
-	}
 	,mount: function() {
 	}
 	,refresh: function() {
@@ -538,7 +536,52 @@ var doom_bs_Button = function(api,state,children) {
 doom_bs_Button.__name__ = ["doom","bs","Button"];
 doom_bs_Button.create = function(style,options,onClick,children) {
 	if(options == null) options = { };
-	return doom_NodeImpl.ComponentNode(new doom_bs_Button({ onClick : onClick},{ active : options.active, disabled : options.disabled, outline : options.outline, block : options.block, size : options.size, style : style},children));
+	return doom_NodeImpl.ComponentNode(new doom_bs_Button({ click : onClick},{ active : options.active, disabled : options.disabled, outline : options.outline, block : options.block, size : options.size, style : style},children));
+};
+doom_bs_Button.getClass = function(state) {
+	var classes = ["btn"];
+	var styleClass;
+	var _g = state.style;
+	switch(_g[1]) {
+	case 0:
+		styleClass = "btn-primary";
+		break;
+	case 1:
+		styleClass = "btn-secondary";
+		break;
+	case 2:
+		styleClass = "btn-info";
+		break;
+	case 3:
+		styleClass = "btn-success";
+		break;
+	case 4:
+		styleClass = "btn-warning";
+		break;
+	case 5:
+		styleClass = "btn-danger";
+		break;
+	}
+	if(state.outline == true) styleClass += "-outline";
+	classes.push(styleClass);
+	var sizeClass;
+	var _g1 = state.size;
+	if(_g1 == null) sizeClass = ""; else switch(_g1[1]) {
+	case 0:
+		sizeClass = "";
+		break;
+	case 1:
+		sizeClass = "btn-lg";
+		break;
+	case 2:
+		sizeClass = "btn-sm";
+		break;
+	}
+	classes.push(sizeClass);
+	if(state.active == true) classes.push("active");
+	if(state.block == true) classes.push("btn-block");
+	if(state.dropdownToggle == true) classes.push("dropdown-toggle");
+	return classes.join(" ");
 };
 doom_bs_Button.__super__ = doom_Component;
 doom_bs_Button.prototype = $extend(doom_Component.prototype,{
@@ -547,58 +590,13 @@ doom_bs_Button.prototype = $extend(doom_Component.prototype,{
 		var _g = new haxe_ds_StringMap();
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("button");
 		if(__map_reserved.type != null) _g.setReserved("type",value); else _g.h["type"] = value;
-		var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString(this.getClass());
+		var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString(doom_bs_Button.getClass(this.state));
 		if(__map_reserved["class"] != null) _g.setReserved("class",value1); else _g.h["class"] = value1;
 		var value2 = doom__$AttributeValue_AttributeValue_$Impl_$.fromBool(this.state.disabled);
 		if(__map_reserved.disabled != null) _g.setReserved("disabled",value2); else _g.h["disabled"] = value2;
-		var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromHandler(($_=this.api,$bind($_,$_.onClick)));
+		var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromHandler(($_=this.api,$bind($_,$_.click)));
 		if(__map_reserved.click != null) _g.setReserved("click",value3); else _g.h["click"] = value3;
 		return doom__$Node_Node_$Impl_$.el("button",_g,this.children,null);
-	}
-	,getClass: function() {
-		var classes = ["btn"];
-		var styleClass;
-		var _g = this.state.style;
-		switch(_g[1]) {
-		case 0:
-			styleClass = "btn-primary";
-			break;
-		case 1:
-			styleClass = "btn-secondary";
-			break;
-		case 2:
-			styleClass = "btn-info";
-			break;
-		case 3:
-			styleClass = "btn-success";
-			break;
-		case 4:
-			styleClass = "btn-warning";
-			break;
-		case 5:
-			styleClass = "btn-danger";
-			break;
-		}
-		if(this.state.outline == true) styleClass += "-outline";
-		classes.push(styleClass);
-		var sizeClass;
-		var _g1 = this.state.size;
-		if(_g1 == null) sizeClass = ""; else switch(_g1[1]) {
-		case 0:
-			sizeClass = "";
-			break;
-		case 1:
-			sizeClass = "btn-lg";
-			break;
-		case 2:
-			sizeClass = "btn-sm";
-			break;
-		}
-		classes.push(sizeClass);
-		if(this.state.active == true) classes.push("active");
-		if(this.state.block == true) classes.push("btn-block");
-		if(this.state.dropdownToggle == true) classes.push("dropdown-toggle");
-		return classes.join(" ");
 	}
 	,__class__: doom_bs_Button
 });
@@ -758,6 +756,50 @@ doom_bs_Label.prototype = $extend(doom_Component.prototype,{
 		return doom__$Node_Node_$Impl_$.el("span",_g1,this.children,null);
 	}
 	,__class__: doom_bs_Label
+});
+var doom_bs_RadioButton = function(api,state,children) {
+	doom_Component.call(this,api,state,children);
+};
+doom_bs_RadioButton.__name__ = ["doom","bs","RadioButton"];
+doom_bs_RadioButton.create = function(style,options,onClick,children) {
+	if(null == options) options = { };
+	var state = thx_Objects.combine(options,{ style : style});
+	if(null == children) children = [];
+	return doom_NodeImpl.ComponentNode(new doom_bs_RadioButton({ click : onClick},state,children));
+};
+doom_bs_RadioButton.createGroup = function(style,values,change,options) {
+	if(null == options) options = { };
+	var itemOptions = { style : style, name : options.name, block : options.block, disabled : options.disabled, outline : options.outline, size : options.size};
+	return values.map(function(value) {
+		var state = thx_Objects.combine(itemOptions,{ active : value.active});
+		var f = change;
+		var a1 = value.value;
+		return doom_NodeImpl.ComponentNode(new doom_bs_RadioButton({ click : function() {
+			f(a1);
+		}},state,[value.label]));
+	});
+};
+doom_bs_RadioButton.__super__ = doom_Component;
+doom_bs_RadioButton.prototype = $extend(doom_Component.prototype,{
+	render: function() {
+		var _g = new haxe_ds_StringMap();
+		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString(doom_bs_Button.getClass(this.state));
+		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
+		var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromHandler(this.api.click);
+		if(__map_reserved.click != null) _g.setReserved("click",value1); else _g.h["click"] = value1;
+		var attributes = _g;
+		var _g1 = new haxe_ds_StringMap();
+		var value2 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("radio");
+		if(__map_reserved.type != null) _g1.setReserved("type",value2); else _g1.h["type"] = value2;
+		var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString(this.state.name);
+		if(__map_reserved.name != null) _g1.setReserved("name",value3); else _g1.h["name"] = value3;
+		var value4 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("off");
+		if(__map_reserved.autocomplete != null) _g1.setReserved("autocomplete",value4); else _g1.h["autocomplete"] = value4;
+		var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromBool(true);
+		if(__map_reserved.checked != null) _g1.setReserved("checked",value5); else _g1.h["checked"] = value5;
+		return doom__$Node_Node_$Impl_$.el("label",attributes,[doom__$Node_Node_$Impl_$.el("input",_g1,null,null)].concat(this.children),null);
+	}
+	,__class__: doom_bs_RadioButton
 });
 var BS = function() { };
 BS.__name__ = ["BS"];
@@ -1796,7 +1838,8 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 		var oldComp = patch[2];
 		if(thx_Types.sameType(oldComp,newComp)) {
 			newComp.element = oldComp.element;
-			newComp.migrate(oldComp);
+			var migrate = Reflect.field(newComp,"migrate");
+			if(null != migrate) migrate.apply(newComp,[oldComp]);
 			newComp.refresh();
 		} else {
 			var newComp1 = patch[3];
@@ -1817,7 +1860,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			node.appendChild(window.document.createTextNode(text));
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 1:
@@ -1827,7 +1870,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			node.appendChild(dots_Html.parse(text1));
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 2:
@@ -1840,7 +1883,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			node.appendChild(el);
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 3:
@@ -1851,7 +1894,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			node.appendChild(comp2.element);
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 7:
@@ -1864,7 +1907,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			node.removeAttribute(name1);
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 9:
@@ -1891,7 +1934,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			}
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 10:
@@ -1930,7 +1973,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			if(node.parentNode.nodeName == "TEXTAREA") node.parentNode.value = newcontent1; else node.nodeValue = newcontent1;
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 15:
@@ -1942,7 +1985,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			if(null != n) doom_HtmlNode.applyPatches(patches,n);
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 144, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	}
@@ -8187,6 +8230,8 @@ if(typeof(scope.performance.now) == "undefined") {
 		return $r;
 	}(this));
 }
+BS.radioButton = doom_bs_RadioButton.create;
+BS.radioButtons = doom_bs_RadioButton.createGroup;
 BS.container = doom_bs_Container.create;
 BS.label = doom_bs_Label.create;
 BS.pill = doom_bs_Label.pill;

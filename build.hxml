@@ -5,10 +5,18 @@
 -lib thx.core
 
 BS
+doom.bs.Alert
 doom.bs.Button
+doom.bs.ButtonGroup
+doom.bs.ButtonGroupVertical
+doom.bs.ButtonToolbar
+doom.bs.Container
+doom.bs.DropdownMenu
 doom.bs.Jumbotron
 doom.bs.Label
 doom.bs.Navbar
+doom.bs.RadioButton
+doom.bs.Size
 
 --each
 
