@@ -12,6 +12,8 @@ class BS {
       className => null != className
     ]], children);
 
+  public static var inputGroup(default, null) = doom.bs.InputGroup.create;
+
   public static var radioButton(default, null) = doom.bs.RadioButton.create;
   public static var radioButtons(default, null) = doom.bs.RadioButton.createGroup;
 

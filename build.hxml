@@ -12,6 +12,7 @@ doom.bs.ButtonGroupVertical
 doom.bs.ButtonToolbar
 doom.bs.Container
 doom.bs.DropdownMenu
+doom.bs.InputGroup
 doom.bs.Jumbotron
 doom.bs.Label
 doom.bs.Navbar

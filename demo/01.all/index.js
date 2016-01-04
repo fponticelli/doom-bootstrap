@@ -721,6 +721,23 @@ doom_bs_DropdownMenu.prototype = $extend(doom_Component.prototype,{
 	}
 	,__class__: doom_bs_DropdownMenu
 });
+var doom_bs_InputGroup = function(api,state,children) {
+	doom_Component.call(this,api,state,children);
+};
+doom_bs_InputGroup.__name__ = ["doom","bs","InputGroup"];
+doom_bs_InputGroup.create = function(children) {
+	return doom_NodeImpl.ComponentNode(new doom_bs_Label({ },{ },children));
+};
+doom_bs_InputGroup.__super__ = doom_Component;
+doom_bs_InputGroup.prototype = $extend(doom_Component.prototype,{
+	render: function() {
+		var _g = new haxe_ds_StringMap();
+		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("input-group");
+		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
+		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
+	}
+	,__class__: doom_bs_InputGroup
+});
 var doom_bs_Label = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -767,12 +784,12 @@ doom_bs_RadioButton.create = function(style,options,onClick,children) {
 	if(null == children) children = [];
 	return doom_NodeImpl.ComponentNode(new doom_bs_RadioButton({ click : onClick},state,children));
 };
-doom_bs_RadioButton.createGroup = function(style,values,change,options) {
+doom_bs_RadioButton.createGroup = function(style,values,onChange,options) {
 	if(null == options) options = { };
 	var itemOptions = { style : style, name : options.name, block : options.block, disabled : options.disabled, outline : options.outline, size : options.size};
 	return values.map(function(value) {
 		var state = thx_Objects.combine(itemOptions,{ active : value.active});
-		var f = change;
+		var f = onChange;
 		var a1 = value.value;
 		return doom_NodeImpl.ComponentNode(new doom_bs_RadioButton({ click : function() {
 			f(a1);
@@ -8230,6 +8247,7 @@ if(typeof(scope.performance.now) == "undefined") {
 		return $r;
 	}(this));
 }
+BS.inputGroup = doom_bs_InputGroup.create;
 BS.radioButton = doom_bs_RadioButton.create;
 BS.radioButtons = doom_bs_RadioButton.createGroup;
 BS.container = doom_bs_Container.create;
