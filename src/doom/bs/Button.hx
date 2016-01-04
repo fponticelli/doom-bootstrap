@@ -7,15 +7,9 @@ import js.html.MouseEvent;
 class Button extends Component<ButtonApi, ButtonState> {
   var classes(default, null) : Array<String>;
 
-  public static function create(style : ButtonStyle, ?options : {
-    ?size : Size,
-    ?block : Bool,
-    ?active : Bool,
-    ?disabled : Bool,
-    ?outline : Bool
-  }, onClick: Void -> Void, children : Nodes) : Node {
+  public static function create(style : ButtonStyle, ?options : ButtonOptions, onClick: Void -> Void, children : Nodes) : Node {
     if (options == null) options = {};
-    return new Button({ onClick: onClick }, {
+    return new Button({ click : onClick }, {
       active: options.active,
       disabled: options.disabled,
       outline: options.outline,
@@ -28,13 +22,13 @@ class Button extends Component<ButtonApi, ButtonState> {
   override function render() : Node {
     return button([
       "type" => "button",
-      "class" => getClass(),
+      "class" => getClass(state),
       "disabled" => state.disabled,
-      "click" => api.onClick
+      "click" => api.click
     ], children);
   }
 
-  function getClass() : String {
+  public static function getClass(state : ButtonState) : String {
     var classes = ["btn"],
         styleClass = switch state.style {
           case Primary: "btn-primary";
@@ -79,15 +73,18 @@ enum ButtonStyle {
 }
 
 typedef ButtonApi = {
-  public function onClick() : Void;
+  public function click() : Void;
 };
 
-typedef ButtonState = {
+typedef ButtonOptions = {
   ?block : Bool,
   ?active: Bool,
   ?disabled: Bool,
   ?outline : Bool,
   ?dropdownToggle : Bool,
-  ?size: Size,
-  ?style: ButtonStyle,
+  ?size: Size
+}
+
+typedef ButtonState = {> ButtonOptions,
+  style: ButtonStyle
 };
