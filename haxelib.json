@@ -1,0 +1,14 @@
+{
+  "name": "doom-bootstrap",
+  "url": "https://github.com/fponticelli/doom-bootstrap",
+  "license": "MIT",
+  "classPath": "src",
+  "tags": ["js", "virtual dom", "html", "front-end", "ui", "bootstrap", "doom"],
+  "description": "Bootstrap 4 components for doom.",
+  "releasenote": "first release.",
+  "version": "0.1.0",
+  "contributors": ["fponticelli"],
+  "dependencies" : {
+    "doom" : ""
+  }
+}
