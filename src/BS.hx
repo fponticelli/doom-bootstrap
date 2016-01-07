@@ -25,6 +25,7 @@ class BS {
   public static var buttonGroupVertical(default, null) =  doom.bs.ButtonGroupVertical.create;
   public static var buttonToolbar(default, null) =  doom.bs.ButtonToolbar.create;
   public static var dropdown(default, null) =  doom.bs.Dropdown.create;
+  public static var dropdownItem(default, null) =  doom.bs.DropdownItem.create;
   public static var dropdownMenu(default, null) =  doom.bs.DropdownMenu.create;
 
   public static var alert(default, null) =  doom.bs.Alert.create;

@@ -11,6 +11,8 @@ doom.bs.ButtonGroup
 doom.bs.ButtonGroupVertical
 doom.bs.ButtonToolbar
 doom.bs.Container
+doom.bs.Dropdown
+doom.bs.DropdownItem
 doom.bs.DropdownMenu
 doom.bs.InputGroup
 doom.bs.Jumbotron
