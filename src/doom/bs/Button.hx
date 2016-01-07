@@ -15,6 +15,7 @@ class Button extends Component<ButtonApi, ButtonState> {
       outline: options.outline,
       block: options.block,
       size: options.size,
+      dropdownToggle: options.dropdownToggle,
       style: style
     }, children);
   }
@@ -24,7 +25,9 @@ class Button extends Component<ButtonApi, ButtonState> {
       "type" => "button",
       "class" => getClass(state),
       "disabled" => state.disabled,
-      "click" => api.click
+      "click" => api.click,
+      "data-toggle" => (state.dropdownToggle == true ? "dropdown" : null),
+      "aria-haspopup" => (state.dropdownToggle == true ? "true" : null),
     ], children);
   }
 
