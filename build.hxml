@@ -10,6 +10,7 @@ doom.bs.Button
 doom.bs.ButtonGroup
 doom.bs.ButtonGroupVertical
 doom.bs.ButtonToolbar
+doom.bs.CloseButton
 doom.bs.Container
 doom.bs.Dropdown
 doom.bs.DropdownItem

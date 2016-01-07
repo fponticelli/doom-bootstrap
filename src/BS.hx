@@ -16,7 +16,7 @@ class BS {
 
   public static var radioButton(default, null) = doom.bs.RadioButton.create;
   public static var radioButtons(default, null) = doom.bs.RadioButton.createGroup;
-
+  public static var closeButton(default, null) = doom.bs.CloseButton.create;
   public static var container(default, null) =  doom.bs.Container.create;
   public static var label(default, null) =  doom.bs.Label.create;
   public static var pill(default, null) =  doom.bs.Label.pill;
