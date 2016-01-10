@@ -25,7 +25,7 @@ class Alert extends Doom {
 
   override function render() {
     var children = [];
-    if(state.dismissable) {
+    if(dismissable) {
       children.push(
         button([
           "type" => "button",
@@ -42,30 +42,21 @@ class Alert extends Doom {
     return div([
       "class" => [
       "alert" => true,
-      "alert-success" => Type.enumEq(Success, state.type),
-      "alert-info"    => Type.enumEq(Info, state.type),
-      "alert-warning" => Type.enumEq(Warning, state.type),
-      "alert-danger"  => Type.enumEq(Danger, state.type)
+      "alert-success" => Type.enumEq(Success, type),
+      "alert-info"    => Type.enumEq(Info, type),
+      "alert-warning" => Type.enumEq(Warning, type),
+      "alert-danger"  => Type.enumEq(Danger, type)
       ]
     ], children);
   }
 
   override function didMount() {
     // TODO, is the JS needed always?
-    if(state.dismissable == true)
+    if(dismissable == true)
       untyped __js__("$")(element).alert();
   }
 }
-/*
-typedef AlertStateOptions = {
-  ?dismissable : Bool
-}
 
-typedef AlertState = {
-  type : AlertType,
-  ?dismissable : Bool
-}
-*/
 /*
 TODO
 events:
