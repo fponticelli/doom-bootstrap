@@ -3,6 +3,12 @@ import doom.Node;
 import doom.bs.Navbar;
 
 class BS {
+  public static var alert(default, null) =  doom.bs.Alert.with;
+  public static var alertSuccess(default, null) =  doom.bs.Alert.success;
+  public static var alertInfo(default, null) =  doom.bs.Alert.info;
+  public static var alertWarning(default, null) =  doom.bs.Alert.warning;
+  public static var alertDanger(default, null) =  doom.bs.Alert.danger;
+
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
     return new Navbar({}, { theme : theme, bg : bg }, children);
 
@@ -27,10 +33,4 @@ class BS {
   public static var dropdown(default, null) =  doom.bs.Dropdown.create;
   public static var dropdownItem(default, null) =  doom.bs.DropdownItem.create;
   public static var dropdownMenu(default, null) =  doom.bs.DropdownMenu.create;
-
-  public static var alert(default, null) =  doom.bs.Alert.create;
-  public static var alertSuccess(default, null) =  doom.bs.Alert.success;
-  public static var alertInfo(default, null) =  doom.bs.Alert.info;
-  public static var alertWarning(default, null) =  doom.bs.Alert.warning;
-  public static var alertDanger(default, null) =  doom.bs.Alert.danger;
 }

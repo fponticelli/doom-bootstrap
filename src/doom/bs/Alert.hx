@@ -4,23 +4,24 @@ import Doom.*;
 import doom.Node;
 using thx.Objects;
 
-class Alert extends Component<{}, AlertState> {
-  public static function create(type : AlertType, ?options : AlertOptions, children : Nodes) : Node {
-    var state = { type : type }.merge(options);
-    return new Alert({}, state, children);
-  }
+class Alert extends Doom {
+  inline public static function success(?options : AlertStateOptions, children : Nodes) : Node
+    return with(Success, options, children);
 
-  inline public static function success(?options : AlertOptions, children : Nodes) : Node
-    return create(Success, options, children);
+  inline public static function info(?options : AlertStateOptions, children : Nodes) : Node
+    return with(Info, options, children);
 
-  inline public static function info(?options : AlertOptions, children : Nodes) : Node
-    return create(Info, options, children);
+  inline public static function warning(?options : AlertStateOptions, children : Nodes) : Node
+    return with(Warning, options, children);
 
-  inline public static function warning(?options : AlertOptions, children : Nodes) : Node
-    return create(Warning, options, children);
+  inline public static function danger(?options : AlertStateOptions, children : Nodes) : Node
+    return with(Danger, options, children);
 
-  inline public static function danger(?options : AlertOptions, children : Nodes) : Node
-    return create(Danger, options, children);
+  @:state(false)
+  var dismissable : Bool;
+
+  @:state
+  var type : AlertType;
 
   override function render() {
     var children = [];
@@ -46,17 +47,17 @@ class Alert extends Component<{}, AlertState> {
       "alert-warning" => Type.enumEq(Warning, state.type),
       "alert-danger"  => Type.enumEq(Danger, state.type)
       ]
-      ], children);
+    ], children);
   }
 
-  override function mount() {
+  override function didMount() {
     // TODO, is the JS needed always?
     if(state.dismissable == true)
       untyped __js__("$")(element).alert();
   }
 }
-
-typedef AlertOptions = {
+/*
+typedef AlertStateOptions = {
   ?dismissable : Bool
 }
 
@@ -64,7 +65,7 @@ typedef AlertState = {
   type : AlertType,
   ?dismissable : Bool
 }
-
+*/
 /*
 TODO
 events:
