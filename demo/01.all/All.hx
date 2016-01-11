@@ -1,5 +1,6 @@
 import js.html.*;
 import Doom.*;
+import doom.Node;
 import BS.*;
 import doom.*;
 import doom.bs.*;
@@ -24,10 +25,7 @@ class All extends Component<{}, {}> {
             p(["class" => "lead"], "This is some lead text in the Jumbotron!"),
             hr(["class" => "m-y-2"]),
             p("This is some normal text in the Jumbotron"),
-            Doom.button([
-              "type" => "button",
-              "class" => "btn btn-primary btn-lg"
-            ], "Learn more"),
+            button(onClick, Primary, { size : Large }, "Learn more"),
           ])
         ]),
       ]),

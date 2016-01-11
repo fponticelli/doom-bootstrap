@@ -125,50 +125,43 @@ All.prototype = $extend(doom_Component.prototype,{
 		var _g8 = new haxe_ds_StringMap();
 		var value8 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("m-y-2");
 		if(__map_reserved["class"] != null) _g8.setReserved("class",value8); else _g8.h["class"] = value8;
-		var tmp3 = doom__$Node_Node_$Impl_$.el("hr",_g8,null,null);
-		var tmp4 = doom__$Node_Node_$Impl_$.el("p",null,null,doom_NodeImpl.Text("This is some normal text in the Jumbotron"));
+		var tmp3 = doom__$Node_Node_$Impl_$.el("div",attributes3,[doom__$Node_Node_$Impl_$.el("div",attributes4,[BS.jumbotron([tmp1,tmp2,doom__$Node_Node_$Impl_$.el("hr",_g8,null,null),doom__$Node_Node_$Impl_$.el("p",null,null,doom_NodeImpl.Text("This is some normal text in the Jumbotron")),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Primary,{ size : doom_bs_Size.Large},[doom_NodeImpl.Text("Learn more")])])],null)],null);
 		var _g9 = new haxe_ds_StringMap();
-		var value9 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("button");
-		if(__map_reserved.type != null) _g9.setReserved("type",value9); else _g9.h["type"] = value9;
-		var value10 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("btn btn-primary btn-lg");
-		if(__map_reserved["class"] != null) _g9.setReserved("class",value10); else _g9.h["class"] = value10;
-		var tmp5 = doom__$Node_Node_$Impl_$.el("div",attributes3,[doom__$Node_Node_$Impl_$.el("div",attributes4,[doom_NodeImpl.ComponentNode(BS.jumbotron([tmp1,tmp2,tmp3,tmp4,doom__$Node_Node_$Impl_$.el("button",_g9,null,doom_NodeImpl.Text("Learn more"))]))],null)],null);
+		var value9 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
+		if(__map_reserved["class"] != null) _g9.setReserved("class",value9); else _g9.h["class"] = value9;
+		var attributes5 = _g9;
 		var _g10 = new haxe_ds_StringMap();
-		var value11 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
-		if(__map_reserved["class"] != null) _g10.setReserved("class",value11); else _g10.h["class"] = value11;
-		var attributes5 = _g10;
+		var value10 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g10.setReserved("class",value10); else _g10.h["class"] = value10;
+		var tmp4 = doom__$Node_Node_$Impl_$.el("div",_g10,[this.labels()],null);
 		var _g11 = new haxe_ds_StringMap();
-		var value12 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g11.setReserved("class",value12); else _g11.h["class"] = value12;
-		var tmp6 = doom__$Node_Node_$Impl_$.el("div",_g11,[this.labels()],null);
+		var value11 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g11.setReserved("class",value11); else _g11.h["class"] = value11;
+		var tmp5 = doom__$Node_Node_$Impl_$.el("div",attributes5,[tmp4,doom__$Node_Node_$Impl_$.el("div",_g11,[this.pillLabels()],null)],null);
 		var _g12 = new haxe_ds_StringMap();
-		var value13 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g12.setReserved("class",value13); else _g12.h["class"] = value13;
-		var tmp7 = doom__$Node_Node_$Impl_$.el("div",attributes5,[tmp6,doom__$Node_Node_$Impl_$.el("div",_g12,[this.pillLabels()],null)],null);
+		var value12 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
+		if(__map_reserved["class"] != null) _g12.setReserved("class",value12); else _g12.h["class"] = value12;
+		var attributes6 = _g12;
 		var _g13 = new haxe_ds_StringMap();
-		var value14 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
-		if(__map_reserved["class"] != null) _g13.setReserved("class",value14); else _g13.h["class"] = value14;
-		var attributes6 = _g13;
+		var value13 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g13.setReserved("class",value13); else _g13.h["class"] = value13;
+		var tmp6 = doom__$Node_Node_$Impl_$.el("div",_g13,[this.buttons()],null);
 		var _g14 = new haxe_ds_StringMap();
-		var value15 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g14.setReserved("class",value15); else _g14.h["class"] = value15;
-		var tmp8 = doom__$Node_Node_$Impl_$.el("div",_g14,[this.buttons()],null);
+		var value14 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g14.setReserved("class",value14); else _g14.h["class"] = value14;
+		var tmp7 = doom__$Node_Node_$Impl_$.el("div",attributes6,[tmp6,doom__$Node_Node_$Impl_$.el("div",_g14,[this.outlineButtons()],null)],null);
 		var _g15 = new haxe_ds_StringMap();
-		var value16 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g15.setReserved("class",value16); else _g15.h["class"] = value16;
-		var tmp9 = doom__$Node_Node_$Impl_$.el("div",attributes6,[tmp8,doom__$Node_Node_$Impl_$.el("div",_g15,[this.outlineButtons()],null)],null);
+		var value15 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
+		if(__map_reserved["class"] != null) _g15.setReserved("class",value15); else _g15.h["class"] = value15;
+		var attributes7 = _g15;
 		var _g16 = new haxe_ds_StringMap();
-		var value17 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
-		if(__map_reserved["class"] != null) _g16.setReserved("class",value17); else _g16.h["class"] = value17;
-		var attributes7 = _g16;
+		var value16 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g16.setReserved("class",value16); else _g16.h["class"] = value16;
+		var tmp8 = doom__$Node_Node_$Impl_$.el("div",_g16,[this.groupButtons()],null);
 		var _g17 = new haxe_ds_StringMap();
-		var value18 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g17.setReserved("class",value18); else _g17.h["class"] = value18;
-		var tmp10 = doom__$Node_Node_$Impl_$.el("div",_g17,[this.groupButtons()],null);
-		var _g18 = new haxe_ds_StringMap();
-		var value19 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g18.setReserved("class",value19); else _g18.h["class"] = value19;
-		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,tmp5,tmp7,tmp9,doom__$Node_Node_$Impl_$.el("div",attributes7,[tmp10,doom__$Node_Node_$Impl_$.el("div",_g18,[doom_NodeImpl.ComponentNode(BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")])),doom_NodeImpl.ComponentNode(BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")]))],null)],null)],null);
+		var value17 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g17.setReserved("class",value17); else _g17.h["class"] = value17;
+		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,tmp3,tmp5,tmp7,doom__$Node_Node_$Impl_$.el("div",attributes7,[tmp8,doom__$Node_Node_$Impl_$.el("div",_g17,[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])],null)],null)],null);
 	}
 	,section: function(name,content) {
 		var _g = new haxe_ds_StringMap();
@@ -187,16 +180,16 @@ All.prototype = $extend(doom_Component.prototype,{
 		return this.section("Pill labels",[doom_bs_Label.pill(doom_bs_LabelType.Default,[doom_NodeImpl.Text("Default label")]),doom_bs_Label.pill(doom_bs_LabelType.Primary,[doom_NodeImpl.Text("Primary label")]),doom_bs_Label.pill(doom_bs_LabelType.Success,[doom_NodeImpl.Text("Success label")]),doom_bs_Label.pill(doom_bs_LabelType.Info,[doom_NodeImpl.Text("Info label")]),doom_bs_Label.pill(doom_bs_LabelType.Warning,[doom_NodeImpl.Text("Warning label")]),doom_bs_Label.pill(doom_bs_LabelType.Danger,[doom_NodeImpl.Text("Danger label")])]);
 	}
 	,buttons: function() {
-		return this.section("Buttons",[doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Primary,null,[doom_NodeImpl.Text("Primary button")])),doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Secondary,null,[doom_NodeImpl.Text("Secondary button")])),doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Info,null,[doom_NodeImpl.Text("Info button")])),doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Success,null,[doom_NodeImpl.Text("Success button")])),doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Warning,null,[doom_NodeImpl.Text("Warning button")])),doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Danger,null,[doom_NodeImpl.Text("Danger button")]))]);
+		return this.section("Buttons",[BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Primary,null,[doom_NodeImpl.Text("Primary button")]),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Secondary,null,[doom_NodeImpl.Text("Secondary button")]),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Info,null,[doom_NodeImpl.Text("Info button")]),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Success,null,[doom_NodeImpl.Text("Success button")]),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Warning,null,[doom_NodeImpl.Text("Warning button")]),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Danger,null,[doom_NodeImpl.Text("Danger button")])]);
 	}
 	,outlineButtons: function() {
-		return this.section("Outline buttons",[doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Primary,{ outline : true},[doom_NodeImpl.Text("Primary outline button")])),doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Secondary,{ outline : true},[doom_NodeImpl.Text("Secondary outline button")])),doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Info,{ outline : true},[doom_NodeImpl.Text("Info outline button")])),doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Success,{ outline : true},[doom_NodeImpl.Text("Success outline button")])),doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Warning,{ outline : true},[doom_NodeImpl.Text("Warning outline button")])),doom_NodeImpl.ComponentNode(BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Danger,{ outline : true},[doom_NodeImpl.Text("Danger outline button")]))]);
+		return this.section("Outline buttons",[BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Primary,{ outline : true},[doom_NodeImpl.Text("Primary outline button")]),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Secondary,{ outline : true},[doom_NodeImpl.Text("Secondary outline button")]),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Info,{ outline : true},[doom_NodeImpl.Text("Info outline button")]),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Success,{ outline : true},[doom_NodeImpl.Text("Success outline button")]),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Warning,{ outline : true},[doom_NodeImpl.Text("Warning outline button")]),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Danger,{ outline : true},[doom_NodeImpl.Text("Danger outline button")])]);
 	}
 	,groupButtons: function() {
-		return this.section("Buttons Group",[doom_NodeImpl.ComponentNode(BS.buttonGroup(null,[BS.button(function() {
+		return this.section("Buttons Group",[BS.buttonGroup(null,[BS.button(function() {
 		},doom_bs_ButtonStyle.Primary,null,[doom_NodeImpl.Text("left")]),BS.button(function() {
 		},doom_bs_ButtonStyle.Primary,null,[doom_NodeImpl.Text("middle")]),BS.button(function() {
-		},doom_bs_ButtonStyle.Primary,null,[doom_NodeImpl.Text("right")])].map(doom__$Node_Node_$Impl_$.comp)))]);
+		},doom_bs_ButtonStyle.Primary,null,[doom_NodeImpl.Text("right")])])]);
 	}
 	,onClick: function() {
 		console.log("click");
@@ -207,12 +200,22 @@ var Doom = function(children) {
 	doom_ComponentBase.call(this,children);
 };
 Doom.__name__ = ["Doom"];
-Doom.mount = function(component,ref) {
+Doom.mount = function(node,ref) {
 	if(null == ref) throw new js__$Boot_HaxeError("reference element is set to null");
-	ref.innerHTML = "";
-	component.init();
-	ref.appendChild(component.element);
-	thx_Timer.immediate($bind(component,component.didMount));
+	var other = node;
+	switch(node[1]) {
+	case 3:
+		var comp = node[2];
+		ref.innerHTML = "";
+		comp.init();
+		ref.appendChild(comp.element);
+		thx_Timer.immediate($bind(comp,comp.didMount));
+		break;
+	default:
+		var dom = doom_HtmlNode.toHtml(other);
+		ref.innerHTML = "";
+		ref.appendChild(dom);
+	}
 };
 Doom.a = function(attributes,children,child) {
 	return doom__$Node_Node_$Impl_$.el("a",attributes,children,child);
@@ -597,7 +600,7 @@ doom_bs_Alert["with"] = function(type,state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
 	var stateVar = { dismissable : state.dismissable, type : type};
-	return new doom_bs_Alert(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_Alert(apiVar,stateVar,children));
 };
 doom_bs_Alert.__super__ = Doom;
 doom_bs_Alert.prototype = $extend(Doom.prototype,{
@@ -659,6 +662,11 @@ doom_bs_Alert.prototype = $extend(Doom.prototype,{
 	}
 	,__class__: doom_bs_Alert
 });
+var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
+doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_AlertType = { __ename__ : ["doom","bs","AlertType"], __constructs__ : ["Success","Info","Warning","Danger"] };
 doom_bs_AlertType.Success = ["Success",0];
 doom_bs_AlertType.Success.toString = $estr;
@@ -734,7 +742,7 @@ doom_bs_Button["with"] = function(click,style,state,children) {
 	var apiVar = { click : click};
 	if(state == null) state = { };
 	var stateVar = { style : style, block : state.block, active : state.active, disabled : state.disabled, outline : state.outline, dropdownToggle : state.dropdownToggle, size : state.size};
-	return new doom_bs_Button(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_Button(apiVar,stateVar,children));
 };
 doom_bs_Button.__super__ = Doom;
 doom_bs_Button.prototype = $extend(Doom.prototype,{
@@ -841,7 +849,7 @@ doom_bs_ButtonGroup["with"] = function(state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
 	var stateVar = { size : state.size, toggle : state.toggle, label : state.label};
-	return new doom_bs_ButtonGroup(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_ButtonGroup(apiVar,stateVar,children));
 };
 doom_bs_ButtonGroup.__super__ = Doom;
 doom_bs_ButtonGroup.prototype = $extend(Doom.prototype,{
@@ -901,7 +909,7 @@ doom_bs_ButtonGroupVertical["with"] = function(state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
 	var stateVar = { size : state.size, toggle : state.toggle, label : state.label};
-	return new doom_bs_ButtonGroupVertical(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_ButtonGroupVertical(apiVar,stateVar,children));
 };
 doom_bs_ButtonGroupVertical.__super__ = Doom;
 doom_bs_ButtonGroupVertical.prototype = $extend(Doom.prototype,{
@@ -957,7 +965,7 @@ doom_bs_ButtonToolbar["with"] = function(state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
 	var stateVar = { label : state.label};
-	return new doom_bs_ButtonToolbar(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_ButtonToolbar(apiVar,stateVar,children));
 };
 doom_bs_ButtonToolbar.__super__ = Doom;
 doom_bs_ButtonToolbar.prototype = $extend(Doom.prototype,{
@@ -1000,7 +1008,7 @@ doom_bs_CloseButton["with"] = function(click,state,children) {
 	var apiVar = { click : click};
 	if(state == null) state = { };
 	var stateVar = { dismissAlert : state.dismissAlert};
-	return new doom_bs_CloseButton(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_CloseButton(apiVar,stateVar,children));
 };
 doom_bs_CloseButton.__super__ = Doom;
 doom_bs_CloseButton.prototype = $extend(Doom.prototype,{
@@ -1052,7 +1060,7 @@ doom_bs_Container["with"] = function(state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
 	var stateVar = { className : state.className};
-	return new doom_bs_Container(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_Container(apiVar,stateVar,children));
 };
 doom_bs_Container.__super__ = Doom;
 doom_bs_Container.prototype = $extend(Doom.prototype,{
@@ -1096,7 +1104,7 @@ doom_bs_Dropdown["with"] = function(state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
 	var stateVar = { open : state.open};
-	return new doom_bs_Dropdown(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_Dropdown(apiVar,stateVar,children));
 };
 doom_bs_Dropdown.__super__ = Doom;
 doom_bs_Dropdown.prototype = $extend(Doom.prototype,{
@@ -1137,7 +1145,7 @@ doom_bs_DropdownItem["with"] = function(click,state,children) {
 	var apiVar = { click : click};
 	if(state == null) state = { };
 	var stateVar = { disabled : state.disabled};
-	return new doom_bs_DropdownItem(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_DropdownItem(apiVar,stateVar,children));
 };
 doom_bs_DropdownItem.__super__ = Doom;
 doom_bs_DropdownItem.prototype = $extend(Doom.prototype,{
@@ -1186,7 +1194,7 @@ doom_bs_DropdownMenu["with"] = function(state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
 	var stateVar = { dropup : state.dropup};
-	return new doom_bs_DropdownMenu(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_DropdownMenu(apiVar,stateVar,children));
 };
 doom_bs_DropdownMenu.__super__ = Doom;
 doom_bs_DropdownMenu.prototype = $extend(Doom.prototype,{
@@ -1225,7 +1233,7 @@ doom_bs_InputGroup.__name__ = ["doom","bs","InputGroup"];
 doom_bs_InputGroup["with"] = function(children) {
 	var apiVar = { };
 	var stateVar = { };
-	return new doom_bs_InputGroup(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_InputGroup(apiVar,stateVar,children));
 };
 doom_bs_InputGroup.__super__ = Doom;
 doom_bs_InputGroup.prototype = $extend(Doom.prototype,{
@@ -1258,7 +1266,7 @@ doom_bs_Jumbotron.__name__ = ["doom","bs","Jumbotron"];
 doom_bs_Jumbotron["with"] = function(children) {
 	var apiVar = { };
 	var stateVar = { };
-	return new doom_bs_Jumbotron(apiVar,stateVar,children);
+	return doom_NodeImpl.ComponentNode(new doom_bs_Jumbotron(apiVar,stateVar,children));
 };
 doom_bs_Jumbotron.__super__ = Doom;
 doom_bs_Jumbotron.prototype = $extend(Doom.prototype,{
@@ -1317,11 +1325,6 @@ doom_bs_Label.prototype = $extend(doom_Component.prototype,{
 	}
 	,__class__: doom_bs_Label
 });
-var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
-doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var BS = function() { };
 BS.__name__ = ["BS"];
 BS.alertSuccess = function(a2,a3) {
@@ -1519,7 +1522,7 @@ var Index = function() { };
 Index.__name__ = ["Index"];
 Index.main = function() {
 	$(function() {
-		Doom.mount(new All({ },{ }),window.document.getElementById("root"));
+		Doom.mount(doom_NodeImpl.ComponentNode(new All({ },{ })),window.document.getElementById("root"));
 	});
 };
 var Lambda = function() { };
