@@ -9,7 +9,11 @@ import doom.bs.Container;
 import doom.bs.Dropdown;
 import doom.bs.DropdownItem;
 
+import doom.bs.DropdownMenu;
+import doom.bs.InputGroup;
+import doom.bs.Label;
 import doom.bs.Navbar;
+import doom.bs.RadioButton;
 
 class BS {
   public static var alert(default, null) = Alert.with;
@@ -41,21 +45,19 @@ class BS {
   public static var dropdownItem(default, null) =  DropdownItem.with;
 
 
-
+  public static var dropdownMenu(default, null) =  DropdownMenu.create;
+  public static var inputGroup(default, null) = InputGroup.create;
+  public static var label(default, null) =  Label.create;
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
     return new Navbar({}, { theme : theme, bg : bg }, children);
-
+  public static var pill(default, null) =  Label.pill;
+  // public static var radioButton(default, null) = RadioButton.create;
+  // public static var radioButtons(default, null) = RadioButton.createGroup;
   inline public static function row(?className : String, children : Nodes) : Node
     return Doom.div(["class" => [
       "row" => true,
       className => null != className
     ]], children);
 
-  public static var inputGroup(default, null) = doom.bs.InputGroup.create;
 
-  // public static var radioButton(default, null) = doom.bs.RadioButton.create;
-  // public static var radioButtons(default, null) = doom.bs.RadioButton.createGroup;
-  public static var label(default, null) =  doom.bs.Label.create;
-  public static var pill(default, null) =  doom.bs.Label.pill;
-  public static var dropdownMenu(default, null) =  doom.bs.DropdownMenu.create;
 }
