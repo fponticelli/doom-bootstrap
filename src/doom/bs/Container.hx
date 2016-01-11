@@ -3,8 +3,7 @@ package doom.bs;
 import Doom.*;
 
 class Container extends Doom {
-  @:state(opt)
-  var className : String;
+  @:state(opt) var className : String;
 
   override function render() : Node {
     return div([

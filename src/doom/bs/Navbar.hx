@@ -3,10 +3,9 @@ package doom.bs;
 import Doom.*;
 
 class Navbar extends Doom {
-  @:state(opt)
-  var theme : NavbarTheme;
-  @:state(opt)
-  var background : NavbarBackground;
+  @:state(opt) var theme : NavbarTheme;
+  @:state(opt) var background : NavbarBackground;
+
   override function render()
     return nav([
       "class" => [

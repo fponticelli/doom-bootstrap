@@ -3,22 +3,14 @@ package doom.bs;
 import Doom.*;
 
 class Button extends Doom {
-  @:api
-  var click : Void -> Void;
-  @:state
-  var style : ButtonStyle;
-  @:state(false)
-  var block : Bool;
-  @:state(false)
-  var active : Bool;
-  @:state(false)
-  var disabled : Bool;
-  @:state(false)
-  var outline : Bool;
-  @:state(false)
-  var dropdownToggle : Bool;
-  @:state(Default)
-  var size : Size;
+  @:api            var click : Void -> Void;
+  @:state          var style : ButtonStyle;
+  @:state(false)   var block : Bool;
+  @:state(false)   var active : Bool;
+  @:state(false)   var disabled : Bool;
+  @:state(false)   var outline : Bool;
+  @:state(false)   var dropdownToggle : Bool;
+  @:state(Default) var size : Size;
 
   override function render()
     return button([

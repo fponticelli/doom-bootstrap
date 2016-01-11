@@ -3,12 +3,9 @@ package doom.bs;
 import Doom.*;
 
 class ButtonGroup extends Doom {
-  @:state(Default)
-  var size : Size;
-  @:state(false)
-  var toggle : Bool;
-  @:state(opt)
-  var label : String;
+  @:state(Default) var size : Size;
+  @:state(false)   var toggle : Bool;
+  @:state(opt)     var label : String;
 
   override function render()
     return div([

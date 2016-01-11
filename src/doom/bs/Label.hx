@@ -3,10 +3,8 @@ package doom.bs;
 import Doom.*;
 
 class Label extends Doom {
-  @:state
-  var type : LabelType;
-  @:state(false)
-  var isPill : Bool;
+  @:state        var type : LabelType;
+  @:state(false) var isPill : Bool;
 
   override function render()
     return span([

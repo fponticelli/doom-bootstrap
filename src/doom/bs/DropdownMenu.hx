@@ -3,8 +3,7 @@ package doom.bs;
 import Doom.*;
 
 class DropdownMenu extends Doom {
-  @:state(false)
-  var dropup : Bool;
+  @:state(false) var dropup : Bool;
 
   override function render()
     return div([

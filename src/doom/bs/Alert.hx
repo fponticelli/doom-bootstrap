@@ -5,11 +5,8 @@ import doom.Node;
 using thx.Objects;
 
 class Alert extends Doom {
-  @:state(false)
-  var dismissable : Bool;
-
-  @:state
-  var type : AlertType;
+  @:state(false) var dismissable : Bool;
+  @:state        var type : AlertType;
 
   override function render() {
     var children = [];

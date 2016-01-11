@@ -3,11 +3,8 @@ package doom.bs;
 import Doom.*;
 
 class CloseButton extends Doom {
-  @:api
-  var click : Void -> Void;
-
-  @:state(false)
-  var dismissAlert : Bool;
+  @:api          var click : Void -> Void;
+  @:state(false) var dismissAlert : Bool;
 
   override function render()
     return button([

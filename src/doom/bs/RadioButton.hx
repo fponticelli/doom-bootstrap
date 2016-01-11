@@ -4,25 +4,17 @@ import Doom.*;
 import doom.bs.Button.ButtonStyle;
 
 class RadioButton extends Doom {
-  @:api
-  var click : Void -> Void;
-
-  @:state(opt)
-  var name : String;
-  @:state
-  var style : ButtonStyle;
+  @:api            var click : Void -> Void;
+  @:state(opt)     var name : String;
+  @:state          var style : ButtonStyle;
+  @:state(false)   var active : Bool;
+  @:state(false)   var disabled : Bool;
+  @:state(false)   var outline : Bool;
+  @:state(Default) var size : Size;
   // @:state(false)
   // var block : Bool;
-  @:state(false)
-  var active : Bool;
-  @:state(false)
-  var disabled : Bool;
-  @:state(false)
-  var outline : Bool;
   // @:state(false)
   // var dropdownToggle : Bool;
-  @:state(Default)
-  var size : Size;
 
   override function render()
     return label([

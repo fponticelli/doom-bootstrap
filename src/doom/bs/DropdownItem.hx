@@ -3,11 +3,8 @@ package doom.bs;
 import Doom.*;
 
 class DropdownItem extends Doom {
-  @:api
-  var click : Void -> Void;
-
-  @:state(false)
-  var disabled : Bool;
+  @:api          var click : Void -> Void;
+  @:state(false) var disabled : Bool;
 
   override function render() : Node
     return button([

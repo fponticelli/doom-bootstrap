@@ -3,8 +3,7 @@ package doom.bs;
 import Doom.*;
 
 class ButtonToolbar extends Doom {
-  @:state(opt)
-  var label : String;
+  @:state(opt) var label : String;
 
   override function render()
     return div([
