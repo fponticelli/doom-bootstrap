@@ -11,8 +11,6 @@ import doom.bs.DropdownItem;
 import doom.bs.DropdownMenu;
 import doom.bs.InputGroup;
 import doom.bs.Jumbotron;
-
-
 import doom.bs.Label;
 import doom.bs.Navbar;
 import doom.bs.RadioButton;
@@ -70,7 +68,7 @@ class BS {
 
   public static var navbar(default, null) = Navbar.with;
 
-  // public static var radioButton(default, null) = RadioButton.create;
+  public static var radioButton(default, null) = RadioButton.with;
   // public static var radioButtons(default, null) = RadioButton.createGroup;
   inline public static function row(?className : String, children : Nodes) : Node
     return Doom.div(["class" => [
