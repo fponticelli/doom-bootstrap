@@ -5,18 +5,6 @@ import doom.Node;
 using thx.Objects;
 
 class Alert extends Doom {
-  inline public static function success(?options : AlertStateOptions, children : Nodes) : Node
-    return with(Success, options, children);
-
-  inline public static function info(?options : AlertStateOptions, children : Nodes) : Node
-    return with(Info, options, children);
-
-  inline public static function warning(?options : AlertStateOptions, children : Nodes) : Node
-    return with(Warning, options, children);
-
-  inline public static function danger(?options : AlertStateOptions, children : Nodes) : Node
-    return with(Danger, options, children);
-
   @:state(false)
   var dismissable : Bool;
 

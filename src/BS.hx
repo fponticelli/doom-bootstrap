@@ -1,13 +1,14 @@
 import doom.Node;
+import doom.bs.Alert;
 
 import doom.bs.Navbar;
 
 class BS {
-  public static var alert(default, null) =  doom.bs.Alert.with;
-  public static var alertSuccess(default, null) =  doom.bs.Alert.success;
-  public static var alertInfo(default, null) =  doom.bs.Alert.info;
-  public static var alertWarning(default, null) =  doom.bs.Alert.warning;
-  public static var alertDanger(default, null) =  doom.bs.Alert.danger;
+  public static var alert(default, null) = Alert.with;
+  public static var alertSuccess(default, null) = Alert.with.bind(Success, _, _);
+  public static var alertInfo(default, null) = Alert.with.bind(Info, _, _);
+  public static var alertWarning(default, null) = Alert.with.bind(Warning, _, _);
+  public static var alertDanger(default, null) = Alert.with.bind(Danger, _, _);
 
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
     return new Navbar({}, { theme : theme, bg : bg }, children);
