@@ -13,7 +13,7 @@ class DropdownItem extends Doom {
     return button([
       "class" => "dropdown-item",
       "type" => "button",
-      "disabled" => state.disabled == true,
-      "click" => api.click
+      "disabled" => disabled == true,
+      "click" => click
     ], children);
 }

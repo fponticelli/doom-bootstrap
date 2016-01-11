@@ -1175,15 +1175,21 @@ doom_bs_DropdownItem.prototype = $extend(Doom.prototype,{
 	,__class__: doom_bs_DropdownItem
 });
 var doom_bs_DropdownMenu = function(api,state,children) {
-	doom_Component.call(this,api,state,children);
+	if(state.dropup == null) state.dropup = false;
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
 };
 doom_bs_DropdownMenu.__name__ = ["doom","bs","DropdownMenu"];
-doom_bs_DropdownMenu.create = function(options,children) {
-	if(options == null) options = { };
-	return doom_NodeImpl.ComponentNode(new doom_bs_DropdownMenu({ },options,children));
+doom_bs_DropdownMenu["with"] = function(state,children) {
+	var apiVar = { };
+	if(state == null) state = { };
+	var stateVar = { dropup : state.dropup};
+	return new doom_bs_DropdownMenu(apiVar,stateVar,children);
 };
-doom_bs_DropdownMenu.__super__ = doom_Component;
-doom_bs_DropdownMenu.prototype = $extend(doom_Component.prototype,{
+doom_bs_DropdownMenu.__super__ = Doom;
+doom_bs_DropdownMenu.prototype = $extend(Doom.prototype,{
 	render: function() {
 		var _g = new haxe_ds_StringMap();
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("dropdown-menu");
@@ -1192,13 +1198,23 @@ doom_bs_DropdownMenu.prototype = $extend(doom_Component.prototype,{
 		if(__map_reserved.dropup != null) _g.setReserved("dropup",value1); else _g.h["dropup"] = value1;
 		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
 	}
+	,api: null
+	,state: null
+	,dropup: null
+	,get_dropup: function() {
+		return this.state.dropup;
+	}
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
 	,__class__: doom_bs_DropdownMenu
 });
-var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
-doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_InputGroup = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -1216,6 +1232,11 @@ doom_bs_InputGroup.prototype = $extend(doom_Component.prototype,{
 	}
 	,__class__: doom_bs_InputGroup
 });
+var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
+doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_Label = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -8604,7 +8625,7 @@ BS.closeButton = doom_bs_CloseButton["with"];
 BS.container = doom_bs_Container["with"];
 BS.dropdown = doom_bs_Dropdown["with"];
 BS.dropdownItem = doom_bs_DropdownItem["with"];
-BS.dropdownMenu = doom_bs_DropdownMenu.create;
+BS.dropdownMenu = doom_bs_DropdownMenu["with"];
 BS.inputGroup = doom_bs_InputGroup.create;
 BS.label = doom_bs_Label.create;
 BS.pill = doom_bs_Label.pill;

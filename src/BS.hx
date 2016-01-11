@@ -44,8 +44,10 @@ class BS {
 
   public static var dropdownItem(default, null) =  DropdownItem.with;
 
+  public static var dropdownMenu(default, null) =  DropdownMenu.with;
 
-  public static var dropdownMenu(default, null) =  DropdownMenu.create;
+
+
   public static var inputGroup(default, null) = InputGroup.create;
   public static var label(default, null) =  Label.create;
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node

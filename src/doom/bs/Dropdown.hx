@@ -9,6 +9,6 @@ class Dropdown extends Doom {
   override function render()
     return div([
       "class" => "dropdown",
-      "open" => state.open == true,
+      "open" => open == true,
     ], children);
 }
