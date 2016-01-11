@@ -1,35 +1,34 @@
 package doom.bs;
 
 import Doom.*;
-import doom.Node;
-import js.html.MouseEvent;
 
-class Button extends Component<ButtonApi, ButtonState> {
-  var classes(default, null) : Array<String>;
+class Button extends Doom {
+  @:api
+  var click : Void -> Void;
+  @:state
+  var style : ButtonStyle;
+  @:state(false)
+  var block : Bool;
+  @:state(false)
+  var active : Bool;
+  @:state(false)
+  var disabled : Bool;
+  @:state(false)
+  var outline : Bool;
+  @:state(false)
+  var dropdownToggle : Bool;
+  @:state(Default)
+  var size : Size;
 
-  public static function create(style : ButtonStyle, ?options : ButtonOptions, onClick: Void -> Void, children : Nodes) : Node {
-    if (options == null) options = {};
-    return new Button({ click : onClick }, {
-      active: options.active,
-      disabled: options.disabled,
-      outline: options.outline,
-      block: options.block,
-      size: options.size,
-      dropdownToggle: options.dropdownToggle,
-      style: style
-    }, children);
-  }
-
-  override function render() : Node {
+  override function render()
     return button([
       "type" => "button",
       "class" => getClass(state),
-      "disabled" => state.disabled,
-      "click" => api.click,
-      "data-toggle" => (state.dropdownToggle == true ? "dropdown" : null),
-      "aria-haspopup" => (state.dropdownToggle == true ? "true" : null),
+      "disabled" => disabled,
+      "click" => click,
+      "data-toggle" => (dropdownToggle == true ? "dropdown" : null),
+      "aria-haspopup" => (dropdownToggle == true ? "true" : null),
     ], children);
-  }
 
   public static function getClass(state : ButtonState) : String {
     var classes = ["btn"],
@@ -74,20 +73,3 @@ enum ButtonStyle {
   Warning;
   Danger;
 }
-
-typedef ButtonApi = {
-  public function click() : Void;
-};
-
-typedef ButtonOptions = {
-  ?block : Bool,
-  ?active: Bool,
-  ?disabled: Bool,
-  ?outline : Bool,
-  ?dropdownToggle : Bool,
-  ?size: Size
-}
-
-typedef ButtonState = {> ButtonOptions,
-  style: ButtonStyle
-};

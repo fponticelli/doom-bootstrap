@@ -90,37 +90,35 @@ class All extends Component<{}, {}> {
 
   public function buttons() : Node {
     return section("Buttons", [
-      Button.create(Primary, onClick, "Primary button"),
-      Button.create(Secondary, onClick, "Secondary button"),
-      Button.create(Info, onClick, "Info button"),
-      Button.create(Success, onClick, "Success button"),
-      Button.create(Warning, onClick, "Warning button"),
-      Button.create(Danger, onClick, "Danger button"),
+      Button.with(onClick, Primary, "Primary button"),
+      Button.with(onClick, Secondary, "Secondary button"),
+      Button.with(onClick, Info, "Info button"),
+      Button.with(onClick, Success, "Success button"),
+      Button.with(onClick, Warning, "Warning button"),
+      Button.with(onClick, Danger, "Danger button"),
     ]);
   }
 
   public function outlineButtons() : Node {
     return section("Outline buttons", [
-      Button.create(Primary, { outline : true }, onClick, "Primary outline button"),
-      Button.create(Secondary, { outline : true }, onClick, "Secondary outline button"),
-      Button.create(Info, { outline : true }, onClick, "Info outline button"),
-      Button.create(Success, { outline : true }, onClick, "Success outline button"),
-      Button.create(Warning, { outline : true }, onClick, "Warning outline button"),
-      Button.create(Danger, { outline : true }, onClick, "Danger outline button"),
+      Button.with(onClick, Primary, { outline : true }, "Primary outline button"),
+      Button.with(onClick, Secondary, { outline : true }, "Secondary outline button"),
+      Button.with(onClick, Info, { outline : true }, "Info outline button"),
+      Button.with(onClick, Success, { outline : true }, "Success outline button"),
+      Button.with(onClick, Warning, { outline : true }, "Warning outline button"),
+      Button.with(onClick, Danger, { outline : true }, "Danger outline button"),
     ]);
   }
 
   public function groupButtons() : Node {
     return section("Buttons Group", [
       ButtonGroup.create([
-        Button.create(Primary, function(){}, "left"),
-        Button.create(Primary, function(){}, "middle"),
-        Button.create(Primary, function(){}, "right")
+        Button.with(function(){}, Primary, "left"),
+        Button.with(function(){}, Primary, "middle"),
+        Button.with(function(){}, Primary, "right")
       ])
     ]);
   }
 
-  function onClick() {
-    trace('click');
-  }
+  function onClick() trace('click');
 }

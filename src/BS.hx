@@ -1,5 +1,6 @@
 import doom.Node;
 import doom.bs.Alert;
+import doom.bs.Button;
 
 import doom.bs.Navbar;
 
@@ -9,6 +10,14 @@ class BS {
   public static var alertInfo(default, null) = Alert.with.bind(Info, _, _);
   public static var alertWarning(default, null) = Alert.with.bind(Warning, _, _);
   public static var alertDanger(default, null) = Alert.with.bind(Danger, _, _);
+
+  public static var button(default, null) =  doom.bs.Button.with;
+  public static var buttonPrimary(default, null) =  doom.bs.Button.with.bind(_, Primary, _, _);
+  public static var buttonSecondary(default, null) =  doom.bs.Button.with.bind(_, Secondary, _, _);
+  public static var buttonInfo(default, null) =  doom.bs.Button.with.bind(_, Info, _, _);
+  public static var buttonSuccess(default, null) =  doom.bs.Button.with.bind(_, Success, _, _);
+  public static var buttonWarning(default, null) =  doom.bs.Button.with.bind(_, Warning, _, _);
+  public static var buttonDanger(default, null) =  doom.bs.Button.with.bind(_, Danger, _, _);
 
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
     return new Navbar({}, { theme : theme, bg : bg }, children);
@@ -21,13 +30,13 @@ class BS {
 
   public static var inputGroup(default, null) = doom.bs.InputGroup.create;
 
-  public static var radioButton(default, null) = doom.bs.RadioButton.create;
-  public static var radioButtons(default, null) = doom.bs.RadioButton.createGroup;
+  // public static var radioButton(default, null) = doom.bs.RadioButton.create;
+  // public static var radioButtons(default, null) = doom.bs.RadioButton.createGroup;
   public static var closeButton(default, null) = doom.bs.CloseButton.create;
   public static var container(default, null) =  doom.bs.Container.create;
   public static var label(default, null) =  doom.bs.Label.create;
   public static var pill(default, null) =  doom.bs.Label.pill;
-  public static var button(default, null) =  doom.bs.Button.create;
+
   public static var buttonGroup(default, null) =  doom.bs.ButtonGroup.create;
   public static var buttonGroupVertical(default, null) =  doom.bs.ButtonGroupVertical.create;
   public static var buttonToolbar(default, null) =  doom.bs.ButtonToolbar.create;
