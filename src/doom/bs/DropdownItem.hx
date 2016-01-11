@@ -1,30 +1,19 @@
 package doom.bs;
 
 import Doom.*;
-import doom.Node;
-import js.html.MouseEvent;
 
-class DropdownItem extends Component<DropdownItemApi, DropdownItemState> {
-  public static function create(click : Void -> Void, ?options : DropdownItemState, children : Nodes) : Node {
-    if (options == null) options = {};
-    return new DropdownItem({ click : click }, options, children);
-  }
+class DropdownItem extends Doom {
+  @:api
+  var click : Void -> Void;
 
-  override function render() : Node {
+  @:state(false)
+  var disabled : Bool;
+
+  override function render() : Node
     return button([
       "class" => "dropdown-item",
       "type" => "button",
       "disabled" => state.disabled == true,
       "click" => api.click
     ], children);
-  }
 }
-
-typedef DropdownItemApi = {
-  click : Void -> Void
-};
-
-
-typedef DropdownItemState = {
-  ?disabled : Bool
-};
