@@ -4,6 +4,7 @@ import doom.bs.Button;
 import doom.bs.ButtonGroup;
 import doom.bs.ButtonGroupVertical;
 import doom.bs.ButtonToolbar;
+import doom.bs.CloseButton;
 
 import doom.bs.Navbar;
 
@@ -28,6 +29,8 @@ class BS {
 
   public static var buttonToolbar(default, null) =  ButtonToolbar.with;
 
+  public static var closeButton(default, null) = CloseButton.with;
+
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
     return new Navbar({}, { theme : theme, bg : bg }, children);
 
@@ -41,7 +44,6 @@ class BS {
 
   // public static var radioButton(default, null) = doom.bs.RadioButton.create;
   // public static var radioButtons(default, null) = doom.bs.RadioButton.createGroup;
-  public static var closeButton(default, null) = doom.bs.CloseButton.create;
   public static var container(default, null) =  doom.bs.Container.create;
   public static var label(default, null) =  doom.bs.Label.create;
   public static var pill(default, null) =  doom.bs.Label.pill;
