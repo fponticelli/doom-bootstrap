@@ -8,9 +8,11 @@ import doom.bs.CloseButton;
 import doom.bs.Container;
 import doom.bs.Dropdown;
 import doom.bs.DropdownItem;
-
 import doom.bs.DropdownMenu;
 import doom.bs.InputGroup;
+import doom.bs.Jumbotron;
+
+
 import doom.bs.Label;
 import doom.bs.Navbar;
 import doom.bs.RadioButton;
@@ -48,7 +50,9 @@ class BS {
 
   public static var inputGroup(default, null) = InputGroup.with;
 
-  
+  public static var jumbotron(default, null) = Jumbotron.with;
+
+
   public static var label(default, null) =  Label.create;
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
     return new Navbar({}, { theme : theme, bg : bg }, children);

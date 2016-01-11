@@ -19,7 +19,7 @@ class All extends Component<{}, {}> {
       ]),
       div(["class" => "row"], [
         div(["class" => "col-md-12"], [
-          new Jumbotron([
+          jumbotron([
             h1(["class" => "display-3"], "Jumbotron header"),
             p(["class" => "lead"], "This is some lead text in the Jumbotron!"),
             hr(["class" => "m-y-2"]),
@@ -28,7 +28,7 @@ class All extends Component<{}, {}> {
               "type" => "button",
               "class" => "btn btn-primary btn-lg"
             ], "Learn more"),
-          ]).render()
+          ])
         ]),
       ]),
       div(["class" => "row"], [

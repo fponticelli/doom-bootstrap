@@ -132,7 +132,7 @@ All.prototype = $extend(doom_Component.prototype,{
 		if(__map_reserved.type != null) _g9.setReserved("type",value9); else _g9.h["type"] = value9;
 		var value10 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("btn btn-primary btn-lg");
 		if(__map_reserved["class"] != null) _g9.setReserved("class",value10); else _g9.h["class"] = value10;
-		var tmp5 = doom__$Node_Node_$Impl_$.el("div",attributes3,[doom__$Node_Node_$Impl_$.el("div",attributes4,[new doom_bs_Jumbotron([tmp1,tmp2,tmp3,tmp4,doom__$Node_Node_$Impl_$.el("button",_g9,null,doom_NodeImpl.Text("Learn more"))]).render()],null)],null);
+		var tmp5 = doom__$Node_Node_$Impl_$.el("div",attributes3,[doom__$Node_Node_$Impl_$.el("div",attributes4,[doom_NodeImpl.ComponentNode(BS.jumbotron([tmp1,tmp2,tmp3,tmp4,doom__$Node_Node_$Impl_$.el("button",_g9,null,doom_NodeImpl.Text("Learn more"))]))],null)],null);
 		var _g10 = new haxe_ds_StringMap();
 		var value11 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
 		if(__map_reserved["class"] != null) _g10.setReserved("class",value11); else _g10.h["class"] = value11;
@@ -1247,6 +1247,39 @@ doom_bs_InputGroup.prototype = $extend(Doom.prototype,{
 		return true;
 	}
 	,__class__: doom_bs_InputGroup
+});
+var doom_bs_Jumbotron = function(api,state,children) {
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
+};
+doom_bs_Jumbotron.__name__ = ["doom","bs","Jumbotron"];
+doom_bs_Jumbotron["with"] = function(children) {
+	var apiVar = { };
+	var stateVar = { };
+	return new doom_bs_Jumbotron(apiVar,stateVar,children);
+};
+doom_bs_Jumbotron.__super__ = Doom;
+doom_bs_Jumbotron.prototype = $extend(Doom.prototype,{
+	render: function() {
+		var _g = new haxe_ds_StringMap();
+		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("jumbotron");
+		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
+		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
+	}
+	,api: null
+	,state: null
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
+	,__class__: doom_bs_Jumbotron
 });
 var doom_bs_Label = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
@@ -2912,20 +2945,6 @@ doom_XmlNode.attributesToString = function(attributes) {
 	}
 	return buf;
 };
-var doom_bs_Jumbotron = function(children) {
-	doom_Component.call(this,{ },{ },children);
-};
-doom_bs_Jumbotron.__name__ = ["doom","bs","Jumbotron"];
-doom_bs_Jumbotron.__super__ = doom_Component;
-doom_bs_Jumbotron.prototype = $extend(doom_Component.prototype,{
-	render: function() {
-		var _g = new haxe_ds_StringMap();
-		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("jumbotron");
-		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
-		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
-	}
-	,__class__: doom_bs_Jumbotron
-});
 var doom_bs_LabelType = { __ename__ : ["doom","bs","LabelType"], __constructs__ : ["Default","Primary","Success","Info","Warning","Danger"] };
 doom_bs_LabelType.Default = ["Default",0];
 doom_bs_LabelType.Default.toString = $estr;
@@ -8643,6 +8662,7 @@ BS.dropdown = doom_bs_Dropdown["with"];
 BS.dropdownItem = doom_bs_DropdownItem["with"];
 BS.dropdownMenu = doom_bs_DropdownMenu["with"];
 BS.inputGroup = doom_bs_InputGroup["with"];
+BS.jumbotron = doom_bs_Jumbotron["with"];
 BS.label = doom_bs_Label.create;
 BS.pill = doom_bs_Label.pill;
 DateTools.DAYS_OF_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];
