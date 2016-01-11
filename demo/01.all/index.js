@@ -1216,27 +1216,38 @@ doom_bs_DropdownMenu.prototype = $extend(Doom.prototype,{
 	,__class__: doom_bs_DropdownMenu
 });
 var doom_bs_InputGroup = function(api,state,children) {
-	doom_Component.call(this,api,state,children);
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
 };
 doom_bs_InputGroup.__name__ = ["doom","bs","InputGroup"];
-doom_bs_InputGroup.create = function(children) {
-	return doom_NodeImpl.ComponentNode(new doom_bs_InputGroup({ },{ },children));
+doom_bs_InputGroup["with"] = function(children) {
+	var apiVar = { };
+	var stateVar = { };
+	return new doom_bs_InputGroup(apiVar,stateVar,children);
 };
-doom_bs_InputGroup.__super__ = doom_Component;
-doom_bs_InputGroup.prototype = $extend(doom_Component.prototype,{
+doom_bs_InputGroup.__super__ = Doom;
+doom_bs_InputGroup.prototype = $extend(Doom.prototype,{
 	render: function() {
 		var _g = new haxe_ds_StringMap();
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("input-group");
 		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
 		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
 	}
+	,api: null
+	,state: null
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
 	,__class__: doom_bs_InputGroup
 });
-var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
-doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_Label = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -1273,6 +1284,11 @@ doom_bs_Label.prototype = $extend(doom_Component.prototype,{
 	}
 	,__class__: doom_bs_Label
 });
+var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
+doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var BS = function() { };
 BS.__name__ = ["BS"];
 BS.alertSuccess = function(a2,a3) {
@@ -8626,7 +8642,7 @@ BS.container = doom_bs_Container["with"];
 BS.dropdown = doom_bs_Dropdown["with"];
 BS.dropdownItem = doom_bs_DropdownItem["with"];
 BS.dropdownMenu = doom_bs_DropdownMenu["with"];
-BS.inputGroup = doom_bs_InputGroup.create;
+BS.inputGroup = doom_bs_InputGroup["with"];
 BS.label = doom_bs_Label.create;
 BS.pill = doom_bs_Label.pill;
 DateTools.DAYS_OF_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];
