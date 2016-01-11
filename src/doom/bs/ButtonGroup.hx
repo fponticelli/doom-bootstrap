@@ -1,16 +1,16 @@
 package doom.bs;
 
 import Doom.*;
-import doom.Node;
-import js.html.MouseEvent;
 
-class ButtonGroup extends Component<{}, ButtonGroupState> {
-  public static function create(?options : ButtonGroupState, children : Nodes) : Node {
-    if (options == null) options = {};
-    return new ButtonGroup({}, options, children);
-  }
+class ButtonGroup extends Doom {
+  @:state(Default)
+  var size : Size;
+  @:state(false)
+  var toggle : Bool;
+  @:state(opt)
+  var label : String;
 
-  override function render() : Node {
+  override function render()
     return div([
       "class" => [
         "btn-group" => true,
@@ -21,11 +21,4 @@ class ButtonGroup extends Component<{}, ButtonGroupState> {
       "role" => "group",
       "aria-label" => state.label
     ], children);
-  }
 }
-
-typedef ButtonGroupState = {
-  ?size : Size,
-  ?toggle : Bool,
-  ?label : String
-};

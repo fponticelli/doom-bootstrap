@@ -10,6 +10,7 @@ import doom.bs.Button.ButtonStyle;
 
 class All extends Component<{}, {}> {
   override function render() {
+    $type(doom.bs.ButtonGroup.with);
     return div(["class" => "container"], [
       div(["class" => "row"], [
         div(["class" => "col-md-12"], [
@@ -112,7 +113,7 @@ class All extends Component<{}, {}> {
 
   public function groupButtons() : Node {
     return section("Buttons Group", [
-      ButtonGroup.create([
+      ButtonGroup.with([
         Button.with(function(){}, Primary, "left"),
         Button.with(function(){}, Primary, "middle"),
         Button.with(function(){}, Primary, "right")

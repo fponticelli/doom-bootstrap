@@ -1,6 +1,7 @@
 import doom.Node;
 import doom.bs.Alert;
 import doom.bs.Button;
+import doom.bs.ButtonGroup;
 
 import doom.bs.Navbar;
 
@@ -11,13 +12,15 @@ class BS {
   public static var alertWarning(default, null) = Alert.with.bind(Warning, _, _);
   public static var alertDanger(default, null) = Alert.with.bind(Danger, _, _);
 
-  public static var button(default, null) =  doom.bs.Button.with;
-  public static var buttonPrimary(default, null) =  doom.bs.Button.with.bind(_, Primary, _, _);
-  public static var buttonSecondary(default, null) =  doom.bs.Button.with.bind(_, Secondary, _, _);
-  public static var buttonInfo(default, null) =  doom.bs.Button.with.bind(_, Info, _, _);
-  public static var buttonSuccess(default, null) =  doom.bs.Button.with.bind(_, Success, _, _);
-  public static var buttonWarning(default, null) =  doom.bs.Button.with.bind(_, Warning, _, _);
-  public static var buttonDanger(default, null) =  doom.bs.Button.with.bind(_, Danger, _, _);
+  public static var button(default, null) =  Button.with;
+  public static var buttonPrimary(default, null) =  Button.with.bind(_, Primary, _, _);
+  public static var buttonSecondary(default, null) =  Button.with.bind(_, Secondary, _, _);
+  public static var buttonInfo(default, null) =  Button.with.bind(_, Info, _, _);
+  public static var buttonSuccess(default, null) =  Button.with.bind(_, Success, _, _);
+  public static var buttonWarning(default, null) =  Button.with.bind(_, Warning, _, _);
+  public static var buttonDanger(default, null) =  Button.with.bind(_, Danger, _, _);
+
+  public static var buttonGroup(default, null) =  ButtonGroup.with;
 
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
     return new Navbar({}, { theme : theme, bg : bg }, children);
@@ -37,7 +40,6 @@ class BS {
   public static var label(default, null) =  doom.bs.Label.create;
   public static var pill(default, null) =  doom.bs.Label.pill;
 
-  public static var buttonGroup(default, null) =  doom.bs.ButtonGroup.create;
   public static var buttonGroupVertical(default, null) =  doom.bs.ButtonGroupVertical.create;
   public static var buttonToolbar(default, null) =  doom.bs.ButtonToolbar.create;
   public static var dropdown(default, null) =  doom.bs.Dropdown.create;
