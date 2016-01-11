@@ -10,6 +10,6 @@ class ButtonToolbar extends Doom {
     return div([
       "class" => "btn-toolbar",
       "role" => "toolbar",
-      "aria-label" => state.label
+      "aria-label" => label
     ], children);
 }

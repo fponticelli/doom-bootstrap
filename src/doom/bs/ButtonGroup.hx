@@ -14,11 +14,11 @@ class ButtonGroup extends Doom {
     return div([
       "class" => [
         "btn-group" => true,
-        "btn-group-sm" => Type.enumEq(state.size, Small),
-        "btn-group-lg" => Type.enumEq(state.size, Large)
+        "btn-group-sm" => Type.enumEq(size, Small),
+        "btn-group-lg" => Type.enumEq(size, Large)
       ],
-      "data-toggle" => (state.toggle == true ? "buttons" : null),
+      "data-toggle" => (toggle == true ? "buttons" : null),
       "role" => "group",
-      "aria-label" => state.label
+      "aria-label" => label
     ], children);
 }

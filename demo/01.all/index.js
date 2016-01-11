@@ -989,15 +989,21 @@ doom_bs_ButtonToolbar.prototype = $extend(Doom.prototype,{
 	,__class__: doom_bs_ButtonToolbar
 });
 var doom_bs_CloseButton = function(api,state,children) {
-	doom_Component.call(this,api,state,children);
+	if(state.dismissAlert == null) state.dismissAlert = false;
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
 };
 doom_bs_CloseButton.__name__ = ["doom","bs","CloseButton"];
-doom_bs_CloseButton.create = function(click,options) {
-	if(options == null) options = { };
-	return doom_NodeImpl.ComponentNode(new doom_bs_CloseButton({ click : click},options));
+doom_bs_CloseButton["with"] = function(click,state,children) {
+	var apiVar = { click : click};
+	if(state == null) state = { };
+	var stateVar = { dismissAlert : state.dismissAlert};
+	return new doom_bs_CloseButton(apiVar,stateVar,children);
 };
-doom_bs_CloseButton.__super__ = doom_Component;
-doom_bs_CloseButton.prototype = $extend(doom_Component.prototype,{
+doom_bs_CloseButton.__super__ = Doom;
+doom_bs_CloseButton.prototype = $extend(Doom.prototype,{
 	render: function() {
 		var _g = new haxe_ds_StringMap();
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("close");
@@ -1014,13 +1020,27 @@ doom_bs_CloseButton.prototype = $extend(doom_Component.prototype,{
 		if(__map_reserved["aria-hidden"] != null) _g1.setReserved("aria-hidden",value4); else _g1.h["aria-hidden"] = value4;
 		return doom__$Node_Node_$Impl_$.el("button",attributes,[doom__$Node_Node_$Impl_$.el("span",_g1,null,doom_NodeImpl.Text("×"))],null);
 	}
+	,api: null
+	,state: null
+	,click: null
+	,get_click: function() {
+		return this.api.click;
+	}
+	,dismissAlert: null
+	,get_dismissAlert: function() {
+		return this.state.dismissAlert;
+	}
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
 	,__class__: doom_bs_CloseButton
 });
-var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
-doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_Container = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -1044,6 +1064,11 @@ doom_bs_Container.prototype = $extend(doom_Component.prototype,{
 	}
 	,__class__: doom_bs_Container
 });
+var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
+doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_Dropdown = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -8509,8 +8534,8 @@ BS.button = doom_bs_Button["with"];
 BS.buttonGroup = doom_bs_ButtonGroup["with"];
 BS.buttonGroupVertical = doom_bs_ButtonGroupVertical["with"];
 BS.buttonToolbar = doom_bs_ButtonToolbar["with"];
+BS.closeButton = doom_bs_CloseButton["with"];
 BS.inputGroup = doom_bs_InputGroup.create;
-BS.closeButton = doom_bs_CloseButton.create;
 BS.container = doom_bs_Container.create;
 BS.label = doom_bs_Label.create;
 BS.pill = doom_bs_Label.pill;
