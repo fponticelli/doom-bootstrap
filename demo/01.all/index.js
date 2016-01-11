@@ -889,15 +889,22 @@ doom_bs_ButtonGroup.prototype = $extend(Doom.prototype,{
 	,__class__: doom_bs_ButtonGroup
 });
 var doom_bs_ButtonGroupVertical = function(api,state,children) {
-	doom_Component.call(this,api,state,children);
+	if(state.size == null) state.size = doom_bs_Size.Default;
+	if(state.toggle == null) state.toggle = false;
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
 };
 doom_bs_ButtonGroupVertical.__name__ = ["doom","bs","ButtonGroupVertical"];
-doom_bs_ButtonGroupVertical.create = function(options,children) {
-	if(options == null) options = { };
-	return doom_NodeImpl.ComponentNode(new doom_bs_ButtonGroup({ },options,children));
+doom_bs_ButtonGroupVertical["with"] = function(state,children) {
+	var apiVar = { };
+	if(state == null) state = { };
+	var stateVar = { size : state.size, toggle : state.toggle, label : state.label};
+	return new doom_bs_ButtonGroupVertical(apiVar,stateVar,children);
 };
-doom_bs_ButtonGroupVertical.__super__ = doom_Component;
-doom_bs_ButtonGroupVertical.prototype = $extend(doom_Component.prototype,{
+doom_bs_ButtonGroupVertical.__super__ = Doom;
+doom_bs_ButtonGroupVertical.prototype = $extend(Doom.prototype,{
 	render: function() {
 		var _g = new haxe_ds_StringMap();
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("btn-group-vertical");
@@ -914,13 +921,31 @@ doom_bs_ButtonGroupVertical.prototype = $extend(doom_Component.prototype,{
 		if(__map_reserved["btn-group-lg"] != null) _g.setReserved("btn-group-lg",value5); else _g.h["btn-group-lg"] = value5;
 		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
 	}
+	,api: null
+	,state: null
+	,size: null
+	,get_size: function() {
+		return this.state.size;
+	}
+	,toggle: null
+	,get_toggle: function() {
+		return this.state.toggle;
+	}
+	,label: null
+	,get_label: function() {
+		return this.state.label;
+	}
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
 	,__class__: doom_bs_ButtonGroupVertical
 });
-var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
-doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_ButtonToolbar = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -943,6 +968,11 @@ doom_bs_ButtonToolbar.prototype = $extend(doom_Component.prototype,{
 	}
 	,__class__: doom_bs_ButtonToolbar
 });
+var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
+doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_CloseButton = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -8457,12 +8487,12 @@ Doom.namespaces = (function($this) {
 BS.alert = doom_bs_Alert["with"];
 BS.button = doom_bs_Button["with"];
 BS.buttonGroup = doom_bs_ButtonGroup["with"];
+BS.buttonGroupVertical = doom_bs_ButtonGroupVertical["with"];
 BS.inputGroup = doom_bs_InputGroup.create;
 BS.closeButton = doom_bs_CloseButton.create;
 BS.container = doom_bs_Container.create;
 BS.label = doom_bs_Label.create;
 BS.pill = doom_bs_Label.pill;
-BS.buttonGroupVertical = doom_bs_ButtonGroupVertical.create;
 BS.buttonToolbar = doom_bs_ButtonToolbar.create;
 BS.dropdown = doom_bs_Dropdown.create;
 BS.dropdownItem = doom_bs_DropdownItem.create;
