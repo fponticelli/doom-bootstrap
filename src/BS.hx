@@ -3,6 +3,7 @@ import doom.bs.Alert;
 import doom.bs.Button;
 import doom.bs.ButtonGroup;
 import doom.bs.ButtonGroupVertical;
+import doom.bs.ButtonToolbar;
 
 import doom.bs.Navbar;
 
@@ -22,7 +23,10 @@ class BS {
   public static var buttonDanger(default, null) =  Button.with.bind(_, Danger, _, _);
 
   public static var buttonGroup(default, null) =  ButtonGroup.with;
+
   public static var buttonGroupVertical(default, null) =  ButtonGroupVertical.with;
+
+  public static var buttonToolbar(default, null) =  ButtonToolbar.with;
 
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
     return new Navbar({}, { theme : theme, bg : bg }, children);
@@ -41,8 +45,6 @@ class BS {
   public static var container(default, null) =  doom.bs.Container.create;
   public static var label(default, null) =  doom.bs.Label.create;
   public static var pill(default, null) =  doom.bs.Label.pill;
-
-  public static var buttonToolbar(default, null) =  doom.bs.ButtonToolbar.create;
   public static var dropdown(default, null) =  doom.bs.Dropdown.create;
   public static var dropdownItem(default, null) =  doom.bs.DropdownItem.create;
   public static var dropdownMenu(default, null) =  doom.bs.DropdownMenu.create;

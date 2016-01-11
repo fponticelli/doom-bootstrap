@@ -947,15 +947,20 @@ doom_bs_ButtonGroupVertical.prototype = $extend(Doom.prototype,{
 	,__class__: doom_bs_ButtonGroupVertical
 });
 var doom_bs_ButtonToolbar = function(api,state,children) {
-	doom_Component.call(this,api,state,children);
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
 };
 doom_bs_ButtonToolbar.__name__ = ["doom","bs","ButtonToolbar"];
-doom_bs_ButtonToolbar.create = function(options,children) {
-	if(options == null) options = { };
-	return doom_NodeImpl.ComponentNode(new doom_bs_ButtonToolbar({ },options,children));
+doom_bs_ButtonToolbar["with"] = function(state,children) {
+	var apiVar = { };
+	if(state == null) state = { };
+	var stateVar = { label : state.label};
+	return new doom_bs_ButtonToolbar(apiVar,stateVar,children);
 };
-doom_bs_ButtonToolbar.__super__ = doom_Component;
-doom_bs_ButtonToolbar.prototype = $extend(doom_Component.prototype,{
+doom_bs_ButtonToolbar.__super__ = Doom;
+doom_bs_ButtonToolbar.prototype = $extend(Doom.prototype,{
 	render: function() {
 		var _g = new haxe_ds_StringMap();
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("btn-toolbar");
@@ -966,13 +971,23 @@ doom_bs_ButtonToolbar.prototype = $extend(doom_Component.prototype,{
 		if(__map_reserved["aria-label"] != null) _g.setReserved("aria-label",value2); else _g.h["aria-label"] = value2;
 		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
 	}
+	,api: null
+	,state: null
+	,label: null
+	,get_label: function() {
+		return this.state.label;
+	}
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
 	,__class__: doom_bs_ButtonToolbar
 });
-var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
-doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_CloseButton = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -1001,6 +1016,11 @@ doom_bs_CloseButton.prototype = $extend(doom_Component.prototype,{
 	}
 	,__class__: doom_bs_CloseButton
 });
+var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
+doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_Container = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -8488,12 +8508,12 @@ BS.alert = doom_bs_Alert["with"];
 BS.button = doom_bs_Button["with"];
 BS.buttonGroup = doom_bs_ButtonGroup["with"];
 BS.buttonGroupVertical = doom_bs_ButtonGroupVertical["with"];
+BS.buttonToolbar = doom_bs_ButtonToolbar["with"];
 BS.inputGroup = doom_bs_InputGroup.create;
 BS.closeButton = doom_bs_CloseButton.create;
 BS.container = doom_bs_Container.create;
 BS.label = doom_bs_Label.create;
 BS.pill = doom_bs_Label.pill;
-BS.buttonToolbar = doom_bs_ButtonToolbar.create;
 BS.dropdown = doom_bs_Dropdown.create;
 BS.dropdownItem = doom_bs_DropdownItem.create;
 BS.dropdownMenu = doom_bs_DropdownMenu.create;
