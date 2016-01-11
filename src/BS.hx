@@ -52,11 +52,25 @@ class BS {
 
   public static var jumbotron(default, null) = Jumbotron.with;
 
+  public static var label(default, null) = Label.with;
+  public static var labelDefault(default, null) = Label.with.bind(Default, _, _);
+  public static var labelPrimary(default, null) = Label.with.bind(Primary, _, _);
+  public static var labelSuccess(default, null) = Label.with.bind(Success, _, _);
+  public static var labelInfo(default, null) = Label.with.bind(Info, _, _);
+  public static var labelWarning(default, null) = Label.with.bind(Warning, _, _);
+  public static var labelDanger(default, null) = Label.with.bind(Danger, _, _);
+  public static var pill(default, null) = function(?type : LabelType, ?children : Nodes)
+    return Label.with(type, { isPill : true }, children);
+  public static var pillDefault(default, null) = pill.bind(Default, _);
+  public static var pillPrimary(default, null) = pill.bind(Primary, _);
+  public static var pillSuccess(default, null) = pill.bind(Success, _);
+  public static var pillInfo(default, null) = pill.bind(Info, _);
+  public static var pillWarning(default, null) = pill.bind(Warning, _);
+  public static var pillDanger(default, null) = pill.bind(Danger, _);
 
-  public static var label(default, null) =  Label.create;
+
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
     return new Navbar({}, { theme : theme, bg : bg }, children);
-  public static var pill(default, null) =  Label.pill;
   // public static var radioButton(default, null) = RadioButton.create;
   // public static var radioButtons(default, null) = RadioButton.createGroup;
   inline public static function row(?className : String, children : Nodes) : Node

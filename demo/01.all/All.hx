@@ -11,7 +11,7 @@ import doom.bs.Button.ButtonStyle;
 
 class All extends Component<{}, {}> {
   override function render() {
-    $type(doom.bs.Button.with);
+    $type(doom.bs.Label.with);
     return div(["class" => "container"], [
       div(["class" => "row"], [
         div(["class" => "col-md-12"], [
@@ -67,54 +67,54 @@ class All extends Component<{}, {}> {
 
   public function labels() : Node {
     return section("Labels", [
-      Label.create(Default, "Default label"),
-      Label.create(Primary, "Primary label"),
-      Label.create(Success, "Success label"),
-      Label.create(Info, "Info label"),
-      Label.create(Warning, "Warning label"),
-      Label.create(Danger, "Danger label"),
+      labelDefault("Default label"),
+      labelPrimary("Primary label"),
+      labelSuccess("Success label"),
+      labelInfo("Info label"),
+      labelWarning("Warning label"),
+      labelDanger("Danger label"),
     ]);
   }
 
   public function pillLabels() : Node {
     return section("Pill labels", [
-      Label.pill(Default, "Default label"),
-      Label.pill(Primary, "Primary label"),
-      Label.pill(Success, "Success label"),
-      Label.pill(Info, "Info label"),
-      Label.pill(Warning, "Warning label"),
-      Label.pill(Danger, "Danger label"),
+      pillDefault("Default label"),
+      pillPrimary("Primary label"),
+      pillSuccess("Success label"),
+      pillInfo("Info label"),
+      pillWarning("Warning label"),
+      pillDanger("Danger label"),
     ]);
   }
 
   public function buttons() : Node {
     return section("Buttons", [
-      button(onClick, Primary, "Primary button"),
-      button(onClick, Secondary, "Secondary button"),
-      button(onClick, Info, "Info button"),
-      button(onClick, Success, "Success button"),
-      button(onClick, Warning, "Warning button"),
-      button(onClick, Danger, "Danger button"),
+      buttonPrimary(onClick, "Primary button"),
+      buttonSecondary(onClick, "Secondary button"),
+      buttonInfo(onClick, "Info button"),
+      buttonSuccess(onClick, "Success button"),
+      buttonWarning(onClick, "Warning button"),
+      buttonDanger(onClick, "Danger button"),
     ]);
   }
 
   public function outlineButtons() : Node {
     return section("Outline buttons", [
-      button(onClick, Primary, { outline : true }, "Primary outline button"),
-      button(onClick, Secondary, { outline : true }, "Secondary outline button"),
-      button(onClick, Info, { outline : true }, "Info outline button"),
-      button(onClick, Success, { outline : true }, "Success outline button"),
-      button(onClick, Warning, { outline : true }, "Warning outline button"),
-      button(onClick, Danger, { outline : true }, "Danger outline button"),
+      buttonPrimary(onClick, { outline : true }, "Primary outline button"),
+      buttonSecondary(onClick, { outline : true }, "Secondary outline button"),
+      buttonInfo(onClick, { outline : true }, "Info outline button"),
+      buttonSuccess(onClick, { outline : true }, "Success outline button"),
+      buttonWarning(onClick, { outline : true }, "Warning outline button"),
+      buttonDanger(onClick, { outline : true }, "Danger outline button"),
     ]);
   }
 
   public function groupButtons() : Node {
     return section("Buttons Group", [
       buttonGroup([
-        button(function(){}, Primary, "left"),
-        button(function(){}, Primary, "middle"),
-        button(function(){}, Primary, "right")
+        buttonPrimary(function(){}, "left"),
+        buttonPrimary(function(){}, "middle"),
+        buttonPrimary(function(){}, "right")
       ])
     ]);
   }

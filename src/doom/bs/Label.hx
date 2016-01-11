@@ -1,33 +1,26 @@
 package doom.bs;
 
 import Doom.*;
-import doom.Node;
 
-class Label extends Component<{}, LabelState> {
-  public static function create(?type : LabelType, children : Nodes) : Node
-    return new Label({}, { type : type }, children);
-
-  public static function pill(?type : LabelType, children : Nodes) : Node
-    return new Label({}, { type : type, isPill : true }, children);
+class Label extends Doom {
+  @:state
+  var type : LabelType;
+  @:state(false)
+  var isPill : Bool;
 
   override function render()
     return span([
       "class" => [
         "label" => true,
-        "label-default" => null == state.type || Type.enumEq(Default, state.type),
-        "label-primary" => Type.enumEq(Primary, state.type),
-        "label-success" => Type.enumEq(Success, state.type),
-        "label-info"    => Type.enumEq(Info, state.type),
-        "label-warning" => Type.enumEq(Warning, state.type),
-        "label-danger"  => Type.enumEq(Danger, state.type),
-        "label-pill"    => state.isPill == true
+        "label-default" => null == type || Type.enumEq(Default, type),
+        "label-primary" => Type.enumEq(Primary, type),
+        "label-success" => Type.enumEq(Success, type),
+        "label-info"    => Type.enumEq(Info, type),
+        "label-warning" => Type.enumEq(Warning, type),
+        "label-danger"  => Type.enumEq(Danger, type),
+        "label-pill"    => isPill == true
       ]
     ], children);
-}
-
-typedef LabelState = {
-  ?type : LabelType,
-  ?isPill : Bool
 }
 
 enum LabelType {
