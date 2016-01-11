@@ -1367,6 +1367,60 @@ doom_bs_LabelType.Warning.__enum__ = doom_bs_LabelType;
 doom_bs_LabelType.Danger = ["Danger",5];
 doom_bs_LabelType.Danger.toString = $estr;
 doom_bs_LabelType.Danger.__enum__ = doom_bs_LabelType;
+var doom_bs_Navbar = function(api,state,children) {
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
+};
+doom_bs_Navbar.__name__ = ["doom","bs","Navbar"];
+doom_bs_Navbar["with"] = function(state,children) {
+	var apiVar = { };
+	if(state == null) state = { };
+	var stateVar = { theme : state.theme, background : state.background};
+	return doom_NodeImpl.ComponentNode(new doom_bs_Navbar(apiVar,stateVar,children));
+};
+doom_bs_Navbar.__super__ = Doom;
+doom_bs_Navbar.prototype = $extend(Doom.prototype,{
+	render: function() {
+		var _g1 = new haxe_ds_StringMap();
+		var _g = new haxe_ds_StringMap();
+		if(__map_reserved.navbar != null) _g.setReserved("navbar",true); else _g.h["navbar"] = true;
+		var value1 = Type.enumEq(this.state.theme,doom_bs_NavbarTheme.Light);
+		if(__map_reserved["navbar-light"] != null) _g.setReserved("navbar-light",value1); else _g.h["navbar-light"] = value1;
+		var value2 = Type.enumEq(this.state.theme,doom_bs_NavbarTheme.Dark);
+		if(__map_reserved["navbar-dark"] != null) _g.setReserved("navbar-dark",value2); else _g.h["navbar-dark"] = value2;
+		var value3 = Type.enumEq(this.state.background,doom_bs_NavbarBackground.Faded);
+		if(__map_reserved["bg-faded"] != null) _g.setReserved("bg-faded",value3); else _g.h["bg-faded"] = value3;
+		var value4 = Type.enumEq(this.state.background,doom_bs_NavbarBackground.Inverse);
+		if(__map_reserved["bg-inverse"] != null) _g.setReserved("bg-inverse",value4); else _g.h["bg-inverse"] = value4;
+		var value5 = Type.enumEq(this.state.background,doom_bs_NavbarBackground.Primary);
+		if(__map_reserved["bg-primary"] != null) _g.setReserved("bg-primary",value5); else _g.h["bg-primary"] = value5;
+		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g);
+		if(__map_reserved["class"] != null) _g1.setReserved("class",value); else _g1.h["class"] = value;
+		return doom__$Node_Node_$Impl_$.el("nav",_g1,this.children,null);
+	}
+	,api: null
+	,state: null
+	,theme: null
+	,get_theme: function() {
+		return this.state.theme;
+	}
+	,background: null
+	,get_background: function() {
+		return this.state.background;
+	}
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
+	,__class__: doom_bs_Navbar
+});
 var BS = function() { };
 BS.__name__ = ["BS"];
 BS.alertSuccess = function(a2,a3) {
@@ -1437,9 +1491,6 @@ BS.pillWarning = function(a2) {
 };
 BS.pillDanger = function(a2) {
 	return BS.pill(doom_bs_LabelType.Danger,a2);
-};
-BS.navbar = function(theme,bg,children) {
-	return doom_NodeImpl.ComponentNode(new doom_bs_Navbar({ },{ theme : theme, bg : bg},children));
 };
 BS.row = function(className,children) {
 	var _g1 = new haxe_ds_StringMap();
@@ -3029,32 +3080,6 @@ doom_XmlNode.attributesToString = function(attributes) {
 	}
 	return buf;
 };
-var doom_bs_Navbar = function(api,state,children) {
-	doom_Component.call(this,api,state,children);
-};
-doom_bs_Navbar.__name__ = ["doom","bs","Navbar"];
-doom_bs_Navbar.__super__ = doom_Component;
-doom_bs_Navbar.prototype = $extend(doom_Component.prototype,{
-	render: function() {
-		var _g1 = new haxe_ds_StringMap();
-		var _g = new haxe_ds_StringMap();
-		if(__map_reserved.navbar != null) _g.setReserved("navbar",true); else _g.h["navbar"] = true;
-		var value1 = Type.enumEq(this.state.theme,doom_bs_NavbarTheme.Light);
-		if(__map_reserved["navbar-light"] != null) _g.setReserved("navbar-light",value1); else _g.h["navbar-light"] = value1;
-		var value2 = Type.enumEq(this.state.theme,doom_bs_NavbarTheme.Dark);
-		if(__map_reserved["navbar-dark"] != null) _g.setReserved("navbar-dark",value2); else _g.h["navbar-dark"] = value2;
-		var value3 = Type.enumEq(this.state.bg,doom_bs_NavbarBackground.Faded);
-		if(__map_reserved["bg-faded"] != null) _g.setReserved("bg-faded",value3); else _g.h["bg-faded"] = value3;
-		var value4 = Type.enumEq(this.state.bg,doom_bs_NavbarBackground.Inverse);
-		if(__map_reserved["bg-inverse"] != null) _g.setReserved("bg-inverse",value4); else _g.h["bg-inverse"] = value4;
-		var value5 = Type.enumEq(this.state.bg,doom_bs_NavbarBackground.Primary);
-		if(__map_reserved["bg-primary"] != null) _g.setReserved("bg-primary",value5); else _g.h["bg-primary"] = value5;
-		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g);
-		if(__map_reserved["class"] != null) _g1.setReserved("class",value); else _g1.h["class"] = value;
-		return doom__$Node_Node_$Impl_$.el("nav",_g1,this.children,null);
-	}
-	,__class__: doom_bs_Navbar
-});
 var doom_bs_NavbarTheme = { __ename__ : ["doom","bs","NavbarTheme"], __constructs__ : ["Light","Dark"] };
 doom_bs_NavbarTheme.Light = ["Light",0];
 doom_bs_NavbarTheme.Light.toString = $estr;
@@ -8729,6 +8754,7 @@ BS.dropdownMenu = doom_bs_DropdownMenu["with"];
 BS.inputGroup = doom_bs_InputGroup["with"];
 BS.jumbotron = doom_bs_Jumbotron["with"];
 BS.label = doom_bs_Label["with"];
+BS.navbar = doom_bs_Navbar["with"];
 DateTools.DAYS_OF_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];
 Xml.Element = 0;
 Xml.PCData = 1;

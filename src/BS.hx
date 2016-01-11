@@ -68,9 +68,8 @@ class BS {
   public static var pillWarning(default, null) = pill.bind(Warning, _);
   public static var pillDanger(default, null) = pill.bind(Danger, _);
 
+  public static var navbar(default, null) = Navbar.with;
 
-  inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
-    return new Navbar({}, { theme : theme, bg : bg }, children);
   // public static var radioButton(default, null) = RadioButton.create;
   // public static var radioButtons(default, null) = RadioButton.createGroup;
   inline public static function row(?className : String, children : Nodes) : Node
