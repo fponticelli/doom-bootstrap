@@ -14,6 +14,7 @@ import doom.bs.Jumbotron;
 import doom.bs.Label;
 import doom.bs.Navbar;
 import doom.bs.RadioButton;
+import doom.bs.RadioButtonGroup;
 
 class BS {
   public static var alert(default, null) = Alert.with;
@@ -69,7 +70,9 @@ class BS {
   public static var navbar(default, null) = Navbar.with;
 
   public static var radioButton(default, null) = RadioButton.with;
-  // public static var radioButtons(default, null) = RadioButton.createGroup;
+
+  public static var radioButtonGroup(default, null) = RadioButtonGroup.with;
+
   inline public static function row(?className : String, children : Nodes) : Node
     return Doom.div(["class" => [
       "row" => true,

@@ -161,7 +161,19 @@ All.prototype = $extend(doom_Component.prototype,{
 		var _g17 = new haxe_ds_StringMap();
 		var value17 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
 		if(__map_reserved["class"] != null) _g17.setReserved("class",value17); else _g17.h["class"] = value17;
-		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,tmp3,tmp5,tmp7,doom__$Node_Node_$Impl_$.el("div",attributes7,[tmp8,doom__$Node_Node_$Impl_$.el("div",_g17,[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])],null)],null)],null);
+		var tmp9 = doom__$Node_Node_$Impl_$.el("div",attributes7,[tmp8,doom__$Node_Node_$Impl_$.el("div",_g17,[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])],null)],null);
+		var _g18 = new haxe_ds_StringMap();
+		var value18 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
+		if(__map_reserved["class"] != null) _g18.setReserved("class",value18); else _g18.h["class"] = value18;
+		var attributes8 = _g18;
+		var _g19 = new haxe_ds_StringMap();
+		var value19 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g19.setReserved("class",value19); else _g19.h["class"] = value19;
+		var tmp10 = doom__$Node_Node_$Impl_$.el("div",_g19,[this.radioButtons()],null);
+		var _g20 = new haxe_ds_StringMap();
+		var value20 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g20.setReserved("class",value20); else _g20.h["class"] = value20;
+		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,tmp3,tmp5,tmp7,tmp9,doom__$Node_Node_$Impl_$.el("div",attributes8,[tmp10,doom__$Node_Node_$Impl_$.el("div",_g20,[],null)],null)],null);
 	}
 	,section: function(name,content) {
 		var _g = new haxe_ds_StringMap();
@@ -190,6 +202,11 @@ All.prototype = $extend(doom_Component.prototype,{
 		},null,[doom_NodeImpl.Text("left")]),BS.buttonPrimary(function() {
 		},null,[doom_NodeImpl.Text("middle")]),BS.buttonPrimary(function() {
 		},null,[doom_NodeImpl.Text("right")])])]);
+	}
+	,radioButtons: function() {
+		return this.section("Radio Button Group",[BS.radioButtonGroup(function(value) {
+			console.log("changed to " + value);
+		},[{ label : doom_NodeImpl.Text("A"), value : "a", active : true},{ label : doom_NodeImpl.Text("B"), value : "b"},{ label : doom_NodeImpl.Text("C"), value : "c"}])]);
 	}
 	,onClick: function() {
 		console.log("click");
@@ -1421,6 +1438,423 @@ doom_bs_Navbar.prototype = $extend(Doom.prototype,{
 	}
 	,__class__: doom_bs_Navbar
 });
+var doom_bs_RadioButton = function(api,state,children) {
+	if(state.active == null) state.active = false;
+	if(state.disabled == null) state.disabled = false;
+	if(state.outline == null) state.outline = false;
+	if(state.size == null) state.size = doom_bs_Size.Default;
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
+};
+doom_bs_RadioButton.__name__ = ["doom","bs","RadioButton"];
+doom_bs_RadioButton.getClass = function(state) {
+	var classes = ["btn"];
+	var styleClass;
+	var _g = state.style;
+	switch(_g[1]) {
+	case 0:
+		styleClass = "btn-primary";
+		break;
+	case 1:
+		styleClass = "btn-secondary";
+		break;
+	case 2:
+		styleClass = "btn-info";
+		break;
+	case 3:
+		styleClass = "btn-success";
+		break;
+	case 4:
+		styleClass = "btn-warning";
+		break;
+	case 5:
+		styleClass = "btn-danger";
+		break;
+	}
+	if(state.outline == true) styleClass += "-outline";
+	classes.push(styleClass);
+	var sizeClass;
+	var _g1 = state.size;
+	if(_g1 == null) sizeClass = ""; else switch(_g1[1]) {
+	case 0:
+		sizeClass = "";
+		break;
+	case 1:
+		sizeClass = "btn-lg";
+		break;
+	case 2:
+		sizeClass = "btn-sm";
+		break;
+	}
+	classes.push(sizeClass);
+	if(state.active == true) classes.push("active");
+	return classes.join(" ");
+};
+doom_bs_RadioButton["with"] = function(click,style,state,children) {
+	var apiVar = { click : click};
+	if(state == null) state = { };
+	var stateVar = { name : state.name, style : style, active : state.active, disabled : state.disabled, outline : state.outline, size : state.size};
+	return doom_NodeImpl.ComponentNode(new doom_bs_RadioButton(apiVar,stateVar,children));
+};
+doom_bs_RadioButton.__super__ = Doom;
+doom_bs_RadioButton.prototype = $extend(Doom.prototype,{
+	render: function() {
+		var _g = new haxe_ds_StringMap();
+		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString(doom_bs_RadioButton.getClass(this.state));
+		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
+		var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromHandler(this.api.click);
+		if(__map_reserved.click != null) _g.setReserved("click",value1); else _g.h["click"] = value1;
+		var attributes = _g;
+		var _g1 = new haxe_ds_StringMap();
+		var value2 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("radio");
+		if(__map_reserved.type != null) _g1.setReserved("type",value2); else _g1.h["type"] = value2;
+		var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString(this.state.name);
+		if(__map_reserved.name != null) _g1.setReserved("name",value3); else _g1.h["name"] = value3;
+		var value4 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("off");
+		if(__map_reserved.autocomplete != null) _g1.setReserved("autocomplete",value4); else _g1.h["autocomplete"] = value4;
+		var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromBool(true);
+		if(__map_reserved.checked != null) _g1.setReserved("checked",value5); else _g1.h["checked"] = value5;
+		return doom__$Node_Node_$Impl_$.el("label",attributes,[doom__$Node_Node_$Impl_$.el("input",_g1,null,null)].concat(this.children),null);
+	}
+	,api: null
+	,state: null
+	,click: null
+	,get_click: function() {
+		return this.api.click;
+	}
+	,name: null
+	,get_name: function() {
+		return this.state.name;
+	}
+	,style: null
+	,get_style: function() {
+		return this.state.style;
+	}
+	,active: null
+	,get_active: function() {
+		return this.state.active;
+	}
+	,disabled: null
+	,get_disabled: function() {
+		return this.state.disabled;
+	}
+	,outline: null
+	,get_outline: function() {
+		return this.state.outline;
+	}
+	,size: null
+	,get_size: function() {
+		return this.state.size;
+	}
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
+	,__class__: doom_bs_RadioButton
+});
+var doom_bs_RadioButtonGroup = function(api,state,children) {
+	doom_Component.call(this,api,state,children);
+};
+doom_bs_RadioButtonGroup.__name__ = ["doom","bs","RadioButtonGroup"];
+doom_bs_RadioButtonGroup["with"] = function(change,values,state) {
+	if(null == state) state = { };
+	return doom_NodeImpl.ComponentNode(new doom_bs_RadioButtonGroup({ change : change},thx_Objects.combine(state,{ values : values})));
+};
+doom_bs_RadioButtonGroup.__super__ = doom_Component;
+doom_bs_RadioButtonGroup.prototype = $extend(doom_Component.prototype,{
+	render: function() {
+		var _g = this;
+		var itemOptions = { name : this.state.name, disabled : this.state.disabled, outline : this.state.outline, size : this.state.size};
+		return doom_bs_ButtonGroup["with"]({ toggle : true},this.state.values.map(function(value) {
+			var style = value.style;
+			if(null == style) style = _g.state.style;
+			if(null == style) style = doom_bs_ButtonStyle.Primary;
+			var itemState = thx_Objects.combine(itemOptions,{ active : value.active});
+			var f = _g.api.change;
+			var a1 = value.value;
+			return doom_bs_RadioButton["with"](function() {
+				f(a1);
+			},style,itemState,[value.label]);
+		}));
+	}
+	,__class__: doom_bs_RadioButtonGroup
+});
+var thx_Objects = function() { };
+thx_Objects.__name__ = ["thx","Objects"];
+thx_Objects.compare = function(a,b) {
+	var v;
+	var fields = Reflect.fields(a);
+	v = thx_Arrays.compare(fields,Reflect.fields(b));
+	if(v != 0) return v;
+	var _g = 0;
+	while(_g < fields.length) {
+		var field = fields[_g];
+		++_g;
+		v = thx_Dynamics.compare(Reflect.field(a,field),Reflect.field(b,field));
+		if(v != 0) return v;
+	}
+	return 0;
+};
+thx_Objects.isEmpty = function(o) {
+	return Reflect.fields(o).length == 0;
+};
+thx_Objects.exists = function(o,name) {
+	return Object.prototype.hasOwnProperty.call(o,name);
+};
+thx_Objects.fields = function(o) {
+	return Reflect.fields(o);
+};
+thx_Objects.combine = function(first,second) {
+	var to = { };
+	var _g = 0;
+	var _g1 = Reflect.fields(first);
+	while(_g < _g1.length) {
+		var field = _g1[_g];
+		++_g;
+		to[field] = Reflect.field(first,field);
+	}
+	var _g2 = 0;
+	var _g11 = Reflect.fields(second);
+	while(_g2 < _g11.length) {
+		var field1 = _g11[_g2];
+		++_g2;
+		to[field1] = Reflect.field(second,field1);
+	}
+	return to;
+};
+thx_Objects.assign = function(to,from,replacef) {
+	if(null == replacef) replacef = function(field,oldv,newv) {
+		return newv;
+	};
+	var _g = 0;
+	var _g1 = Reflect.fields(from);
+	while(_g < _g1.length) {
+		var field1 = _g1[_g];
+		++_g;
+		var newv1 = Reflect.field(from,field1);
+		if(Object.prototype.hasOwnProperty.call(to,field1)) to[field1] = replacef(field1,Reflect.field(to,field1),newv1); else to[field1] = newv1;
+	}
+	return to;
+};
+thx_Objects.copyTo = function(src,dst,cloneInstances) {
+	if(cloneInstances == null) cloneInstances = false;
+	var _g = 0;
+	var _g1 = Reflect.fields(src);
+	while(_g < _g1.length) {
+		var field = _g1[_g];
+		++_g;
+		var sv = thx_Dynamics.clone(Reflect.field(src,field),cloneInstances);
+		var dv = Reflect.field(dst,field);
+		var tmp;
+		var tmp1;
+		if(Reflect.isObject(sv)) {
+			var tmp2;
+			var o = sv;
+			if(o == null) tmp2 = null; else tmp2 = js_Boot.getClass(o);
+			tmp1 = null == tmp2;
+		} else tmp1 = false;
+		if(tmp1) {
+			if(Reflect.isObject(dv)) {
+				var tmp3;
+				var o1 = dv;
+				if(o1 == null) tmp3 = null; else tmp3 = js_Boot.getClass(o1);
+				tmp = null == tmp3;
+			} else tmp = false;
+		} else tmp = false;
+		if(tmp) thx_Objects.copyTo(sv,dv); else dst[field] = sv;
+	}
+	return dst;
+};
+thx_Objects.clone = function(src,cloneInstances) {
+	if(cloneInstances == null) cloneInstances = false;
+	return thx_Dynamics.clone(src,cloneInstances);
+};
+thx_Objects.toMap = function(o) {
+	var array = thx_Objects.tuples(o);
+	var initial = new haxe_ds_StringMap();
+	return array.reduce(function(map,t) {
+		var key = t._0;
+		var value = t._1;
+		if(__map_reserved[key] != null) map.setReserved(key,value); else map.h[key] = value;
+		return map;
+	},initial);
+};
+thx_Objects.size = function(o) {
+	return Reflect.fields(o).length;
+};
+thx_Objects.string = function(o) {
+	return "{" + Reflect.fields(o).map(function(key) {
+		var v = Reflect.field(o,key);
+		var s = typeof(v) == "string"?thx_Strings.quote(v):thx_Dynamics.string(v);
+		return "" + key + " : " + s;
+	}).join(", ") + "}";
+};
+thx_Objects.stringImpl = function(o,cache) {
+};
+thx_Objects.values = function(o) {
+	return Reflect.fields(o).map(function(key) {
+		return Reflect.field(o,key);
+	});
+};
+thx_Objects.tuples = function(o) {
+	return Reflect.fields(o).map(function(key) {
+		return { _0 : key, _1 : Reflect.field(o,key)};
+	});
+};
+thx_Objects.hasPath = function(o,path) {
+	var paths = path.split(".");
+	var current = o;
+	var _g = 0;
+	while(_g < paths.length) {
+		var currentPath = paths[_g];
+		++_g;
+		if(thx_Strings.DIGITS.match(currentPath)) {
+			var index = Std.parseInt(currentPath);
+			var arr;
+			var value = current;
+			if((value instanceof Array)) arr = value; else arr = null;
+			if(null == arr || arr.length <= index) return false;
+			current = arr[index];
+		} else if(Object.prototype.hasOwnProperty.call(current,currentPath)) current = Reflect.field(current,currentPath); else return false;
+	}
+	return true;
+};
+thx_Objects.hasPathValue = function(o,path) {
+	return thx_Objects.getPath(o,path) != null;
+};
+thx_Objects.getPath = function(o,path) {
+	var paths = path.split(".");
+	var current = o;
+	var _g = 0;
+	while(_g < paths.length) {
+		var currentPath = paths[_g];
+		++_g;
+		if(thx_Strings.DIGITS.match(currentPath)) {
+			var index = Std.parseInt(currentPath);
+			var arr;
+			var value = current;
+			if((value instanceof Array)) arr = value; else arr = null;
+			if(null == arr) return null;
+			current = arr[index];
+		} else if(Object.prototype.hasOwnProperty.call(current,currentPath)) current = Reflect.field(current,currentPath); else return null;
+	}
+	return current;
+};
+thx_Objects.getPathOr = function(o,path,alt) {
+	var paths = path.split(".");
+	var current = o;
+	var _g = 0;
+	while(_g < paths.length) {
+		var currentPath = paths[_g];
+		++_g;
+		if(thx_Strings.DIGITS.match(currentPath)) {
+			var index = Std.parseInt(currentPath);
+			var arr;
+			var value = current;
+			if((value instanceof Array)) arr = value; else arr = null;
+			if(null == arr) return null;
+			current = arr[index];
+		} else if(Object.prototype.hasOwnProperty.call(current,currentPath)) current = Reflect.field(current,currentPath); else return alt;
+	}
+	return current;
+};
+thx_Objects.setPath = function(o,path,val) {
+	var paths = path.split(".");
+	var current = o;
+	var _g1 = 0;
+	var _g = paths.length - 1;
+	while(_g1 < _g) {
+		var i = _g1++;
+		var currentPath = paths[i];
+		var nextPath = paths[i + 1];
+		if(thx_Strings.DIGITS.match(currentPath) || currentPath == "*") {
+			var index = currentPath == "*"?current.length:Std.parseInt(currentPath);
+			if(current[index] == null) {
+				if(thx_Strings.DIGITS.match(nextPath) || nextPath == "*") current[index] = []; else current[index] = { };
+			}
+			current = current[index];
+		} else {
+			if(!Object.prototype.hasOwnProperty.call(current,currentPath)) {
+				if(thx_Strings.DIGITS.match(nextPath) || nextPath == "*") current[currentPath] = []; else current[currentPath] = { };
+			}
+			current = Reflect.field(current,currentPath);
+		}
+	}
+	var p = paths[paths.length - 1];
+	if(thx_Strings.DIGITS.match(p)) {
+		var index1 = Std.parseInt(p);
+		current[index1] = val;
+	} else if(p == "*") current.push(val); else current[p] = val;
+	return o;
+};
+thx_Objects.removePath = function(o,path) {
+	var paths = path.split(".");
+	var target = paths.pop();
+	try {
+		var sub = paths.reduce(function(existing,nextPath) {
+			if(nextPath == "*") return existing.pop(); else if(thx_Strings.DIGITS.match(nextPath)) {
+				var current = existing;
+				var index = Std.parseInt(nextPath);
+				return current[index];
+			} else return Reflect.field(existing,nextPath);
+		},o);
+		if(null != sub) Reflect.deleteField(sub,target);
+	} catch( e ) {
+		haxe_CallStack.lastException = e;
+	}
+	return o;
+};
+var Reflect = function() { };
+Reflect.__name__ = ["Reflect"];
+Reflect.field = function(o,field) {
+	try {
+		return o[field];
+	} catch( e ) {
+		haxe_CallStack.lastException = e;
+		return null;
+	}
+};
+Reflect.fields = function(o) {
+	var a = [];
+	if(o != null) {
+		var hasOwnProperty = Object.prototype.hasOwnProperty;
+		for( var f in o ) {
+		if(f != "__id__" && f != "hx__closures__" && hasOwnProperty.call(o,f)) a.push(f);
+		}
+	}
+	return a;
+};
+Reflect.isFunction = function(f) {
+	return typeof(f) == "function" && !(f.__name__ || f.__ename__);
+};
+Reflect.compare = function(a,b) {
+	if(a == b) return 0; else if(a > b) return 1; else return -1;
+};
+Reflect.compareMethods = function(f1,f2) {
+	if(f1 == f2) return true;
+	if(!Reflect.isFunction(f1) || !Reflect.isFunction(f2)) return false;
+	if(f1.scope == f2.scope && f1.method == f2.method) return f1.method != null; else return false;
+};
+Reflect.isObject = function(v) {
+	if(v == null) return false;
+	var t = typeof(v);
+	return t == "string" || t == "object" && v.__enum__ == null || t == "function" && (v.__name__ || v.__ename__) != null;
+};
+Reflect.isEnumValue = function(v) {
+	if(v != null) return v.__enum__ != null; else return false;
+};
+Reflect.deleteField = function(o,field) {
+	if(!Object.prototype.hasOwnProperty.call(o,field)) return false;
+	delete(o[field]);
+	return true;
+};
 var BS = function() { };
 BS.__name__ = ["BS"];
 BS.alertSuccess = function(a2,a3) {
@@ -1668,50 +2102,6 @@ Lambda.has = function(it,elt) {
 	return false;
 };
 Math.__name__ = ["Math"];
-var Reflect = function() { };
-Reflect.__name__ = ["Reflect"];
-Reflect.field = function(o,field) {
-	try {
-		return o[field];
-	} catch( e ) {
-		haxe_CallStack.lastException = e;
-		return null;
-	}
-};
-Reflect.fields = function(o) {
-	var a = [];
-	if(o != null) {
-		var hasOwnProperty = Object.prototype.hasOwnProperty;
-		for( var f in o ) {
-		if(f != "__id__" && f != "hx__closures__" && hasOwnProperty.call(o,f)) a.push(f);
-		}
-	}
-	return a;
-};
-Reflect.isFunction = function(f) {
-	return typeof(f) == "function" && !(f.__name__ || f.__ename__);
-};
-Reflect.compare = function(a,b) {
-	if(a == b) return 0; else if(a > b) return 1; else return -1;
-};
-Reflect.compareMethods = function(f1,f2) {
-	if(f1 == f2) return true;
-	if(!Reflect.isFunction(f1) || !Reflect.isFunction(f2)) return false;
-	if(f1.scope == f2.scope && f1.method == f2.method) return f1.method != null; else return false;
-};
-Reflect.isObject = function(v) {
-	if(v == null) return false;
-	var t = typeof(v);
-	return t == "string" || t == "object" && v.__enum__ == null || t == "function" && (v.__name__ || v.__ename__) != null;
-};
-Reflect.isEnumValue = function(v) {
-	if(v != null) return v.__enum__ != null; else return false;
-};
-Reflect.deleteField = function(o,field) {
-	if(!Object.prototype.hasOwnProperty.call(o,field)) return false;
-	delete(o[field]);
-	return true;
-};
 var Std = function() { };
 Std.__name__ = ["Std"];
 Std.string = function(s) {
@@ -6752,231 +7142,6 @@ var thx_Nil = { __ename__ : ["thx","Nil"], __constructs__ : ["nil"] };
 thx_Nil.nil = ["nil",0];
 thx_Nil.nil.toString = $estr;
 thx_Nil.nil.__enum__ = thx_Nil;
-var thx_Objects = function() { };
-thx_Objects.__name__ = ["thx","Objects"];
-thx_Objects.compare = function(a,b) {
-	var v;
-	var fields = Reflect.fields(a);
-	v = thx_Arrays.compare(fields,Reflect.fields(b));
-	if(v != 0) return v;
-	var _g = 0;
-	while(_g < fields.length) {
-		var field = fields[_g];
-		++_g;
-		v = thx_Dynamics.compare(Reflect.field(a,field),Reflect.field(b,field));
-		if(v != 0) return v;
-	}
-	return 0;
-};
-thx_Objects.isEmpty = function(o) {
-	return Reflect.fields(o).length == 0;
-};
-thx_Objects.exists = function(o,name) {
-	return Object.prototype.hasOwnProperty.call(o,name);
-};
-thx_Objects.fields = function(o) {
-	return Reflect.fields(o);
-};
-thx_Objects.combine = function(first,second) {
-	var to = { };
-	var _g = 0;
-	var _g1 = Reflect.fields(first);
-	while(_g < _g1.length) {
-		var field = _g1[_g];
-		++_g;
-		to[field] = Reflect.field(first,field);
-	}
-	var _g2 = 0;
-	var _g11 = Reflect.fields(second);
-	while(_g2 < _g11.length) {
-		var field1 = _g11[_g2];
-		++_g2;
-		to[field1] = Reflect.field(second,field1);
-	}
-	return to;
-};
-thx_Objects.assign = function(to,from,replacef) {
-	if(null == replacef) replacef = function(field,oldv,newv) {
-		return newv;
-	};
-	var _g = 0;
-	var _g1 = Reflect.fields(from);
-	while(_g < _g1.length) {
-		var field1 = _g1[_g];
-		++_g;
-		var newv1 = Reflect.field(from,field1);
-		if(Object.prototype.hasOwnProperty.call(to,field1)) to[field1] = replacef(field1,Reflect.field(to,field1),newv1); else to[field1] = newv1;
-	}
-	return to;
-};
-thx_Objects.copyTo = function(src,dst,cloneInstances) {
-	if(cloneInstances == null) cloneInstances = false;
-	var _g = 0;
-	var _g1 = Reflect.fields(src);
-	while(_g < _g1.length) {
-		var field = _g1[_g];
-		++_g;
-		var sv = thx_Dynamics.clone(Reflect.field(src,field),cloneInstances);
-		var dv = Reflect.field(dst,field);
-		var tmp;
-		var tmp1;
-		if(Reflect.isObject(sv)) {
-			var tmp2;
-			var o = sv;
-			if(o == null) tmp2 = null; else tmp2 = js_Boot.getClass(o);
-			tmp1 = null == tmp2;
-		} else tmp1 = false;
-		if(tmp1) {
-			if(Reflect.isObject(dv)) {
-				var tmp3;
-				var o1 = dv;
-				if(o1 == null) tmp3 = null; else tmp3 = js_Boot.getClass(o1);
-				tmp = null == tmp3;
-			} else tmp = false;
-		} else tmp = false;
-		if(tmp) thx_Objects.copyTo(sv,dv); else dst[field] = sv;
-	}
-	return dst;
-};
-thx_Objects.clone = function(src,cloneInstances) {
-	if(cloneInstances == null) cloneInstances = false;
-	return thx_Dynamics.clone(src,cloneInstances);
-};
-thx_Objects.toMap = function(o) {
-	var array = thx_Objects.tuples(o);
-	var initial = new haxe_ds_StringMap();
-	return array.reduce(function(map,t) {
-		var key = t._0;
-		var value = t._1;
-		if(__map_reserved[key] != null) map.setReserved(key,value); else map.h[key] = value;
-		return map;
-	},initial);
-};
-thx_Objects.size = function(o) {
-	return Reflect.fields(o).length;
-};
-thx_Objects.string = function(o) {
-	return "{" + Reflect.fields(o).map(function(key) {
-		var v = Reflect.field(o,key);
-		var s = typeof(v) == "string"?thx_Strings.quote(v):thx_Dynamics.string(v);
-		return "" + key + " : " + s;
-	}).join(", ") + "}";
-};
-thx_Objects.stringImpl = function(o,cache) {
-};
-thx_Objects.values = function(o) {
-	return Reflect.fields(o).map(function(key) {
-		return Reflect.field(o,key);
-	});
-};
-thx_Objects.tuples = function(o) {
-	return Reflect.fields(o).map(function(key) {
-		return { _0 : key, _1 : Reflect.field(o,key)};
-	});
-};
-thx_Objects.hasPath = function(o,path) {
-	var paths = path.split(".");
-	var current = o;
-	var _g = 0;
-	while(_g < paths.length) {
-		var currentPath = paths[_g];
-		++_g;
-		if(thx_Strings.DIGITS.match(currentPath)) {
-			var index = Std.parseInt(currentPath);
-			var arr;
-			var value = current;
-			if((value instanceof Array)) arr = value; else arr = null;
-			if(null == arr || arr.length <= index) return false;
-			current = arr[index];
-		} else if(Object.prototype.hasOwnProperty.call(current,currentPath)) current = Reflect.field(current,currentPath); else return false;
-	}
-	return true;
-};
-thx_Objects.hasPathValue = function(o,path) {
-	return thx_Objects.getPath(o,path) != null;
-};
-thx_Objects.getPath = function(o,path) {
-	var paths = path.split(".");
-	var current = o;
-	var _g = 0;
-	while(_g < paths.length) {
-		var currentPath = paths[_g];
-		++_g;
-		if(thx_Strings.DIGITS.match(currentPath)) {
-			var index = Std.parseInt(currentPath);
-			var arr;
-			var value = current;
-			if((value instanceof Array)) arr = value; else arr = null;
-			if(null == arr) return null;
-			current = arr[index];
-		} else if(Object.prototype.hasOwnProperty.call(current,currentPath)) current = Reflect.field(current,currentPath); else return null;
-	}
-	return current;
-};
-thx_Objects.getPathOr = function(o,path,alt) {
-	var paths = path.split(".");
-	var current = o;
-	var _g = 0;
-	while(_g < paths.length) {
-		var currentPath = paths[_g];
-		++_g;
-		if(thx_Strings.DIGITS.match(currentPath)) {
-			var index = Std.parseInt(currentPath);
-			var arr;
-			var value = current;
-			if((value instanceof Array)) arr = value; else arr = null;
-			if(null == arr) return null;
-			current = arr[index];
-		} else if(Object.prototype.hasOwnProperty.call(current,currentPath)) current = Reflect.field(current,currentPath); else return alt;
-	}
-	return current;
-};
-thx_Objects.setPath = function(o,path,val) {
-	var paths = path.split(".");
-	var current = o;
-	var _g1 = 0;
-	var _g = paths.length - 1;
-	while(_g1 < _g) {
-		var i = _g1++;
-		var currentPath = paths[i];
-		var nextPath = paths[i + 1];
-		if(thx_Strings.DIGITS.match(currentPath) || currentPath == "*") {
-			var index = currentPath == "*"?current.length:Std.parseInt(currentPath);
-			if(current[index] == null) {
-				if(thx_Strings.DIGITS.match(nextPath) || nextPath == "*") current[index] = []; else current[index] = { };
-			}
-			current = current[index];
-		} else {
-			if(!Object.prototype.hasOwnProperty.call(current,currentPath)) {
-				if(thx_Strings.DIGITS.match(nextPath) || nextPath == "*") current[currentPath] = []; else current[currentPath] = { };
-			}
-			current = Reflect.field(current,currentPath);
-		}
-	}
-	var p = paths[paths.length - 1];
-	if(thx_Strings.DIGITS.match(p)) {
-		var index1 = Std.parseInt(p);
-		current[index1] = val;
-	} else if(p == "*") current.push(val); else current[p] = val;
-	return o;
-};
-thx_Objects.removePath = function(o,path) {
-	var paths = path.split(".");
-	var target = paths.pop();
-	try {
-		var sub = paths.reduce(function(existing,nextPath) {
-			if(nextPath == "*") return existing.pop(); else if(thx_Strings.DIGITS.match(nextPath)) {
-				var current = existing;
-				var index = Std.parseInt(nextPath);
-				return current[index];
-			} else return Reflect.field(existing,nextPath);
-		},o);
-		if(null != sub) Reflect.deleteField(sub,target);
-	} catch( e ) {
-		haxe_CallStack.lastException = e;
-	}
-	return o;
-};
 var thx_Options = function() { };
 thx_Options.__name__ = ["thx","Options"];
 thx_Options.ofValue = function(value) {
@@ -8755,6 +8920,8 @@ BS.inputGroup = doom_bs_InputGroup["with"];
 BS.jumbotron = doom_bs_Jumbotron["with"];
 BS.label = doom_bs_Label["with"];
 BS.navbar = doom_bs_Navbar["with"];
+BS.radioButton = doom_bs_RadioButton["with"];
+BS.radioButtonGroup = doom_bs_RadioButtonGroup["with"];
 DateTools.DAYS_OF_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];
 Xml.Element = 0;
 Xml.PCData = 1;

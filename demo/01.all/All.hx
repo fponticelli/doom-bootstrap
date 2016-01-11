@@ -53,7 +53,15 @@ class All extends Component<{}, {}> {
           alertSuccess("a permanent alert"),
           alertDanger({ dismissable : true }, "a dismissable alert")
         ]),
-      ])
+      ]),
+      div(["class" => "row"], [
+        div(["class" => "col-md-6"], [
+          radioButtons(),
+        ]),
+        div(["class" => "col-md-6"], [
+
+        ]),
+      ]),
     ]);
   }
 
@@ -115,6 +123,16 @@ class All extends Component<{}, {}> {
         buttonPrimary(function(){}, "left"),
         buttonPrimary(function(){}, "middle"),
         buttonPrimary(function(){}, "right")
+      ])
+    ]);
+  }
+
+  public function radioButtons() : Node {
+    return section("Radio Button Group", [
+      radioButtonGroup(function(value) trace('changed to $value'), [
+        { label : "A", value : "a", active : true },
+        { label : "B", value : "b" },
+        { label : "C", value : "c" }
       ])
     ]);
   }
