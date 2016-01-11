@@ -1,6 +1,6 @@
 import js.html.*;
-import BS.*;
 import Doom.*;
+import BS.*;
 import doom.*;
 import doom.bs.*;
 import doom.bs.Label.LabelType;
@@ -10,7 +10,7 @@ import doom.bs.Button.ButtonStyle;
 
 class All extends Component<{}, {}> {
   override function render() {
-    $type(doom.bs.ButtonGroup.with);
+    $type(doom.bs.Button.with);
     return div(["class" => "container"], [
       div(["class" => "row"], [
         div(["class" => "col-md-12"], [
@@ -24,7 +24,7 @@ class All extends Component<{}, {}> {
             p(["class" => "lead"], "This is some lead text in the Jumbotron!"),
             hr(["class" => "m-y-2"]),
             p("This is some normal text in the Jumbotron"),
-            button([
+            Doom.button([
               "type" => "button",
               "class" => "btn btn-primary btn-lg"
             ], "Learn more"),
@@ -91,32 +91,32 @@ class All extends Component<{}, {}> {
 
   public function buttons() : Node {
     return section("Buttons", [
-      Button.with(onClick, Primary, "Primary button"),
-      Button.with(onClick, Secondary, "Secondary button"),
-      Button.with(onClick, Info, "Info button"),
-      Button.with(onClick, Success, "Success button"),
-      Button.with(onClick, Warning, "Warning button"),
-      Button.with(onClick, Danger, "Danger button"),
+      button(onClick, Primary, "Primary button"),
+      button(onClick, Secondary, "Secondary button"),
+      button(onClick, Info, "Info button"),
+      button(onClick, Success, "Success button"),
+      button(onClick, Warning, "Warning button"),
+      button(onClick, Danger, "Danger button"),
     ]);
   }
 
   public function outlineButtons() : Node {
     return section("Outline buttons", [
-      Button.with(onClick, Primary, { outline : true }, "Primary outline button"),
-      Button.with(onClick, Secondary, { outline : true }, "Secondary outline button"),
-      Button.with(onClick, Info, { outline : true }, "Info outline button"),
-      Button.with(onClick, Success, { outline : true }, "Success outline button"),
-      Button.with(onClick, Warning, { outline : true }, "Warning outline button"),
-      Button.with(onClick, Danger, { outline : true }, "Danger outline button"),
+      button(onClick, Primary, { outline : true }, "Primary outline button"),
+      button(onClick, Secondary, { outline : true }, "Secondary outline button"),
+      button(onClick, Info, { outline : true }, "Info outline button"),
+      button(onClick, Success, { outline : true }, "Success outline button"),
+      button(onClick, Warning, { outline : true }, "Warning outline button"),
+      button(onClick, Danger, { outline : true }, "Danger outline button"),
     ]);
   }
 
   public function groupButtons() : Node {
     return section("Buttons Group", [
-      ButtonGroup.with([
-        Button.with(function(){}, Primary, "left"),
-        Button.with(function(){}, Primary, "middle"),
-        Button.with(function(){}, Primary, "right")
+      buttonGroup([
+        button(function(){}, Primary, "left"),
+        button(function(){}, Primary, "middle"),
+        button(function(){}, Primary, "right")
       ])
     ]);
   }
