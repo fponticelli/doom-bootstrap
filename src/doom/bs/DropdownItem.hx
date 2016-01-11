@@ -4,7 +4,7 @@ import Doom.*;
 import doom.Node;
 import js.html.MouseEvent;
 
-class DropdownItem extends Component<DropdownApi, DropdownItemState> {
+class DropdownItem extends Component<DropdownItemApi, DropdownItemState> {
   public static function create(click : Void -> Void, ?options : DropdownItemState, children : Nodes) : Node {
     if (options == null) options = {};
     return new DropdownItem({ click : click }, options, children);
@@ -20,7 +20,7 @@ class DropdownItem extends Component<DropdownApi, DropdownItemState> {
   }
 }
 
-typedef DropdownApi = {
+typedef DropdownItemApi = {
   click : Void -> Void
 };
 

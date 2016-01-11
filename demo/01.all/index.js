@@ -1085,15 +1085,21 @@ doom_bs_Container.prototype = $extend(Doom.prototype,{
 	,__class__: doom_bs_Container
 });
 var doom_bs_Dropdown = function(api,state,children) {
-	doom_Component.call(this,api,state,children);
+	if(state.open == null) state.open = false;
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
 };
 doom_bs_Dropdown.__name__ = ["doom","bs","Dropdown"];
-doom_bs_Dropdown.create = function(options,children) {
-	if(options == null) options = { };
-	return doom_NodeImpl.ComponentNode(new doom_bs_Dropdown({ },options,children));
+doom_bs_Dropdown["with"] = function(state,children) {
+	var apiVar = { };
+	if(state == null) state = { };
+	var stateVar = { open : state.open};
+	return new doom_bs_Dropdown(apiVar,stateVar,children);
 };
-doom_bs_Dropdown.__super__ = doom_Component;
-doom_bs_Dropdown.prototype = $extend(doom_Component.prototype,{
+doom_bs_Dropdown.__super__ = Doom;
+doom_bs_Dropdown.prototype = $extend(Doom.prototype,{
 	render: function() {
 		var _g = new haxe_ds_StringMap();
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("dropdown");
@@ -1102,13 +1108,23 @@ doom_bs_Dropdown.prototype = $extend(doom_Component.prototype,{
 		if(__map_reserved.open != null) _g.setReserved("open",value1); else _g.h["open"] = value1;
 		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
 	}
+	,api: null
+	,state: null
+	,open: null
+	,get_open: function() {
+		return this.state.open;
+	}
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
 	,__class__: doom_bs_Dropdown
 });
-var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
-doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
-doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_DropdownItem = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -1133,6 +1149,11 @@ doom_bs_DropdownItem.prototype = $extend(doom_Component.prototype,{
 	}
 	,__class__: doom_bs_DropdownItem
 });
+var doom_NodeImpl = { __ename__ : ["doom","NodeImpl"], __constructs__ : ["Element","Raw","Text","ComponentNode"] };
+doom_NodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Raw = function(text) { var $x = ["Raw",1,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.Text = function(text) { var $x = ["Text",2,text]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
+doom_NodeImpl.ComponentNode = function(comp) { var $x = ["ComponentNode",3,comp]; $x.__enum__ = doom_NodeImpl; $x.toString = $estr; return $x; };
 var doom_bs_DropdownMenu = function(api,state,children) {
 	doom_Component.call(this,api,state,children);
 };
@@ -8556,10 +8577,10 @@ BS.buttonGroupVertical = doom_bs_ButtonGroupVertical["with"];
 BS.buttonToolbar = doom_bs_ButtonToolbar["with"];
 BS.closeButton = doom_bs_CloseButton["with"];
 BS.container = doom_bs_Container["with"];
+BS.dropdown = doom_bs_Dropdown["with"];
 BS.inputGroup = doom_bs_InputGroup.create;
 BS.label = doom_bs_Label.create;
 BS.pill = doom_bs_Label.pill;
-BS.dropdown = doom_bs_Dropdown.create;
 BS.dropdownItem = doom_bs_DropdownItem.create;
 BS.dropdownMenu = doom_bs_DropdownMenu.create;
 DateTools.DAYS_OF_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];

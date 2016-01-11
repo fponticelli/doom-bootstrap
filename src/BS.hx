@@ -34,6 +34,10 @@ class BS {
 
   public static var container(default, null) =  Container.with;
 
+  public static var dropdown(default, null) =  doom.bs.Dropdown.with;
+
+  
+
   inline public static function navbar(?theme : NavbarTheme, ?bg : NavbarBackground, children : Nodes) : Node
     return new Navbar({}, { theme : theme, bg : bg }, children);
 
@@ -49,7 +53,6 @@ class BS {
   // public static var radioButtons(default, null) = doom.bs.RadioButton.createGroup;
   public static var label(default, null) =  doom.bs.Label.create;
   public static var pill(default, null) =  doom.bs.Label.pill;
-  public static var dropdown(default, null) =  doom.bs.Dropdown.create;
   public static var dropdownItem(default, null) =  doom.bs.DropdownItem.create;
   public static var dropdownMenu(default, null) =  doom.bs.DropdownMenu.create;
 }
