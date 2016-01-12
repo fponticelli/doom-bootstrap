@@ -13,6 +13,7 @@ import doom.bs.InputGroup;
 import doom.bs.Jumbotron;
 import doom.bs.Label;
 import doom.bs.Navbar;
+import doom.bs.Progress;
 import doom.bs.RadioButton;
 import doom.bs.RadioButtonGroup;
 
@@ -68,6 +69,8 @@ class BS {
   public static var pillDanger(default, null) = pill.bind(Danger, _);
 
   public static var navbar(default, null) = Navbar.with;
+
+  public static var progress(default, null) = Progress.with;
 
   public static var radioButton(default, null) = RadioButton.with;
 

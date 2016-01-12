@@ -173,7 +173,7 @@ All.prototype = $extend(doom_Component.prototype,{
 		var _g20 = new haxe_ds_StringMap();
 		var value20 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
 		if(__map_reserved["class"] != null) _g20.setReserved("class",value20); else _g20.h["class"] = value20;
-		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,tmp3,tmp5,tmp7,tmp9,doom__$Node_Node_$Impl_$.el("div",attributes8,[tmp10,doom__$Node_Node_$Impl_$.el("div",_g20,[],null)],null)],null);
+		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,tmp3,tmp5,tmp7,tmp9,doom__$Node_Node_$Impl_$.el("div",attributes8,[tmp10,doom__$Node_Node_$Impl_$.el("div",_g20,[this.progressBars()],null)],null)],null);
 	}
 	,section: function(name,content) {
 		var _g = new haxe_ds_StringMap();
@@ -207,6 +207,9 @@ All.prototype = $extend(doom_Component.prototype,{
 		return this.section("Radio Button Group",[BS.radioButtonGroup(function(value) {
 			console.log("changed to " + value);
 		},[{ label : doom_NodeImpl.Text("A"), value : "a", active : true},{ label : doom_NodeImpl.Text("B"), value : "b"},{ label : doom_NodeImpl.Text("C"), value : "c"}])]);
+	}
+	,progressBars: function() {
+		return this.section("Progress Bars",[BS.progress(20,100),BS.progress(30,100,{ style : doom_bs_ProgressStyle.Success}),BS.progress(40,100,{ style : doom_bs_ProgressStyle.Info}),BS.progress(50,100,{ style : doom_bs_ProgressStyle.Warning}),BS.progress(60,100,{ style : doom_bs_ProgressStyle.Danger}),BS.progress(60,100,{ style : doom_bs_ProgressStyle.Danger, striped : true}),BS.progress(60,100,{ style : doom_bs_ProgressStyle.Danger, striped : true, animated : true})]);
 	}
 	,onClick: function() {
 		console.log("click");
@@ -1438,6 +1441,97 @@ doom_bs_Navbar.prototype = $extend(Doom.prototype,{
 	}
 	,__class__: doom_bs_Navbar
 });
+var doom_bs_Progress = function(api,state,children) {
+	if(state.style == null) state.style = doom_bs_ProgressStyle.Default;
+	if(state.striped == null) state.striped = false;
+	if(state.animated == null) state.animated = false;
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
+};
+doom_bs_Progress.__name__ = ["doom","bs","Progress"];
+doom_bs_Progress["with"] = function(value,max,state,children) {
+	var apiVar = { };
+	if(state == null) state = { };
+	var stateVar = { value : value, max : max, style : state.style, striped : state.striped, animated : state.animated};
+	return doom_NodeImpl.ComponentNode(new doom_bs_Progress(apiVar,stateVar,children));
+};
+doom_bs_Progress.__super__ = Doom;
+doom_bs_Progress.prototype = $extend(Doom.prototype,{
+	render: function() {
+		var _g1 = new haxe_ds_StringMap();
+		var _g = new haxe_ds_StringMap();
+		if(__map_reserved.progress != null) _g.setReserved("progress",true); else _g.h["progress"] = true;
+		var value1 = Type.enumEq(this.state.style,doom_bs_ProgressStyle.Success);
+		if(__map_reserved["progress-success"] != null) _g.setReserved("progress-success",value1); else _g.h["progress-success"] = value1;
+		var value2 = Type.enumEq(this.state.style,doom_bs_ProgressStyle.Info);
+		if(__map_reserved["progress-info"] != null) _g.setReserved("progress-info",value2); else _g.h["progress-info"] = value2;
+		var value3 = Type.enumEq(this.state.style,doom_bs_ProgressStyle.Warning);
+		if(__map_reserved["progress-warning"] != null) _g.setReserved("progress-warning",value3); else _g.h["progress-warning"] = value3;
+		var value4 = Type.enumEq(this.state.style,doom_bs_ProgressStyle.Danger);
+		if(__map_reserved["progress-danger"] != null) _g.setReserved("progress-danger",value4); else _g.h["progress-danger"] = value4;
+		var value5 = this.state.striped;
+		if(__map_reserved["progress-striped"] != null) _g.setReserved("progress-striped",value5); else _g.h["progress-striped"] = value5;
+		var value6 = this.state.animated;
+		if(__map_reserved["progress-animated"] != null) _g.setReserved("progress-animated",value6); else _g.h["progress-animated"] = value6;
+		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g);
+		if(__map_reserved["class"] != null) _g1.setReserved("class",value); else _g1.h["class"] = value;
+		var value7 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("" + this.state.value);
+		if(__map_reserved.value != null) _g1.setReserved("value",value7); else _g1.h["value"] = value7;
+		var value8 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("" + this.state.max);
+		if(__map_reserved.max != null) _g1.setReserved("max",value8); else _g1.h["max"] = value8;
+		return doom__$Node_Node_$Impl_$.el("progress",_g1,null,doom_NodeImpl.Text(Math.round(this.state.value / this.state.max * 100) + "%"));
+	}
+	,api: null
+	,state: null
+	,value: null
+	,get_value: function() {
+		return this.state.value;
+	}
+	,max: null
+	,get_max: function() {
+		return this.state.max;
+	}
+	,style: null
+	,get_style: function() {
+		return this.state.style;
+	}
+	,striped: null
+	,get_striped: function() {
+		return this.state.striped;
+	}
+	,animated: null
+	,get_animated: function() {
+		return this.state.animated;
+	}
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
+	,__class__: doom_bs_Progress
+});
+var doom_bs_ProgressStyle = { __ename__ : ["doom","bs","ProgressStyle"], __constructs__ : ["Default","Success","Info","Warning","Danger"] };
+doom_bs_ProgressStyle.Default = ["Default",0];
+doom_bs_ProgressStyle.Default.toString = $estr;
+doom_bs_ProgressStyle.Default.__enum__ = doom_bs_ProgressStyle;
+doom_bs_ProgressStyle.Success = ["Success",1];
+doom_bs_ProgressStyle.Success.toString = $estr;
+doom_bs_ProgressStyle.Success.__enum__ = doom_bs_ProgressStyle;
+doom_bs_ProgressStyle.Info = ["Info",2];
+doom_bs_ProgressStyle.Info.toString = $estr;
+doom_bs_ProgressStyle.Info.__enum__ = doom_bs_ProgressStyle;
+doom_bs_ProgressStyle.Warning = ["Warning",3];
+doom_bs_ProgressStyle.Warning.toString = $estr;
+doom_bs_ProgressStyle.Warning.__enum__ = doom_bs_ProgressStyle;
+doom_bs_ProgressStyle.Danger = ["Danger",4];
+doom_bs_ProgressStyle.Danger.toString = $estr;
+doom_bs_ProgressStyle.Danger.__enum__ = doom_bs_ProgressStyle;
 var doom_bs_RadioButton = function(api,state,children) {
 	if(state.active == null) state.active = false;
 	if(state.disabled == null) state.disabled = false;
@@ -8920,6 +9014,7 @@ BS.inputGroup = doom_bs_InputGroup["with"];
 BS.jumbotron = doom_bs_Jumbotron["with"];
 BS.label = doom_bs_Label["with"];
 BS.navbar = doom_bs_Navbar["with"];
+BS.progress = doom_bs_Progress["with"];
 BS.radioButton = doom_bs_RadioButton["with"];
 BS.radioButtonGroup = doom_bs_RadioButtonGroup["with"];
 DateTools.DAYS_OF_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];

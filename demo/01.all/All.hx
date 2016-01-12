@@ -11,7 +11,6 @@ import doom.bs.Button.ButtonStyle;
 
 class All extends Component<{}, {}> {
   override function render() {
-    $type(doom.bs.Label.with);
     return div(["class" => "container"], [
       div(["class" => "row"], [
         div(["class" => "col-md-12"], [
@@ -59,7 +58,7 @@ class All extends Component<{}, {}> {
           radioButtons(),
         ]),
         div(["class" => "col-md-6"], [
-
+          progressBars()
         ]),
       ]),
     ]);
@@ -134,6 +133,18 @@ class All extends Component<{}, {}> {
         { label : "B", value : "b" },
         { label : "C", value : "c" }
       ])
+    ]);
+  }
+
+  public function progressBars() : Node {
+    return section("Progress Bars", [
+      progress(20, 100),
+      progress(30, 100, { style : Success }),
+      progress(40, 100, { style : Info }),
+      progress(50, 100, { style : Warning }),
+      progress(60, 100, { style : Danger }),
+      progress(60, 100, { style : Danger, striped : true }),
+      progress(60, 100, { style : Danger, striped : true, animated : true }),
     ]);
   }
 
