@@ -16,6 +16,7 @@ import doom.bs.Navbar;
 import doom.bs.Progress;
 import doom.bs.RadioButton;
 import doom.bs.RadioButtonGroup;
+import doom.bs.Table;
 
 class BS {
   public static var alert(default, null) = Alert.with;
@@ -75,6 +76,8 @@ class BS {
   public static var radioButton(default, null) = RadioButton.with;
 
   public static var radioButtonGroup(default, null) = RadioButtonGroup.with;
+
+  public static var table(default, null) = Table.with;
 
   inline public static function row(?className : String, children : Nodes) : Node
     return Doom.div(["class" => [

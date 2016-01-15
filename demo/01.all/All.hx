@@ -12,12 +12,12 @@ import doom.bs.Button.ButtonStyle;
 class All extends Component<{}, {}> {
   override function render() {
     return div(["class" => "container"], [
-      div(["class" => "row"], [
+      row([
         div(["class" => "col-md-12"], [
           h1(["class" => "display-1"], "Doom Bootstrap"),
         ]),
       ]),
-      div(["class" => "row"], [
+      row([
         div(["class" => "col-md-12"], [
           jumbotron([
             h1(["class" => "display-3"], "Jumbotron header"),
@@ -28,40 +28,55 @@ class All extends Component<{}, {}> {
           ])
         ]),
       ]),
-      div(["class" => "row"], [
-        div(["class" => "col-md-6"], [
-          labels(),
-        ]),
-        div(["class" => "col-md-6"], [
-          pillLabels(),
-        ]),
-      ]),
-      div(["class" => "row"], [
-        div(["class" => "col-md-6"], [
-          buttons(),
-        ]),
-        div(["class" => "col-md-6"], [
-          outlineButtons(),
-        ]),
-      ]),
-      div(["class" => "row"], [
-        div(["class" => "col-md-6"], [
-          groupButtons(),
-        ]),
-        div(["class" => "col-md-6"], [
+      row2(
+        labels(),
+        pillLabels()
+      ),
+      row2(
+        buttons(),
+        outlineButtons()
+      ),
+      row2(
+        groupButtons(),
+        [
           alertSuccess("a permanent alert"),
           alertDanger({ dismissable : true }, "a dismissable alert")
-        ]),
-      ]),
-      div(["class" => "row"], [
-        div(["class" => "col-md-6"], [
-          radioButtons(),
-        ]),
-        div(["class" => "col-md-6"], [
-          progressBars()
-        ]),
-      ]),
+        ]
+      ),
+      row2(
+        radioButtons(),
+        progressBars()
+      ),
+      row2(
+        basicTable(),
+        []
+      )
     ]);
+  }
+
+  public function row2(left : Nodes, right : Nodes) {
+    return row([
+      div(["class" => "col-md-6"], left),
+      div(["class" => "col-md-6"], right)
+    ]);
+  }
+
+  public function basicTable() {
+    return section("Basic Table", tableContent());
+  }
+
+  function tableContent() {
+    return [
+      table([
+        thead(
+          tr([th("A"),th("B"),th("C")])
+        ),
+        tbody([
+          tr([td("1"),td("2"),td("3")]),
+          tr([td("4"),td("5"),td("6")])
+        ])
+      ])
+    ];
   }
 
   public function section(name : String, content : Array<Node>) {

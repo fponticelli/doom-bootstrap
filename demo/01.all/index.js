@@ -94,86 +94,67 @@ All.prototype = $extend(doom_Component.prototype,{
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("container");
 		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
 		var attributes = _g;
-		var _g1 = new haxe_ds_StringMap();
-		var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
-		if(__map_reserved["class"] != null) _g1.setReserved("class",value1); else _g1.h["class"] = value1;
-		var attributes1 = _g1;
-		var _g2 = new haxe_ds_StringMap();
-		var value2 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-12");
-		if(__map_reserved["class"] != null) _g2.setReserved("class",value2); else _g2.h["class"] = value2;
-		var attributes2 = _g2;
 		var _g3 = new haxe_ds_StringMap();
-		var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("display-1");
-		if(__map_reserved["class"] != null) _g3.setReserved("class",value3); else _g3.h["class"] = value3;
-		var tmp = doom__$Node_Node_$Impl_$.el("div",attributes1,[doom__$Node_Node_$Impl_$.el("div",attributes2,[doom__$Node_Node_$Impl_$.el("h1",_g3,null,doom_NodeImpl.Text("Doom Bootstrap"))],null)],null);
+		var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-12");
+		if(__map_reserved["class"] != null) _g3.setReserved("class",value1); else _g3.h["class"] = value1;
+		var attributes1 = _g3;
 		var _g4 = new haxe_ds_StringMap();
-		var value4 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
-		if(__map_reserved["class"] != null) _g4.setReserved("class",value4); else _g4.h["class"] = value4;
-		var attributes3 = _g4;
-		var _g5 = new haxe_ds_StringMap();
-		var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-12");
-		if(__map_reserved["class"] != null) _g5.setReserved("class",value5); else _g5.h["class"] = value5;
-		var attributes4 = _g5;
-		var _g6 = new haxe_ds_StringMap();
-		var value6 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("display-3");
-		if(__map_reserved["class"] != null) _g6.setReserved("class",value6); else _g6.h["class"] = value6;
-		var tmp1 = doom__$Node_Node_$Impl_$.el("h1",_g6,null,doom_NodeImpl.Text("Jumbotron header"));
-		var _g7 = new haxe_ds_StringMap();
-		var value7 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("lead");
-		if(__map_reserved["class"] != null) _g7.setReserved("class",value7); else _g7.h["class"] = value7;
-		var tmp2 = doom__$Node_Node_$Impl_$.el("p",_g7,null,doom_NodeImpl.Text("This is some lead text in the Jumbotron!"));
-		var _g8 = new haxe_ds_StringMap();
-		var value8 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("m-y-2");
-		if(__map_reserved["class"] != null) _g8.setReserved("class",value8); else _g8.h["class"] = value8;
-		var tmp3 = doom__$Node_Node_$Impl_$.el("div",attributes3,[doom__$Node_Node_$Impl_$.el("div",attributes4,[BS.jumbotron([tmp1,tmp2,doom__$Node_Node_$Impl_$.el("hr",_g8,null,null),doom__$Node_Node_$Impl_$.el("p",null,null,doom_NodeImpl.Text("This is some normal text in the Jumbotron")),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Primary,{ size : doom_bs_Size.Large},[doom_NodeImpl.Text("Learn more")])])],null)],null);
+		var value2 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("display-1");
+		if(__map_reserved["class"] != null) _g4.setReserved("class",value2); else _g4.h["class"] = value2;
+		var children = [doom__$Node_Node_$Impl_$.el("div",attributes1,[doom__$Node_Node_$Impl_$.el("h1",_g4,null,doom_NodeImpl.Text("Doom Bootstrap"))],null)];
+		var _g1 = new haxe_ds_StringMap();
+		var _g2 = new haxe_ds_StringMap();
+		if(__map_reserved.row != null) _g2.setReserved("row",true); else _g2.h["row"] = true;
+		if(__map_reserved[null] != null) _g2.setReserved(null,false); else _g2.h[null] = false;
+		var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g2);
+		if(__map_reserved["class"] != null) _g1.setReserved("class",value3); else _g1.h["class"] = value3;
+		var tmp = doom__$Node_Node_$Impl_$.el("div",_g1,children,null);
 		var _g9 = new haxe_ds_StringMap();
-		var value9 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
-		if(__map_reserved["class"] != null) _g9.setReserved("class",value9); else _g9.h["class"] = value9;
-		var attributes5 = _g9;
+		var value4 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-12");
+		if(__map_reserved["class"] != null) _g9.setReserved("class",value4); else _g9.h["class"] = value4;
+		var attributes2 = _g9;
 		var _g10 = new haxe_ds_StringMap();
-		var value10 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g10.setReserved("class",value10); else _g10.h["class"] = value10;
-		var tmp4 = doom__$Node_Node_$Impl_$.el("div",_g10,[this.labels()],null);
+		var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("display-3");
+		if(__map_reserved["class"] != null) _g10.setReserved("class",value5); else _g10.h["class"] = value5;
+		var tmp1 = doom__$Node_Node_$Impl_$.el("h1",_g10,null,doom_NodeImpl.Text("Jumbotron header"));
 		var _g11 = new haxe_ds_StringMap();
-		var value11 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g11.setReserved("class",value11); else _g11.h["class"] = value11;
-		var tmp5 = doom__$Node_Node_$Impl_$.el("div",attributes5,[tmp4,doom__$Node_Node_$Impl_$.el("div",_g11,[this.pillLabels()],null)],null);
+		var value6 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("lead");
+		if(__map_reserved["class"] != null) _g11.setReserved("class",value6); else _g11.h["class"] = value6;
+		var tmp2 = doom__$Node_Node_$Impl_$.el("p",_g11,null,doom_NodeImpl.Text("This is some lead text in the Jumbotron!"));
 		var _g12 = new haxe_ds_StringMap();
-		var value12 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
-		if(__map_reserved["class"] != null) _g12.setReserved("class",value12); else _g12.h["class"] = value12;
-		var attributes6 = _g12;
+		var value7 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("m-y-2");
+		if(__map_reserved["class"] != null) _g12.setReserved("class",value7); else _g12.h["class"] = value7;
+		var children1 = [doom__$Node_Node_$Impl_$.el("div",attributes2,[BS.jumbotron([tmp1,tmp2,doom__$Node_Node_$Impl_$.el("hr",_g12,null,null),doom__$Node_Node_$Impl_$.el("p",null,null,doom_NodeImpl.Text("This is some normal text in the Jumbotron")),BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Primary,{ size : doom_bs_Size.Large},[doom_NodeImpl.Text("Learn more")])])],null)];
 		var _g13 = new haxe_ds_StringMap();
-		var value13 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g13.setReserved("class",value13); else _g13.h["class"] = value13;
-		var tmp6 = doom__$Node_Node_$Impl_$.el("div",_g13,[this.buttons()],null);
-		var _g14 = new haxe_ds_StringMap();
-		var value14 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g14.setReserved("class",value14); else _g14.h["class"] = value14;
-		var tmp7 = doom__$Node_Node_$Impl_$.el("div",attributes6,[tmp6,doom__$Node_Node_$Impl_$.el("div",_g14,[this.outlineButtons()],null)],null);
-		var _g15 = new haxe_ds_StringMap();
-		var value15 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
-		if(__map_reserved["class"] != null) _g15.setReserved("class",value15); else _g15.h["class"] = value15;
-		var attributes7 = _g15;
-		var _g16 = new haxe_ds_StringMap();
-		var value16 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g16.setReserved("class",value16); else _g16.h["class"] = value16;
-		var tmp8 = doom__$Node_Node_$Impl_$.el("div",_g16,[this.groupButtons()],null);
-		var _g17 = new haxe_ds_StringMap();
-		var value17 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g17.setReserved("class",value17); else _g17.h["class"] = value17;
-		var tmp9 = doom__$Node_Node_$Impl_$.el("div",attributes7,[tmp8,doom__$Node_Node_$Impl_$.el("div",_g17,[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])],null)],null);
-		var _g18 = new haxe_ds_StringMap();
-		var value18 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("row");
-		if(__map_reserved["class"] != null) _g18.setReserved("class",value18); else _g18.h["class"] = value18;
-		var attributes8 = _g18;
-		var _g19 = new haxe_ds_StringMap();
-		var value19 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g19.setReserved("class",value19); else _g19.h["class"] = value19;
-		var tmp10 = doom__$Node_Node_$Impl_$.el("div",_g19,[this.radioButtons()],null);
-		var _g20 = new haxe_ds_StringMap();
-		var value20 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
-		if(__map_reserved["class"] != null) _g20.setReserved("class",value20); else _g20.h["class"] = value20;
-		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,tmp3,tmp5,tmp7,tmp9,doom__$Node_Node_$Impl_$.el("div",attributes8,[tmp10,doom__$Node_Node_$Impl_$.el("div",_g20,[this.progressBars()],null)],null)],null);
+		var _g5 = new haxe_ds_StringMap();
+		if(__map_reserved.row != null) _g5.setReserved("row",true); else _g5.h["row"] = true;
+		if(__map_reserved[null] != null) _g5.setReserved(null,false); else _g5.h[null] = false;
+		var value8 = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g5);
+		if(__map_reserved["class"] != null) _g13.setReserved("class",value8); else _g13.h["class"] = value8;
+		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,doom__$Node_Node_$Impl_$.el("div",_g13,children1,null),this.row2([this.labels()],[this.pillLabels()]),this.row2([this.buttons()],[this.outlineButtons()]),this.row2([this.groupButtons()],[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])]),this.row2([this.radioButtons()],[this.progressBars()]),this.row2([this.basicTable()],[])],null);
+	}
+	,row2: function(left,right) {
+		var _g2 = new haxe_ds_StringMap();
+		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g2.setReserved("class",value); else _g2.h["class"] = value;
+		var tmp = doom__$Node_Node_$Impl_$.el("div",_g2,left,null);
+		var _g3 = new haxe_ds_StringMap();
+		var value1 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
+		if(__map_reserved["class"] != null) _g3.setReserved("class",value1); else _g3.h["class"] = value1;
+		var children = [tmp,doom__$Node_Node_$Impl_$.el("div",_g3,right,null)];
+		var _g1 = new haxe_ds_StringMap();
+		var _g = new haxe_ds_StringMap();
+		if(__map_reserved.row != null) _g.setReserved("row",true); else _g.h["row"] = true;
+		if(__map_reserved[null] != null) _g.setReserved(null,false); else _g.h[null] = false;
+		var value2 = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g);
+		if(__map_reserved["class"] != null) _g1.setReserved("class",value2); else _g1.h["class"] = value2;
+		return doom__$Node_Node_$Impl_$.el("div",_g1,children,null);
+	}
+	,basicTable: function() {
+		return this.section("Basic Table",this.tableContent());
+	}
+	,tableContent: function() {
+		return [BS.table([doom__$Node_Node_$Impl_$.el("thead",null,null,doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("A")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("B")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("C"))],null)),doom__$Node_Node_$Impl_$.el("tbody",null,[doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("1")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("2")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("3"))],null),doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("4")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("5")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("6"))],null)],null)])];
 	}
 	,section: function(name,content) {
 		var _g = new haxe_ds_StringMap();
@@ -1949,6 +1930,39 @@ Reflect.deleteField = function(o,field) {
 	delete(o[field]);
 	return true;
 };
+var doom_bs_Table = function(api,state,children) {
+	this.api = api;
+	this.state = state;
+	this.children = children;
+	Doom.call(this,children);
+};
+doom_bs_Table.__name__ = ["doom","bs","Table"];
+doom_bs_Table["with"] = function(children) {
+	var apiVar = { };
+	var stateVar = { };
+	return doom_NodeImpl.ComponentNode(new doom_bs_Table(apiVar,stateVar,children));
+};
+doom_bs_Table.__super__ = Doom;
+doom_bs_Table.prototype = $extend(Doom.prototype,{
+	render: function() {
+		var _g = new haxe_ds_StringMap();
+		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("table");
+		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
+		return doom__$Node_Node_$Impl_$.el("table",_g,this.children,null);
+	}
+	,api: null
+	,state: null
+	,update: function(newState) {
+		var oldState = this.state;
+		this.state = newState;
+		if(!this.shouldRender(oldState,newState)) return;
+		this.updateNode(this.node);
+	}
+	,shouldRender: function(oldState,newState) {
+		return true;
+	}
+	,__class__: doom_bs_Table
+});
 var BS = function() { };
 BS.__name__ = ["BS"];
 BS.alertSuccess = function(a2,a3) {
@@ -9017,6 +9031,7 @@ BS.navbar = doom_bs_Navbar["with"];
 BS.progress = doom_bs_Progress["with"];
 BS.radioButton = doom_bs_RadioButton["with"];
 BS.radioButtonGroup = doom_bs_RadioButtonGroup["with"];
+BS.table = doom_bs_Table["with"];
 DateTools.DAYS_OF_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];
 Xml.Element = 0;
 Xml.PCData = 1;
