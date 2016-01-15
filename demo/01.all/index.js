@@ -131,7 +131,7 @@ All.prototype = $extend(doom_Component.prototype,{
 		if(__map_reserved[null] != null) _g5.setReserved(null,false); else _g5.h[null] = false;
 		var value8 = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g5);
 		if(__map_reserved["class"] != null) _g13.setReserved("class",value8); else _g13.h["class"] = value8;
-		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,doom__$Node_Node_$Impl_$.el("div",_g13,children1,null),this.row2([this.labels()],[this.pillLabels()]),this.row2([this.buttons()],[this.outlineButtons()]),this.row2([this.groupButtons()],[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])]),this.row2([this.radioButtons()],[this.progressBars()]),this.row2([this.basicTable()],[])],null);
+		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,doom__$Node_Node_$Impl_$.el("div",_g13,children1,null),this.row2([this.labels()],[this.pillLabels()]),this.row2([this.buttons()],[this.outlineButtons()]),this.row2([this.groupButtons()],[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])]),this.row2([this.radioButtons()],[this.progressBars()]),this.row2([this.basicTable()],[this.inverseTable()])],null);
 	}
 	,row2: function(left,right) {
 		var _g2 = new haxe_ds_StringMap();
@@ -151,10 +151,13 @@ All.prototype = $extend(doom_Component.prototype,{
 		return doom__$Node_Node_$Impl_$.el("div",_g1,children,null);
 	}
 	,basicTable: function() {
-		return this.section("Basic Table",this.tableContent());
+		return this.section("Basic Table",[BS.table(null,this.tableContent())]);
+	}
+	,inverseTable: function() {
+		return this.section("Inverse Table",[BS.table({ inverse : true},this.tableContent())]);
 	}
 	,tableContent: function() {
-		return [BS.table([doom__$Node_Node_$Impl_$.el("thead",null,null,doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("A")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("B")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("C"))],null)),doom__$Node_Node_$Impl_$.el("tbody",null,[doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("1")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("2")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("3"))],null),doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("4")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("5")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("6"))],null)],null)])];
+		return [doom__$Node_Node_$Impl_$.el("thead",null,null,doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("#")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("First Name")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("Last Name")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("Username"))],null)),doom__$Node_Node_$Impl_$.el("tbody",null,[doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("1")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Mark")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Otto")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("@mdo"))],null),doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("2")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Jacob")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Thornton")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("@fat"))],null),doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("3")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Larry")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("the Bird")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("@twitter"))],null)],null)];
 	}
 	,section: function(name,content) {
 		var _g = new haxe_ds_StringMap();
@@ -1931,27 +1934,37 @@ Reflect.deleteField = function(o,field) {
 	return true;
 };
 var doom_bs_Table = function(api,state,children) {
+	if(state.inverse == null) state.inverse = false;
 	this.api = api;
 	this.state = state;
 	this.children = children;
 	Doom.call(this,children);
 };
 doom_bs_Table.__name__ = ["doom","bs","Table"];
-doom_bs_Table["with"] = function(children) {
+doom_bs_Table["with"] = function(state,children) {
 	var apiVar = { };
-	var stateVar = { };
+	if(state == null) state = { };
+	var stateVar = { inverse : state.inverse};
 	return doom_NodeImpl.ComponentNode(new doom_bs_Table(apiVar,stateVar,children));
 };
 doom_bs_Table.__super__ = Doom;
 doom_bs_Table.prototype = $extend(Doom.prototype,{
 	render: function() {
+		var _g1 = new haxe_ds_StringMap();
 		var _g = new haxe_ds_StringMap();
-		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("table");
-		if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
-		return doom__$Node_Node_$Impl_$.el("table",_g,this.children,null);
+		if(__map_reserved.table != null) _g.setReserved("table",true); else _g.h["table"] = true;
+		var value1 = this.state.inverse;
+		if(__map_reserved["table-inverse"] != null) _g.setReserved("table-inverse",value1); else _g.h["table-inverse"] = value1;
+		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g);
+		if(__map_reserved["class"] != null) _g1.setReserved("class",value); else _g1.h["class"] = value;
+		return doom__$Node_Node_$Impl_$.el("table",_g1,this.children,null);
 	}
 	,api: null
 	,state: null
+	,inverse: null
+	,get_inverse: function() {
+		return this.state.inverse;
+	}
 	,update: function(newState) {
 		var oldState = this.state;
 		this.state = newState;

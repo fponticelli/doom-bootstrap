@@ -49,7 +49,7 @@ class All extends Component<{}, {}> {
       ),
       row2(
         basicTable(),
-        []
+        inverseTable()
       )
     ]);
   }
@@ -62,24 +62,31 @@ class All extends Component<{}, {}> {
   }
 
   public function basicTable() {
-    return section("Basic Table", tableContent());
+    return section("Basic Table",
+      table(tableContent())
+    );
+  }
+
+  public function inverseTable() {
+    return section("Inverse Table",
+      table({ inverse : true }, tableContent())
+    );
   }
 
   function tableContent() {
     return [
-      table([
-        thead(
-          tr([th("A"),th("B"),th("C")])
-        ),
-        tbody([
-          tr([td("1"),td("2"),td("3")]),
-          tr([td("4"),td("5"),td("6")])
-        ])
+      thead(
+        tr([th("#"),th("First Name"),th("Last Name"),th("Username")])
+      ),
+      tbody([
+        tr([th("1"),td("Mark"),td("Otto"),td("@mdo")]),
+        tr([th("2"),td("Jacob"),td("Thornton"),td("@fat")]),
+        tr([th("3"),td("Larry"),td("the Bird"),td("@twitter")]),
       ])
     ];
   }
 
-  public function section(name : String, content : Array<Node>) {
+  public function section(name : String, content : Nodes) {
     return div(["class" => "card"], [
       div(["class" => "card-block"], [
         h2(name)
