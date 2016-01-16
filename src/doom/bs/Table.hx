@@ -1,8 +1,12 @@
 package doom.bs;
 
 import Doom.*;
+import doom.Node;
 
 class Table extends Doom {
+  public static function responsive(?options : { ?striped : Bool, ?inverse : Bool, ?bordered : Bool, ?hover : Bool, ?small : Bool }, ?nodes : Nodes)
+    return div(["class" => "responsive-table"], with(options, nodes));
+
   @:state(false)   var striped : Bool;
   @:state(false)   var inverse : Bool;
   @:state(false)   var bordered : Bool;

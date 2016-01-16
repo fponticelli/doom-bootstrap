@@ -1963,6 +1963,12 @@ var doom_bs_Table = function(api,state,children) {
 	Doom.call(this,children);
 };
 doom_bs_Table.__name__ = ["doom","bs","Table"];
+doom_bs_Table.responsive = function(options,nodes) {
+	var _g = new haxe_ds_StringMap();
+	var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("responsive-table");
+	if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
+	return doom__$Node_Node_$Impl_$.el("div",_g,null,doom_bs_Table["with"](options,nodes));
+};
 doom_bs_Table["with"] = function(state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
