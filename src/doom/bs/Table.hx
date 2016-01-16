@@ -4,7 +4,7 @@ import Doom.*;
 import doom.Node;
 
 class Table extends Doom {
-  public static function responsive(?options : { ?striped : Bool, ?inverse : Bool, ?bordered : Bool, ?hover : Bool, ?small : Bool }, ?nodes : Nodes)
+  public static function responsive(?options : { ?striped : Bool, ?inverse : Bool, ?bordered : Bool, ?hover : Bool, ?small : Bool, ?reflow : Bool }, ?nodes : Nodes)
     return div(["class" => "responsive-table"], with(options, nodes));
 
   @:state(false)   var striped : Bool;
@@ -12,6 +12,7 @@ class Table extends Doom {
   @:state(false)   var bordered : Bool;
   @:state(false)   var hover : Bool;
   @:state(false)   var small : Bool;
+  @:state(false)   var reflow : Bool;
   override function render()
     return table([
       "class" => [
@@ -20,7 +21,8 @@ class Table extends Doom {
         "table-striped" => striped,
         "table-bordered" => bordered,
         "table-hover" => hover,
-        "table-sm" => small
+        "table-sm" => small,
+        "table-reflow" => reflow
       ]
     ], children);
 }

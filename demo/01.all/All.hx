@@ -61,6 +61,10 @@ class All extends Component<{}, {}> {
       row2(
         stripedHoverTable(),
         smallTable()
+      ),
+      row2(
+        reflowTable(),
+        []
       )
     ]);
   }
@@ -117,6 +121,12 @@ class All extends Component<{}, {}> {
   public function smallTable() {
     return section("Small Table",
       table({ small : true }, tableContent())
+    );
+  }
+
+  public function reflowTable() {
+    return section("Reflow Table",
+      table({ reflow : true }, tableContent())
     );
   }
 

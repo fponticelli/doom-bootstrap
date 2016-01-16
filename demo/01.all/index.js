@@ -131,7 +131,7 @@ All.prototype = $extend(doom_Component.prototype,{
 		if(__map_reserved[null] != null) _g5.setReserved(null,false); else _g5.h[null] = false;
 		var value8 = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g5);
 		if(__map_reserved["class"] != null) _g13.setReserved("class",value8); else _g13.h["class"] = value8;
-		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,doom__$Node_Node_$Impl_$.el("div",_g13,children1,null),this.row2([this.labels()],[this.pillLabels()]),this.row2([this.buttons()],[this.outlineButtons()]),this.row2([this.groupButtons()],[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])]),this.row2([this.radioButtons()],[this.progressBars()]),this.row2([this.basicTable()],[this.inverseTable()]),this.row2([this.stripedTable()],[this.borderedInverseTable()]),this.row2([this.borderedTable()],[this.hoverTable()]),this.row2([this.stripedHoverTable()],[this.smallTable()])],null);
+		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,doom__$Node_Node_$Impl_$.el("div",_g13,children1,null),this.row2([this.labels()],[this.pillLabels()]),this.row2([this.buttons()],[this.outlineButtons()]),this.row2([this.groupButtons()],[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])]),this.row2([this.radioButtons()],[this.progressBars()]),this.row2([this.basicTable()],[this.inverseTable()]),this.row2([this.stripedTable()],[this.borderedInverseTable()]),this.row2([this.borderedTable()],[this.hoverTable()]),this.row2([this.stripedHoverTable()],[this.smallTable()]),this.row2([this.reflowTable()],[])],null);
 	}
 	,row2: function(left,right) {
 		var _g2 = new haxe_ds_StringMap();
@@ -173,6 +173,9 @@ All.prototype = $extend(doom_Component.prototype,{
 	}
 	,smallTable: function() {
 		return this.section("Small Table",[BS.table({ small : true},this.tableContent())]);
+	}
+	,reflowTable: function() {
+		return this.section("Reflow Table",[BS.table({ reflow : true},this.tableContent())]);
 	}
 	,tableContent: function() {
 		return [doom__$Node_Node_$Impl_$.el("thead",null,null,doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("#")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("First Name")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("Last Name")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("Username"))],null)),doom__$Node_Node_$Impl_$.el("tbody",null,[doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("1")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Mark")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Otto")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("@mdo"))],null),doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("2")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Jacob")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Thornton")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("@fat"))],null),doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("3")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Larry")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("the Bird")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("@twitter"))],null)],null)];
@@ -1957,6 +1960,7 @@ var doom_bs_Table = function(api,state,children) {
 	if(state.bordered == null) state.bordered = false;
 	if(state.hover == null) state.hover = false;
 	if(state.small == null) state.small = false;
+	if(state.reflow == null) state.reflow = false;
 	this.api = api;
 	this.state = state;
 	this.children = children;
@@ -1972,7 +1976,7 @@ doom_bs_Table.responsive = function(options,nodes) {
 doom_bs_Table["with"] = function(state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
-	var stateVar = { striped : state.striped, inverse : state.inverse, bordered : state.bordered, hover : state.hover, small : state.small};
+	var stateVar = { striped : state.striped, inverse : state.inverse, bordered : state.bordered, hover : state.hover, small : state.small, reflow : state.reflow};
 	return doom_NodeImpl.ComponentNode(new doom_bs_Table(apiVar,stateVar,children));
 };
 doom_bs_Table.__super__ = Doom;
@@ -1991,6 +1995,8 @@ doom_bs_Table.prototype = $extend(Doom.prototype,{
 		if(__map_reserved["table-hover"] != null) _g.setReserved("table-hover",value4); else _g.h["table-hover"] = value4;
 		var value5 = this.state.small;
 		if(__map_reserved["table-sm"] != null) _g.setReserved("table-sm",value5); else _g.h["table-sm"] = value5;
+		var value6 = this.state.reflow;
+		if(__map_reserved["table-reflow"] != null) _g.setReserved("table-reflow",value6); else _g.h["table-reflow"] = value6;
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g);
 		if(__map_reserved["class"] != null) _g1.setReserved("class",value); else _g1.h["class"] = value;
 		return doom__$Node_Node_$Impl_$.el("table",_g1,this.children,null);
@@ -2016,6 +2022,10 @@ doom_bs_Table.prototype = $extend(Doom.prototype,{
 	,small: null
 	,get_small: function() {
 		return this.state.small;
+	}
+	,reflow: null
+	,get_reflow: function() {
+		return this.state.reflow;
 	}
 	,update: function(newState) {
 		var oldState = this.state;
