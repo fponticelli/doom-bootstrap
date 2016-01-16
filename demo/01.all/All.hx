@@ -8,7 +8,6 @@ import doom.bs.Label.LabelType;
 import doom.bs.Size;
 import doom.bs.Button.ButtonStyle;
 
-
 class All extends Component<{}, {}> {
   override function render() {
     return div(["class" => "container"], [
@@ -50,6 +49,18 @@ class All extends Component<{}, {}> {
       row2(
         basicTable(),
         inverseTable()
+      ),
+      row2(
+        stripedTable(),
+        borderedInverseTable()
+      ),
+      row2(
+        borderedTable(),
+        hoverTable()
+      ),
+      row2(
+        stripedHoverTable(),
+        smallTable()
       )
     ]);
   }
@@ -70,6 +81,42 @@ class All extends Component<{}, {}> {
   public function inverseTable() {
     return section("Inverse Table",
       table({ inverse : true }, tableContent())
+    );
+  }
+
+  public function stripedTable() {
+    return section("Striped Table",
+      table({ striped : true }, tableContent())
+    );
+  }
+
+  public function borderedTable() {
+    return section("Bordered Table",
+      table({ bordered : true }, tableContent())
+    );
+  }
+
+  public function borderedInverseTable() {
+    return section("Bordered Inverse Table",
+      table({ bordered : true, inverse : true }, tableContent())
+    );
+  }
+
+  public function hoverTable() {
+    return section("Hover Table",
+      table({ hover : true }, tableContent())
+    );
+  }
+
+  public function stripedHoverTable() {
+    return section("Striped Hover Table",
+      table({ hover : true, striped : true }, tableContent())
+    );
+  }
+
+  public function smallTable() {
+    return section("Small Table",
+      table({ small : true }, tableContent())
     );
   }
 

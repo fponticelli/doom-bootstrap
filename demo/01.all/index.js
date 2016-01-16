@@ -131,7 +131,7 @@ All.prototype = $extend(doom_Component.prototype,{
 		if(__map_reserved[null] != null) _g5.setReserved(null,false); else _g5.h[null] = false;
 		var value8 = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g5);
 		if(__map_reserved["class"] != null) _g13.setReserved("class",value8); else _g13.h["class"] = value8;
-		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,doom__$Node_Node_$Impl_$.el("div",_g13,children1,null),this.row2([this.labels()],[this.pillLabels()]),this.row2([this.buttons()],[this.outlineButtons()]),this.row2([this.groupButtons()],[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])]),this.row2([this.radioButtons()],[this.progressBars()]),this.row2([this.basicTable()],[this.inverseTable()])],null);
+		return doom__$Node_Node_$Impl_$.el("div",attributes,[tmp,doom__$Node_Node_$Impl_$.el("div",_g13,children1,null),this.row2([this.labels()],[this.pillLabels()]),this.row2([this.buttons()],[this.outlineButtons()]),this.row2([this.groupButtons()],[BS.alertSuccess(null,[doom_NodeImpl.Text("a permanent alert")]),BS.alertDanger({ dismissable : true},[doom_NodeImpl.Text("a dismissable alert")])]),this.row2([this.radioButtons()],[this.progressBars()]),this.row2([this.basicTable()],[this.inverseTable()]),this.row2([this.stripedTable()],[this.borderedInverseTable()]),this.row2([this.borderedTable()],[this.hoverTable()]),this.row2([this.stripedHoverTable()],[this.smallTable()])],null);
 	}
 	,row2: function(left,right) {
 		var _g2 = new haxe_ds_StringMap();
@@ -155,6 +155,24 @@ All.prototype = $extend(doom_Component.prototype,{
 	}
 	,inverseTable: function() {
 		return this.section("Inverse Table",[BS.table({ inverse : true},this.tableContent())]);
+	}
+	,stripedTable: function() {
+		return this.section("Striped Table",[BS.table({ striped : true},this.tableContent())]);
+	}
+	,borderedTable: function() {
+		return this.section("Bordered Table",[BS.table({ bordered : true},this.tableContent())]);
+	}
+	,borderedInverseTable: function() {
+		return this.section("Bordered Inverse Table",[BS.table({ bordered : true, inverse : true},this.tableContent())]);
+	}
+	,hoverTable: function() {
+		return this.section("Hover Table",[BS.table({ hover : true},this.tableContent())]);
+	}
+	,stripedHoverTable: function() {
+		return this.section("Striped Hover Table",[BS.table({ hover : true, striped : true},this.tableContent())]);
+	}
+	,smallTable: function() {
+		return this.section("Small Table",[BS.table({ small : true},this.tableContent())]);
 	}
 	,tableContent: function() {
 		return [doom__$Node_Node_$Impl_$.el("thead",null,null,doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("#")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("First Name")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("Last Name")),doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("Username"))],null)),doom__$Node_Node_$Impl_$.el("tbody",null,[doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("1")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Mark")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Otto")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("@mdo"))],null),doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("2")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Jacob")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Thornton")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("@fat"))],null),doom__$Node_Node_$Impl_$.el("tr",null,[doom__$Node_Node_$Impl_$.el("th",null,null,doom_NodeImpl.Text("3")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("Larry")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("the Bird")),doom__$Node_Node_$Impl_$.el("td",null,null,doom_NodeImpl.Text("@twitter"))],null)],null)];
@@ -1934,7 +1952,11 @@ Reflect.deleteField = function(o,field) {
 	return true;
 };
 var doom_bs_Table = function(api,state,children) {
+	if(state.striped == null) state.striped = false;
 	if(state.inverse == null) state.inverse = false;
+	if(state.bordered == null) state.bordered = false;
+	if(state.hover == null) state.hover = false;
+	if(state.small == null) state.small = false;
 	this.api = api;
 	this.state = state;
 	this.children = children;
@@ -1944,7 +1966,7 @@ doom_bs_Table.__name__ = ["doom","bs","Table"];
 doom_bs_Table["with"] = function(state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
-	var stateVar = { inverse : state.inverse};
+	var stateVar = { striped : state.striped, inverse : state.inverse, bordered : state.bordered, hover : state.hover, small : state.small};
 	return doom_NodeImpl.ComponentNode(new doom_bs_Table(apiVar,stateVar,children));
 };
 doom_bs_Table.__super__ = Doom;
@@ -1955,15 +1977,39 @@ doom_bs_Table.prototype = $extend(Doom.prototype,{
 		if(__map_reserved.table != null) _g.setReserved("table",true); else _g.h["table"] = true;
 		var value1 = this.state.inverse;
 		if(__map_reserved["table-inverse"] != null) _g.setReserved("table-inverse",value1); else _g.h["table-inverse"] = value1;
+		var value2 = this.state.striped;
+		if(__map_reserved["table-striped"] != null) _g.setReserved("table-striped",value2); else _g.h["table-striped"] = value2;
+		var value3 = this.state.bordered;
+		if(__map_reserved["table-bordered"] != null) _g.setReserved("table-bordered",value3); else _g.h["table-bordered"] = value3;
+		var value4 = this.state.hover;
+		if(__map_reserved["table-hover"] != null) _g.setReserved("table-hover",value4); else _g.h["table-hover"] = value4;
+		var value5 = this.state.small;
+		if(__map_reserved["table-sm"] != null) _g.setReserved("table-sm",value5); else _g.h["table-sm"] = value5;
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g);
 		if(__map_reserved["class"] != null) _g1.setReserved("class",value); else _g1.h["class"] = value;
 		return doom__$Node_Node_$Impl_$.el("table",_g1,this.children,null);
 	}
 	,api: null
 	,state: null
+	,striped: null
+	,get_striped: function() {
+		return this.state.striped;
+	}
 	,inverse: null
 	,get_inverse: function() {
 		return this.state.inverse;
+	}
+	,bordered: null
+	,get_bordered: function() {
+		return this.state.bordered;
+	}
+	,hover: null
+	,get_hover: function() {
+		return this.state.hover;
+	}
+	,small: null
+	,get_small: function() {
+		return this.state.small;
 	}
 	,update: function(newState) {
 		var oldState = this.state;
