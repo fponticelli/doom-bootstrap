@@ -11,8 +11,8 @@ class ButtonGroup extends Doom {
     return div([
       "class" => [
         "btn-group" => true,
-        "btn-group-sm" => Type.enumEq(size, Small),
-        "btn-group-lg" => Type.enumEq(size, Large)
+        "btn-group-sm" => size == Small,
+        "btn-group-lg" => size == Large
       ],
       "data-toggle" => (toggle == true ? "buttons" : null),
       "role" => "group",

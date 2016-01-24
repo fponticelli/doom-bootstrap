@@ -10,11 +10,11 @@ class Navbar extends Doom {
     return nav([
       "class" => [
         "navbar" => true,
-        "navbar-light" => Type.enumEq(theme, Light),
-        "navbar-dark" => Type.enumEq(theme, Dark),
-        "bg-faded" => Type.enumEq(background, Faded),
-        "bg-inverse" => Type.enumEq(background, Inverse),
-        "bg-primary" => Type.enumEq(background, Primary)
+        "navbar-light" => theme == Light,
+        "navbar-dark"  => theme == Dark,
+        "bg-faded"     => background == Faded,
+        "bg-inverse"   => background == Inverse,
+        "bg-primary"   => background == Primary
     ]
   ], children);
 }

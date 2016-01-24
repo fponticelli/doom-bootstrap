@@ -27,10 +27,10 @@ class Alert extends Doom {
     return div([
       "class" => [
       "alert" => true,
-      "alert-success" => Type.enumEq(Success, type),
-      "alert-info"    => Type.enumEq(Info, type),
-      "alert-warning" => Type.enumEq(Warning, type),
-      "alert-danger"  => Type.enumEq(Danger, type)
+      "alert-success" => Success == type,
+      "alert-info"    => Info == type,
+      "alert-warning" => Warning == type,
+      "alert-danger"  => Danger == type
       ]
     ], children);
   }

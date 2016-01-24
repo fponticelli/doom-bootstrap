@@ -13,7 +13,7 @@ class ButtonGroupVertical extends Doom {
       "data-toggle" => (toggle == true ? "buttons" : null),
       "role" => "group",
       "aria-label" => label,
-      "btn-group-sm" => Type.enumEq(size, Small),
-      "btn-group-lg" => Type.enumEq(size, Large)
+      "btn-group-sm" => size == Small,
+      "btn-group-lg" => size == Large
     ], children);
 }

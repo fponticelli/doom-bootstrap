@@ -10,12 +10,12 @@ class Label extends Doom {
     return span([
       "class" => [
         "label" => true,
-        "label-default" => null == type || Type.enumEq(Default, type),
-        "label-primary" => Type.enumEq(Primary, type),
-        "label-success" => Type.enumEq(Success, type),
-        "label-info"    => Type.enumEq(Info, type),
-        "label-warning" => Type.enumEq(Warning, type),
-        "label-danger"  => Type.enumEq(Danger, type),
+        "label-default" => null == type || Default == type,
+        "label-primary" => Primary == type,
+        "label-success" => Success == type,
+        "label-info"    => Info == type,
+        "label-warning" => Warning == type,
+        "label-danger"  => Danger == type,
         "label-pill"    => isPill == true
       ]
     ], children);

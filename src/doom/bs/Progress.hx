@@ -12,10 +12,10 @@ class Progress extends Doom {
     return progress([
         "class" => [
           "progress"          => true,
-          "progress-success"  => Type.enumEq(style, Success),
-          "progress-info"     => Type.enumEq(style, Info),
-          "progress-warning"  => Type.enumEq(style, Warning),
-          "progress-danger"   => Type.enumEq(style, Danger),
+          "progress-success"  => style == Success,
+          "progress-info"     => style == Info,
+          "progress-warning"  => style == Warning,
+          "progress-danger"   => style == Danger,
           "progress-striped"  => striped,
           "progress-animated" => animated
         ],
