@@ -30,11 +30,12 @@ doom_ComponentBase.prototype = {
 	element: null
 	,node: null
 	,children: null
-	,init: function() {
-		this.element = doom_HtmlNode.toHtml(this.node);
+	,init: function(post) {
+		post.splice(0,0,$bind(this,this.didMount));
+		this.element = doom_HtmlNode.toHtml(this.node,post);
 	}
 	,render: function() {
-		throw new thx_error_AbstractMethod({ fileName : "ComponentBase.hx", lineNumber : 24, className : "doom.ComponentBase", methodName : "render"});
+		throw new thx_error_AbstractMethod({ fileName : "ComponentBase.hx", lineNumber : 25, className : "doom.ComponentBase", methodName : "render"});
 	}
 	,didMount: function() {
 	}
@@ -54,7 +55,7 @@ doom_ComponentBase.prototype = {
 		case 3:
 			break;
 		default:
-			throw new thx_Error("Component " + this.toString() + " must return only element nodes",null,{ fileName : "ComponentBase.hx", lineNumber : 41, className : "doom.ComponentBase", methodName : "updateNode"});
+			throw new thx_Error("Component " + this.toString() + " must return only element nodes",null,{ fileName : "ComponentBase.hx", lineNumber : 42, className : "doom.ComponentBase", methodName : "updateNode"});
 		}
 		var patches = doom__$Node_Node_$Impl_$.diff(oldNode,newNode);
 		doom_HtmlNode.applyPatches(patches,this.element);
@@ -232,14 +233,27 @@ Doom.mount = function(node,ref) {
 	case 3:
 		var comp = node[2];
 		ref.innerHTML = "";
-		comp.init();
+		var post = [];
+		comp.init(post);
 		ref.appendChild(comp.element);
-		thx_Timer.immediate($bind(comp,comp.didMount));
+		var _g = 0;
+		while(_g < post.length) {
+			var f = post[_g];
+			++_g;
+			f();
+		}
 		break;
 	default:
-		var dom = doom_HtmlNode.toHtml(other);
+		var post1 = [];
+		var dom = doom_HtmlNode.toHtml(other,post1);
 		ref.innerHTML = "";
 		ref.appendChild(dom);
+		var _g1 = 0;
+		while(_g1 < post1.length) {
+			var f1 = post1[_g1];
+			++_g1;
+			f1();
+		}
 	}
 };
 Doom.a = function(attributes,children,child) {
@@ -651,13 +665,13 @@ doom_bs_Alert.prototype = $extend(Doom.prototype,{
 		var _g1 = new haxe_ds_StringMap();
 		var _g2 = new haxe_ds_StringMap();
 		if(__map_reserved.alert != null) _g2.setReserved("alert",true); else _g2.h["alert"] = true;
-		var value6 = Type.enumEq(doom_bs_AlertType.Success,this.state.type);
+		var value6 = doom_bs_AlertType.Success == this.state.type;
 		if(__map_reserved["alert-success"] != null) _g2.setReserved("alert-success",value6); else _g2.h["alert-success"] = value6;
-		var value7 = Type.enumEq(doom_bs_AlertType.Info,this.state.type);
+		var value7 = doom_bs_AlertType.Info == this.state.type;
 		if(__map_reserved["alert-info"] != null) _g2.setReserved("alert-info",value7); else _g2.h["alert-info"] = value7;
-		var value8 = Type.enumEq(doom_bs_AlertType.Warning,this.state.type);
+		var value8 = doom_bs_AlertType.Warning == this.state.type;
 		if(__map_reserved["alert-warning"] != null) _g2.setReserved("alert-warning",value8); else _g2.h["alert-warning"] = value8;
-		var value9 = Type.enumEq(doom_bs_AlertType.Danger,this.state.type);
+		var value9 = doom_bs_AlertType.Danger == this.state.type;
 		if(__map_reserved["alert-danger"] != null) _g2.setReserved("alert-danger",value9); else _g2.h["alert-danger"] = value9;
 		var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g2);
 		if(__map_reserved["class"] != null) _g1.setReserved("class",value5); else _g1.h["class"] = value5;
@@ -873,7 +887,7 @@ doom_bs_ButtonGroup.__name__ = ["doom","bs","ButtonGroup"];
 doom_bs_ButtonGroup["with"] = function(state,children) {
 	var apiVar = { };
 	if(state == null) state = { };
-	var stateVar = { size : state.size, toggle : state.toggle, label : state.label};
+	var stateVar = { size : state.size, toggle : state.toggle, label : state.label, className : state.className};
 	return doom_NodeImpl.ComponentNode(new doom_bs_ButtonGroup(apiVar,stateVar,children));
 };
 doom_bs_ButtonGroup.__super__ = Doom;
@@ -882,18 +896,21 @@ doom_bs_ButtonGroup.prototype = $extend(Doom.prototype,{
 		var _g1 = new haxe_ds_StringMap();
 		var _g = new haxe_ds_StringMap();
 		if(__map_reserved["btn-group"] != null) _g.setReserved("btn-group",true); else _g.h["btn-group"] = true;
-		var value1 = Type.enumEq(this.state.size,doom_bs_Size.Small);
+		var value1 = this.state.size == doom_bs_Size.Small;
 		if(__map_reserved["btn-group-sm"] != null) _g.setReserved("btn-group-sm",value1); else _g.h["btn-group-sm"] = value1;
-		var value2 = Type.enumEq(this.state.size,doom_bs_Size.Large);
+		var value2 = this.state.size == doom_bs_Size.Large;
 		if(__map_reserved["btn-group-lg"] != null) _g.setReserved("btn-group-lg",value2); else _g.h["btn-group-lg"] = value2;
+		var key = this.state.className;
+		var value3 = this.state.className != null;
+		if(__map_reserved[key] != null) _g.setReserved(key,value3); else _g.h[key] = value3;
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g);
 		if(__map_reserved["class"] != null) _g1.setReserved("class",value); else _g1.h["class"] = value;
-		var value3 = this.state.toggle == true?doom__$AttributeValue_AttributeValue_$Impl_$.fromString("buttons"):null;
-		if(__map_reserved["data-toggle"] != null) _g1.setReserved("data-toggle",value3); else _g1.h["data-toggle"] = value3;
-		var value4 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("group");
-		if(__map_reserved.role != null) _g1.setReserved("role",value4); else _g1.h["role"] = value4;
-		var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString(this.state.label);
-		if(__map_reserved["aria-label"] != null) _g1.setReserved("aria-label",value5); else _g1.h["aria-label"] = value5;
+		var value4 = this.state.toggle == true?doom__$AttributeValue_AttributeValue_$Impl_$.fromString("buttons"):null;
+		if(__map_reserved["data-toggle"] != null) _g1.setReserved("data-toggle",value4); else _g1.h["data-toggle"] = value4;
+		var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString("group");
+		if(__map_reserved.role != null) _g1.setReserved("role",value5); else _g1.h["role"] = value5;
+		var value6 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString(this.state.label);
+		if(__map_reserved["aria-label"] != null) _g1.setReserved("aria-label",value6); else _g1.h["aria-label"] = value6;
 		return doom__$Node_Node_$Impl_$.el("div",_g1,this.children,null);
 	}
 	,api: null
@@ -909,6 +926,10 @@ doom_bs_ButtonGroup.prototype = $extend(Doom.prototype,{
 	,label: null
 	,get_label: function() {
 		return this.state.label;
+	}
+	,className: null
+	,get_className: function() {
+		return this.state.className;
 	}
 	,update: function(newState) {
 		var oldState = this.state;
@@ -948,9 +969,9 @@ doom_bs_ButtonGroupVertical.prototype = $extend(Doom.prototype,{
 		if(__map_reserved.role != null) _g.setReserved("role",value2); else _g.h["role"] = value2;
 		var value3 = doom__$AttributeValue_AttributeValue_$Impl_$.fromString(this.state.label);
 		if(__map_reserved["aria-label"] != null) _g.setReserved("aria-label",value3); else _g.h["aria-label"] = value3;
-		var value4 = doom__$AttributeValue_AttributeValue_$Impl_$.fromBool(Type.enumEq(this.state.size,doom_bs_Size.Small));
+		var value4 = doom__$AttributeValue_AttributeValue_$Impl_$.fromBool(this.state.size == doom_bs_Size.Small);
 		if(__map_reserved["btn-group-sm"] != null) _g.setReserved("btn-group-sm",value4); else _g.h["btn-group-sm"] = value4;
-		var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromBool(Type.enumEq(this.state.size,doom_bs_Size.Large));
+		var value5 = doom__$AttributeValue_AttributeValue_$Impl_$.fromBool(this.state.size == doom_bs_Size.Large);
 		if(__map_reserved["btn-group-lg"] != null) _g.setReserved("btn-group-lg",value5); else _g.h["btn-group-lg"] = value5;
 		return doom__$Node_Node_$Impl_$.el("div",_g,this.children,null);
 	}
@@ -1334,17 +1355,17 @@ doom_bs_Label.prototype = $extend(Doom.prototype,{
 		var _g1 = new haxe_ds_StringMap();
 		var _g = new haxe_ds_StringMap();
 		if(__map_reserved.label != null) _g.setReserved("label",true); else _g.h["label"] = true;
-		var value1 = null == this.state.type || Type.enumEq(doom_bs_LabelType.Default,this.state.type);
+		var value1 = null == this.state.type || doom_bs_LabelType.Default == this.state.type;
 		if(__map_reserved["label-default"] != null) _g.setReserved("label-default",value1); else _g.h["label-default"] = value1;
-		var value2 = Type.enumEq(doom_bs_LabelType.Primary,this.state.type);
+		var value2 = doom_bs_LabelType.Primary == this.state.type;
 		if(__map_reserved["label-primary"] != null) _g.setReserved("label-primary",value2); else _g.h["label-primary"] = value2;
-		var value3 = Type.enumEq(doom_bs_LabelType.Success,this.state.type);
+		var value3 = doom_bs_LabelType.Success == this.state.type;
 		if(__map_reserved["label-success"] != null) _g.setReserved("label-success",value3); else _g.h["label-success"] = value3;
-		var value4 = Type.enumEq(doom_bs_LabelType.Info,this.state.type);
+		var value4 = doom_bs_LabelType.Info == this.state.type;
 		if(__map_reserved["label-info"] != null) _g.setReserved("label-info",value4); else _g.h["label-info"] = value4;
-		var value5 = Type.enumEq(doom_bs_LabelType.Warning,this.state.type);
+		var value5 = doom_bs_LabelType.Warning == this.state.type;
 		if(__map_reserved["label-warning"] != null) _g.setReserved("label-warning",value5); else _g.h["label-warning"] = value5;
-		var value6 = Type.enumEq(doom_bs_LabelType.Danger,this.state.type);
+		var value6 = doom_bs_LabelType.Danger == this.state.type;
 		if(__map_reserved["label-danger"] != null) _g.setReserved("label-danger",value6); else _g.h["label-danger"] = value6;
 		var value7 = this.state.isPill == true;
 		if(__map_reserved["label-pill"] != null) _g.setReserved("label-pill",value7); else _g.h["label-pill"] = value7;
@@ -1411,15 +1432,15 @@ doom_bs_Navbar.prototype = $extend(Doom.prototype,{
 		var _g1 = new haxe_ds_StringMap();
 		var _g = new haxe_ds_StringMap();
 		if(__map_reserved.navbar != null) _g.setReserved("navbar",true); else _g.h["navbar"] = true;
-		var value1 = Type.enumEq(this.state.theme,doom_bs_NavbarTheme.Light);
+		var value1 = this.state.theme == doom_bs_NavbarTheme.Light;
 		if(__map_reserved["navbar-light"] != null) _g.setReserved("navbar-light",value1); else _g.h["navbar-light"] = value1;
-		var value2 = Type.enumEq(this.state.theme,doom_bs_NavbarTheme.Dark);
+		var value2 = this.state.theme == doom_bs_NavbarTheme.Dark;
 		if(__map_reserved["navbar-dark"] != null) _g.setReserved("navbar-dark",value2); else _g.h["navbar-dark"] = value2;
-		var value3 = Type.enumEq(this.state.background,doom_bs_NavbarBackground.Faded);
+		var value3 = this.state.background == doom_bs_NavbarBackground.Faded;
 		if(__map_reserved["bg-faded"] != null) _g.setReserved("bg-faded",value3); else _g.h["bg-faded"] = value3;
-		var value4 = Type.enumEq(this.state.background,doom_bs_NavbarBackground.Inverse);
+		var value4 = this.state.background == doom_bs_NavbarBackground.Inverse;
 		if(__map_reserved["bg-inverse"] != null) _g.setReserved("bg-inverse",value4); else _g.h["bg-inverse"] = value4;
-		var value5 = Type.enumEq(this.state.background,doom_bs_NavbarBackground.Primary);
+		var value5 = this.state.background == doom_bs_NavbarBackground.Primary;
 		if(__map_reserved["bg-primary"] != null) _g.setReserved("bg-primary",value5); else _g.h["bg-primary"] = value5;
 		var value = doom__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g);
 		if(__map_reserved["class"] != null) _g1.setReserved("class",value); else _g1.h["class"] = value;
@@ -1468,13 +1489,13 @@ doom_bs_Progress.prototype = $extend(Doom.prototype,{
 		var _g1 = new haxe_ds_StringMap();
 		var _g = new haxe_ds_StringMap();
 		if(__map_reserved.progress != null) _g.setReserved("progress",true); else _g.h["progress"] = true;
-		var value1 = Type.enumEq(this.state.style,doom_bs_ProgressStyle.Success);
+		var value1 = this.state.style == doom_bs_ProgressStyle.Success;
 		if(__map_reserved["progress-success"] != null) _g.setReserved("progress-success",value1); else _g.h["progress-success"] = value1;
-		var value2 = Type.enumEq(this.state.style,doom_bs_ProgressStyle.Info);
+		var value2 = this.state.style == doom_bs_ProgressStyle.Info;
 		if(__map_reserved["progress-info"] != null) _g.setReserved("progress-info",value2); else _g.h["progress-info"] = value2;
-		var value3 = Type.enumEq(this.state.style,doom_bs_ProgressStyle.Warning);
+		var value3 = this.state.style == doom_bs_ProgressStyle.Warning;
 		if(__map_reserved["progress-warning"] != null) _g.setReserved("progress-warning",value3); else _g.h["progress-warning"] = value3;
-		var value4 = Type.enumEq(this.state.style,doom_bs_ProgressStyle.Danger);
+		var value4 = this.state.style == doom_bs_ProgressStyle.Danger;
 		if(__map_reserved["progress-danger"] != null) _g.setReserved("progress-danger",value4); else _g.h["progress-danger"] = value4;
 		var value5 = this.state.striped;
 		if(__map_reserved["progress-striped"] != null) _g.setReserved("progress-striped",value5); else _g.h["progress-striped"] = value5;
@@ -2454,24 +2475,6 @@ Type["typeof"] = function(v) {
 		return ValueType.TUnknown;
 	}
 };
-Type.enumEq = function(a,b) {
-	if(a == b) return true;
-	try {
-		if(a[0] != b[0]) return false;
-		var _g1 = 2;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			if(!Type.enumEq(a[i],b[i])) return false;
-		}
-		var e = a.__enum__;
-		if(e != b.__enum__ || e == null) return false;
-	} catch( e1 ) {
-		haxe_CallStack.lastException = e1;
-		return false;
-	}
-	return true;
-};
 var Xml = function(nodeType) {
 	this.nodeType = nodeType;
 	this.children = [];
@@ -2675,14 +2678,14 @@ doom__$EventHandler_EventHandler_$Impl_$.fromElementHandler = function(f) {
 };
 var doom_HtmlNode = function() { };
 doom_HtmlNode.__name__ = ["doom","HtmlNode"];
-doom_HtmlNode.toHtml = function(node) {
+doom_HtmlNode.toHtml = function(node,post) {
 	var _g = node;
 	switch(_g[1]) {
 	case 0:
 		var children = _g[4];
 		var attributes = _g[3];
 		var name = _g[2];
-		return doom_HtmlNode.createElement(name,attributes,children);
+		return doom_HtmlNode.createElement(name,attributes,children,post);
 	case 1:
 		var text = _g[2];
 		return dots_Html.parse(text);
@@ -2691,12 +2694,11 @@ doom_HtmlNode.toHtml = function(node) {
 		return window.document.createTextNode(text1);
 	case 3:
 		var comp = _g[2];
-		comp.init();
-		thx_Timer.immediate($bind(comp,comp.didMount));
+		comp.init(post);
 		return comp.element;
 	}
 };
-doom_HtmlNode.createElement = function(name,attributes,children) {
+doom_HtmlNode.createElement = function(name,attributes,children,post) {
 	var colonPos = name.indexOf(":");
 	var el;
 	if(colonPos > 0) {
@@ -2706,7 +2708,7 @@ doom_HtmlNode.createElement = function(name,attributes,children) {
 		var _this = Doom.namespaces;
 		if(__map_reserved[prefix] != null) tmp = _this.getReserved(prefix); else tmp = _this.h[prefix];
 		var ns = tmp;
-		if(null == ns) throw new thx_Error("element prefix \"" + prefix + "\" is not associated to any namespace. Add the right namespace to Doom.namespaces.",null,{ fileName : "HtmlNode.hx", lineNumber : 35, className : "doom.HtmlNode", methodName : "createElement"});
+		if(null == ns) throw new thx_Error("element prefix \"" + prefix + "\" is not associated to any namespace. Add the right namespace to Doom.namespaces.",null,{ fileName : "HtmlNode.hx", lineNumber : 34, className : "doom.HtmlNode", methodName : "createElement"});
 		el = window.document.createElementNS(ns,name1);
 	} else el = window.document.createElement(name);
 	var tmp1 = attributes.keys();
@@ -2736,7 +2738,7 @@ doom_HtmlNode.createElement = function(name,attributes,children) {
 	while(_g < children.length) {
 		var child = children[_g];
 		++_g;
-		var n = doom_HtmlNode.toHtml(child);
+		var n = doom_HtmlNode.toHtml(child,post);
 		if(null != n) el.appendChild(n);
 	}
 	return el;
@@ -2774,14 +2776,14 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 		} else {
 			var newComp1 = patch[3];
 			var oldComp1 = patch[2];
-			newComp1.element = oldComp1.element;
-			thx_Timer.immediate($bind(newComp1,newComp1.didMount));
+			oldComp1.didUnmount();
+			doom_HtmlNode.applyPatch(doom_Patch.MigrateElementToComponent(newComp1),node);
 		}
 		break;
 	case 6:
 		var comp1 = patch[2];
 		comp1.element = node;
-		comp1.didRefresh();
+		comp1.didMount();
 		break;
 	case 0:
 		switch(_g) {
@@ -2790,7 +2792,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			node.appendChild(window.document.createTextNode(text));
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 154, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 1:
@@ -2800,7 +2802,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			node.appendChild(dots_Html.parse(text1));
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 154, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 2:
@@ -2809,22 +2811,36 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			var name = patch[2];
 			var children = patch[4];
 			var attributes = patch[3];
-			var el = doom_HtmlNode.createElement(name,attributes,children);
+			var post = [];
+			var el = doom_HtmlNode.createElement(name,attributes,children,post);
 			node.appendChild(el);
+			var _g1 = 0;
+			while(_g1 < post.length) {
+				var f = post[_g1];
+				++_g1;
+				f();
+			}
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 154, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 3:
 		switch(_g) {
 		case 1:
 			var comp2 = patch[2];
-			comp2.init();
+			var post1 = [];
+			comp2.init(post1);
 			node.appendChild(comp2.element);
+			var _g11 = 0;
+			while(_g11 < post1.length) {
+				var f1 = post1[_g11];
+				++_g11;
+				f1();
+			}
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 154, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 7:
@@ -2837,7 +2853,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			node.removeAttribute(name1);
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 154, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 9:
@@ -2864,7 +2880,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			}
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 154, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 10:
@@ -2872,15 +2888,28 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 		var attributes1 = patch[3];
 		var name3 = patch[2];
 		var parent = node.parentNode;
-		var el1 = doom_HtmlNode.createElement(name3,attributes1,children1);
+		var post2 = [];
+		var el1 = doom_HtmlNode.createElement(name3,attributes1,children1,post2);
 		parent.replaceChild(el1,node);
+		var _g12 = 0;
+		while(_g12 < post2.length) {
+			var f2 = post2[_g12];
+			++_g12;
+			f2();
+		}
 		break;
 	case 13:
 		var comp3 = patch[2];
 		var parent1 = node.parentNode;
-		comp3.init();
-		thx_Timer.immediate($bind(comp3,comp3.didMount));
+		var post3 = [];
+		comp3.init(post3);
 		parent1.replaceChild(comp3.element,node);
+		var _g13 = 0;
+		while(_g13 < post3.length) {
+			var f3 = post3[_g13];
+			++_g13;
+			f3();
+		}
 		break;
 	case 11:
 		var text2 = patch[2];
@@ -2903,7 +2932,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			if(node.parentNode.nodeName == "TEXTAREA") node.parentNode.value = newcontent1; else node.nodeValue = newcontent1;
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 154, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	case 15:
@@ -2915,7 +2944,7 @@ doom_HtmlNode.applyPatch = function(patch,node) {
 			if(null != n) doom_HtmlNode.applyPatches(patches,n);
 			break;
 		default:
-			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 146, className : "doom.HtmlNode", methodName : "applyPatch"});
+			throw new thx_Error("cannot apply patch " + Std.string(p) + " on " + Std.string(node),null,{ fileName : "HtmlNode.hx", lineNumber : 154, className : "doom.HtmlNode", methodName : "applyPatch"});
 		}
 		break;
 	}
@@ -2972,21 +3001,24 @@ doom__$Node_Node_$Impl_$.diffAttributes = function(a,b) {
 		return thx__$Set_Set_$Impl_$.map(_e,f);
 	};
 	var _e1 = common;
-	var _e2 = (function(predicate) {
+	var tmp1 = thx__$Set_Set_$Impl_$.map((function(predicate) {
 		return thx__$Set_Set_$Impl_$.filter(_e1,predicate);
 	})(function(_) {
 		return doom__$AttributeValue_AttributeValue_$Impl_$.notEqualsTo(__map_reserved[_] != null?a.getReserved(_):a.h[_],__map_reserved[_] != null?b.getReserved(_):b.h[_]);
+	}),function(k) {
+		var v = __map_reserved[k] != null?b.getReserved(k):b.h[k];
+		if(null == v) return doom_Patch.RemoveAttribute(k); else return doom_Patch.SetAttribute(k,v);
 	});
-	var tmp1 = (function(f1) {
-		return thx__$Set_Set_$Impl_$.map(_e2,f1);
+	var _e2 = added;
+	var _e3 = (function(predicate1) {
+		return thx__$Set_Set_$Impl_$.filter(_e2,predicate1);
 	})(function(_1) {
-		return doom_Patch.SetAttribute(_1,__map_reserved[_1] != null?b.getReserved(_1):b.h[_1]);
+		return (__map_reserved[_1] != null?b.getReserved(_1):b.h[_1]) != null;
 	});
-	var _e3 = added;
 	return tmp(function(_2) {
 		return doom_Patch.RemoveAttribute(_2);
-	}).concat(tmp1).concat((function(f2) {
-		return thx__$Set_Set_$Impl_$.map(_e3,f2);
+	}).concat(tmp1).concat((function(f1) {
+		return thx__$Set_Set_$Impl_$.map(_e3,f1);
 	})(function(_3) {
 		return doom_Patch.SetAttribute(_3,__map_reserved[_3] != null?b.getReserved(_3):b.h[_3]);
 	}));
@@ -3039,25 +3071,37 @@ doom__$Node_Node_$Impl_$.diffNodes = function(a,b) {
 	return result;
 };
 doom__$Node_Node_$Impl_$.diff = function(this1,that) {
+	var destroySubComponents = null;
+	destroySubComponents = function(node) {
+		switch(node[1]) {
+		case 3:
+			var comp = node[2];
+			var tmp1 = doom_Patch.DestroyComponent(comp);
+			return [tmp1].concat(destroySubComponents(comp.node));
+		default:
+			return [];
+		}
+	};
+	var destroySubComponents1 = destroySubComponents;
 	var p;
 	switch(this1[1]) {
 	case 3:
 		switch(that[1]) {
 		case 3:
 			var old = this1[2];
-			var comp = that[2];
-			p = [doom_Patch.MigrateComponentToComponent(old,comp)];
+			var comp1 = that[2];
+			p = [doom_Patch.MigrateComponentToComponent(old,comp1)];
 			break;
 		default:
-			var comp1 = this1[2];
-			p = [doom_Patch.DestroyComponent(comp1)];
+			var comp2 = this1[2];
+			p = destroySubComponents1(this1);
 		}
 		break;
 	default:
 		switch(that[1]) {
 		case 3:
-			var comp2 = that[2];
-			p = [doom_Patch.MigrateElementToComponent(comp2)];
+			var comp3 = that[2];
+			p = [doom_Patch.MigrateElementToComponent(comp3)];
 			break;
 		default:
 			p = [];
@@ -3069,8 +3113,8 @@ doom__$Node_Node_$Impl_$.diff = function(this1,that) {
 		switch(that[1]) {
 		case 3:
 			var old1 = this1[2];
-			var comp3 = that[2];
-			tmp = doom__$Node_Node_$Impl_$.diff(old1.node,comp3.node);
+			var comp4 = that[2];
+			tmp = doom__$Node_Node_$Impl_$.diff(old1.node,comp4.node);
 			break;
 		case 0:
 			var c2 = that[4];
@@ -3091,8 +3135,8 @@ doom__$Node_Node_$Impl_$.diff = function(this1,that) {
 	case 0:
 		switch(that[1]) {
 		case 3:
-			var comp4 = that[2];
-			tmp = [doom_Patch.ReplaceWithComponent(comp4)];
+			var comp5 = that[2];
+			tmp = [doom_Patch.ReplaceWithComponent(comp5)];
 			break;
 		case 0:
 			var n1 = this1[2];
@@ -3122,8 +3166,8 @@ doom__$Node_Node_$Impl_$.diff = function(this1,that) {
 	case 2:
 		switch(that[1]) {
 		case 3:
-			var comp5 = that[2];
-			tmp = [doom_Patch.ReplaceWithComponent(comp5)];
+			var comp6 = that[2];
+			tmp = [doom_Patch.ReplaceWithComponent(comp6)];
 			break;
 		case 0:
 			var c23 = that[4];
@@ -3134,19 +3178,26 @@ doom__$Node_Node_$Impl_$.diff = function(this1,that) {
 		case 2:
 			var t11 = this1[2];
 			var t21 = that[2];
-			if(t11 != t21) tmp = [doom_Patch.ContentChanged(t21)]; else tmp = [];
+			if(t11 != t21) tmp = [doom_Patch.ContentChanged(t21)]; else {
+				var a = this1[2];
+				var b = that[2];
+				if(a == b) tmp = []; else {
+					var t4 = that[2];
+					tmp = [doom_Patch.ReplaceWithText(t4)];
+				}
+			}
 			break;
 		case 1:
-			var t4 = that[2];
-			tmp = [doom_Patch.ReplaceWithRaw(t4)];
+			var t5 = that[2];
+			tmp = [doom_Patch.ReplaceWithRaw(t5)];
 			break;
 		}
 		break;
-	default:
+	case 1:
 		switch(that[1]) {
 		case 3:
-			var comp6 = that[2];
-			tmp = [doom_Patch.ReplaceWithComponent(comp6)];
+			var comp7 = that[2];
+			tmp = [doom_Patch.ReplaceWithComponent(comp7)];
 			break;
 		case 0:
 			var c24 = that[4];
@@ -3155,12 +3206,38 @@ doom__$Node_Node_$Impl_$.diff = function(this1,that) {
 			tmp = [doom_Patch.ReplaceWithElement(n23,a24,c24)];
 			break;
 		case 2:
-			var t5 = that[2];
-			tmp = [doom_Patch.ReplaceWithText(t5)];
+			var t6 = that[2];
+			tmp = [doom_Patch.ReplaceWithText(t6)];
 			break;
 		case 1:
-			var t6 = that[2];
-			tmp = [doom_Patch.ReplaceWithRaw(t6)];
+			var a3 = this1[2];
+			var b1 = that[2];
+			if(a3 == b1) tmp = []; else {
+				var t7 = that[2];
+				tmp = [doom_Patch.ReplaceWithRaw(t7)];
+			}
+			break;
+		}
+		break;
+	default:
+		switch(that[1]) {
+		case 3:
+			var comp8 = that[2];
+			tmp = [doom_Patch.ReplaceWithComponent(comp8)];
+			break;
+		case 0:
+			var c25 = that[4];
+			var a25 = that[3];
+			var n24 = that[2];
+			tmp = [doom_Patch.ReplaceWithElement(n24,a25,c25)];
+			break;
+		case 2:
+			var t8 = that[2];
+			tmp = [doom_Patch.ReplaceWithText(t8)];
+			break;
+		case 1:
+			var t9 = that[2];
+			tmp = [doom_Patch.ReplaceWithRaw(t9)];
 			break;
 		}
 	}
@@ -3639,7 +3716,7 @@ doom_XmlNode.attributesToString = function(attributes) {
 	while(tmp.hasNext()) {
 		var key = tmp.next();
 		var value = __map_reserved[key] != null?attributes.getReserved(key):attributes.h[key];
-		switch(value[1]) {
+		if(null == value) buf += " " + key; else switch(value[1]) {
 		case 1:
 			var s = value[2];
 			if(s != null && s.length > 0) buf += " " + key + "=\"" + StringTools.replace(s,"\"","&quot;") + "\"";
@@ -4941,6 +5018,11 @@ thx_Arrays.appendIf = function(array,cond,element) {
 	if(cond) array.push(element);
 	return array;
 };
+thx_Arrays.monoid = function() {
+	return { zero : [], append : function(a,b) {
+		return a.concat(b);
+	}};
+};
 thx_Arrays.after = function(array,element) {
 	return array.slice(thx__$ReadonlyArray_ReadonlyArray_$Impl_$.indexOf(array,element) + 1);
 };
@@ -5152,6 +5234,14 @@ thx_Arrays.find = function(array,predicate) {
 	}
 	return null;
 };
+thx_Arrays.findOption = function(array,predicate) {
+	var tmp = HxOverrides.iter(array);
+	while(tmp.hasNext()) {
+		var element = tmp.next();
+		if(predicate(element)) return haxe_ds_Option.Some(element);
+	}
+	return haxe_ds_Option.None;
+};
 thx_Arrays.findIndex = function(array,predicate) {
 	var _g1 = 0;
 	var _g = array.length;
@@ -5204,7 +5294,7 @@ thx_Arrays.spanByIndex = function(arr,spanKey) {
 	while(_g1 < _g) {
 		var i = _g1++;
 		var k = spanKey(i);
-		if(k == null) throw new thx_Error("spanKey function returned null for index " + i,null,{ fileName : "Arrays.hx", lineNumber : 465, className : "thx.Arrays", methodName : "spanByIndex"});
+		if(k == null) throw new thx_Error("spanKey function returned null for index " + i,null,{ fileName : "Arrays.hx", lineNumber : 486, className : "thx.Arrays", methodName : "spanByIndex"});
 		if(cur == k) acc[j].push(arr[i]); else {
 			cur = k;
 			++j;
@@ -7391,7 +7481,13 @@ thx_Options.flatMap = function(option,callback) {
 	}
 };
 thx_Options.join = function(option) {
-	return thx_Options.flatMap(option,thx_Functions.identity);
+	switch(option[1]) {
+	case 1:
+		return haxe_ds_Option.None;
+	case 0:
+		var v = option[2];
+		return v;
+	}
 };
 thx_Options.foldLeft = function(option,b,f) {
 	switch(option[1]) {
@@ -7464,6 +7560,19 @@ thx_Options.any = function(option,f) {
 	case 0:
 		var v = option[2];
 		return f(v);
+	}
+};
+thx_Options.traverseValidation = function(option,f) {
+	switch(option[1]) {
+	case 0:
+		var v = option[2];
+		return thx__$Validation_Validation_$Impl_$.ap(f(v),thx_Either.Right(function(v1) {
+			return haxe_ds_Option.Some(v1);
+		}),function(e1,e2) {
+			throw new js__$Boot_HaxeError("Unreachable");
+		});
+	case 1:
+		return thx_Either.Right(haxe_ds_Option.None);
 	}
 };
 thx_Options.toSuccess = function(option,error) {
