@@ -1,8 +1,8 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class CloseButton extends Doom {
+class CloseButton extends doom.html.Component<CloseButtonProps> {
   @:api          var click : Void -> Void;
   @:state(false) var dismissAlert : Bool;
 
@@ -17,4 +17,8 @@ class CloseButton extends Doom {
         "aria-hidden" => (dismissAlert == true ? "true" : null)
       ], "×")
     ]);
+}
+
+typedef CloseButtonProps = {
+
 }

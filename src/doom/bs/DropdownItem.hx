@@ -1,8 +1,8 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class DropdownItem extends Doom {
+class DropdownItem extends doom.html.Component<DropdownItemProps> {
   @:api          var click : Void -> Void;
   @:state(false) var disabled : Bool;
 
@@ -13,4 +13,8 @@ class DropdownItem extends Doom {
       "disabled" => disabled == true,
       "click" => click
     ], children);
+}
+
+typedef DropdownItemProps = {
+
 }

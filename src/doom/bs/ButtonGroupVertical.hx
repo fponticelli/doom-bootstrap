@@ -1,8 +1,8 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class ButtonGroupVertical extends Doom {
+class ButtonGroupVertical extends doom.html.Component<ButtonGroupVerticalProps> {
   @:state(Default) var size : Size;
   @:state(false)   var toggle : Bool;
   @:state(opt)     var label : String;
@@ -16,4 +16,8 @@ class ButtonGroupVertical extends Doom {
       "btn-group-sm" => size == Small,
       "btn-group-lg" => size == Large
     ], children);
+}
+
+typedef ButtonGroupVerticalProps = {
+
 }

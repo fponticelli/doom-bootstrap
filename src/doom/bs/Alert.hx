@@ -1,16 +1,20 @@
 package doom.bs;
 
-import Doom.*;
-import doom.Node;
+import doom.html.Html.*;
+import doom.core.VNodes;
 using thx.Objects;
+using thx.Nulls;
 
-class Alert extends Doom {
-  @:state(false) var dismissable : Bool;
-  @:state        var type : AlertType;
+class Alert extends doom.html.Component<AlertProps> {
+  public static function with(type : AlertType, ?options : { ?dismissable : Bool }, children : VNodes)
+    return new Alert({
+      type : type,
+      dismissable : options.dismissable.or(false)
+    }, children);
 
   override function render() {
-    var children = [];
-    if(dismissable) {
+    var children : VNodes = [];
+    if(props.dismissable == true) {
       children.push(
         button([
           "type" => "button",
@@ -27,17 +31,17 @@ class Alert extends Doom {
     return div([
       "class" => [
       "alert" => true,
-      "alert-success" => Success == type,
-      "alert-info"    => Info == type,
-      "alert-warning" => Warning == type,
-      "alert-danger"  => Danger == type
+      "alert-success" => Success == props.type,
+      "alert-info"    => Info    == props.type,
+      "alert-warning" => Warning == props.type,
+      "alert-danger"  => Danger  == props.type
       ]
     ], children);
   }
 
   override function didMount() {
     // TODO, is the JS needed always?
-    if(dismissable == true)
+    if(props.dismissable == true)
       untyped __js__("$")(element).alert();
   }
 }
@@ -56,4 +60,9 @@ enum AlertType {
   Info;
   Warning;
   Danger;
+}
+
+typedef AlertProps = {
+  ?dismissable : Bool,
+  type : AlertType
 }

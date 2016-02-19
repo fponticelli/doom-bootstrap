@@ -1,10 +1,14 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class InputGroup extends Doom {
+class InputGroup extends doom.html.Component<InputGroupProps> {
   override function render()
     return div([
       "class" => "input-group"
     ], children);
+}
+
+typedef InputGroupProps = {
+
 }

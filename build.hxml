@@ -4,23 +4,23 @@
 -lib jQueryExtern
 -lib thx.core
 
-BS
-doom.bs.Alert
-doom.bs.Button
-doom.bs.ButtonGroup
-doom.bs.ButtonGroupVertical
-doom.bs.ButtonToolbar
-doom.bs.CloseButton
-doom.bs.Container
-doom.bs.Dropdown
-doom.bs.DropdownItem
-doom.bs.DropdownMenu
-doom.bs.InputGroup
-doom.bs.Jumbotron
-doom.bs.Label
-doom.bs.Navbar
-doom.bs.RadioButton
-doom.bs.Size
+doom.bs.BS
+# doom.bs.Alert
+# doom.bs.Button
+# doom.bs.ButtonGroup
+# doom.bs.ButtonGroupVertical
+# doom.bs.ButtonToolbar
+# doom.bs.CloseButton
+# doom.bs.Container
+# doom.bs.Dropdown
+# doom.bs.DropdownItem
+# doom.bs.DropdownMenu
+# doom.bs.InputGroup
+# doom.bs.Jumbotron
+# doom.bs.Label
+# doom.bs.Navbar
+# doom.bs.RadioButton
+# doom.bs.Size
 
 --each
 

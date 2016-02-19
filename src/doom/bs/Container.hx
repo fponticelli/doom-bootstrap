@@ -1,8 +1,8 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class Container extends Doom {
+class Container extends doom.html.Component<ContainerProps> {
   @:state(opt) var className : String;
 
   override function render() : Node {
@@ -13,4 +13,8 @@ class Container extends Doom {
       ]
     ], children);
   }
+}
+
+typedef ContainerProps = {
+
 }

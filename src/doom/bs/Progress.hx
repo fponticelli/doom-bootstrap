@@ -1,8 +1,8 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class Progress extends Doom {
+class Progress extends doom.html.Component<ProgressProps> {
   @:state          var value : Float;
   @:state          var max : Float;
   @:state(Default) var style : ProgressStyle;
@@ -32,4 +32,8 @@ enum ProgressStyle {
   Info;
   Warning;
   Danger;
+}
+
+typedef ProgressProps = {
+
 }

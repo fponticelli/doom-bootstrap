@@ -1,8 +1,7 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 import doom.bs.Button.ButtonStyle;
-// import doom.Node;
 using thx.Objects;
 
 class RadioButtonGroup<T> extends doom.Component<RadioButtonGroupApi<T>, RadioButtonGroupState<T>> {

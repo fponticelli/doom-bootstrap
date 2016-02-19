@@ -1,9 +1,8 @@
 package doom.bs;
 
-import Doom.*;
-import doom.Node;
+import doom.html.Html.*;
 
-class Table extends Doom {
+class Table extends doom.html.Component<TableProps> {
   public static function responsive(?options : { ?striped : Bool, ?inverse : Bool, ?bordered : Bool, ?hover : Bool, ?small : Bool, ?reflow : Bool }, ?nodes : Nodes)
     return div(["class" => "responsive-table"], with(options, nodes));
 
@@ -25,4 +24,8 @@ class Table extends Doom {
         "table-reflow" => reflow
       ]
     ], children);
+}
+
+typedef TableProps = {
+
 }

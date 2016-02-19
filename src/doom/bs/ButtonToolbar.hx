@@ -1,8 +1,8 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class ButtonToolbar extends Doom {
+class ButtonToolbar extends doom.html.Component<ButtonToolbarProps> {
   @:state(opt) var label : String;
 
   override function render()
@@ -11,4 +11,8 @@ class ButtonToolbar extends Doom {
       "role" => "toolbar",
       "aria-label" => label
     ], children);
+}
+
+typedef ButtonToolbarProps = {
+
 }

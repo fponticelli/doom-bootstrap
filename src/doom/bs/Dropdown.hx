@@ -1,8 +1,8 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class Dropdown extends Doom {
+class Dropdown extends doom.html.Component<DropdownProps> {
   @:state(false) var open : Bool;
 
   override function render()
@@ -10,4 +10,8 @@ class Dropdown extends Doom {
       "class" => "dropdown",
       "open" => open == true,
     ], children);
+}
+
+typedef DropdownProps = {
+
 }

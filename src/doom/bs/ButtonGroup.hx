@@ -1,8 +1,8 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class ButtonGroup extends Doom {
+class ButtonGroup extends doom.html.Component<ButtonGroupProps> {
   @:state(Default) var size : Size;
   @:state(false)   var toggle : Bool;
   @:state(opt)     var label : String;
@@ -20,4 +20,8 @@ class ButtonGroup extends Doom {
       "role" => "group",
       "aria-label" => label
     ], children);
+}
+
+typedef ButtonGroupProps = {
+
 }

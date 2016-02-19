@@ -1,9 +1,9 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 import doom.bs.Button.ButtonStyle;
 
-class RadioButton extends Doom {
+class RadioButton extends doom.html.Component<RadioButtonProps> {
   @:api            var click : Void -> Void;
   @:state(opt)     var name : String;
   @:state          var style : ButtonStyle;
@@ -85,6 +85,10 @@ class RadioButton extends Doom {
 ?dropdownToggle : Bool,
 ?size: Size
 */
+}
+
+typedef RadioButtonProps = {
+
 }
 /*
 typedef RadioButtonGroupItemState<T> = {

@@ -1,8 +1,8 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class Navbar extends Doom {
+class Navbar extends doom.html.Component<NavbarProps> {
   @:state(opt) var theme : NavbarTheme;
   @:state(opt) var background : NavbarBackground;
 
@@ -28,4 +28,8 @@ enum NavbarBackground {
   Faded;
   Inverse;
   Primary;
+}
+
+typedef NavbarProps = {
+
 }

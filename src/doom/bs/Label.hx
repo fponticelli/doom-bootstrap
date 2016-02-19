@@ -1,8 +1,8 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 
-class Label extends Doom {
+class Label extends doom.html.Component<LabelProps> {
   @:state        var type : LabelType;
   @:state(false) var isPill : Bool;
 
@@ -28,4 +28,8 @@ enum LabelType {
   Info;
   Warning;
   Danger;
+}
+
+typedef LabelProps = {
+
 }
