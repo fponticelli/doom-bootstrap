@@ -1,22 +1,27 @@
 package doom.bs;
 
 import doom.html.Html.*;
+import doom.core.VNodes;
+using thx.Nulls;
 
 class Label extends doom.html.Component<LabelProps> {
-  @:state        var type : LabelType;
-  @:state(false) var isPill : Bool;
+  public static function with(type : LabelType, ?options : { ?isPill : Bool }, children : VNodes)
+    return new Label({
+      type : type,
+      isPill : options.isPill.or(false)
+    }, children).asNode();
 
   override function render()
     return span([
       "class" => [
         "label" => true,
-        "label-default" => null == type || Default == type,
-        "label-primary" => Primary == type,
-        "label-success" => Success == type,
-        "label-info"    => Info == type,
-        "label-warning" => Warning == type,
-        "label-danger"  => Danger == type,
-        "label-pill"    => isPill == true
+        "label-default" => null == props.type || Default == props.type,
+        "label-primary" => Primary == props.type,
+        "label-success" => Success == props.type,
+        "label-info"    => Info == props.type,
+        "label-warning" => Warning == props.type,
+        "label-danger"  => Danger == props.type,
+        "label-pill"    => props.isPill == true
       ]
     ], children);
 }
@@ -31,5 +36,6 @@ enum LabelType {
 }
 
 typedef LabelProps = {
-
+  type : LabelType,
+  ?isPill : Bool
 }

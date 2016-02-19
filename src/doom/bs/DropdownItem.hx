@@ -1,20 +1,26 @@
 package doom.bs;
 
 import doom.html.Html.*;
+import doom.core.VNodes;
+using thx.Nulls;
 
 class DropdownItem extends doom.html.Component<DropdownItemProps> {
-  @:api          var click : Void -> Void;
-  @:state(false) var disabled : Bool;
+  public static function with(click : Void -> Void, ?options : { ?disabled : Bool }, children : VNodes)
+    return new DropdownItem({
+      click : click,
+      disabled : options.disabled.or(false)
+    }, children).asNode();
 
-  override function render() : Node
+  override function render()
     return button([
       "class" => "dropdown-item",
       "type" => "button",
-      "disabled" => disabled == true,
-      "click" => click
+      "disabled" => props.disabled == true,
+      "click" => props.click
     ], children);
 }
 
 typedef DropdownItemProps = {
-
+  click : Void -> Void,
+  ?disabled : Bool
 }

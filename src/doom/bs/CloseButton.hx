@@ -1,24 +1,32 @@
 package doom.bs;
 
 import doom.html.Html.*;
+using thx.Nulls;
 
 class CloseButton extends doom.html.Component<CloseButtonProps> {
-  @:api          var click : Void -> Void;
-  @:state(false) var dismissAlert : Bool;
+  public static function with(click : Void -> Void, ?options : CloseButtonOptions)
+    return new CloseButton({
+      click : click,
+      dismissAlert : options.dismissAlert.or(false)
+    }).asNode();
 
   override function render()
     return button([
       "class" => "close",
-      "data-dismiss" => (dismissAlert == true ? "alert" : null),
+      "data-dismiss" => (props.dismissAlert == true ? "alert" : null),
       "aria-label" => "Close",
-      "click" => api.click
+      "click" => props.click
     ], [
       span([
-        "aria-hidden" => (dismissAlert == true ? "true" : null)
+        "aria-hidden" => (props.dismissAlert == true ? "true" : null)
       ], "×")
     ]);
 }
 
-typedef CloseButtonProps = {
+typedef CloseButtonOptions = {
+  ?dismissAlert : Bool
+}
 
+typedef CloseButtonProps = {>CloseButtonOptions,
+  click : Void -> Void
 }

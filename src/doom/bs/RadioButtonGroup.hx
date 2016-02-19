@@ -1,55 +1,52 @@
 package doom.bs;
 
 import doom.html.Html.*;
+import doom.core.VNode;
+import doom.core.VNodes;
 import doom.bs.Button.ButtonStyle;
+import doom.bs.RadioButton;
 using thx.Objects;
+using thx.Nulls;
 
-class RadioButtonGroup<T> extends doom.Component<RadioButtonGroupApi<T>, RadioButtonGroupState<T>> {
-  public static function with<T>(change : T -> Void, values : Array<RadioButtonGroupItemState<T>>, ?state : RadioButtonGroupStateOptions) : doom.Node {
-    if(null == state)
-      state = {};
-    return new RadioButtonGroup({
-      change : change
-    }, state.merge({
-      values : values
-    }));
-  }
+class RadioButtonGroup<T> extends doom.html.Component<RadioButtonGroupProps<T>> {
+  public static function with<T>(change : T -> Void, values : Array<RadioButtonGroupItemState<T>>, ?options : RadioButtonGroupStateOptions)
+    return new RadioButtonGroup(
+      options.merge({
+        change : change,
+        values : values
+      })
+    ).asNode();
 
   override function render() {
     var itemOptions = {
-          name : state.name,
-          // block : state.block,
-          disabled : state.disabled,
-          outline : state.outline,
-          size : state.size
+          name : props.name,
+          // block : props.block,
+          disabled : props.disabled,
+          outline : props.outline,
+          size : props.size
         };
-    return ButtonGroup.with({ toggle : true }, state.values.map(function(value) : Node {
+    return ButtonGroup.with({ toggle : true }, props.values.map(function(value) : VNode {
       var style = value.style;
       if(null == style)
-        style = state.style;
+        style = props.style;
       if(null == style)
         style = Primary;
-      var itemState = itemOptions.merge({
-        active : value.active
-      });
-      return RadioButton.with(api.change.bind(value.value), style, itemState, value.label);
+      var itemOptions : RadioButtonOptions = itemOptions.merge({ active : value.active });
+      return RadioButton.with(props.change.bind(value.value), style, itemOptions, value.label);
     }));
   }
 }
 
 
 typedef RadioButtonGroupItemState<T> = {
-  label : Node,
+  label : VNodes,
   value : T,
   ?active : Bool,
   ?style : ButtonStyle
 }
 
-typedef RadioButtonGroupApi<T> = {
-  change : T -> Void
-}
-
-typedef RadioButtonGroupState<T> = {> RadioButtonGroupStateOptions,
+typedef RadioButtonGroupProps<T> = {> RadioButtonGroupStateOptions,
+  change : T -> Void,
   values : Array<RadioButtonGroupItemState<T>>
 }
 
