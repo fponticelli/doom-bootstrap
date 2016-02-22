@@ -25,7 +25,7 @@ class RadioButtonGroup<T> extends doom.html.Component<RadioButtonGroupProps<T>> 
           outline : props.outline,
           size : props.size
         };
-    return ButtonGroup.with({ toggle : true }, props.values.map(function(value) : VNode {
+    return div(ButtonGroup.with({ toggle : true }, props.values.map(function(value) : VNode {
       var style = value.style;
       if(null == style)
         style = props.style;
@@ -33,7 +33,7 @@ class RadioButtonGroup<T> extends doom.html.Component<RadioButtonGroupProps<T>> 
         style = Primary;
       var itemOptions : RadioButtonOptions = itemOptions.merge({ active : value.active });
       return RadioButton.with(props.change.bind(value.value), style, itemOptions, value.label);
-    }));
+    })));
   }
 }
 

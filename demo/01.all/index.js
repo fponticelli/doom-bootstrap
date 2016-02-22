@@ -250,12 +250,10 @@ doom_html_Render.prototype = {
 	,nodeToComponent: null
 	,componentToNode: null
 	,mount: function(node,parent) {
-		console.log("** mount");
 		parent.innerHTML = "";
 		var post = [];
 		var n = this.generateNode(node,post);
 		parent.appendChild(n);
-		console.log("** mount: post (" + post.length + ")");
 		var _g = 0;
 		while(_g < post.length) {
 			var f = post[_g];
@@ -265,7 +263,6 @@ doom_html_Render.prototype = {
 	}
 	,apply: function(node,dom) {
 		var post = [];
-		console.log("** apply");
 		this.applyToNode(node,dom,dom.parentElement,post,false);
 		var _g = 0;
 		while(_g < post.length) {
@@ -275,10 +272,8 @@ doom_html_Render.prototype = {
 		}
 	}
 	,generate: function(node) {
-		console.log("** generate");
 		var post = [];
 		var dom = this.generateNode(node,post);
-		console.log("** generate: post (" + post.length + ")");
 		var _g = 0;
 		while(_g < post.length) {
 			var f = post[_g];
@@ -288,9 +283,7 @@ doom_html_Render.prototype = {
 		return dom;
 	}
 	,applyToNode: function(node,dom,parent,post,tryUnmount) {
-		console.log("** applyToNode, has node? " + Std.string(null != node) + ", has dom? " + Std.string(null != dom) + ", tryUnmount? " + (tryUnmount == null?"null":"" + tryUnmount));
 		if(null == node && null == dom) return null; else if(null == node) {
-			console.log("** applyToNode: REMOVE CHILD");
 			if(tryUnmount) this.unmountDomComponent(dom);
 			parent.removeChild(dom);
 			return null;
@@ -326,7 +319,6 @@ doom_html_Render.prototype = {
 	}
 	,applyNodeToNode: function(srcDom,dstDom,parent,tryUnmount) {
 		var _g = this;
-		console.log("** applyNodeToNode");
 		if(null == srcDom && null == dstDom) return null; else if(null == srcDom) {
 			parent.removeChild(dstDom);
 			return null;
@@ -372,14 +364,13 @@ doom_html_Render.prototype = {
 	}
 	,applyComponentToNode: function(newComp,dom,parent,post) {
 		var oldComp = this.nodeToComponent.h[dom.__id__];
-		console.log("** applyComponentToNode, has oldComp? " + Std.string(null != oldComp) + ", are same type? " + Std.string(thx_Types.sameType(newComp,oldComp)));
 		if(null != oldComp) {
 			if(thx_Types.sameType(newComp,oldComp)) {
 				this.migrate(newComp,oldComp);
 				oldComp.willUpdate();
 				post.push($bind(oldComp,oldComp.didUpdate));
 				if(oldComp.shouldRender()) {
-					var node = oldComp.render();
+					var node = this.renderComponent(oldComp);
 					return this.applyToNode(node,dom,parent,post,false);
 				} else return dom;
 			} else {
@@ -388,7 +379,7 @@ doom_html_Render.prototype = {
 				this.componentToNode.remove(oldComp);
 				this.componentToNode.set(newComp,dom);
 				newComp.willMount();
-				var node1 = newComp.render();
+				var node1 = this.renderComponent(newComp);
 				newComp.apply = $bind(this,this.apply);
 				var dom1 = this.applyToNode(node1,dom,parent,post,false);
 				newComp.node = dom1;
@@ -404,7 +395,7 @@ doom_html_Render.prototype = {
 			}
 		} else {
 			newComp.willMount();
-			var node2 = newComp.render();
+			var node2 = this.renderComponent(newComp);
 			newComp.apply = $bind(this,this.apply);
 			var dom2 = this.applyToNode(node2,dom,parent,post,false);
 			newComp.node = dom2;
@@ -421,6 +412,18 @@ doom_html_Render.prototype = {
 		if(null == comp) return;
 		this.unmountComponent(comp);
 	}
+	,renderComponent: function(comp) {
+		var _g = comp.render();
+		var other = _g;
+		switch(_g[1]) {
+		case 4:
+			var c = _g[2];
+			throw new thx_Error("Component " + thx_Types.toString(Type["typeof"](comp)) + " should not return another component (" + thx_Types.toString(Type["typeof"](c)) + ") directly",null,{ fileName : "Render.hx", lineNumber : 216, className : "doom.html.Render", methodName : "renderComponent"});
+			break;
+		default:
+			return other;
+		}
+	}
 	,unmountComponent: function(comp) {
 		var node = this.componentToNode.h[comp.__id__];
 		this.componentToNode.remove(comp);
@@ -432,7 +435,6 @@ doom_html_Render.prototype = {
 	}
 	,applyElementToNode: function(name,attributes,children,dom,parent,post) {
 		var _g = this;
-		console.log("** applyElementToNode, name: " + name.toUpperCase() + ", old node: " + (dom.nodeType == 1?dom.tagName:"" + dom.nodeType));
 		if(dom.nodeType == 1 && dom.tagName == name.toUpperCase()) {
 			this.applyNodeAttributes(attributes,dom);
 			thx_Arrays.each(this.zipVNodesAndNodeList(children,dom.childNodes),function(t) {
@@ -445,7 +447,6 @@ doom_html_Render.prototype = {
 		}
 	}
 	,applyCommentToNode: function(comment,dom,parent,post) {
-		console.log("** applyCommentToNode");
 		if(dom.nodeType == 8) {
 			dom.textContent = comment;
 			return dom;
@@ -455,7 +456,6 @@ doom_html_Render.prototype = {
 		}
 	}
 	,applyTextToNode: function(text,dom,parent,post) {
-		console.log("** applyTextToNode");
 		if(dom.nodeType == 3) {
 			dom.textContent = text;
 			return dom;
@@ -465,7 +465,6 @@ doom_html_Render.prototype = {
 		}
 	}
 	,replaceChild: function(parent,oldDom,newDom) {
-		console.log("** replaceChild, is same? " + Std.string(oldDom == newDom));
 		if(oldDom == newDom) return newDom;
 		parent.replaceChild(newDom,oldDom);
 		return newDom;
@@ -586,31 +585,25 @@ doom_html_Render.prototype = {
 		}
 	}
 	,generateNode: function(node,post) {
-		console.log("** generateNode");
 		switch(node[1]) {
 		case 0:
 			var children = node[4];
 			var attributes = node[3];
 			var name = node[2];
-			console.log("** generateNode: element");
 			return this.createElement(name,attributes,children,post);
 		case 1:
 			var comment = node[2];
-			console.log("** generateNode: comment");
 			return this.doc.createComment(comment);
 		case 2:
 			var code = node[2];
-			console.log("** generateNode: raw");
 			return dots_Html.parse(code);
 		case 3:
 			var text = node[2];
-			console.log("** generateNode: text");
 			return this.doc.createTextNode(text);
 		case 4:
 			var comp = node[2];
-			console.log("** generateNode: component");
 			comp.willMount();
-			var node1 = comp.render();
+			var node1 = this.renderComponent(comp);
 			var dom = this.generateNode(node1,post);
 			comp.node = dom;
 			comp.apply = $bind(this,this.apply);
@@ -632,7 +625,7 @@ doom_html_Render.prototype = {
 			var _this = this.namespaces;
 			if(__map_reserved[prefix] != null) tmp = _this.getReserved(prefix); else tmp = _this.h[prefix];
 			var ns = tmp;
-			if(null == ns) throw new thx_Error("element prefix \"" + prefix + "\" is not associated to any namespace. Add the right namespace to Doom.namespaces.",null,{ fileName : "Render.hx", lineNumber : 353, className : "doom.html.Render", methodName : "createElement"});
+			if(null == ns) throw new thx_Error("element prefix \"" + prefix + "\" is not associated to any namespace. Add the right namespace to Doom.namespaces.",null,{ fileName : "Render.hx", lineNumber : 360, className : "doom.html.Render", methodName : "createElement"});
 			el = this.doc.createElementNS(ns,name1);
 		} else el = this.doc.createElement(name);
 		this.applyNodeAttributes(attributes,el);
@@ -1177,18 +1170,18 @@ doom_bs_Button.getClass = function(state) {
 	classes.push(styleClass);
 	var sizeClass;
 	var _g1 = state.size;
-	if(_g1 == null) sizeClass = ""; else switch(_g1[1]) {
+	if(_g1 == null) sizeClass = []; else switch(_g1[1]) {
 	case 0:
-		sizeClass = "";
+		sizeClass = [];
 		break;
 	case 1:
-		sizeClass = "btn-lg";
+		sizeClass = ["btn-lg"];
 		break;
 	case 2:
-		sizeClass = "btn-sm";
+		sizeClass = ["btn-sm"];
 		break;
 	}
-	classes.push(sizeClass);
+	classes = classes.concat(sizeClass);
 	if(state.active == true) classes.push("active");
 	if(state.block == true) classes.push("btn-block");
 	if(state.dropdownToggle == true) classes.push("dropdown-toggle");
@@ -1913,7 +1906,7 @@ doom_bs_RadioButtonGroup.prototype = $extend(doom_html_Component.prototype,{
 	render: function() {
 		var _g = this;
 		var itemOptions = { name : this.props.name, disabled : this.props.disabled, outline : this.props.outline, size : this.props.size};
-		return doom_bs_ButtonGroup["with"]({ toggle : true},this.props.values.map(function(value) {
+		return doom_core__$VNode_VNode_$Impl_$.el("div",null,[doom_bs_ButtonGroup["with"]({ toggle : true},this.props.values.map(function(value) {
 			var style = value.style;
 			if(null == style) style = _g.props.style;
 			if(null == style) style = doom_bs_ButtonStyle.Primary;
@@ -1923,7 +1916,7 @@ doom_bs_RadioButtonGroup.prototype = $extend(doom_html_Component.prototype,{
 			return doom_bs_RadioButton["with"](function() {
 				f(a1);
 			},style,itemOptions1,value.label);
-		}));
+		}))]);
 	}
 	,__class__: doom_bs_RadioButtonGroup
 });

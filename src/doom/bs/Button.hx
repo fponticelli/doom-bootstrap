@@ -5,7 +5,7 @@ import doom.core.VNodes;
 using thx.Nulls;
 
 class Button extends doom.html.Component<ButtonProps> {
-  public static function with(click : Void -> Void, style : ButtonStyle, ?options : ButtonBasicOptions, children : VNodes)
+  public static function with(click : Void -> Void, style : ButtonStyle, ?options : ButtonBasicOptions, children : VNodes) {
     return new Button({
       click : click,
       style : style,
@@ -16,9 +16,10 @@ class Button extends doom.html.Component<ButtonProps> {
       dropdownToggle : options.dropdownToggle.or(false),
       size : options.size.or(Default)
     }, children).asNode();
+  }
 
 
-  override function render()
+  override function render() {
     return button([
       "type" => "button",
       "class" => getClass(props),
@@ -26,7 +27,8 @@ class Button extends doom.html.Component<ButtonProps> {
       "click" => props.click,
       "data-toggle" =>(props.dropdownToggle == true ? "dropdown" : null),
       "aria-haspopup" =>(props.dropdownToggle == true ? "true" : null),
-    ], children);
+      ], children);
+  }
 
   public static function getClass(state : ButtonOptions) : String {
     var classes = ["btn"],
@@ -44,11 +46,11 @@ class Button extends doom.html.Component<ButtonProps> {
     classes.push(styleClass);
 
     var sizeClass = switch state.size {
-      case null, Default: "";
-      case Large: "btn-lg";
-      case Small: "btn-sm";
+      case null, Default: [];
+      case Large: ["btn-lg"];
+      case Small: ["btn-sm"];
     };
-    classes.push(sizeClass);
+    classes = classes.concat(sizeClass);
 
     if(state.active == true)
       classes.push("active");
