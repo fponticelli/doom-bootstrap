@@ -4,7 +4,7 @@
 -lib jQueryExtern
 -lib thx.core
 
-BS
+doom.bs.BS
 doom.bs.Alert
 doom.bs.Button
 doom.bs.ButtonGroup
@@ -19,7 +19,9 @@ doom.bs.InputGroup
 doom.bs.Jumbotron
 doom.bs.Label
 doom.bs.Navbar
+doom.bs.Progress
 doom.bs.RadioButton
+doom.bs.RadioButtonGroup
 doom.bs.Size
 
 --each

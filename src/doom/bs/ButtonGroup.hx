@@ -1,23 +1,35 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
+import doom.core.VNodes;
+using thx.Nulls;
 
-class ButtonGroup extends Doom {
-  @:state(Default) var size : Size;
-  @:state(false)   var toggle : Bool;
-  @:state(opt)     var label : String;
-  @:state(opt)     var className : String;
+class ButtonGroup extends doom.html.Component<ButtonGroupProps> {
+  public static function with(?options : ButtonGroupProps, children : VNodes)
+    return new ButtonGroup({
+      size      : options.size.or(Default),
+      toggle    : options.toggle.or(false),
+      label     : options.label.or(null),
+      className : options.className.or(null)
+    }, children).asNode();
 
   override function render()
     return div([
       "class" => [
         "btn-group" => true,
-        "btn-group-sm" => size == Small,
-        "btn-group-lg" => size == Large,
-        className => className != null
+        "btn-group-sm" => props.size == Small,
+        "btn-group-lg" => props.size == Large,
+        props.className => props.className != null
       ],
-      "data-toggle" => (toggle == true ? "buttons" : null),
+      "data-toggle" => (props.toggle == true ? "buttons" : null),
       "role" => "group",
-      "aria-label" => label
+      "aria-label" => props.label
     ], children);
+}
+
+typedef ButtonGroupProps = {
+  ?size : Size,
+  ?toggle : Bool,
+  ?label : String,
+  ?className : String
 }

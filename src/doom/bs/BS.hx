@@ -1,22 +1,8 @@
-import doom.Node;
-import doom.bs.Alert;
-import doom.bs.Button;
-import doom.bs.ButtonGroup;
-import doom.bs.ButtonGroupVertical;
-import doom.bs.ButtonToolbar;
-import doom.bs.CloseButton;
-import doom.bs.Container;
-import doom.bs.Dropdown;
-import doom.bs.DropdownItem;
-import doom.bs.DropdownMenu;
-import doom.bs.InputGroup;
-import doom.bs.Jumbotron;
-import doom.bs.Label;
-import doom.bs.Navbar;
-import doom.bs.Progress;
-import doom.bs.RadioButton;
-import doom.bs.RadioButtonGroup;
-import doom.bs.Table;
+package doom.bs;
+
+import doom.core.VNode;
+import doom.core.VNodes;
+import doom.bs.Label.LabelType;
 
 class BS {
   public static var alert(default, null) = Alert.with;
@@ -60,7 +46,7 @@ class BS {
   public static var labelInfo(default, null) = Label.with.bind(Info, _, _);
   public static var labelWarning(default, null) = Label.with.bind(Warning, _, _);
   public static var labelDanger(default, null) = Label.with.bind(Danger, _, _);
-  public static var pill(default, null) = function(?type : LabelType, ?children : Nodes)
+  public static var pill(default, null) = function(?type : LabelType, ?children : VNodes)
     return Label.with(type, { isPill : true }, children);
   public static var pillDefault(default, null) = pill.bind(Default, _);
   public static var pillPrimary(default, null) = pill.bind(Primary, _);
@@ -79,11 +65,9 @@ class BS {
 
   public static var table(default, null) = Table.with;
 
-  inline public static function row(?className : String, children : Nodes) : Node
-    return Doom.div(["class" => [
+  inline public static function row(?className : String, children : VNodes) : VNode
+    return doom.html.Html.div(["class" => [
       "row" => true,
       className => null != className
     ]], children);
-
-
 }

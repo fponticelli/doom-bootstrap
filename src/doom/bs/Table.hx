@@ -1,28 +1,35 @@
 package doom.bs;
 
-import Doom.*;
-import doom.Node;
+import doom.html.Html.*;
+import doom.core.VNodes;
+using thx.Nulls;
 
-class Table extends Doom {
-  public static function responsive(?options : { ?striped : Bool, ?inverse : Bool, ?bordered : Bool, ?hover : Bool, ?small : Bool, ?reflow : Bool }, ?nodes : Nodes)
-    return div(["class" => "responsive-table"], with(options, nodes));
+class Table extends doom.html.Component<TableProps> {
+  public static function with(?options : TableProps, children : VNodes)
+    return new Table(options.or({}), children).asNode();
 
-  @:state(false)   var striped : Bool;
-  @:state(false)   var inverse : Bool;
-  @:state(false)   var bordered : Bool;
-  @:state(false)   var hover : Bool;
-  @:state(false)   var small : Bool;
-  @:state(false)   var reflow : Bool;
+  public static function responsive(?options : { ?striped : Bool, ?inverse : Bool, ?bordered : Bool, ?hover : Bool, ?small : Bool, ?reflow : Bool }, ?children : VNodes)
+    return div(["class" => "responsive-table"], with(options, children));
+
   override function render()
     return table([
       "class" => [
         "table" => true,
-        "table-inverse" => inverse,
-        "table-striped" => striped,
-        "table-bordered" => bordered,
-        "table-hover" => hover,
-        "table-sm" => small,
-        "table-reflow" => reflow
+        "table-inverse" => props.inverse,
+        "table-striped" => props.striped,
+        "table-bordered" => props.bordered,
+        "table-hover" => props.hover,
+        "table-sm" => props.small,
+        "table-reflow" => props.reflow
       ]
     ], children);
+}
+
+typedef TableProps = {
+  ?striped : Bool,
+  ?inverse : Bool,
+  ?bordered : Bool,
+  ?hover : Bool,
+  ?small : Bool,
+  ?reflow : Bool
 }

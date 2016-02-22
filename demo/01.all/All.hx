@@ -1,14 +1,14 @@
 import js.html.*;
-import Doom.*;
-import doom.Node;
-import BS.*;
-import doom.*;
+import doom.html.Html.*;
+import doom.core.VNodes;
+import doom.html.Html.*;
+import doom.bs.BS.*;
 import doom.bs.*;
 import doom.bs.Label.LabelType;
-import doom.bs.Size;
-import doom.bs.Button.ButtonStyle;
+// import doom.bs.Size;
+// import doom.bs.Button.ButtonStyle;
 
-class All extends Component<{}, {}> {
+class All extends doom.html.Component<{}> {
   override function render() {
     return div(["class" => "container"], [
       row([
@@ -69,7 +69,7 @@ class All extends Component<{}, {}> {
     ]);
   }
 
-  public function row2(left : Nodes, right : Nodes) {
+  public function row2(left : VNodes, right : VNodes) {
     return row([
       div(["class" => "col-md-6"], left),
       div(["class" => "col-md-6"], right)
@@ -143,7 +143,7 @@ class All extends Component<{}, {}> {
     ];
   }
 
-  public function section(name : String, content : Nodes) {
+  public function section(name : String, content : VNodes) {
     return div(["class" => "card"], [
       div(["class" => "card-block"], [
         h2(name)
@@ -151,7 +151,7 @@ class All extends Component<{}, {}> {
     ]);
   }
 
-  public function labels() : Node {
+  public function labels() {
     return section("Labels", [
       labelDefault("Default label"),
       labelPrimary("Primary label"),
@@ -162,7 +162,7 @@ class All extends Component<{}, {}> {
     ]);
   }
 
-  public function pillLabels() : Node {
+  public function pillLabels() {
     return section("Pill labels", [
       pillDefault("Default label"),
       pillPrimary("Primary label"),
@@ -173,7 +173,7 @@ class All extends Component<{}, {}> {
     ]);
   }
 
-  public function buttons() : Node {
+  public function buttons() {
     return section("Buttons", [
       buttonPrimary(onClick, "Primary button"),
       buttonSecondary(onClick, "Secondary button"),
@@ -184,7 +184,7 @@ class All extends Component<{}, {}> {
     ]);
   }
 
-  public function outlineButtons() : Node {
+  public function outlineButtons()
     return section("Outline buttons", [
       buttonPrimary(onClick, { outline : true }, "Primary outline button"),
       buttonSecondary(onClick, { outline : true }, "Secondary outline button"),
@@ -193,9 +193,8 @@ class All extends Component<{}, {}> {
       buttonWarning(onClick, { outline : true }, "Warning outline button"),
       buttonDanger(onClick, { outline : true }, "Danger outline button"),
     ]);
-  }
 
-  public function groupButtons() : Node {
+  public function groupButtons()
     return section("Buttons Group", [
       buttonGroup([
         buttonPrimary(function(){}, "left"),
@@ -203,9 +202,8 @@ class All extends Component<{}, {}> {
         buttonPrimary(function(){}, "right")
       ])
     ]);
-  }
 
-  public function radioButtons() : Node {
+  public function radioButtons() {
     return section("Radio Button Group", [
       radioButtonGroup(function(value) trace('changed to $value'), [
         { label : "A", value : "a", active : true },
@@ -215,7 +213,7 @@ class All extends Component<{}, {}> {
     ]);
   }
 
-  public function progressBars() : Node {
+  public function progressBars() {
     return section("Progress Bars", [
       progress(20, 100),
       progress(30, 100, { style : Success }),

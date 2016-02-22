@@ -1,28 +1,36 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
+import doom.core.VNodes;
+using thx.Nulls;
 
-class Button extends Doom {
-  @:api            var click : Void -> Void;
-  @:state          var style : ButtonStyle;
-  @:state(false)   var block : Bool;
-  @:state(false)   var active : Bool;
-  @:state(false)   var disabled : Bool;
-  @:state(false)   var outline : Bool;
-  @:state(false)   var dropdownToggle : Bool;
-  @:state(Default) var size : Size;
+class Button extends doom.html.Component<ButtonProps> {
+  public static function with(click : Void -> Void, style : ButtonStyle, ?options : ButtonBasicOptions, children : VNodes) {
+    return new Button({
+      click : click,
+      style : style,
+      block : options.block.or(false),
+      active : options.active.or(false),
+      disabled : options.disabled.or(false),
+      outline : options.outline.or(false),
+      dropdownToggle : options.dropdownToggle.or(false),
+      size : options.size.or(Default)
+    }, children).asNode();
+  }
 
-  override function render()
+
+  override function render() {
     return button([
       "type" => "button",
-      "class" => getClass(state),
-      "disabled" => disabled,
-      "click" => click,
-      "data-toggle" => (dropdownToggle == true ? "dropdown" : null),
-      "aria-haspopup" => (dropdownToggle == true ? "true" : null),
-    ], children);
+      "class" => getClass(props),
+      "disabled" => props.disabled == true,
+      "click" => props.click,
+      "data-toggle" =>(props.dropdownToggle == true ? "dropdown" : null),
+      "aria-haspopup" =>(props.dropdownToggle == true ? "true" : null),
+      ], children);
+  }
 
-  public static function getClass(state : ButtonState) : String {
+  public static function getClass(state : ButtonOptions) : String {
     var classes = ["btn"],
         styleClass = switch state.style {
           case Primary: "btn-primary";
@@ -38,19 +46,19 @@ class Button extends Doom {
     classes.push(styleClass);
 
     var sizeClass = switch state.size {
-      case null, Default: "";
-      case Large: "btn-lg";
-      case Small: "btn-sm";
+      case null, Default: [];
+      case Large: ["btn-lg"];
+      case Small: ["btn-sm"];
     };
-    classes.push(sizeClass);
+    classes = classes.concat(sizeClass);
 
-    if (state.active == true)
+    if(state.active == true)
       classes.push("active");
 
-    if (state.block == true)
+    if(state.block == true)
       classes.push("btn-block");
 
-    if (state.dropdownToggle == true)
+    if(state.dropdownToggle == true)
       classes.push("dropdown-toggle");
 
     return classes.join(" ");
@@ -64,4 +72,21 @@ enum ButtonStyle {
   Success;
   Warning;
   Danger;
+}
+
+typedef ButtonBasicOptions = {
+  ?block : Bool,
+  ?active : Bool,
+  ?disabled : Bool,
+  ?outline : Bool,
+  ?dropdownToggle : Bool,
+  ?size : Size
+}
+
+typedef ButtonOptions = {>ButtonBasicOptions,
+  style : ButtonStyle
+}
+
+typedef ButtonProps = {> ButtonOptions,
+  click : Void -> Void
 }

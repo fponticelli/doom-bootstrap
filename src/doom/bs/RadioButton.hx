@@ -1,35 +1,36 @@
 package doom.bs;
 
-import Doom.*;
+import doom.html.Html.*;
 import doom.bs.Button.ButtonStyle;
+import doom.core.VNodes;
+using thx.Nulls;
 
-class RadioButton extends Doom {
-  @:api            var click : Void -> Void;
-  @:state(opt)     var name : String;
-  @:state          var style : ButtonStyle;
-  @:state(false)   var active : Bool;
-  @:state(false)   var disabled : Bool;
-  @:state(false)   var outline : Bool;
-  @:state(Default) var size : Size;
-  // @:state(false)
-  // var block : Bool;
-  // @:state(false)
-  // var dropdownToggle : Bool;
+class RadioButton extends doom.html.Component<RadioButtonProps> {
+  public static function with(click : Void -> Void, style : ButtonStyle, ?options : RadioButtonOptions, children : VNodes)
+    return new RadioButton({
+      click : click,
+      style : style,
+      name : options.name.or(null),
+      active : options.active.or(false),
+      disabled : options.disabled.or(false),
+      outline : options.outline.or(false),
+      size : options.size.or(Default),
+    }, children).asNode();
 
   override function render()
     return label([
-        "class" => getClass(state),
-        "click" => api.click
+        "class" => getClass(props),
+        "click" => props.click
       ], [
         input([
           "type" => "radio",
-          "name" => name,
+          "name" => props.name,
           "autocomplete" => "off",
           "checked" => true
         ])
       ].concat(children));
 
-  public static function getClass(state : RadioButtonState) : String {
+  public static function getClass(state : RadioButtonProps) : String {
     var classes = ["btn"],
         styleClass = switch state.style {
           case Primary: "btn-primary";
@@ -56,60 +57,17 @@ class RadioButton extends Doom {
 
     return classes.join(" ");
   }
-
-  // public static function group<T>(style : ButtonStyle, values : Array<RadioButtonGroupItemState<T>>, onChange : T -> Void, ?options : RadioButtonGroupOptions) : Nodes {
-  //   if(null == options) options = {};
-  //   var itemOptions : RadioButtonState = {
-  //     style : style,
-  //     name : options.name,
-  //     block : options.block,
-  //     disabled: options.disabled,
-  //     outline : options.outline,
-  //     size: options.size
-  //   };
-  //   return values.map(function(value) : Node {
-  //     var state : RadioButtonState = itemOptions.merge({
-  //       active : value.active
-  //     });
-  //     return new RadioButton({
-  //       click : onChange.bind(value.value)
-  //     }, state, value.label);
-  //   });
-  // }
-
-/*
-?block : Bool,
-?active: Bool,
-?disabled: Bool,
-?outline : Bool,
-?dropdownToggle : Bool,
-?size: Size
-*/
-}
-/*
-typedef RadioButtonGroupItemState<T> = {
-  label : Node,
-  value : T,
-  active : Bool
 }
 
-typedef RadioButtonGroupOptions = {
+typedef RadioButtonOptions = {
   ?name : String,
-  ?block : Bool,
-  ?disabled: Bool,
+  ?active : Bool,
+  ?disabled : Bool,
   ?outline : Bool,
-  ?size: Size
+  ?size : Size,
 }
 
-typedef RadioButtonApi = {
-  click : Void -> Void
+typedef RadioButtonProps = {>RadioButtonOptions,
+  click : Void -> Void,
+  style : ButtonStyle
 }
-
-// typedef RadioButtonOptions = {>ButtonOptions,
-//   ?name : String
-// }
-
-typedef RadioButtonState = {>ButtonState,
-  ?name : String
-}
-*/
