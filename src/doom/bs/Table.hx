@@ -1,14 +1,14 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VNodes;
+import doom.core.VChildren;
 using thx.Nulls;
 
 class Table extends doom.html.Component<TableProps> {
-  public static function with(?options : TableProps, children : VNodes)
+  public static function with(?options : TableProps, children : VChildren)
     return new Table(options.or({}), children).asNode();
 
-  public static function responsive(?options : { ?striped : Bool, ?inverse : Bool, ?bordered : Bool, ?hover : Bool, ?small : Bool, ?reflow : Bool }, ?children : VNodes)
+  public static function responsive(?options : { ?striped : Bool, ?inverse : Bool, ?bordered : Bool, ?hover : Bool, ?small : Bool, ?reflow : Bool }, ?children : VChildren)
     return div(["class" => "responsive-table"], with(options, children));
 
   override function render()

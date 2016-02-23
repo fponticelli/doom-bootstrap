@@ -1,11 +1,6 @@
 {
   "dependencies": [
     {
-      "name": "JQueryExtern",
-      "type": "haxelib",
-      "version": "2.0.4"
-    },
-    {
       "name": "doom",
       "type": "git",
       "dir": "src",

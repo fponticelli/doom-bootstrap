@@ -1,11 +1,11 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VNodes;
+import doom.core.VChildren;
 using thx.Nulls;
 
 class DropdownMenu extends doom.html.Component<DropdownMenuProps> {
-  public static function with(?options : { ?dropup : Bool }, children : VNodes)
+  public static function with(?options : { ?dropup : Bool }, children : VChildren)
     return new DropdownMenu({
       dropup : options.dropup.or(false)
     }, children).asNode();

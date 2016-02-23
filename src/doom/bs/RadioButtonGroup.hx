@@ -1,8 +1,9 @@
 package doom.bs;
 
 import doom.html.Html.*;
+import doom.core.VChild;
+import doom.core.VChildren;
 import doom.core.VNode;
-import doom.core.VNodes;
 import doom.bs.Button.ButtonStyle;
 import doom.bs.RadioButton;
 using thx.Objects;
@@ -25,7 +26,7 @@ class RadioButtonGroup<T> extends doom.html.Component<RadioButtonGroupProps<T>> 
           outline : props.outline,
           size : props.size
         };
-    return div(ButtonGroup.with({ toggle : true }, props.values.map(function(value) : VNode {
+    return div(ButtonGroup.with({ toggle : true }, props.values.map(function(value) : VChild {
       var style = value.style;
       if(null == style)
         style = props.style;
@@ -39,7 +40,7 @@ class RadioButtonGroup<T> extends doom.html.Component<RadioButtonGroupProps<T>> 
 
 
 typedef RadioButtonGroupItemState<T> = {
-  label : VNodes,
+  label : VChildren,
   value : T,
   ?active : Bool,
   ?style : ButtonStyle

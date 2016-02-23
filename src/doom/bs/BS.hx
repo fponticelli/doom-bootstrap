@@ -1,7 +1,7 @@
 package doom.bs;
 
 import doom.core.VNode;
-import doom.core.VNodes;
+import doom.core.VChildren;
 import doom.bs.Label.LabelType;
 
 class BS {
@@ -46,7 +46,7 @@ class BS {
   public static var labelInfo(default, null) = Label.with.bind(Info, _, _);
   public static var labelWarning(default, null) = Label.with.bind(Warning, _, _);
   public static var labelDanger(default, null) = Label.with.bind(Danger, _, _);
-  public static var pill(default, null) = function(?type : LabelType, ?children : VNodes)
+  public static var pill(default, null) = function(?type : LabelType, ?children : VChildren)
     return Label.with(type, { isPill : true }, children);
   public static var pillDefault(default, null) = pill.bind(Default, _);
   public static var pillPrimary(default, null) = pill.bind(Primary, _);
@@ -65,7 +65,7 @@ class BS {
 
   public static var table(default, null) = Table.with;
 
-  inline public static function row(?className : String, children : VNodes) : VNode
+  inline public static function row(?className : String, children : VChildren) : VNode
     return doom.html.Html.div(["class" => [
       "row" => true,
       className => null != className

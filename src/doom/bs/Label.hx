@@ -1,11 +1,11 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VNodes;
+import doom.core.VChildren;
 using thx.Nulls;
 
 class Label extends doom.html.Component<LabelProps> {
-  public static function with(type : LabelType, ?options : { ?isPill : Bool }, children : VNodes)
+  public static function with(type : LabelType, ?options : { ?isPill : Bool }, children : VChildren)
     return new Label({
       type : type,
       isPill : options.isPill.or(false)

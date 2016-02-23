@@ -1,11 +1,11 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VNodes;
+import doom.core.VChildren;
 using thx.Nulls;
 
 class ButtonGroupVertical extends doom.html.Component<ButtonGroupVerticalProps> {
-  public static function with(?options : ButtonGroupVerticalProps, children : VNodes)
+  public static function with(?options : ButtonGroupVerticalProps, children : VChildren)
     return new ButtonGroupVertical({
       size      : options.size.or(Default),
       toggle    : options.toggle.or(false),
