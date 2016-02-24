@@ -9,7 +9,7 @@ class DropdownItem extends doom.html.Component<DropdownItemProps> {
     return new DropdownItem({
       click : click,
       disabled : options.disabled.or(false)
-    }, children).asNode();
+    }, children).asChild();
 
   override function render()
     return button([

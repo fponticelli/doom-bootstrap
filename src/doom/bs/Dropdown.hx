@@ -8,7 +8,7 @@ class Dropdown extends doom.html.Component<DropdownProps> {
   public static function with(?options : { ?open : Bool }, children : VChildren)
     return new Dropdown({
       open : options.open.or(false)
-    }, children).asNode();
+    }, children).asChild();
 
   override function render()
     return div([

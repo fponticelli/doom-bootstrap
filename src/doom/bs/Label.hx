@@ -9,7 +9,7 @@ class Label extends doom.html.Component<LabelProps> {
     return new Label({
       type : type,
       isPill : options.isPill.or(false)
-    }, children).asNode();
+    }, children).asChild();
 
   override function render()
     return span([

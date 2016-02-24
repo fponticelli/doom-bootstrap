@@ -8,7 +8,7 @@ class DropdownMenu extends doom.html.Component<DropdownMenuProps> {
   public static function with(?options : { ?dropup : Bool }, children : VChildren)
     return new DropdownMenu({
       dropup : options.dropup.or(false)
-    }, children).asNode();
+    }, children).asChild();
 
   override function render()
     return div([

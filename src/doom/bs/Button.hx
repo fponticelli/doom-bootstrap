@@ -15,7 +15,7 @@ class Button extends doom.html.Component<ButtonProps> {
       outline : options.outline.or(false),
       dropdownToggle : options.dropdownToggle.or(false),
       size : options.size.or(Default)
-    }, children).asNode();
+    }, children).asChild();
   }
 
 

@@ -5,7 +5,7 @@ import doom.core.VChildren;
 
 class InputGroup extends doom.html.Component<{}> {
   public static function with(children : VChildren)
-    return new InputGroup({}, children).asNode();
+    return new InputGroup({}, children).asChild();
 
   override function render()
     return div([

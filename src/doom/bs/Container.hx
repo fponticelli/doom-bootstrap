@@ -8,7 +8,7 @@ class Container extends doom.html.Component<ContainerProps> {
   public static function with(?options : { ?className : String }, children : VChildren)
     return new Container({
       className : options.className.or(null)
-    }, children).asNode();
+    }, children).asChild();
 
   override function render() {
     return div([

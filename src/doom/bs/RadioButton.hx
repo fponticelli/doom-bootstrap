@@ -15,7 +15,7 @@ class RadioButton extends doom.html.Component<RadioButtonProps> {
       disabled : options.disabled.or(false),
       outline : options.outline.or(false),
       size : options.size.or(Default),
-    }, children).asNode();
+    }, children).asChild();
 
   override function render()
     return label([

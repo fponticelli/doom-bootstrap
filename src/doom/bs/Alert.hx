@@ -10,7 +10,7 @@ class Alert extends doom.html.Component<AlertProps> {
     return new Alert({
       type : type,
       dismissable : options.dismissable.or(false)
-    }, children).asNode();
+    }, children).asChild();
 
   override function render() {
     var children : VChildren = [];

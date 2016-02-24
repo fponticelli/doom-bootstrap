@@ -9,7 +9,7 @@ class Navbar extends doom.html.Component<NavbarProps> {
     return new Navbar({
       theme : options.theme.or(null),
       background : options.background.or(null)
-    }, children).asNode();
+    }, children).asChild();
 
   override function render()
     return nav([

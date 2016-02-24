@@ -11,7 +11,7 @@ class ButtonGroupVertical extends doom.html.Component<ButtonGroupVerticalProps> 
       toggle    : options.toggle.or(false),
       label     : options.label.or(null),
       className : options.className.or(null)
-    }, children).asNode();
+    }, children).asChild();
 
   override function render()
     return div([

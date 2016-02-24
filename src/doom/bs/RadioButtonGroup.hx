@@ -16,7 +16,7 @@ class RadioButtonGroup<T> extends doom.html.Component<RadioButtonGroupProps<T>> 
         change : change,
         values : values
       })
-    ).asNode();
+    ).asChild();
 
   override function render() {
     var itemOptions = {
