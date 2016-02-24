@@ -11,7 +11,7 @@ class Progress extends doom.html.Component<ProgressProps> {
       style : options.style.or(Default),
       striped : options.striped.or(false),
       animated : options.animated.or(false)
-    }).asNode();
+    }).asChild();
 
   override function render()
     return progress([

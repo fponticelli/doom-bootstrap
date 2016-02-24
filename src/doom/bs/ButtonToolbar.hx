@@ -1,14 +1,14 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VNodes;
+import doom.core.VChildren;
 using thx.Nulls;
 
 class ButtonToolbar extends doom.html.Component<ButtonToolbarProps> {
-  public static function with(?options : ButtonToolbarProps, children : VNodes)
+  public static function with(?options : ButtonToolbarProps, children : VChildren)
     return new ButtonToolbar({
       label : options.label.or(null)
-    }, children).asNode();
+    }, children).asChild();
 
   override function render()
     return div([

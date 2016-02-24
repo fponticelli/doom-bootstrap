@@ -1,21 +1,21 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VNodes;
+import doom.core.VChildren;
 using thx.Objects;
 using thx.Nulls;
 
 class Alert extends doom.html.Component<AlertProps> {
-  public static function with(type : AlertType, ?options : { ?dismissable : Bool }, children : VNodes)
+  public static function with(type : AlertType, ?options : { ?dismissable : Bool }, children : VChildren)
     return new Alert({
       type : type,
       dismissable : options.dismissable.or(false)
-    }, children).asNode();
+    }, children).asChild();
 
   override function render() {
-    var children : VNodes = [];
+    var children : VChildren = [];
     if(props.dismissable == true) {
-      children.push(
+      children.add(
         button([
           "type" => "button",
           "class" => "close",
