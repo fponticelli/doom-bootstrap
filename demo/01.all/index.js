@@ -20,16 +20,26 @@ doom_core_Component.prototype = {
 	,isUnmounted: null
 	,apply: null
 	,render: function() {
-		throw new thx_error_AbstractMethod({ fileName : "Component.hx", lineNumber : 16, className : "doom.core.Component", methodName : "render"});
+		throw new thx_error_AbstractMethod({ fileName : "Component.hx", lineNumber : 19, className : "doom.core.Component", methodName : "render"});
 	}
 	,asNode: function() {
-		return doom_core_VChildImpl.Comp(this);
+		return doom_core_VNodeImpl.Comp(this);
 	}
 	,update: function(props) {
 		var old = this.props;
 		this.props = props;
 		if(!this.shouldUpdate(old,props) || !this.shouldRender()) return;
-		this.apply(doom_core_VChildImpl.Comp(this),this.node);
+		try {
+			this.apply(doom_core_VNodeImpl.Comp(this),this.node);
+		} catch( e ) {
+			haxe_CallStack.lastException = e;
+			if (e instanceof js__$Boot_HaxeError) e = e.val;
+			this.rethrowUpdateError(e);
+		}
+	}
+	,rethrowUpdateError: function(e) {
+		var s = Std.string(e);
+		if(s.indexOf("apply is not a function") >= 0) throw new thx_Error("method `apply` has not been correctly migrated to " + Type.getClassName(js_Boot.getClass(this)),null,{ fileName : "Component.hx", lineNumber : 41, className : "doom.core.Component", methodName : "rethrowUpdateError"}); else throw thx_Error.fromDynamic(e,{ fileName : "Component.hx", lineNumber : 43, className : "doom.core.Component", methodName : "rethrowUpdateError"});
 	}
 	,shouldUpdate: function(oldProps,newProps) {
 		return true;
@@ -51,6 +61,10 @@ doom_core_Component.prototype = {
 	,didUnmount: function() {
 	}
 	,willUnmount: function() {
+	}
+	,append: function(children) {
+		this.children = doom_core__$VNodes_VNodes_$Impl_$.children(this.children.concat(children));
+		return this.children;
 	}
 	,__class__: doom_core_Component
 };
@@ -83,14 +97,14 @@ All.prototype = $extend(doom_html_Component.prototype,{
 		var _g4 = new haxe_ds_StringMap();
 		var value4 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("display-1");
 		if(__map_reserved["class"] != null) _g4.setReserved("class",value4); else _g4.h["class"] = value4;
-		var children = doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("div",attributes1,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("h1",_g4,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Doom Bootstrap"))])))])))]);
+		var children = doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("div",attributes1,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("h1",_g4,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Doom Bootstrap")]))]))]);
 		var _g1 = new haxe_ds_StringMap();
 		var _g5 = new haxe_ds_StringMap();
 		if(__map_reserved.row != null) _g5.setReserved("row",true); else _g5.h["row"] = true;
 		if(__map_reserved[null] != null) _g5.setReserved(null,false); else _g5.h[null] = false;
 		var value5 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g5);
 		if(__map_reserved["class"] != null) _g1.setReserved("class",value5); else _g1.h["class"] = value5;
-		var tmp = doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("div",_g1,children));
+		var tmp = doom_core__$VNode_VNode_$Impl_$.el("div",_g1,children);
 		var _g9 = new haxe_ds_StringMap();
 		var value6 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-12");
 		if(__map_reserved["class"] != null) _g9.setReserved("class",value6); else _g9.h["class"] = value6;
@@ -98,32 +112,32 @@ All.prototype = $extend(doom_html_Component.prototype,{
 		var _g10 = new haxe_ds_StringMap();
 		var value7 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("display-3");
 		if(__map_reserved["class"] != null) _g10.setReserved("class",value7); else _g10.h["class"] = value7;
-		var tmp2 = doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("h1",_g10,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Jumbotron header"))])));
+		var tmp2 = doom_core__$VNode_VNode_$Impl_$.el("h1",_g10,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Jumbotron header")]));
 		var _g11 = new haxe_ds_StringMap();
 		var value8 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("lead");
 		if(__map_reserved["class"] != null) _g11.setReserved("class",value8); else _g11.h["class"] = value8;
-		var tmp3 = doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("p",_g11,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("This is some lead text in the Jumbotron!"))])));
+		var tmp3 = doom_core__$VNode_VNode_$Impl_$.el("p",_g11,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("This is some lead text in the Jumbotron!")]));
 		var _g12 = new haxe_ds_StringMap();
 		var value9 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("m-y-2");
 		if(__map_reserved["class"] != null) _g12.setReserved("class",value9); else _g12.h["class"] = value9;
-		var children3 = doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("div",attributes2,doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.jumbotron(doom_core__$VChildren_VChildren_$Impl_$.children([tmp2,tmp3,doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("hr",_g12,null)),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("p",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("This is some normal text in the Jumbotron"))]))),doom_bs_BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Primary,{ size : doom_bs_Size.Large},doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Learn more"))]))]))])))]);
+		var children3 = doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("div",attributes2,doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.jumbotron(doom_core__$VNodes_VNodes_$Impl_$.children([tmp2,tmp3,doom_core__$VNode_VNode_$Impl_$.el("hr",_g12,null),doom_core__$VNode_VNode_$Impl_$.el("p",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("This is some normal text in the Jumbotron")])),doom_bs_BS.button($bind(this,this.onClick),doom_bs_ButtonStyle.Primary,{ size : doom_bs_Size.Large},doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Learn more")]))]))]))]);
 		var _g13 = new haxe_ds_StringMap();
 		var _g14 = new haxe_ds_StringMap();
 		if(__map_reserved.row != null) _g14.setReserved("row",true); else _g14.h["row"] = true;
 		if(__map_reserved[null] != null) _g14.setReserved(null,false); else _g14.h[null] = false;
 		var value14 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromMap(_g14);
 		if(__map_reserved["class"] != null) _g13.setReserved("class",value14); else _g13.h["class"] = value14;
-		return doom_core__$VNode_VNode_$Impl_$.el("div",attributes,doom_core__$VChildren_VChildren_$Impl_$.children([tmp,doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("div",_g13,children3)),doom_core_VChildImpl.Node(this.row2(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.labels())]),doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.pillLabels())]))),doom_core_VChildImpl.Node(this.row2(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.buttons())]),doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.outlineButtons())]))),doom_core_VChildImpl.Node(this.row2(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.groupButtons())]),doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.alertSuccess(null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("a permanent alert"))])),doom_bs_BS.alertDanger({ dismissable : true},doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("a dismissable alert"))]))]))),doom_core_VChildImpl.Node(this.row2(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.radioButtons())]),doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.progressBars())]))),doom_core_VChildImpl.Node(this.row2(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.basicTable())]),doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.inverseTable())]))),doom_core_VChildImpl.Node(this.row2(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.stripedTable())]),doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.borderedInverseTable())]))),doom_core_VChildImpl.Node(this.row2(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.borderedTable())]),doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.hoverTable())]))),doom_core_VChildImpl.Node(this.row2(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.stripedHoverTable())]),doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.smallTable())]))),doom_core_VChildImpl.Node(this.row2(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this.reflowTable())]),doom_core__$VChildren_VChildren_$Impl_$.children([])))]));
+		return doom_core__$VNode_VNode_$Impl_$.el("div",attributes,doom_core__$VNodes_VNodes_$Impl_$.children([tmp,doom_core__$VNode_VNode_$Impl_$.el("div",_g13,children3),this.row2(doom_core__$VNodes_VNodes_$Impl_$.children([this.labels()]),doom_core__$VNodes_VNodes_$Impl_$.children([this.pillLabels()])),this.row2(doom_core__$VNodes_VNodes_$Impl_$.children([this.buttons()]),doom_core__$VNodes_VNodes_$Impl_$.children([this.outlineButtons()])),this.row2(doom_core__$VNodes_VNodes_$Impl_$.children([this.groupButtons()]),doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.alertSuccess(null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("a permanent alert")])),doom_bs_BS.alertDanger({ dismissable : true},doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("a dismissable alert")]))])),this.row2(doom_core__$VNodes_VNodes_$Impl_$.children([this.radioButtons()]),doom_core__$VNodes_VNodes_$Impl_$.children([this.progressBars()])),this.row2(doom_core__$VNodes_VNodes_$Impl_$.children([this.basicTable()]),doom_core__$VNodes_VNodes_$Impl_$.children([this.inverseTable()])),this.row2(doom_core__$VNodes_VNodes_$Impl_$.children([this.stripedTable()]),doom_core__$VNodes_VNodes_$Impl_$.children([this.borderedInverseTable()])),this.row2(doom_core__$VNodes_VNodes_$Impl_$.children([this.borderedTable()]),doom_core__$VNodes_VNodes_$Impl_$.children([this.hoverTable()])),this.row2(doom_core__$VNodes_VNodes_$Impl_$.children([this.stripedHoverTable()]),doom_core__$VNodes_VNodes_$Impl_$.children([this.smallTable()])),this.row2(doom_core__$VNodes_VNodes_$Impl_$.children([this.reflowTable()]),doom_core__$VNodes_VNodes_$Impl_$.children([]))]));
 	}
 	,row2: function(left,right) {
 		var _g2 = new haxe_ds_StringMap();
 		var value = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
 		if(__map_reserved["class"] != null) _g2.setReserved("class",value); else _g2.h["class"] = value;
-		var tmp = doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("div",_g2,left));
+		var tmp = doom_core__$VNode_VNode_$Impl_$.el("div",_g2,left);
 		var _g3 = new haxe_ds_StringMap();
 		var value1 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("col-md-6");
 		if(__map_reserved["class"] != null) _g3.setReserved("class",value1); else _g3.h["class"] = value1;
-		var children = doom_core__$VChildren_VChildren_$Impl_$.children([tmp,doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("div",_g3,right))]);
+		var children = doom_core__$VNodes_VNodes_$Impl_$.children([tmp,doom_core__$VNode_VNode_$Impl_$.el("div",_g3,right)]);
 		var _g1 = new haxe_ds_StringMap();
 		var _g = new haxe_ds_StringMap();
 		if(__map_reserved.row != null) _g.setReserved("row",true); else _g.h["row"] = true;
@@ -133,34 +147,34 @@ All.prototype = $extend(doom_html_Component.prototype,{
 		return doom_core__$VNode_VNode_$Impl_$.el("div",_g1,children);
 	}
 	,basicTable: function() {
-		return this.section("Basic Table",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.table(null,this.tableContent())]));
+		return this.section("Basic Table",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.table(null,this.tableContent())]));
 	}
 	,inverseTable: function() {
-		return this.section("Inverse Table",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.table({ inverse : true},this.tableContent())]));
+		return this.section("Inverse Table",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.table({ inverse : true},this.tableContent())]));
 	}
 	,stripedTable: function() {
-		return this.section("Striped Table",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.table({ striped : true},this.tableContent())]));
+		return this.section("Striped Table",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.table({ striped : true},this.tableContent())]));
 	}
 	,borderedTable: function() {
-		return this.section("Bordered Table",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.table({ bordered : true},this.tableContent())]));
+		return this.section("Bordered Table",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.table({ bordered : true},this.tableContent())]));
 	}
 	,borderedInverseTable: function() {
-		return this.section("Bordered Inverse Table",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.table({ bordered : true, inverse : true},this.tableContent())]));
+		return this.section("Bordered Inverse Table",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.table({ bordered : true, inverse : true},this.tableContent())]));
 	}
 	,hoverTable: function() {
-		return this.section("Hover Table",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.table({ hover : true},this.tableContent())]));
+		return this.section("Hover Table",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.table({ hover : true},this.tableContent())]));
 	}
 	,stripedHoverTable: function() {
-		return this.section("Striped Hover Table",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.table({ hover : true, striped : true},this.tableContent())]));
+		return this.section("Striped Hover Table",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.table({ hover : true, striped : true},this.tableContent())]));
 	}
 	,smallTable: function() {
-		return this.section("Small Table",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.table({ small : true},this.tableContent())]));
+		return this.section("Small Table",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.table({ small : true},this.tableContent())]));
 	}
 	,reflowTable: function() {
-		return this.section("Reflow Table",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.table({ reflow : true},this.tableContent())]));
+		return this.section("Reflow Table",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.table({ reflow : true},this.tableContent())]));
 	}
 	,tableContent: function() {
-		return doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("thead",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("tr",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("#"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("First Name"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Last Name"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Username"))])))])))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("tbody",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("tr",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("1"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Mark"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Otto"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("@mdo"))])))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("tr",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("2"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Jacob"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Thornton"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("@fat"))])))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("tr",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("3"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Larry"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("the Bird"))]))),doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("@twitter"))])))])))])))]);
+		return doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("thead",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("tr",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("#")])),doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("First Name")])),doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Last Name")])),doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Username")]))]))])),doom_core__$VNode_VNode_$Impl_$.el("tbody",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("tr",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("1")])),doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Mark")])),doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Otto")])),doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("@mdo")]))])),doom_core__$VNode_VNode_$Impl_$.el("tr",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("2")])),doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Jacob")])),doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Thornton")])),doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("@fat")]))])),doom_core__$VNode_VNode_$Impl_$.el("tr",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("th",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("3")])),doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Larry")])),doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("the Bird")])),doom_core__$VNode_VNode_$Impl_$.el("td",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("@twitter")]))]))]))]);
 	}
 	,section: function(name,content) {
 		var _g = new haxe_ds_StringMap();
@@ -170,36 +184,35 @@ All.prototype = $extend(doom_html_Component.prototype,{
 		var _g1 = new haxe_ds_StringMap();
 		var value1 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("card-block");
 		if(__map_reserved["class"] != null) _g1.setReserved("class",value1); else _g1.h["class"] = value1;
-		return doom_core__$VNode_VNode_$Impl_$.el("div",attributes,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("div",_g1,doom_core__$VChildren_VChildren_$Impl_$.children(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("h2",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text(name))])))]).concat(content))))]));
+		return doom_core__$VNode_VNode_$Impl_$.el("div",attributes,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("div",_g1,doom_core__$VNodes_VNodes_$Impl_$.children(doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("h2",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text(name)]))]).concat(content)))]));
 	}
 	,labels: function() {
-		return this.section("Labels",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.labelDefault(null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Default label"))])),doom_bs_BS.labelPrimary(null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Primary label"))])),doom_bs_BS.labelSuccess(null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Success label"))])),doom_bs_BS.labelInfo(null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Info label"))])),doom_bs_BS.labelWarning(null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Warning label"))])),doom_bs_BS.labelDanger(null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Danger label"))]))]));
+		return this.section("Labels",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.labelDefault(null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Default label")])),doom_bs_BS.labelPrimary(null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Primary label")])),doom_bs_BS.labelSuccess(null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Success label")])),doom_bs_BS.labelInfo(null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Info label")])),doom_bs_BS.labelWarning(null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Warning label")])),doom_bs_BS.labelDanger(null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Danger label")]))]));
 	}
 	,pillLabels: function() {
-		return this.section("Pill labels",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.pillDefault(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Default label"))])),doom_bs_BS.pillPrimary(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Primary label"))])),doom_bs_BS.pillSuccess(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Success label"))])),doom_bs_BS.pillInfo(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Info label"))])),doom_bs_BS.pillWarning(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Warning label"))])),doom_bs_BS.pillDanger(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Danger label"))]))]));
+		return this.section("Pill labels",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.pillDefault(doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Default label")])),doom_bs_BS.pillPrimary(doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Primary label")])),doom_bs_BS.pillSuccess(doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Success label")])),doom_bs_BS.pillInfo(doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Info label")])),doom_bs_BS.pillWarning(doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Warning label")])),doom_bs_BS.pillDanger(doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Danger label")]))]));
 	}
 	,buttons: function() {
-		return this.section("Buttons",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.buttonPrimary($bind(this,this.onClick),null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Primary button"))])),doom_bs_BS.buttonSecondary($bind(this,this.onClick),null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Secondary button"))])),doom_bs_BS.buttonInfo($bind(this,this.onClick),null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Info button"))])),doom_bs_BS.buttonSuccess($bind(this,this.onClick),null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Success button"))])),doom_bs_BS.buttonWarning($bind(this,this.onClick),null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Warning button"))])),doom_bs_BS.buttonDanger($bind(this,this.onClick),null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Danger button"))]))]));
+		return this.section("Buttons",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.buttonPrimary($bind(this,this.onClick),null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Primary button")])),doom_bs_BS.buttonSecondary($bind(this,this.onClick),null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Secondary button")])),doom_bs_BS.buttonInfo($bind(this,this.onClick),null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Info button")])),doom_bs_BS.buttonSuccess($bind(this,this.onClick),null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Success button")])),doom_bs_BS.buttonWarning($bind(this,this.onClick),null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Warning button")])),doom_bs_BS.buttonDanger($bind(this,this.onClick),null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Danger button")]))]));
 	}
 	,outlineButtons: function() {
-		return this.section("Outline buttons",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.buttonPrimary($bind(this,this.onClick),{ outline : true},doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Primary outline button"))])),doom_bs_BS.buttonSecondary($bind(this,this.onClick),{ outline : true},doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Secondary outline button"))])),doom_bs_BS.buttonInfo($bind(this,this.onClick),{ outline : true},doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Info outline button"))])),doom_bs_BS.buttonSuccess($bind(this,this.onClick),{ outline : true},doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Success outline button"))])),doom_bs_BS.buttonWarning($bind(this,this.onClick),{ outline : true},doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Warning outline button"))])),doom_bs_BS.buttonDanger($bind(this,this.onClick),{ outline : true},doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("Danger outline button"))]))]));
+		return this.section("Outline buttons",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.buttonPrimary($bind(this,this.onClick),{ outline : true},doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Primary outline button")])),doom_bs_BS.buttonSecondary($bind(this,this.onClick),{ outline : true},doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Secondary outline button")])),doom_bs_BS.buttonInfo($bind(this,this.onClick),{ outline : true},doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Info outline button")])),doom_bs_BS.buttonSuccess($bind(this,this.onClick),{ outline : true},doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Success outline button")])),doom_bs_BS.buttonWarning($bind(this,this.onClick),{ outline : true},doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Warning outline button")])),doom_bs_BS.buttonDanger($bind(this,this.onClick),{ outline : true},doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("Danger outline button")]))]));
 	}
 	,groupButtons: function() {
-		return this.section("Buttons Group",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.buttonGroup(null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.buttonPrimary(function() {
-		},null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("left"))])),doom_bs_BS.buttonPrimary(function() {
-		},null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("middle"))])),doom_bs_BS.buttonPrimary(function() {
-		},null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("right"))]))]))]));
+		return this.section("Buttons Group",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.buttonGroup(null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.buttonPrimary(function() {
+		},null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("left")])),doom_bs_BS.buttonPrimary(function() {
+		},null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("middle")])),doom_bs_BS.buttonPrimary(function() {
+		},null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("right")]))]))]));
 	}
 	,radioButtons: function() {
-		var tmp = { label : doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("A"))]), value : "a", active : true};
-		var tmp1 = { label : doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("B"))]), value : "b"};
-		var tmp2 = doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("C"));
-		return this.section("Radio Button Group",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.radioButtonGroup(function(value) {
+		var tmp = { label : doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("A")]), value : "a", active : true};
+		var tmp1 = { label : doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("B")]), value : "b"};
+		return this.section("Radio Button Group",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.radioButtonGroup(function(value) {
 			console.log("changed to " + value);
-		},[tmp,tmp1,{ label : doom_core__$VChildren_VChildren_$Impl_$.children([tmp2]), value : "c"}])]));
+		},[tmp,tmp1,{ label : doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("C")]), value : "c"}])]));
 	}
 	,progressBars: function() {
-		return this.section("Progress Bars",doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_BS.progress(20,100),doom_bs_BS.progress(30,100,{ style : doom_bs_ProgressStyle.Success}),doom_bs_BS.progress(40,100,{ style : doom_bs_ProgressStyle.Info}),doom_bs_BS.progress(50,100,{ style : doom_bs_ProgressStyle.Warning}),doom_bs_BS.progress(60,100,{ style : doom_bs_ProgressStyle.Danger}),doom_bs_BS.progress(60,100,{ style : doom_bs_ProgressStyle.Danger, striped : true}),doom_bs_BS.progress(60,100,{ style : doom_bs_ProgressStyle.Danger, striped : true, animated : true})]));
+		return this.section("Progress Bars",doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_BS.progress(20,100),doom_bs_BS.progress(30,100,{ style : doom_bs_ProgressStyle.Success}),doom_bs_BS.progress(40,100,{ style : doom_bs_ProgressStyle.Info}),doom_bs_BS.progress(50,100,{ style : doom_bs_ProgressStyle.Warning}),doom_bs_BS.progress(60,100,{ style : doom_bs_ProgressStyle.Danger}),doom_bs_BS.progress(60,100,{ style : doom_bs_ProgressStyle.Danger, striped : true}),doom_bs_BS.progress(60,100,{ style : doom_bs_ProgressStyle.Danger, striped : true, animated : true})]));
 	}
 	,onClick: function() {
 		console.log("click");
@@ -236,8 +249,7 @@ var doom_html_Render = function(doc,namespaces) {
 			if(__map_reserved[key] != null) _this1.setReserved(key,value); else _this1.h[key] = value;
 		}
 	} else this.namespaces = namespaces;
-	this.nodeToComponent = new haxe_ds_ObjectMap();
-	this.componentToNode = new haxe_ds_ObjectMap();
+	this.domComponentMap = new doom_html__$Render_DomComponentMap();
 };
 doom_html_Render.__name__ = ["doom","html","Render"];
 doom_html_Render.__interfaces__ = [doom_core_IRender];
@@ -250,12 +262,11 @@ doom_html_Render.removeEvent = function(el,name) {
 doom_html_Render.prototype = {
 	doc: null
 	,namespaces: null
-	,nodeToComponent: null
-	,componentToNode: null
+	,domComponentMap: null
 	,mount: function(node,parent) {
 		parent.innerHTML = "";
 		var post = [];
-		var n = this.generateVChildDom(node,post);
+		var n = this.generateDom(node,post);
 		parent.appendChild(n);
 		var _g = 0;
 		while(_g < post.length) {
@@ -266,7 +277,7 @@ doom_html_Render.prototype = {
 	}
 	,apply: function(node,dom) {
 		var post = [];
-		this.applyVChildToNode(node,dom,dom.parentElement,post,false);
+		this.applyToNode(node,dom,dom.parentElement,post,false);
 		var _g = 0;
 		while(_g < post.length) {
 			var f = post[_g];
@@ -284,25 +295,6 @@ doom_html_Render.prototype = {
 			f();
 		}
 		return dom;
-	}
-	,applyVChildToNode: function(node,dom,parent,post,tryUnmount) {
-		if(null == node && null == dom) return null; else if(null == node) {
-			if(tryUnmount) this.unmountDomComponent(dom);
-			parent.removeChild(dom);
-			return null;
-		} else if(null == dom) {
-			var el = this.generateVChildDom(node,post);
-			parent.appendChild(el);
-			return el;
-		}
-		switch(node[1]) {
-		case 0:
-			var n = node[2];
-			return this.applyToNode(n,dom,parent,post,tryUnmount);
-		case 1:
-			var comp = node[2];
-			return this.applyComponentToNode(comp,dom,parent,post);
-		}
 	}
 	,applyToNode: function(node,dom,parent,post,tryUnmount) {
 		if(null == node && null == dom) return null; else if(null == node) {
@@ -334,6 +326,9 @@ doom_html_Render.prototype = {
 			var text = node[2];
 			if(tryUnmount) this.unmountDomComponent(dom);
 			return this.applyTextToNode(text,dom,parent,post);
+		case 4:
+			var comp = node[2];
+			return this.applyComponentToNode(comp,dom,parent,post);
 		}
 	}
 	,applyNodeToNode: function(srcDom,dstDom,parent,tryUnmount) {
@@ -382,35 +377,45 @@ doom_html_Render.prototype = {
 		}
 	}
 	,applyComponentToNode: function(newComp,dom,parent,post) {
-		var oldComp = this.nodeToComponent.h[dom.__id__];
-		if(null != oldComp) {
-			if(thx_Types.sameType(newComp,oldComp)) {
+		var oldComps = this.domComponentMap.getComponents(dom);
+		if(null != oldComps) {
+			var oldComp = thx_Arrays.find(oldComps,function(comp) {
+				return thx_Types.sameType(comp,newComp);
+			});
+			if(null == oldComp) {
+				var _g = 0;
+				while(_g < oldComps.length) {
+					var oldComp1 = oldComps[_g];
+					++_g;
+					oldComp1.willUnmount();
+					this.domComponentMap.removeByComponent(oldComp1);
+					this.domComponentMap.set(newComp,dom);
+					newComp.willMount();
+					var node = this.renderComponent(newComp);
+					newComp.apply = $bind(this,this.apply);
+					var dom1 = this.applyToNode(node,dom,parent,post,false);
+					newComp.node = dom1;
+					post.splice(0,0,function() {
+						newComp.didMount();
+					});
+					this.domComponentMap.set(newComp,dom1);
+					oldComp1.isUnmounted = true;
+					oldComp1.node = null;
+					oldComp1.didUnmount();
+				}
+				return dom;
+			} else {
 				this.migrate(newComp,oldComp);
 				oldComp.willUpdate();
 				post.push($bind(oldComp,oldComp.didUpdate));
 				if(oldComp.shouldRender()) {
-					var node = this.renderComponent(oldComp);
-					return this.applyToNode(node,dom,parent,post,false);
+					this.domComponentMap.removeByComponent(oldComp);
+					var node1 = this.renderComponent(oldComp);
+					var newDom = this.applyToNode(node1,dom,parent,post,false);
+					oldComp.node = newDom;
+					this.domComponentMap.set(oldComp,newDom);
+					return newDom;
 				} else return dom;
-			} else {
-				oldComp.willUnmount();
-				this.nodeToComponent.set(dom,newComp);
-				this.componentToNode.remove(oldComp);
-				this.componentToNode.set(newComp,dom);
-				newComp.willMount();
-				var node1 = this.renderComponent(newComp);
-				newComp.apply = $bind(this,this.apply);
-				var dom1 = this.applyToNode(node1,dom,parent,post,false);
-				newComp.node = dom1;
-				post.splice(0,0,function() {
-					newComp.didMount();
-				});
-				this.nodeToComponent.set(dom1,newComp);
-				this.componentToNode.set(newComp,dom1);
-				oldComp.isUnmounted = true;
-				oldComp.node = null;
-				oldComp.didUnmount();
-				return dom1;
 			}
 		} else {
 			newComp.willMount();
@@ -421,23 +426,32 @@ doom_html_Render.prototype = {
 			post.splice(0,0,function() {
 				newComp.didMount();
 			});
-			this.nodeToComponent.set(dom2,newComp);
-			this.componentToNode.set(newComp,dom2);
+			this.domComponentMap.set(newComp,dom2);
 			return dom2;
 		}
 	}
 	,unmountDomComponent: function(dom) {
-		var comp = this.nodeToComponent.h[dom.__id__];
-		if(null == comp) return;
-		this.unmountComponent(comp);
+		var comps = this.domComponentMap.getComponents(dom);
+		if(null == comps) return;
+		var _g = 0;
+		while(_g < comps.length) {
+			var comp = comps[_g];
+			++_g;
+			this.unmountComponent(comp);
+		}
 	}
 	,renderComponent: function(comp) {
-		return comp.render();
+		try {
+			return comp.render();
+		} catch( e ) {
+			haxe_CallStack.lastException = e;
+			if (e instanceof js__$Boot_HaxeError) e = e.val;
+			var typeName = thx_Types.toString(Type["typeof"](comp));
+			throw new thx_error_ErrorWrapper("unable to render " + typeName,e,null,{ fileName : "Render.hx", lineNumber : 225, className : "doom.html.Render", methodName : "renderComponent"});
+		}
 	}
 	,unmountComponent: function(comp) {
-		var node = this.componentToNode.h[comp.__id__];
-		this.componentToNode.remove(comp);
-		this.nodeToComponent.remove(node);
+		this.domComponentMap.removeByComponent(comp);
 		comp.willUnmount();
 		comp.isUnmounted = true;
 		comp.node = null;
@@ -447,8 +461,8 @@ doom_html_Render.prototype = {
 		var _g = this;
 		if(dom.nodeType == 1 && dom.tagName == name.toUpperCase()) {
 			this.applyNodeAttributes(attributes,dom);
-			thx_Arrays.each(this.zipVChildrenAndNodeList(children,dom.childNodes),function(t) {
-				_g.applyVChildToNode(t._0,t._1,dom,post,true);
+			thx_Arrays.each(this.zipVNodesAndNodeList(children,dom.childNodes),function(t) {
+				_g.applyToNode(t._0,t._1,dom,post,true);
 			});
 			return dom;
 		} else {
@@ -479,7 +493,7 @@ doom_html_Render.prototype = {
 		parent.replaceChild(newDom,oldDom);
 		return newDom;
 	}
-	,zipVChildrenAndNodeList: function(vnodes,children) {
+	,zipVNodesAndNodeList: function(vnodes,children) {
 		var len;
 		var a = vnodes.length;
 		var b = children.length;
@@ -598,26 +612,6 @@ doom_html_Render.prototype = {
 			}
 		}
 	}
-	,generateVChildDom: function(node,post) {
-		switch(node[1]) {
-		case 0:
-			var n = node[2];
-			return this.generateDom(n,post);
-		case 1:
-			var comp = node[2];
-			comp.willMount();
-			var node1 = this.renderComponent(comp);
-			var dom = this.generateDom(node1,post);
-			comp.node = dom;
-			comp.apply = $bind(this,this.apply);
-			post.splice(0,0,function() {
-				comp.didMount();
-			});
-			this.nodeToComponent.set(dom,comp);
-			this.componentToNode.set(comp,dom);
-			return dom;
-		}
-	}
 	,generateDom: function(node,post) {
 		switch(node[1]) {
 		case 0:
@@ -634,6 +628,18 @@ doom_html_Render.prototype = {
 		case 3:
 			var text = node[2];
 			return this.doc.createTextNode(text);
+		case 4:
+			var comp = node[2];
+			comp.willMount();
+			var node1 = this.renderComponent(comp);
+			var dom = this.generateDom(node1,post);
+			comp.node = dom;
+			comp.apply = $bind(this,this.apply);
+			post.splice(0,0,function() {
+				comp.didMount();
+			});
+			this.domComponentMap.set(comp,dom);
+			return dom;
 		}
 	}
 	,createElement: function(name,attributes,children,post) {
@@ -646,7 +652,7 @@ doom_html_Render.prototype = {
 			var _this = this.namespaces;
 			if(__map_reserved[prefix] != null) tmp = _this.getReserved(prefix); else tmp = _this.h[prefix];
 			var ns = tmp;
-			if(null == ns) throw new thx_Error("element prefix \"" + prefix + "\" is not associated to any namespace. Add the right namespace to Doom.namespaces.",null,{ fileName : "Render.hx", lineNumber : 381, className : "doom.html.Render", methodName : "createElement"});
+			if(null == ns) throw new thx_Error("element prefix \"" + prefix + "\" is not associated to any namespace. Add the right namespace to Doom.namespaces.",null,{ fileName : "Render.hx", lineNumber : 364, className : "doom.html.Render", methodName : "createElement"});
 			el = this.doc.createElementNS(ns,name1);
 		} else el = this.doc.createElement(name);
 		this.applyNodeAttributes(attributes,el);
@@ -654,12 +660,53 @@ doom_html_Render.prototype = {
 		while(tmp1.hasNext()) {
 			var child = tmp1.next();
 			if(null == child) continue;
-			var n = this.generateVChildDom(child,post);
+			var n = this.generateDom(child,post);
 			el.appendChild(n);
 		}
 		return el;
 	}
 	,__class__: doom_html_Render
+};
+var doom_html__$Render_DomComponentMap = function() {
+	this.componentToDom = new haxe_ds_ObjectMap();
+	this.domToComponent = new haxe_ds_ObjectMap();
+};
+doom_html__$Render_DomComponentMap.__name__ = ["doom","html","_Render","DomComponentMap"];
+doom_html__$Render_DomComponentMap.prototype = {
+	domToComponent: null
+	,componentToDom: null
+	,getComponents: function(dom) {
+		return this.domToComponent.h[dom.__id__];
+	}
+	,getDom: function(comp) {
+		return this.componentToDom.h[comp.__id__];
+	}
+	,set: function(comp,dom) {
+		this.componentToDom.set(comp,dom);
+		var list = this.domToComponent.h[dom.__id__];
+		if(null == list) {
+			list = [comp];
+			this.domToComponent.set(dom,list);
+		} else list.push(comp);
+	}
+	,removeByComponent: function(comp) {
+		var dom = this.componentToDom.h[comp.__id__];
+		this.componentToDom.remove(comp);
+		var list = this.getComponents(dom);
+		HxOverrides.remove(list,comp);
+		if(list.length == 0) this.domToComponent.remove(dom);
+	}
+	,removeByDom: function(dom) {
+		var _g = 0;
+		var _g1 = this.getComponents(dom);
+		while(_g < _g1.length) {
+			var comp = _g1[_g];
+			++_g;
+			this.componentToDom.remove(comp);
+		}
+		this.domToComponent.remove(dom);
+	}
+	,__class__: doom_html__$Render_DomComponentMap
 };
 var Doom = function() { };
 Doom.__name__ = ["Doom"];
@@ -805,7 +852,7 @@ HxOverrides.iter = function(a) {
 var Index = function() { };
 Index.__name__ = ["Index"];
 Index.main = function() {
-	Doom.browser.mount(doom_core_VChildImpl.Comp(new All({ })),window.document.getElementById("root"));
+	Doom.browser.mount(doom_core_VNodeImpl.Comp(new All({ })),window.document.getElementById("root"));
 };
 var Lambda = function() { };
 Lambda.__name__ = ["Lambda"];
@@ -1050,7 +1097,7 @@ doom_bs_Alert["with"] = function(type,options,children) {
 doom_bs_Alert.__super__ = doom_html_Component;
 doom_bs_Alert.prototype = $extend(doom_html_Component.prototype,{
 	render: function() {
-		var children = doom_core__$VChildren_VChildren_$Impl_$.children([]);
+		var children = doom_core__$VNodes_VNodes_$Impl_$.children([]);
 		if(this.props.dismissable == true) {
 			var _g = new haxe_ds_StringMap();
 			var value = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("button");
@@ -1065,9 +1112,9 @@ doom_bs_Alert.prototype = $extend(doom_html_Component.prototype,{
 			var _g11 = new haxe_ds_StringMap();
 			var value4 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("true");
 			if(__map_reserved["aria-hidden"] != null) _g11.setReserved("aria-hidden",value4); else _g11.h["aria-hidden"] = value4;
-			doom_core__$VChildren_VChildren_$Impl_$.add(children,doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("button",attributes,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("span",_g11,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("×"))])))]))));
+			doom_core__$VNodes_VNodes_$Impl_$.add(children,doom_core__$VNode_VNode_$Impl_$.el("button",attributes,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("span",_g11,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("×")]))])));
 		}
-		children = doom_core__$VChildren_VChildren_$Impl_$.children(children.concat(this.children));
+		children = doom_core__$VNodes_VNodes_$Impl_$.children(children.concat(this.children));
 		var _g1 = new haxe_ds_StringMap();
 		var _g4 = new haxe_ds_StringMap();
 		if(__map_reserved.alert != null) _g4.setReserved("alert",true); else _g4.h["alert"] = true;
@@ -1454,7 +1501,7 @@ doom_bs_CloseButton.prototype = $extend(doom_html_Component.prototype,{
 		var _g1 = new haxe_ds_StringMap();
 		var value4 = this.props.dismissAlert == true?doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("true"):null;
 		if(__map_reserved["aria-hidden"] != null) _g1.setReserved("aria-hidden",value4); else _g1.h["aria-hidden"] = value4;
-		return doom_core__$VNode_VNode_$Impl_$.el("button",attributes,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("span",_g1,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text("×"))])))]));
+		return doom_core__$VNode_VNode_$Impl_$.el("button",attributes,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("span",_g1,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text("×")]))]));
 	}
 	,__class__: doom_bs_CloseButton
 });
@@ -1777,7 +1824,7 @@ doom_bs_Progress.prototype = $extend(doom_html_Component.prototype,{
 		if(__map_reserved.value != null) _g1.setReserved("value",value7); else _g1.h["value"] = value7;
 		var value8 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("" + this.props.max);
 		if(__map_reserved.max != null) _g1.setReserved("max",value8); else _g1.h["max"] = value8;
-		return doom_core__$VNode_VNode_$Impl_$.el("progress",_g1,doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text(Math.round(this.props.value / this.props.max * 100) + "%"))]));
+		return doom_core__$VNode_VNode_$Impl_$.el("progress",_g1,doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text(Math.round(this.props.value / this.props.max * 100) + "%")]));
 	}
 	,__class__: doom_bs_Progress
 });
@@ -1910,7 +1957,7 @@ doom_bs_RadioButton.prototype = $extend(doom_html_Component.prototype,{
 		if(__map_reserved.autocomplete != null) _g1.setReserved("autocomplete",value4); else _g1.h["autocomplete"] = value4;
 		var value5 = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromBool(true);
 		if(__map_reserved.checked != null) _g1.setReserved("checked",value5); else _g1.h["checked"] = value5;
-		return doom_core__$VNode_VNode_$Impl_$.el("label",attributes,doom_core__$VChildren_VChildren_$Impl_$.children(doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core__$VNode_VNode_$Impl_$.el("input",_g1,null))]).concat(this.children)));
+		return doom_core__$VNode_VNode_$Impl_$.el("label",attributes,doom_core__$VNodes_VNodes_$Impl_$.children(doom_core__$VNodes_VNodes_$Impl_$.children([doom_core__$VNode_VNode_$Impl_$.el("input",_g1,null)]).concat(this.children)));
 	}
 	,__class__: doom_bs_RadioButton
 });
@@ -1926,7 +1973,7 @@ doom_bs_RadioButtonGroup.prototype = $extend(doom_html_Component.prototype,{
 	render: function() {
 		var _g = this;
 		var itemOptions = { name : this.props.name, disabled : this.props.disabled, outline : this.props.outline, size : this.props.size};
-		return doom_core__$VNode_VNode_$Impl_$.el("div",null,doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_ButtonGroup["with"]({ toggle : true},doom_core__$VChildren_VChildren_$Impl_$.children(this.props.values.map(function(value) {
+		return doom_core__$VNode_VNode_$Impl_$.el("div",null,doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_ButtonGroup["with"]({ toggle : true},doom_core__$VNodes_VNodes_$Impl_$.children(this.props.values.map(function(value) {
 			var style = value.style;
 			if(null == style) style = _g.props.style;
 			if(null == style) style = doom_bs_ButtonStyle.Primary;
@@ -2182,7 +2229,7 @@ doom_bs_Table.responsive = function(options,children) {
 	var _g = new haxe_ds_StringMap();
 	var value = doom_core__$AttributeValue_AttributeValue_$Impl_$.fromString("responsive-table");
 	if(__map_reserved["class"] != null) _g.setReserved("class",value); else _g.h["class"] = value;
-	return doom_core__$VNode_VNode_$Impl_$.el("div",_g,doom_core__$VChildren_VChildren_$Impl_$.children([doom_bs_Table["with"](options,children)]));
+	return doom_core__$VNode_VNode_$Impl_$.el("div",_g,doom_core__$VNodes_VNodes_$Impl_$.children([doom_bs_Table["with"](options,children)]));
 };
 doom_bs_Table.__super__ = doom_html_Component;
 doom_bs_Table.prototype = $extend(doom_html_Component.prototype,{
@@ -2547,65 +2594,13 @@ doom_core_SelectorParser.prototype = {
 	}
 	,__class__: doom_core_SelectorParser
 };
-var doom_core__$VChild_VChild_$Impl_$ = {};
-doom_core__$VChild_VChild_$Impl_$.__name__ = ["doom","core","_VChild","VChild_Impl_"];
-doom_core__$VChild_VChild_$Impl_$.node = function(node) {
-	return doom_core_VChildImpl.Node(node);
-};
-doom_core__$VChild_VChild_$Impl_$.text = function(text) {
-	return doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text(text));
-};
-doom_core__$VChild_VChild_$Impl_$.comp = function(comp) {
-	return doom_core_VChildImpl.Comp(comp);
-};
-var doom_core_VChildImpl = { __ename__ : ["doom","core","VChildImpl"], __constructs__ : ["Node","Comp"] };
-doom_core_VChildImpl.Node = function(node) { var $x = ["Node",0,node]; $x.__enum__ = doom_core_VChildImpl; $x.toString = $estr; return $x; };
-doom_core_VChildImpl.Comp = function(comp) { var $x = ["Comp",1,comp]; $x.__enum__ = doom_core_VChildImpl; $x.toString = $estr; return $x; };
-var doom_core__$VChildren_VChildren_$Impl_$ = {};
-doom_core__$VChildren_VChildren_$Impl_$.__name__ = ["doom","core","_VChildren","VChildren_Impl_"];
-doom_core__$VChildren_VChildren_$Impl_$.child = function(child) {
-	return doom_core__$VChildren_VChildren_$Impl_$.children([child]);
-};
-doom_core__$VChildren_VChildren_$Impl_$.node = function(node) {
-	return doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(node)]);
-};
-doom_core__$VChildren_VChildren_$Impl_$.text = function(text) {
-	return doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(doom_core_VNodeImpl.Text(text))]);
-};
-doom_core__$VChildren_VChildren_$Impl_$.comp = function(comp) {
-	return doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Comp(comp)]);
-};
-doom_core__$VChildren_VChildren_$Impl_$.children = function(children) {
-	var this1 = children;
-	return this1;
-};
-doom_core__$VChildren_VChildren_$Impl_$.nodes = function(children) {
-	return doom_core__$VChildren_VChildren_$Impl_$.children(children.map(doom_core__$VChild_VChild_$Impl_$.node));
-};
-doom_core__$VChildren_VChildren_$Impl_$.toArray = function(this1) {
-	return this1;
-};
-doom_core__$VChildren_VChildren_$Impl_$._new = function(arr) {
-	var this1 = arr;
-	return this1;
-};
-doom_core__$VChildren_VChildren_$Impl_$.add = function(this1,child) {
-	this1.push(child);
-	return doom_core__$VChildren_VChildren_$Impl_$.children(this1);
-};
-doom_core__$VChildren_VChildren_$Impl_$.concat = function(this1,other) {
-	return doom_core__$VChildren_VChildren_$Impl_$.children(this1.concat(other));
-};
-doom_core__$VChildren_VChildren_$Impl_$.copy = function(this1) {
-	return doom_core__$VChildren_VChildren_$Impl_$.children(this1.slice());
-};
-doom_core__$VChildren_VChildren_$Impl_$.filter = function(this1,predicate) {
-	return doom_core__$VChildren_VChildren_$Impl_$.children(this1.filter(predicate));
-};
 var doom_core__$VNode_VNode_$Impl_$ = {};
 doom_core__$VNode_VNode_$Impl_$.__name__ = ["doom","core","_VNode","VNode_Impl_"];
-doom_core__$VNode_VNode_$Impl_$.text = function(s) {
-	return doom_core_VNodeImpl.Text(s);
+doom_core__$VNode_VNode_$Impl_$.text = function(text) {
+	return doom_core_VNodeImpl.Text(text);
+};
+doom_core__$VNode_VNode_$Impl_$.comp = function(comp) {
+	return doom_core_VNodeImpl.Comp(comp);
 };
 doom_core__$VNode_VNode_$Impl_$.raw = function(content) {
 	return doom_core_VNodeImpl.Raw(content);
@@ -2615,20 +2610,53 @@ doom_core__$VNode_VNode_$Impl_$.comment = function(content) {
 };
 doom_core__$VNode_VNode_$Impl_$.el = function(name,attributes,children) {
 	if(null == attributes) attributes = new haxe_ds_StringMap();
-	if(null == children) children = doom_core__$VChildren_VChildren_$Impl_$.children([]);
+	if(null == children) children = doom_core__$VNodes_VNodes_$Impl_$.children([]);
 	return doom_core_VNodeImpl.Element(name,attributes,children);
 };
-doom_core__$VNode_VNode_$Impl_$.asChild = function(this1) {
-	return doom_core_VChildImpl.Node(this1);
+doom_core__$VNode_VNode_$Impl_$.asNodes = function(this1) {
+	return doom_core__$VNodes_VNodes_$Impl_$.children([this1]);
 };
-doom_core__$VNode_VNode_$Impl_$.asChildren = function(this1) {
-	return doom_core__$VChildren_VChildren_$Impl_$.children([doom_core_VChildImpl.Node(this1)]);
-};
-var doom_core_VNodeImpl = { __ename__ : ["doom","core","VNodeImpl"], __constructs__ : ["Element","Comment","Raw","Text"] };
+var doom_core_VNodeImpl = { __ename__ : ["doom","core","VNodeImpl"], __constructs__ : ["Element","Comment","Raw","Text","Comp"] };
 doom_core_VNodeImpl.Element = function(name,attributes,children) { var $x = ["Element",0,name,attributes,children]; $x.__enum__ = doom_core_VNodeImpl; $x.toString = $estr; return $x; };
 doom_core_VNodeImpl.Comment = function(comment) { var $x = ["Comment",1,comment]; $x.__enum__ = doom_core_VNodeImpl; $x.toString = $estr; return $x; };
 doom_core_VNodeImpl.Raw = function(code) { var $x = ["Raw",2,code]; $x.__enum__ = doom_core_VNodeImpl; $x.toString = $estr; return $x; };
 doom_core_VNodeImpl.Text = function(text) { var $x = ["Text",3,text]; $x.__enum__ = doom_core_VNodeImpl; $x.toString = $estr; return $x; };
+doom_core_VNodeImpl.Comp = function(comp) { var $x = ["Comp",4,comp]; $x.__enum__ = doom_core_VNodeImpl; $x.toString = $estr; return $x; };
+var doom_core__$VNodes_VNodes_$Impl_$ = {};
+doom_core__$VNodes_VNodes_$Impl_$.__name__ = ["doom","core","_VNodes","VNodes_Impl_"];
+doom_core__$VNodes_VNodes_$Impl_$.child = function(child) {
+	return doom_core__$VNodes_VNodes_$Impl_$.children([child]);
+};
+doom_core__$VNodes_VNodes_$Impl_$.text = function(text) {
+	return doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Text(text)]);
+};
+doom_core__$VNodes_VNodes_$Impl_$.comp = function(comp) {
+	return doom_core__$VNodes_VNodes_$Impl_$.children([doom_core_VNodeImpl.Comp(comp)]);
+};
+doom_core__$VNodes_VNodes_$Impl_$.children = function(children) {
+	var this1 = children;
+	return this1;
+};
+doom_core__$VNodes_VNodes_$Impl_$._new = function(arr) {
+	var this1 = arr;
+	return this1;
+};
+doom_core__$VNodes_VNodes_$Impl_$.add = function(this1,child) {
+	this1.push(child);
+	return doom_core__$VNodes_VNodes_$Impl_$.children(this1);
+};
+doom_core__$VNodes_VNodes_$Impl_$.concat = function(this1,other) {
+	return doom_core__$VNodes_VNodes_$Impl_$.children(this1.concat(other));
+};
+doom_core__$VNodes_VNodes_$Impl_$.copy = function(this1) {
+	return doom_core__$VNodes_VNodes_$Impl_$.children(this1.slice());
+};
+doom_core__$VNodes_VNodes_$Impl_$.filter = function(this1,predicate) {
+	return doom_core__$VNodes_VNodes_$Impl_$.children(this1.filter(predicate));
+};
+doom_core__$VNodes_VNodes_$Impl_$.toArray = function(this1) {
+	return this1;
+};
 var doom_html_AttributeType = { __ename__ : ["doom","html","AttributeType"], __constructs__ : ["BooleanAttribute","Property","BooleanProperty","OverloadedBooleanAttribute","NumericAttribute","PositiveNumericAttribute","SideEffectProperty"] };
 doom_html_AttributeType.BooleanAttribute = ["BooleanAttribute",0];
 doom_html_AttributeType.BooleanAttribute.toString = $estr;
@@ -3092,7 +3120,7 @@ doom_html_Html.dummy = function(text) {
 	return doom_core__$VNode_VNode_$Impl_$.el("div",_g);
 };
 doom_html_Html.comp = function(comp) {
-	return doom_core_VChildImpl.Comp(comp);
+	return doom_core_VNodeImpl.Comp(comp);
 };
 var dots_Dom = function() { };
 dots_Dom.__name__ = ["dots","Dom"];
@@ -3934,6 +3962,9 @@ thx_Arrays.monoid = function() {
 thx_Arrays.after = function(array,element) {
 	return array.slice(thx__$ReadonlyArray_ReadonlyArray_$Impl_$.indexOf(array,element) + 1);
 };
+thx_Arrays.atIndex = function(array,i) {
+	if(i >= 0 && i < array.length) return haxe_ds_Option.Some(array[i]); else return haxe_ds_Option.None;
+};
 thx_Arrays.each = function(arr,effect) {
 	var tmp = HxOverrides.iter(arr);
 	while(tmp.hasNext()) {
@@ -4186,14 +4217,15 @@ thx_Arrays.from = function(array,element) {
 	return array.slice(thx__$ReadonlyArray_ReadonlyArray_$Impl_$.indexOf(array,element));
 };
 thx_Arrays.groupByAppend = function(arr,resolver,map) {
-	arr.map(function(v) {
+	var _g1 = 0;
+	var _g = arr.length;
+	while(_g1 < _g) {
+		var i = _g1++;
+		var v = arr[i];
 		var key = resolver(v);
-		var arr1 = map.get(key);
-		if(null == arr1) {
-			arr1 = [v];
-			map.set(key,arr1);
-		} else arr1.push(v);
-	});
+		var acc = map.get(key);
+		if(null == acc) map.set(key,[v]); else acc.push(v);
+	}
 	return map;
 };
 thx_Arrays.spanByIndex = function(arr,spanKey) {
@@ -4205,7 +4237,7 @@ thx_Arrays.spanByIndex = function(arr,spanKey) {
 	while(_g1 < _g) {
 		var i = _g1++;
 		var k = spanKey(i);
-		if(k == null) throw new thx_Error("spanKey function returned null for index " + i,null,{ fileName : "Arrays.hx", lineNumber : 486, className : "thx.Arrays", methodName : "spanByIndex"});
+		if(k == null) throw new thx_Error("spanKey function returned null for index " + i,null,{ fileName : "Arrays.hx", lineNumber : 497, className : "thx.Arrays", methodName : "spanByIndex"});
 		if(cur == k) acc[j].push(arr[i]); else {
 			cur = k;
 			++j;
@@ -4259,6 +4291,37 @@ thx_Arrays.pushIf = function(array,condition,value) {
 };
 thx_Arrays.reduce = function(array,callback,initial) {
 	return array.reduce(callback,initial);
+};
+thx_Arrays.foldLeft = function(array,init,f) {
+	return array.reduce(f,init);
+};
+thx_Arrays.foldLeftEither = function(array,init,f) {
+	var acc = thx_Either.Right(init);
+	var tmp = HxOverrides.iter(array);
+	while(tmp.hasNext()) {
+		var a = tmp.next();
+		switch(acc[1]) {
+		case 0:
+			var error = acc[2];
+			return acc;
+		case 1:
+			var b = acc[2];
+			acc = f(b,a);
+			break;
+		}
+	}
+	return acc;
+};
+thx_Arrays.foldMap = function(array,f,m) {
+	var array1 = array.map(f);
+	var init = thx__$Monoid_Monoid_$Impl_$.get_zero(m);
+	var _e = m;
+	return array1.reduce(function(a0,a1) {
+		return thx__$Monoid_Monoid_$Impl_$.append(_e,a0,a1);
+	},init);
+};
+thx_Arrays.fold = function(array,m) {
+	return thx_Arrays.foldMap(array,thx_Functions.identity,m);
 };
 thx_Arrays.resize = function(array,length,fill) {
 	while(array.length < length) array.push(fill);
@@ -4361,6 +4424,19 @@ thx_Arrays.traverseValidation = function(arr,f,s) {
 	var initial = thx_Either.Right([]);
 	return arr.reduce(function(acc,t) {
 		return thx__$Validation_Validation_$Impl_$.ap(f(t),thx__$Validation_Validation_$Impl_$.ap(acc,thx_Either.Right(function(ux) {
+			return function(u) {
+				ux.push(u);
+				return ux;
+			};
+		}),function(e1,e2) {
+			throw new js__$Boot_HaxeError("Unreachable");
+		}),s);
+	},initial);
+};
+thx_Arrays.traverseValidationIndexed = function(arr,f,s) {
+	var initial = thx_Either.Right([]);
+	return arr.reduce(function(acc,t,i) {
+		return thx__$Validation_Validation_$Impl_$.ap(f(t,i),thx__$Validation_Validation_$Impl_$.ap(acc,thx_Either.Right(function(ux) {
 			return function(u) {
 				ux.push(u);
 				return ux;
@@ -4559,17 +4635,7 @@ thx_Arrays.maxBy = function(arr,ord) {
 	if(arr.length == 0) return haxe_ds_Option.None; else {
 		var _e = ord;
 		return haxe_ds_Option.Some(arr.reduce(function(a0,a1) {
-			var tmp;
-			var _g = _e(a0,a1);
-			switch(_g[1]) {
-			case 0:case 2:
-				tmp = a1;
-				break;
-			case 1:
-				tmp = a0;
-				break;
-			}
-			return tmp;
+			return thx__$Ord_Ord_$Impl_$.max(_e,a0,a1);
 		},arr[0]));
 	}
 };
@@ -4577,19 +4643,21 @@ thx_Arrays.minBy = function(arr,ord) {
 	if(arr.length == 0) return haxe_ds_Option.None; else {
 		var _e = ord;
 		return haxe_ds_Option.Some(arr.reduce(function(a0,a1) {
-			var tmp;
-			var _g = _e(a0,a1);
-			switch(_g[1]) {
-			case 0:case 2:
-				tmp = a0;
-				break;
-			case 1:
-				tmp = a1;
-				break;
-			}
-			return tmp;
+			return thx__$Ord_Ord_$Impl_$.min(_e,a0,a1);
 		},arr[0]));
 	}
+};
+thx_Arrays.toMap = function(arr,keyOrder) {
+	var m = thx_fp_MapImpl.Tip;
+	var collisions = [];
+	var _g1 = 0;
+	var _g = arr.length;
+	while(_g1 < _g) {
+		var i = _g1++;
+		var tuple = arr[i];
+		if(thx_Options.isNone(thx_fp__$Map_Map_$Impl_$.lookup(m,tuple._0,keyOrder))) m = thx_fp__$Map_Map_$Impl_$.insert(m,tuple._0,tuple._1,keyOrder); else collisions.push(tuple._0);
+	}
+	return thx_Options.toFailure(thx__$Nel_Nel_$Impl_$.fromArray(collisions),m);
 };
 var thx_ArrayFloats = function() { };
 thx_ArrayFloats.__name__ = ["thx","ArrayFloats"];
@@ -4959,6 +5027,14 @@ thx_Dates.withMinute = function(date,minute) {
 };
 thx_Dates.withSecond = function(date,second) {
 	return thx_Dates.create(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes(),second);
+};
+thx_Dates.parseDate = function(s) {
+	try {
+		return thx_Either.Right(HxOverrides.strDate(s));
+	} catch( e ) {
+		haxe_CallStack.lastException = e;
+		return thx_Either.Left("" + s + " could not be parsed to a valid Date value.");
+	}
 };
 var thx_Dynamics = function() { };
 thx_Dynamics.__name__ = ["thx","Dynamics"];
@@ -5336,6 +5412,26 @@ thx_Eithers.orThrow = function(either,message) {
 		return v1;
 	}
 };
+thx_Eithers.toVNel = function(either) {
+	switch(either[1]) {
+	case 0:
+		var e = either[2];
+		return thx_Either.Left(thx__$Nel_Nel_$Impl_$.pure(e));
+	case 1:
+		var v = either[2];
+		return thx_Either.Right(v);
+	}
+};
+thx_Eithers.cata = function(either,l,r) {
+	switch(either[1]) {
+	case 0:
+		var l0 = either[2];
+		return l(l0);
+	case 1:
+		var r0 = either[2];
+		return r(r0);
+	}
+};
 var thx_Enums = function() { };
 thx_Enums.__name__ = ["thx","Enums"];
 thx_Enums.string = function(e) {
@@ -5354,6 +5450,9 @@ thx_Enums.compare = function(a,b) {
 	var v = a[1] - b[1];
 	if(v != 0) return v;
 	return thx_Arrays.compare(a.slice(2),b.slice(2));
+};
+thx_Enums.sameConstructor = function(a,b) {
+	return a[1] == b[1];
 };
 thx_Enums.min = function(a,b) {
 	if(thx_Enums.compare(a,b) < 0) return a; else return b;
@@ -5787,6 +5886,15 @@ thx_Functions8.curry = function(f) {
 		};
 	};
 };
+var thx_Functions9 = function() { };
+thx_Functions9.__name__ = ["thx","Functions9"];
+thx_Functions9.curry = function(f) {
+	return function(a,b,c,d,e,f0,g,h) {
+		return function(i) {
+			return f(a,b,c,d,e,f0,g,h,i);
+		};
+	};
+};
 var thx__$Functions_Reader_$Impl_$ = {};
 thx__$Functions_Reader_$Impl_$.__name__ = ["thx","_Functions","Reader_Impl_"];
 thx__$Functions_Reader_$Impl_$.flatMap = function(this1,f) {
@@ -6001,8 +6109,18 @@ thx_Iterables.isIterable = function(v) {
 thx_Iterables.map = function(it,f) {
 	return thx_Iterators.map($iterator(it)(),f);
 };
+thx_Iterables.fmap = function(it,f) {
+	return { iterator : function() {
+		return thx_Iterators.fmap($iterator(it)(),f);
+	}};
+};
 thx_Iterables.mapi = function(it,f) {
 	return thx_Iterators.mapi($iterator(it)(),f);
+};
+thx_Iterables.fmapi = function(it,f) {
+	return { iterator : function() {
+		return thx_Iterators.fmapi($iterator(it)(),f);
+	}};
 };
 thx_Iterables.order = function(it,sort) {
 	return thx_Iterators.order($iterator(it)(),sort);
@@ -6195,6 +6313,9 @@ thx_Iterators.last = function(it) {
 	while(it.hasNext()) buf = it.next();
 	return buf;
 };
+thx_Iterators.forEach = function(it,proc) {
+	while(it.hasNext()) proc(it.next());
+};
 thx_Iterators.map = function(it,f) {
 	var acc = [];
 	var tmp = it;
@@ -6203,6 +6324,9 @@ thx_Iterators.map = function(it,f) {
 		acc.push(f(v));
 	}
 	return acc;
+};
+thx_Iterators.fmap = function(it,f) {
+	return new thx_MapIterator(it,f);
 };
 thx_Iterators.mapi = function(it,f) {
 	var acc = [];
@@ -6214,22 +6338,35 @@ thx_Iterators.mapi = function(it,f) {
 	}
 	return acc;
 };
+thx_Iterators.fmapi = function(it,f) {
+	return new thx_MapIIterator(it,f);
+};
 thx_Iterators.order = function(it,sort) {
 	var n = thx_Iterators.toArray(it);
 	n.sort(sort);
 	return n;
 };
 thx_Iterators.reduce = function(it,callback,initial) {
-	thx_Iterators.map(it,function(v) {
-		initial = callback(initial,v);
-	});
-	return initial;
+	var result = initial;
+	while(it.hasNext()) result = callback(result,it.next());
+	return result;
 };
 thx_Iterators.reducei = function(it,callback,initial) {
 	thx_Iterators.mapi(it,function(v,i) {
 		initial = callback(initial,v,i);
 	});
 	return initial;
+};
+thx_Iterators.foldLeft = function(it,zero,f) {
+	return thx_Iterators.reduce(it,f,zero);
+};
+thx_Iterators.foldMap = function(it,f,m) {
+	var tmp = thx_Iterators.fmap(it,f);
+	var tmp1 = thx__$Monoid_Monoid_$Impl_$.get_zero(m);
+	var _e = m;
+	return thx_Iterators.foldLeft(tmp,tmp1,function(a0,a1) {
+		return thx__$Monoid_Monoid_$Impl_$.append(_e,a0,a1);
+	});
 };
 thx_Iterators.toArray = function(it) {
 	var elements = [];
@@ -6243,7 +6380,7 @@ thx_Iterators.toArray = function(it) {
 thx_Iterators.unzip = function(it) {
 	var a1 = [];
 	var a2 = [];
-	thx_Iterators.map(it,function(t) {
+	thx_Iterators.forEach(it,function(t) {
 		a1.push(t._0);
 		a2.push(t._1);
 	});
@@ -6254,7 +6391,7 @@ thx_Iterators.unzip3 = function(it) {
 	var a1 = [];
 	var a2 = [];
 	var a3 = [];
-	thx_Iterators.map(it,function(t) {
+	thx_Iterators.forEach(it,function(t) {
 		a1.push(t._0);
 		a2.push(t._1);
 		a3.push(t._2);
@@ -6267,7 +6404,7 @@ thx_Iterators.unzip4 = function(it) {
 	var a2 = [];
 	var a3 = [];
 	var a4 = [];
-	thx_Iterators.map(it,function(t) {
+	thx_Iterators.forEach(it,function(t) {
 		a1.push(t._0);
 		a2.push(t._1);
 		a3.push(t._2);
@@ -6282,7 +6419,7 @@ thx_Iterators.unzip5 = function(it) {
 	var a3 = [];
 	var a4 = [];
 	var a5 = [];
-	thx_Iterators.map(it,function(t) {
+	thx_Iterators.forEach(it,function(t) {
 		a1.push(t._0);
 		a2.push(t._1);
 		a3.push(t._2);
@@ -6323,6 +6460,42 @@ thx_Iterators.zip5 = function(it1,it2,it3,it4,it5) {
 		array.push(this1);
 	}
 	return array;
+};
+var thx_MapIterator = function(base,f) {
+	this.base = base;
+	this.f = f;
+};
+thx_MapIterator.__name__ = ["thx","MapIterator"];
+thx_MapIterator.prototype = {
+	base: null
+	,f: null
+	,next: function() {
+		return this.f(this.base.next());
+	}
+	,hasNext: function() {
+		return this.base.hasNext();
+	}
+	,__class__: thx_MapIterator
+};
+var thx_MapIIterator = function(base,f) {
+	this.i = 0;
+	this.base = base;
+	this.f = f;
+};
+thx_MapIIterator.__name__ = ["thx","MapIIterator"];
+thx_MapIIterator.prototype = {
+	base: null
+	,f: null
+	,i: null
+	,next: function() {
+		var result = this.f(this.base.next(),this.i);
+		this.i++;
+		return result;
+	}
+	,hasNext: function() {
+		return this.base.hasNext();
+	}
+	,__class__: thx_MapIIterator
 };
 var thx_Maps = function() { };
 thx_Maps.__name__ = ["thx","Maps"];
@@ -6576,6 +6749,14 @@ thx_Options.foldLeft = function(option,b,f) {
 		return f(b,v);
 	}
 };
+thx_Options.foldMap = function(option,f,m) {
+	var tmp = thx_Options.map(option,f);
+	var tmp1 = thx__$Monoid_Monoid_$Impl_$.get_zero(m);
+	var _e = m;
+	return thx_Options.foldLeft(tmp,tmp1,function(a0,a1) {
+		return thx__$Monoid_Monoid_$Impl_$.append(_e,a0,a1);
+	});
+};
 thx_Options.filter = function(option,f) {
 	switch(option[1]) {
 	case 0:
@@ -6602,6 +6783,9 @@ thx_Options.toBool = function(option) {
 	case 0:
 		return true;
 	}
+};
+thx_Options.isNone = function(option) {
+	return !thx_Options.toBool(option);
 };
 thx_Options.toOption = function(value) {
 	if(null == value) return haxe_ds_Option.None; else return haxe_ds_Option.Some(value);
@@ -6679,6 +6863,24 @@ thx_Options.toSuccessNel = function(option,error) {
 	case 0:
 		var v = option[2];
 		return thx_Either.Right(v);
+	}
+};
+thx_Options.toFailure = function(error,value) {
+	switch(error[1]) {
+	case 1:
+		return thx_Either.Right(value);
+	case 0:
+		var e = error[2];
+		return thx_Either.Left(e);
+	}
+};
+thx_Options.toFailureNel = function(error,value) {
+	switch(error[1]) {
+	case 1:
+		return thx_Either.Right(value);
+	case 0:
+		var e = error[2];
+		return thx_Either.Left(thx__$Nel_Nel_$Impl_$.pure(e));
 	}
 };
 thx_Options.ap2 = function(f,v1,v2) {
@@ -7851,6 +8053,23 @@ thx__$Validation_Validation_$Impl_$.map = function(this1,f) {
 		throw new js__$Boot_HaxeError("Unreachable");
 	});
 };
+thx__$Validation_Validation_$Impl_$.foldLeft = function(this1,b,f) {
+	switch(this1[1]) {
+	case 0:
+		return b;
+	case 1:
+		var a = this1[2];
+		return f(b,a);
+	}
+};
+thx__$Validation_Validation_$Impl_$.foldMap = function(this1,f,m) {
+	var tmp = thx_Eithers.map(this1,f);
+	var tmp1 = thx__$Monoid_Monoid_$Impl_$.get_zero(m);
+	var _e = m;
+	return thx__$Validation_Validation_$Impl_$.foldLeft(tmp,tmp1,function(a0,a1) {
+		return thx__$Monoid_Monoid_$Impl_$.append(_e,a0,a1);
+	});
+};
 thx__$Validation_Validation_$Impl_$.ap = function(this1,v,s) {
 	switch(this1[1]) {
 	case 0:
@@ -8043,6 +8262,13 @@ thx__$Validation_Validation_$Impl_$.val8 = function(f,v1,v2,v3,v4,v5,v6,v7,v8,s)
 		throw new js__$Boot_HaxeError("Unreachable");
 	}),s),s),s),s),s),s),s);
 };
+var thx_ValidationExtensions = function() { };
+thx_ValidationExtensions.__name__ = ["thx","ValidationExtensions"];
+thx_ValidationExtensions.leftMapNel = function(n,f) {
+	return thx_Eithers.leftMap(n,function(n1) {
+		return thx__$Nel_Nel_$Impl_$.map(n1,f);
+	});
+};
 var thx_error_AbstractMethod = function(posInfo) {
 	thx_Error.call(this,"method " + posInfo.className + "." + posInfo.methodName + "() is abstract",null,posInfo);
 };
@@ -8061,6 +8287,364 @@ thx_error_ErrorWrapper.prototype = $extend(thx_Error.prototype,{
 	innerError: null
 	,__class__: thx_error_ErrorWrapper
 });
+var thx_fp__$Map_Map_$Impl_$ = {};
+thx_fp__$Map_Map_$Impl_$.__name__ = ["thx","fp","_Map","Map_Impl_"];
+thx_fp__$Map_Map_$Impl_$.empty = function() {
+	return thx_fp_MapImpl.Tip;
+};
+thx_fp__$Map_Map_$Impl_$.singleton = function(k,v) {
+	return thx_fp_MapImpl.Bin(1,k,v,thx_fp_MapImpl.Tip,thx_fp_MapImpl.Tip);
+};
+thx_fp__$Map_Map_$Impl_$.bin = function(k,v,lhs,rhs) {
+	return thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(lhs) + thx_fp__$Map_Map_$Impl_$.size(rhs) + 1,k,v,lhs,rhs);
+};
+thx_fp__$Map_Map_$Impl_$.fromNative = function(map,comparator) {
+	var r = thx_fp_MapImpl.Tip;
+	var tmp = map.keys();
+	while(tmp.hasNext()) {
+		var key = tmp.next();
+		r = thx_fp__$Map_Map_$Impl_$.insert(r,key,map.get(key),comparator);
+	}
+	return r;
+};
+thx_fp__$Map_Map_$Impl_$.lookup = function(this1,key,comparator) {
+	switch(this1[1]) {
+	case 0:
+		return haxe_ds_Option.None;
+	case 1:
+		var rhs = this1[6];
+		var lhs = this1[5];
+		var xvalue = this1[4];
+		var xkey = this1[3];
+		var size = this1[2];
+		var c = comparator(key,xkey);
+		switch(c[1]) {
+		case 0:
+			return thx_fp__$Map_Map_$Impl_$.lookup(lhs,key,comparator);
+		case 1:
+			return thx_fp__$Map_Map_$Impl_$.lookup(rhs,key,comparator);
+		case 2:
+			return haxe_ds_Option.Some(xvalue);
+		}
+		break;
+	}
+};
+thx_fp__$Map_Map_$Impl_$.lookupTuple = function(this1,key,comparator) {
+	switch(this1[1]) {
+	case 0:
+		return haxe_ds_Option.None;
+	case 1:
+		var rhs = this1[6];
+		var lhs = this1[5];
+		var xvalue = this1[4];
+		var xkey = this1[3];
+		var size = this1[2];
+		var c = comparator(key,xkey);
+		switch(c[1]) {
+		case 0:
+			return thx_fp__$Map_Map_$Impl_$.lookupTuple(lhs,key,comparator);
+		case 1:
+			return thx_fp__$Map_Map_$Impl_$.lookupTuple(rhs,key,comparator);
+		case 2:
+			var this2 = { _0 : xkey, _1 : xvalue};
+			return haxe_ds_Option.Some(this2);
+		}
+		break;
+	}
+};
+thx_fp__$Map_Map_$Impl_$["delete"] = function(this1,key,comparator) {
+	switch(this1[1]) {
+	case 0:
+		return thx_fp_MapImpl.Tip;
+	case 1:
+		var rhs = this1[6];
+		var lhs = this1[5];
+		var x = this1[4];
+		var kx = this1[3];
+		var size = this1[2];
+		var _g = comparator(key,kx);
+		switch(_g[1]) {
+		case 0:
+			return thx_fp__$Map_Map_$Impl_$.balance(kx,x,thx_fp__$Map_Map_$Impl_$["delete"](lhs,key,comparator),rhs);
+		case 1:
+			return thx_fp__$Map_Map_$Impl_$.balance(kx,x,lhs,thx_fp__$Map_Map_$Impl_$["delete"](rhs,key,comparator));
+		case 2:
+			return thx_fp__$Map_Map_$Impl_$.glue(lhs,rhs);
+		}
+		break;
+	}
+};
+thx_fp__$Map_Map_$Impl_$.insert = function(this1,kx,x,comparator) {
+	switch(this1[1]) {
+	case 0:
+		return thx_fp_MapImpl.Bin(1,kx,x,thx_fp_MapImpl.Tip,thx_fp_MapImpl.Tip);
+	case 1:
+		var rhs = this1[6];
+		var lhs = this1[5];
+		var y = this1[4];
+		var ky = this1[3];
+		var sz = this1[2];
+		var _g = comparator(kx,ky);
+		switch(_g[1]) {
+		case 0:
+			return thx_fp__$Map_Map_$Impl_$.balance(ky,y,thx_fp__$Map_Map_$Impl_$.insert(lhs,kx,x,comparator),rhs);
+		case 1:
+			return thx_fp__$Map_Map_$Impl_$.balance(ky,y,lhs,thx_fp__$Map_Map_$Impl_$.insert(rhs,kx,x,comparator));
+		case 2:
+			return thx_fp_MapImpl.Bin(sz,kx,x,lhs,rhs);
+		}
+		break;
+	}
+};
+thx_fp__$Map_Map_$Impl_$.foldLeft = function(this1,b,f) {
+	switch(this1[1]) {
+	case 0:
+		return b;
+	case 1:
+		var r = this1[6];
+		var l = this1[5];
+		var x = this1[4];
+		return thx_fp__$Map_Map_$Impl_$.foldLeft(r,thx_fp__$Map_Map_$Impl_$.foldLeft(l,f(b,x),f),f);
+	}
+};
+thx_fp__$Map_Map_$Impl_$.map = function(this1,f) {
+	switch(this1[1]) {
+	case 0:
+		return thx_fp_MapImpl.Tip;
+	case 1:
+		var rhs = this1[6];
+		var lhs = this1[5];
+		var y = this1[4];
+		var ky = this1[3];
+		var sz = this1[2];
+		return thx_fp_MapImpl.Bin(sz,ky,f(y),thx_fp__$Map_Map_$Impl_$.map(lhs,f),thx_fp__$Map_Map_$Impl_$.map(rhs,f));
+	}
+};
+thx_fp__$Map_Map_$Impl_$.values = function(this1) {
+	return thx_fp__$Map_Map_$Impl_$.foldLeft(this1,[],function(acc,v) {
+		acc.push(v);
+		return acc;
+	});
+};
+thx_fp__$Map_Map_$Impl_$.foldLeftKeys = function(this1,b,f) {
+	switch(this1[1]) {
+	case 0:
+		return b;
+	case 1:
+		var r = this1[6];
+		var l = this1[5];
+		var kx = this1[3];
+		return thx_fp__$Map_Map_$Impl_$.foldLeftKeys(r,thx_fp__$Map_Map_$Impl_$.foldLeftKeys(l,f(b,kx),f),f);
+	}
+};
+thx_fp__$Map_Map_$Impl_$.foldLeftAll = function(this1,b,f) {
+	switch(this1[1]) {
+	case 0:
+		return b;
+	case 1:
+		var r = this1[6];
+		var l = this1[5];
+		var x = this1[4];
+		var kx = this1[3];
+		return thx_fp__$Map_Map_$Impl_$.foldLeftAll(r,thx_fp__$Map_Map_$Impl_$.foldLeftAll(l,f(b,kx,x),f),f);
+	}
+};
+thx_fp__$Map_Map_$Impl_$.foldLeftTuples = function(this1,b,f) {
+	switch(this1[1]) {
+	case 0:
+		return b;
+	case 1:
+		var r = this1[6];
+		var l = this1[5];
+		var x = this1[4];
+		var kx = this1[3];
+		var this2 = { _0 : kx, _1 : x};
+		return thx_fp__$Map_Map_$Impl_$.foldLeftTuples(r,thx_fp__$Map_Map_$Impl_$.foldLeftTuples(l,f(b,this2),f),f);
+	}
+};
+thx_fp__$Map_Map_$Impl_$.size = function(this1) {
+	switch(this1[1]) {
+	case 0:
+		return 0;
+	case 1:
+		var size = this1[2];
+		return size;
+	}
+};
+thx_fp__$Map_Map_$Impl_$.balance = function(k,x,lhs,rhs) {
+	var ls = thx_fp__$Map_Map_$Impl_$.size(lhs);
+	var rs = thx_fp__$Map_Map_$Impl_$.size(rhs);
+	var xs = ls + rs + 1;
+	if(ls + rs <= 1) return thx_fp_MapImpl.Bin(xs,k,x,lhs,rhs); else if(rs >= 5 * ls) return thx_fp__$Map_Map_$Impl_$.rotateLeft(k,x,lhs,rhs); else if(ls >= 5 * rs) return thx_fp__$Map_Map_$Impl_$.rotateRight(k,x,lhs,rhs); else return thx_fp_MapImpl.Bin(xs,k,x,lhs,rhs);
+};
+thx_fp__$Map_Map_$Impl_$.glue = function(this1,that) {
+	var l = this1;
+	var l1 = this1;
+	switch(this1[1]) {
+	case 0:
+		return that;
+	default:
+		var r = that;
+		var r1 = that;
+		switch(that[1]) {
+		case 0:
+			return this1;
+		default:
+			if(thx_fp__$Map_Map_$Impl_$.size(l) > thx_fp__$Map_Map_$Impl_$.size(r)) {
+				var t = thx_fp__$Map_Map_$Impl_$.deleteFindMax(l);
+				return thx_fp__$Map_Map_$Impl_$.balance(t.k,t.x,t.t,r);
+			} else {
+				var t1 = thx_fp__$Map_Map_$Impl_$.deleteFindMin(r1);
+				return thx_fp__$Map_Map_$Impl_$.balance(t1.k,t1.x,l1,t1.t);
+			}
+		}
+	}
+};
+thx_fp__$Map_Map_$Impl_$.deleteFindMin = function(map) {
+	switch(map[1]) {
+	case 1:
+		var l = map[5];
+		switch(map[5][1]) {
+		case 0:
+			var r = map[6];
+			var x = map[4];
+			var k = map[3];
+			return { k : k, x : x, t : r};
+		default:
+			var r1 = map[6];
+			var x1 = map[4];
+			var k1 = map[3];
+			var t = thx_fp__$Map_Map_$Impl_$.deleteFindMin(l);
+			return { k : t.k, x : t.x, t : thx_fp__$Map_Map_$Impl_$.balance(k1,x1,t.t,r1)};
+		}
+		break;
+	case 0:
+		throw new thx_Error("can not return the minimal element of an empty map",null,{ fileName : "Map.hx", lineNumber : 161, className : "thx.fp._Map.Map_Impl_", methodName : "deleteFindMin"});
+		break;
+	}
+};
+thx_fp__$Map_Map_$Impl_$.deleteFindMax = function(map) {
+	switch(map[1]) {
+	case 1:
+		var r = map[6];
+		switch(map[6][1]) {
+		case 0:
+			var l = map[5];
+			var x = map[4];
+			var k = map[3];
+			return { k : k, x : x, t : l};
+		default:
+			var l1 = map[5];
+			var x1 = map[4];
+			var k1 = map[3];
+			var t = thx_fp__$Map_Map_$Impl_$.deleteFindMax(r);
+			return { k : t.k, x : t.x, t : thx_fp__$Map_Map_$Impl_$.balance(k1,x1,l1,t.t)};
+		}
+		break;
+	case 0:
+		throw new thx_Error("can not return the maximal element of an empty map",null,{ fileName : "Map.hx", lineNumber : 171, className : "thx.fp._Map.Map_Impl_", methodName : "deleteFindMax"});
+		break;
+	}
+};
+thx_fp__$Map_Map_$Impl_$.rotateLeft = function(k,x,lhs,rhs) {
+	switch(rhs[1]) {
+	case 1:
+		var ry = rhs[6];
+		var ly = rhs[5];
+		if(thx_fp__$Map_Map_$Impl_$.size(ly) < 2 * thx_fp__$Map_Map_$Impl_$.size(ry)) return thx_fp__$Map_Map_$Impl_$.singleLeft(k,x,lhs,rhs); else return thx_fp__$Map_Map_$Impl_$.doubleLeft(k,x,lhs,rhs);
+		break;
+	default:
+		return thx_fp__$Map_Map_$Impl_$.doubleLeft(k,x,lhs,rhs);
+	}
+};
+thx_fp__$Map_Map_$Impl_$.rotateRight = function(k,x,lhs,rhs) {
+	switch(lhs[1]) {
+	case 1:
+		var ry = lhs[6];
+		var ly = lhs[5];
+		if(thx_fp__$Map_Map_$Impl_$.size(ry) < 2 * thx_fp__$Map_Map_$Impl_$.size(ly)) return thx_fp__$Map_Map_$Impl_$.singleRight(k,x,lhs,rhs); else return thx_fp__$Map_Map_$Impl_$.doubleRight(k,x,lhs,rhs);
+		break;
+	default:
+		return thx_fp__$Map_Map_$Impl_$.doubleRight(k,x,lhs,rhs);
+	}
+};
+thx_fp__$Map_Map_$Impl_$.singleLeft = function(k1,x1,t1,rhs) {
+	switch(rhs[1]) {
+	case 1:
+		var t3 = rhs[6];
+		var t2 = rhs[5];
+		var x2 = rhs[4];
+		var k2 = rhs[3];
+		var lhs = thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(t1) + thx_fp__$Map_Map_$Impl_$.size(t2) + 1,k1,x1,t1,t2);
+		return thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(lhs) + thx_fp__$Map_Map_$Impl_$.size(t3) + 1,k2,x2,lhs,t3);
+	default:
+		throw new thx_Error("damn it, this should never happen",null,{ fileName : "Map.hx", lineNumber : 193, className : "thx.fp._Map.Map_Impl_", methodName : "singleLeft"});
+	}
+};
+thx_fp__$Map_Map_$Impl_$.singleRight = function(k1,x1,lhs,t3) {
+	switch(lhs[1]) {
+	case 1:
+		var t2 = lhs[6];
+		var t1 = lhs[5];
+		var x2 = lhs[4];
+		var k2 = lhs[3];
+		var rhs = thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(t2) + thx_fp__$Map_Map_$Impl_$.size(t3) + 1,k1,x1,t2,t3);
+		return thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(t1) + thx_fp__$Map_Map_$Impl_$.size(rhs) + 1,k2,x2,t1,rhs);
+	default:
+		throw new thx_Error("damn it, this should never happen",null,{ fileName : "Map.hx", lineNumber : 199, className : "thx.fp._Map.Map_Impl_", methodName : "singleRight"});
+	}
+};
+thx_fp__$Map_Map_$Impl_$.doubleLeft = function(k1,x1,t1,rhs) {
+	switch(rhs[1]) {
+	case 1:
+		switch(rhs[5][1]) {
+		case 1:
+			var t4 = rhs[6];
+			var x2 = rhs[4];
+			var k2 = rhs[3];
+			var t3 = rhs[5][6];
+			var t2 = rhs[5][5];
+			var x3 = rhs[5][4];
+			var k3 = rhs[5][3];
+			var lhs = thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(t1) + thx_fp__$Map_Map_$Impl_$.size(t2) + 1,k1,x1,t1,t2);
+			var rhs1 = thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(t3) + thx_fp__$Map_Map_$Impl_$.size(t4) + 1,k2,x2,t3,t4);
+			return thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(lhs) + thx_fp__$Map_Map_$Impl_$.size(rhs1) + 1,k3,x3,lhs,rhs1);
+		default:
+			throw new thx_Error("damn it, this should never happen",null,{ fileName : "Map.hx", lineNumber : 206, className : "thx.fp._Map.Map_Impl_", methodName : "doubleLeft"});
+		}
+		break;
+	default:
+		throw new thx_Error("damn it, this should never happen",null,{ fileName : "Map.hx", lineNumber : 206, className : "thx.fp._Map.Map_Impl_", methodName : "doubleLeft"});
+	}
+};
+thx_fp__$Map_Map_$Impl_$.doubleRight = function(k1,x1,lhs,t4) {
+	switch(lhs[1]) {
+	case 1:
+		switch(lhs[6][1]) {
+		case 1:
+			var t1 = lhs[5];
+			var x2 = lhs[4];
+			var k2 = lhs[3];
+			var t3 = lhs[6][6];
+			var t2 = lhs[6][5];
+			var x3 = lhs[6][4];
+			var k3 = lhs[6][3];
+			var lhs1 = thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(t1) + thx_fp__$Map_Map_$Impl_$.size(t2) + 1,k2,x2,t1,t2);
+			var rhs = thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(t3) + thx_fp__$Map_Map_$Impl_$.size(t4) + 1,k1,x1,t3,t4);
+			return thx_fp_MapImpl.Bin(thx_fp__$Map_Map_$Impl_$.size(lhs1) + thx_fp__$Map_Map_$Impl_$.size(rhs) + 1,k3,x3,lhs1,rhs);
+		default:
+			throw new thx_Error("damn it, this should never happen",null,{ fileName : "Map.hx", lineNumber : 213, className : "thx.fp._Map.Map_Impl_", methodName : "doubleRight"});
+		}
+		break;
+	default:
+		throw new thx_Error("damn it, this should never happen",null,{ fileName : "Map.hx", lineNumber : 213, className : "thx.fp._Map.Map_Impl_", methodName : "doubleRight"});
+	}
+};
+var thx_fp_MapImpl = { __ename__ : ["thx","fp","MapImpl"], __constructs__ : ["Tip","Bin"] };
+thx_fp_MapImpl.Tip = ["Tip",0];
+thx_fp_MapImpl.Tip.toString = $estr;
+thx_fp_MapImpl.Tip.__enum__ = thx_fp_MapImpl;
+thx_fp_MapImpl.Bin = function(size,key,value,lhs,rhs) { var $x = ["Bin",1,size,key,value,lhs,rhs]; $x.__enum__ = thx_fp_MapImpl; $x.toString = $estr; return $x; };
 function $iterator(o) { if( o instanceof Array ) return function() { return HxOverrides.iter(o); }; return typeof(o.iterator) == 'function' ? $bind(o,o.iterator) : o.iterator; }
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
@@ -8141,6 +8725,10 @@ doom_html_Render.defaultNamespaces = (function($this) {
 	var $r;
 	var _g = new haxe_ds_StringMap();
 	if(__map_reserved.svg != null) _g.setReserved("svg","http://www.w3.org/2000/svg"); else _g.h["svg"] = "http://www.w3.org/2000/svg";
+	if(__map_reserved.xlink != null) _g.setReserved("xlink","http://www.w3.org/1999/xlink"); else _g.h["xlink"] = "http://www.w3.org/1999/xlink";
+	if(__map_reserved.ev != null) _g.setReserved("ev","http://www.w3.org/2001/xml-events"); else _g.h["ev"] = "http://www.w3.org/2001/xml-events";
+	if(__map_reserved.xsl != null) _g.setReserved("xsl","http://www.w3.org/1999/XSL/Transform"); else _g.h["xsl"] = "http://www.w3.org/1999/XSL/Transform";
+	if(__map_reserved.m != null) _g.setReserved("m","http://www.w3.org/1998/Math/MathML"); else _g.h["m"] = "http://www.w3.org/1998/Math/MathML";
 	$r = _g;
 	return $r;
 }(this));
@@ -8305,6 +8893,9 @@ thx_Floats.TOLERANCE = 10e-5;
 thx_Floats.EPSILON = 1e-9;
 thx_Floats.pattern_parse = new EReg("^(\\+|-)?\\d+(\\.\\d+)?(e-?\\d+)?$","");
 thx_Floats.order = thx__$Ord_Ord_$Impl_$.fromIntComparison(thx_Floats.compare);
+thx_Floats.monoid = { zero : 0.0, append : function(a,b) {
+	return a + b;
+}};
 thx_Ints.pattern_parse = new EReg("^[ \t\r\n]*[+-]?(\\d+|0x[0-9A-F]+)","i");
 thx_Ints.BASE = "0123456789abcdefghijklmnopqrstuvwxyz";
 thx_Ints.order = function(i0,i1) {
@@ -8329,5 +8920,7 @@ thx_Strings.STRIPTAGS = new EReg("</?[a-z]+[^>]*>","gi");
 thx_Strings.WSG = new EReg("[ \t\r\n]+","g");
 thx_Strings.SPLIT_LINES = new EReg("\r\n|\n\r|\n|\r","g");
 thx_Strings.CANONICALIZE_LINES = new EReg("\r\n|\n\r|\r","g");
+thx_fp__$Map_Map_$Impl_$.delta = 5;
+thx_fp__$Map_Map_$Impl_$.ratio = 2;
 Index.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);

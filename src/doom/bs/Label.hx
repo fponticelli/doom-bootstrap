@@ -1,15 +1,15 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VChildren;
+import doom.core.VNodes;
 using thx.Nulls;
 
 class Label extends doom.html.Component<LabelProps> {
-  public static function with(type : LabelType, ?options : { ?isPill : Bool }, children : VChildren)
+  public static function with(type : LabelType, ?options : { ?isPill : Bool }, children : VNodes)
     return new Label({
       type : type,
       isPill : options.isPill.or(false)
-    }, children).asChild();
+    }, children).asNode();
 
   override function render()
     return span([

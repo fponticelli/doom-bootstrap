@@ -1,15 +1,15 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VChildren;
+import doom.core.VNodes;
 using thx.Nulls;
 
 class Navbar extends doom.html.Component<NavbarProps> {
-  public static function with(?options : NavbarProps, children : VChildren)
+  public static function with(?options : NavbarProps, children : VNodes)
     return new Navbar({
       theme : options.theme.or(null),
       background : options.background.or(null)
-    }, children).asChild();
+    }, children).asNode();
 
   override function render()
     return nav([

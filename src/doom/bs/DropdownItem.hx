@@ -1,15 +1,15 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VChildren;
+import doom.core.VNodes;
 using thx.Nulls;
 
 class DropdownItem extends doom.html.Component<DropdownItemProps> {
-  public static function with(click : Void -> Void, ?options : { ?disabled : Bool }, children : VChildren)
+  public static function with(click : Void -> Void, ?options : { ?disabled : Bool }, children : VNodes)
     return new DropdownItem({
       click : click,
       disabled : options.disabled.or(false)
-    }, children).asChild();
+    }, children).asNode();
 
   override function render()
     return button([

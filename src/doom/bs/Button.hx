@@ -1,11 +1,11 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VChildren;
+import doom.core.VNodes;
 using thx.Nulls;
 
 class Button extends doom.html.Component<ButtonProps> {
-  public static function with(click : Void -> Void, style : ButtonStyle, ?options : ButtonBasicOptions, children : VChildren) {
+  public static function with(click : Void -> Void, style : ButtonStyle, ?options : ButtonBasicOptions, children : VNodes) {
     return new Button({
       click : click,
       style : style,
@@ -15,7 +15,7 @@ class Button extends doom.html.Component<ButtonProps> {
       outline : options.outline.or(false),
       dropdownToggle : options.dropdownToggle.or(false),
       size : options.size.or(Default)
-    }, children).asChild();
+    }, children).asNode();
   }
 
 

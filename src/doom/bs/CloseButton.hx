@@ -8,7 +8,7 @@ class CloseButton extends doom.html.Component<CloseButtonProps> {
     return new CloseButton({
       click : click,
       dismissAlert : options.dismissAlert.or(false)
-    }).asChild();
+    }).asNode();
 
   override function render()
     return button([
