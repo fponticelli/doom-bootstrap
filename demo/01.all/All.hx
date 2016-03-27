@@ -1,6 +1,6 @@
 import js.html.*;
 import doom.html.Html.*;
-import doom.core.VChildren;
+import doom.core.VNodes;
 import doom.html.Html.*;
 import doom.bs.BS.*;
 import doom.bs.*;
@@ -69,7 +69,7 @@ class All extends doom.html.Component<{}> {
     ]);
   }
 
-  public function row2(left : VChildren, right : VChildren) {
+  public function row2(left : VNodes, right : VNodes) {
     return row([
       div(["class" => "col-md-6"], left),
       div(["class" => "col-md-6"], right)
@@ -130,7 +130,7 @@ class All extends doom.html.Component<{}> {
     );
   }
 
-  function tableContent() : VChildren {
+  function tableContent() : VNodes {
     return [
       thead(
         tr([th("#"),th("First Name"),th("Last Name"),th("Username")])
@@ -143,10 +143,10 @@ class All extends doom.html.Component<{}> {
     ];
   }
 
-  public function section(name : String, content : VChildren) {
+  public function section(name : String, content : VNodes) {
     return div(["class" => "card"], [
       div(["class" => "card-block"],
-        h2(name).asChildren().concat(content)
+        h2(name).asNodes().concat(content)
       )
     ]);
   }

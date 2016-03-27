@@ -2,11 +2,11 @@ package doom.bs;
 
 import doom.html.Html.*;
 import doom.bs.Button.ButtonStyle;
-import doom.core.VChildren;
+import doom.core.VNodes;
 using thx.Nulls;
 
 class RadioButton extends doom.html.Component<RadioButtonProps> {
-  public static function with(click : Void -> Void, style : ButtonStyle, ?options : RadioButtonOptions, children : VChildren)
+  public static function with(click : Void -> Void, style : ButtonStyle, ?options : RadioButtonOptions, children : VNodes)
     return new RadioButton({
       click : click,
       style : style,
@@ -15,7 +15,7 @@ class RadioButton extends doom.html.Component<RadioButtonProps> {
       disabled : options.disabled.or(false),
       outline : options.outline.or(false),
       size : options.size.or(Default),
-    }, children).asChild();
+    }, children).asNode();
 
   override function render()
     return label([
@@ -27,7 +27,7 @@ class RadioButton extends doom.html.Component<RadioButtonProps> {
         "name" => props.name,
         "autocomplete" => "off",
         "checked" => true
-      ]).asChildren().concat(children));
+      ]).asNodes().concat(children));
 
   public static function getClass(state : RadioButtonProps) : String {
     var classes = ["btn"],

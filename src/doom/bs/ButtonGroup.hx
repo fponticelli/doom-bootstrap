@@ -1,17 +1,17 @@
 package doom.bs;
 
 import doom.html.Html.*;
-import doom.core.VChildren;
+import doom.core.VNodes;
 using thx.Nulls;
 
 class ButtonGroup extends doom.html.Component<ButtonGroupProps> {
-  public static function with(?options : ButtonGroupProps, children : VChildren)
+  public static function with(?options : ButtonGroupProps, children : VNodes)
     return new ButtonGroup({
       size      : options.size.or(Default),
       toggle    : options.toggle.or(false),
       label     : options.label.or(null),
       className : options.className.or(null)
-    }, children).asChild();
+    }, children).asNode();
 
   override function render()
     return div([
