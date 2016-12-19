@@ -4,22 +4,22 @@
       "name": "doom",
       "type": "git",
       "dir": "src",
-      "ref": "master",
+      "ref": "bd4956a",
       "url": "git@github.com:fponticelli/doom"
     },
     {
       "name": "dots",
       "type": "git",
       "dir": "src",
-      "ref": "master",
+      "ref": "35872d0",
       "url": "git@github.com:fponticelli/dots"
     },
     {
       "name": "thx.core",
       "type": "git",
       "dir": "src",
-      "ref": "master",
-      "url": "git@github.com:fponticelli/thx.core"
+      "ref": "0b19049",
+      "url": "git@github.com:andywhite37/thx.core"
     }
   ]
 }
