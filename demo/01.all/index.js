@@ -5812,7 +5812,7 @@ thx_Arrays.compact = function(arr) {
 	});
 };
 thx_Arrays.compare = function(a,b) {
-	var v = a.length - b.length;
+	var v = thx_Ints.compare(a.length,b.length);
 	if(v != 0) {
 		return v;
 	}
@@ -7635,7 +7635,7 @@ thx_Dynamics.compare = function(a,b) {
 	var _g = Type["typeof"](a);
 	switch(_g[1]) {
 	case 1:
-		return a - b;
+		return thx_Ints.compare(a,b);
 	case 2:
 		var a1 = a;
 		var b1 = b;
@@ -7874,7 +7874,7 @@ thx_Enums.string = function(e) {
 	return cons + (params.length == 0?"":"(" + params.join(", ") + ")");
 };
 thx_Enums.compare = function(a,b) {
-	var v = a[1] - b[1];
+	var v = thx_Ints.compare(a[1],b[1]);
 	if(v != 0) {
 		return v;
 	}
@@ -8284,6 +8284,12 @@ thx_Functions2.curry = function(f) {
 		};
 	};
 };
+thx_Functions2.join = function(fa,fb) {
+	return function(v1,v2) {
+		fa(v1,v2);
+		fb(v1,v2);
+	};
+};
 thx_Functions2.negate = function(callback) {
 	return function(v1,v2) {
 		return !callback(v1,v2);
@@ -8550,7 +8556,7 @@ thx_Ints.random = function(min,max) {
 	if(min == null) {
 		min = 0;
 	}
-	return Std.random(max + 1) + min;
+	return Std.random(max - min + 1) + min;
 };
 thx_Ints.range = function(start,stop,step) {
 	if(step == null) {
@@ -9629,6 +9635,22 @@ thx_Options.toFailureNel = function(error,value) {
 		return thx_Either.Left(thx__$Nel_Nel_$Impl_$.pure(error[2]));
 	case 1:
 		return thx_Either.Right(value);
+	}
+};
+thx_Options.toRight = function(opt,left) {
+	switch(opt[1]) {
+	case 0:
+		return thx_Either.Right(opt[2]);
+	case 1:
+		return thx_Either.Left(left);
+	}
+};
+thx_Options.toLeft = function(opt,right) {
+	switch(opt[1]) {
+	case 0:
+		return thx_Either.Left(opt[2]);
+	case 1:
+		return thx_Either.Right(right);
 	}
 };
 thx_Options.each = function(o,f) {
