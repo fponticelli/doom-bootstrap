@@ -11,7 +11,7 @@ using thx.Nulls;
 class RadioButtonGroup<T> extends doom.html.Component<RadioButtonGroupProps<T>> {
   public static function with<T>(change : T -> Void, values : Array<RadioButtonGroupItemState<T>>, ?options : RadioButtonGroupStateOptions)
     return new RadioButtonGroup(
-      options.merge({
+      options.shallowMerge({
         change : change,
         values : values
       })
@@ -31,7 +31,7 @@ class RadioButtonGroup<T> extends doom.html.Component<RadioButtonGroupProps<T>> 
         style = props.style;
       if(null == style)
         style = Primary;
-      var itemOptions : RadioButtonOptions = itemOptions.merge({ active : value.active });
+      var itemOptions : RadioButtonOptions = itemOptions.shallowMerge({ active : value.active });
       return RadioButton.with(props.change.bind(value.value), style, itemOptions, value.label);
     })));
   }
